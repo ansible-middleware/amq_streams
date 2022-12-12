@@ -1,0 +1,27 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Install requirements for tests
+      yum:
+        name:
+          - sudo
+        state: present
+
+    - name: "Retrieve assets server from env"
+      ansible.builtin.set_fact:
+        assets_server: "{{ lookup('env','MIDDLEWARE_DOWNLOAD_RELEASE_SERVER_URL') }}"
+
+    - name: "Download and deploy jdg zips from {{ assets_server }}"
+      ansible.builtin.get_url:
+        url: "{{ asset }}"
+        dest: "{{ lookup('env', 'PWD') }}"
+        validate_certs: no
+      delegate_to: localhost
+      loop:
+         - "{{ assets_server }}/amq/streams/2.2.0/amq-streams-2.2.0-bin.zip-server.zip"
+      loop_control:
+        loop_var: asset
+      when:
+        - assets_server is defined
+        - assets_server | length > 0

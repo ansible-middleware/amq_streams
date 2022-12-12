@@ -1,0 +1,36 @@
+---
+namespace: middleware_automation
+name: amq_streams
+version: "0.0.1"
+readme: README.md
+authors:
+  - Romain Pelisse <belaran@redhat.com>
+  - Guido Grazioli <ggraziol@redhat.com>
+description: Install and configure Red Hat AMQ Streams (kafka) deployments
+license_file: "LICENSE"
+tags:
+  - java
+  - server
+  - application
+  - messaging
+dependencies:
+  middleware_automation.redhat_csp_download: '>=1.1.2'
+  community.general: '>=5.6.0'
+  ansible.posix: '>=1.4.0'
+repository: https://github.com/ansible-middleware/amq_streams
+documentation: https://ansible-middleware.github.io/amq_streams
+homepage: https://github.com/ansible-middleware/amq_streams
+issues: https://github.com/ansible-middleware/amq_streams/issues
+build_ignore:
+  - .gitignore
+  - .github
+  - .ansible-lint
+  - .yamllint
+  - '*.tar.gz'
+  - '*.zip'
+  - molecule
+  - changelogs
+  - docs/_gh_include
+  - docs/conf.py
+  - docs/roles.rst.template
+  - docs/requirements.yml
