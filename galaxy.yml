@@ -1,7 +1,7 @@
 ---
 namespace: middleware_automation
 name: amq_streams
-version: "0.0.1"
+version: "1.0.0"
 readme: README.md
 authors:
   - Romain Pelisse <belaran@redhat.com>

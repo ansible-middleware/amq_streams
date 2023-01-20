@@ -1,0 +1,46 @@
+---
+- name: "Ensure that required parameter(s) are provided."
+  ansible.builtin.assert:
+    that:
+      - server_name is defined
+      - server_config is defined
+    quiet: True
+
+- name: "Ensure {{ server_name }} configuration is deployed."
+  ansible.builtin.template:
+    src: "{{ server_config_template }}"
+    dest: "{{ server_config }}"
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - server_config_template is defined
+
+- name: "Deploy Systemd descriptor for service: {{ server_name }}"
+  ansible.builtin.template:
+    src: "{{ amq_streams_install.systemd.service_config_file_template }}"
+    dest: "{{ amq_streams_install.systemd.home }}/{{ server_systemd_name | default(server_name + '.service') }}"
+    group: root
+    owner: root
+    mode: 0644
+  vars:
+    service_description: "{{ server_description | default(server_name) }}"
+    service_user: "{{ server_user | default('root') }}"
+    service_group: "{{ server_group | default('root') }}"
+    service_pidfile: "{{ server_pidfile | default(omit) }}"
+  register: daemon_reload
+  become: yes
+
+- name: "Perform daemon-reload to ensure the changes are picked up"
+  ansible.builtin.systemd:
+    daemon_reload: yes
+  become: yes
+  when:
+    - daemon_reload is defined
+    - daemon_reload.changed
+
+- name: "Ensure {{ server_name }} is enabled and running."
+  ansible.builtin.service:
+    name: "{{ server_name }}"
+    enabled: yes
+    state: started

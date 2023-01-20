@@ -1,6 +1,4 @@
 ---
-- name: Converge
-  hosts: all
-  gather_facts: yes
-  roles:
-    - role: rolename
+- import_playbook: ../../playbooks/playbook.yml
+  vars:
+    amq_streams_download_dir: /tmp/

@@ -1,0 +1,7 @@
+---
+- ansible.builtin.include_tasks: start_server.yml
+  vars:
+     server_name:  'kafka_zookeeper'
+     server_start: "{{ kafka_zookeeper_server_start }}"
+     server_config: "{{ kafka_zookeeper_config }}"
+     server_started: "{{ kafka_zookeeper_already_running | default(False) }}"

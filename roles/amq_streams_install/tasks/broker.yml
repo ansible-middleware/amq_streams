@@ -1,0 +1,23 @@
+---
+- name: "Set server_id for {{ amq_streams_install.broker.service_name }} service."
+  ansible.builtin.set_fact:
+    server_id: "{{ broker_id | default('0') }}"
+  when:
+    - not server_id is defined
+
+- name: "Wait for Zookeeper to be available - if host and port are provided."
+  ansible.builtin.wait_for:
+    host: "{{ amq_streams_install.zookeeper.config.host }}"
+    port: "{{ amq_streams_install.zookeeper.config.port }}"
+  when:
+    - amq_streams_install.zookeeper is defined and amq_streams_install.zookeeper.config is defined
+    - amq_streams_install.zookeeper.config.host is defined and amq_streams_install.zookeeper.config.port is defined
+
+- name: "Start Broker as a systemd service."
+  ansible.builtin.include_tasks: start_server.yml
+  vars:
+    server_name:  "{{ amq_streams_install.broker.service_name }}"
+    server_start: "{{ amq_streams_install.broker.server_start }}"
+    server_config: "{{ amq_streams_install.broker.config.dest }}"
+    server_config_template: "{{ amq_streams_install.broker.config.template }}"
+    server_id: "{{ broker_id | default('0') }}"

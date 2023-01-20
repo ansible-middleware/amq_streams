@@ -1,0 +1,29 @@
+---
+- name: "Set required JDK package (if Java version is provided)."
+  ansible.builtin.set_fact:
+    amq_streams_install_dependencies: "{{ [ amq_streams_install.dependencies + ['java-{{ amq_streams_install.java.version }}-openjdk-headless'] ] | flatten }}"
+  when:
+    - amq_streams_install.java is defined
+    - amq_streams_install.java.version is defined
+
+- name: "Ensure required user exists (if provided)."
+  ansible.builtin.user:
+    name: "{{ amq_streams_install_user }}"
+  when:
+    - amq_streams_install_user is defined
+    - amq_streams_install_user | length > 0
+
+- name: "Ensure required group exists (if provided)"
+  ansible.builtin.group:
+    name: "{{ amq_streams_install_group }}"
+  when:
+    - amq_streams_install_group is defined
+    - amq_streams_install_user | length > 0
+
+- name: "Ensure all required system dependencies are present."
+  ansible.builtin.package:
+    name: "{{ amq_streams_install_dependencies }}"
+    state: present
+  when:
+    - amq_streams_install.dependencies is defined
+    - amq_streams_install.dependencies | length > 0

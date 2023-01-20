@@ -1,0 +1,16 @@
+---
+- name: "Ensure prerequirements for collection are met."
+  ansible.builtin.include_tasks: prereqs.yml
+
+- name: "Download artefacts from project's website"
+  ansible.builtin.include_tasks: download.yml
+
+- name: "Ensure Zookeeper is running."
+  ansible.builtin.include_tasks: zookeeper.yml
+  when:
+    - amq_streams_install.zookeeper.enabled is defined and amq_streams_install.zookeeper.enabled
+
+- name: "Ensure Broker is running."
+  ansible.builtin.include_tasks: broker.yml
+  when:
+    - amq_streams_install.broker.enabled is defined and amq_streams_install.broker.enabled

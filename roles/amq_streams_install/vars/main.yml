@@ -1,0 +1,57 @@
+---
+amq_streams_install:
+  archive:
+    version: "{{ amq_streams_install_version }}"
+    file: "{{ amq_streams_install_archive_file }}"
+    download_url: "{{ amq_streams_install_download_url }}"
+    download_dir: "{{ amq_streams_install_download_dir }}"
+    install_dir: "{{ amq_streams_install_install_dir }}"
+    user: "{{ amq_streams_install_user }}"
+    group: "{{ amq_streams_install_group }}"
+  dependencies: "{{ amq_streams_install_prereqs_dependencies }}"
+  zookeeper:
+    enabled: "{{ amq_streams_install_zookeeper_enabled }}"
+    config:
+      dest: "{{ amq_streams_install_zookeeper_config }}"
+      template: "{{ amq_streams_install_zookeeper_config_template }}"
+      data_dir: "{{ amq_streams_install_zookeeper_data_dir }}"
+      max_client_cnxns: "{{ amq_streams_install_zookeeper_max_client_cnxns }}"
+      admin_enable_server: "{{ amq_streams_install_zookeeper_admin_enable_server }}"
+      port: "{{ amq_streams_install_zookeeper_port }}"
+      host: "{{ amq_streams_install_zookeeper_host }}"
+    server_start: "{{ amq_streams_install_zookeeper_server_start }}"
+    service_name: "{{ amq_streams_install_zookeeper_service_name }}"
+  broker:
+    enabled: "{{ amq_streams_install_broker_enabled }}"
+    server_start: "{{ amq_streams_install_broker_server_start }}"
+    service_name: "{{ amq_streams_install_broker_service_name }}"
+    config:
+      dest: "{{ amq_streams_install_broker_config }}"
+      template: "{{ amq_streams_install_broker_properties_template }}"
+      num_network_threads: "{{ amq_streams_install_broker_num_network_threads }}"
+      num_io_threads: "{{ amq_streams_install_broker_num_io_threads }}"
+      buffer_send_bytes: "{{ amq_streams_install_broker_buffer_send_bytes }}"
+      buffer_bytes: "{{ amq_streams_install_broker_buffer_bytes }}"
+      socket_request_max_bytes: "{{ amq_streams_install_broker_socket_request_max_bytes }}"
+      log_dirs: "{{ amq_streams_install_broker_log_dirs }}"
+      num_partitions: "{{ amq_streams_install_broker_num_partitions }}"
+      num_recovery_threads_per_data_dir: "{{ amq_streams_install_broker_num_recovery_threads_per_data_dir }}"
+      offsets_topic_replication_factor: "{{ amq_streams_install_broker_offsets_topic_replication_factor }}"
+      transaction_state_log_replication_factor: "{{ amq_streams_install_broker_transaction_state_log_replication_factor }}"
+      transaction_state_log_min_isr: "{{ amq_streams_install_broker_transaction_state_log_min_isr }}"
+      log_retention_hours: "{{ amq_streams_install_broker_log_retention_hours }}"
+      log_retention_check_interval_ms: "{{ amq_streams_install_broker_log_retention_check_interval_ms }}"
+      zookeeper_connection_timeout_ms: "{{ amq_streams_install_broker_zookeeper_connection_timeout_ms }}"
+      group_initial_rebalance_delay_ms: "{{ amq_streams_install_broker_group_initial_rebalance_delay_ms }}"
+      properties_template: "{{ amq_streams_install_broker_properties_template }}"
+
+  systemd:
+    home: "{{ amq_streams_install_systemd_home }}"
+    service_config_file_template: "{{ amq_streams_install_systemd_service_config_file_template }}"
+  bootstrap_server:
+    host: "{{ amq_streams_install_bootstrap_server_host }}"
+    port: "{{ amq_streams_install_bootstrap_server_port }}"
+  java:
+    version: "{{ amq_streams_install_openjdk_version }}"
+  topic:
+    script: "{{ amq_streams_install_create_topic_script }}"
