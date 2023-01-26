@@ -27,6 +27,7 @@ warn_list:
   - meta-no-tags
   - name[casing]
   - fqcn[action]
+  - no-jinja-nesting
 
 skip_list:
   - vars_should_not_be_used
