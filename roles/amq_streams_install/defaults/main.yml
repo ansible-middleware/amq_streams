@@ -11,6 +11,7 @@ amq_streams_install_prereqs_dependencies:
   - tar
 amq_streams_install_openjdk_version: 17
 amq_streams_install_home: "{{ amq_streams_install_install_dir }}/kafka_{{ amq_streams_install_version }}/"
+amq_streams_install_home_logs: "{{ amq_streams_install_home }}/logs"
 amq_streams_install_create_topic_script: "{{ amq_streams_install_home }}/bin/kafka-topics.sh"
 amq_streams_install_user: 'amq_streams'
 amq_streams_install_group: 'amq_streams'
