@@ -6,3 +6,5 @@
     server_start: "{{ amq_streams_install.zookeeper.server_start }}"
     server_config: "{{ amq_streams_install.zookeeper.config.dest }}"
     server_config_template: "{{ amq_streams_install.zookeeper.config.template }}"
+    server_user: "{{ amq_streams_install_zookeeper_user | default(omit) }}"
+    server_group: "{{ amq_streams_install_zookeeper_group | default(omit) }}"

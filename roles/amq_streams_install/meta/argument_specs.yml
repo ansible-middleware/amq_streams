@@ -29,14 +29,23 @@ argument_specs:
                 default: "/opt"
                 description: "Root director for the Apache Kafka installation"
                 type: "str"
-            amq_streams_install_user:
-                default: "amq_streams"
-                description: "System user on the target executing Apache Kafka services"
+            amq_streams_install_broker_user:
+                default: "amq_streams_broker"
+                description: "System user on the target executing Apache Kafka broker"
                 type: "str"
-            amq_streams_install_group:
+            amq_streams_install_broker_group:
                 default: "amq_streams"
                 description: "System group associated to the user of Kafka on the target"
                 type: "str"
+            amq_streams_install_zookeeper_user:
+                default: "amq_streams_zookeeper"
+                description: "System user on the target executing Apache Kafka services"
+                type: "str"
+            amq_streams_install_zookeeper_group:
+                default: "amq_streams"
+                description: "System group associated to the user of Kafka on the target"
+
+
             amq_streams_install_path_to_archive_file:
                 default: "{{ amq_streams_install_download_dir }}/{{ amq_streams_install_archive_file }}"
                 description: "Full path to the Apache Kafka (downloaded) archive"

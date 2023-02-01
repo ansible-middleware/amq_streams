@@ -1,0 +1,16 @@
+---
+- name: "Ensure required parameter(s) are provided."
+  ansible.builtin.assert:
+    that:
+      - user is defined and user | length > 0
+      - group is defined and group | length > 0
+    quiet: true
+
+- name: "Ensure required user {{ user }} exists."
+  ansible.builtin.user:
+    name: "{{ user }}"
+
+- name: "Ensure required group {{ group }} exists."
+  ansible.builtin.group:
+    name: "{{ group }}"
+

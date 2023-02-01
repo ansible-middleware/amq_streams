@@ -6,8 +6,6 @@ amq_streams_install:
     download_url: "{{ amq_streams_install_download_url }}"
     download_dir: "{{ amq_streams_install_download_dir }}"
     install_dir: "{{ amq_streams_install_install_dir }}"
-    user: "{{ amq_streams_install_user }}"
-    group: "{{ amq_streams_install_group }}"
   dependencies: "{{ amq_streams_install_prereqs_dependencies }}"
   zookeeper:
     enabled: "{{ amq_streams_install_zookeeper_enabled }}"

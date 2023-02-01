@@ -13,8 +13,10 @@ amq_streams_install_openjdk_version: 17
 amq_streams_install_home: "{{ amq_streams_install_install_dir }}/kafka_{{ amq_streams_install_version }}/"
 amq_streams_install_home_logs: "{{ amq_streams_install_home }}/logs"
 amq_streams_install_create_topic_script: "{{ amq_streams_install_home }}/bin/kafka-topics.sh"
-amq_streams_install_user: 'amq_streams'
-amq_streams_install_group: 'amq_streams'
+amq_streams_install_broker_user: 'amq_streams_broker'
+amq_streams_install_broker_group: 'amq_streams'
+amq_streams_install_zookeeper_user: 'amq_streams_zookeeper'
+amq_streams_install_zookeeper_group: 'amq_streams'
 
 amq_streams_install_zookeeper_enabled: True
 amq_streams_install_zookeeper_config: /etc/amq_streams_zookeeper.properties
