@@ -28,6 +28,7 @@ warn_list:
   - name[casing]
   - fqcn[action]
   - no-jinja-nesting
+  - no-changed-when
 
 skip_list:
   - vars_should_not_be_used

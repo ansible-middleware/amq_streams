@@ -16,6 +16,28 @@
   when:
     - server_config_template is defined
 
+- name: "Ensure log dir belongs to the appropriate user and group - if all provided"
+  ansible.builtin.file:
+    path: "{{ server_log_dir }}"
+    owner: "{{ server_user }}"
+    group: "{{ server_group }}"
+    recurse: yes
+    state: directory
+  changed_when: False  # tofix
+  when:
+    - server_log_dir is defined
+    - server_user is defined
+    - server_group is defined
+
+- name: "Deploy server configuration - if provided."
+  ansible.builtin.template:
+    src: "{{ service_systemd_env_file_template }}"
+    dest: "{{ service_systemd_env_file }}"
+    owner: root
+    group: root
+  when:
+    - service_systemd_env_file is defined
+
 - name: "Deploy Systemd descriptor for service: {{ server_name }}"
   ansible.builtin.template:
     src: "{{ amq_streams_install.systemd.service_config_file_template }}"
@@ -38,6 +60,8 @@
   when:
     - daemon_reload is defined
     - daemon_reload.changed
+  notify:
+    - "Restart {{ server_name }}"
 
 - name: "Ensure {{ server_name }} is enabled and running."
   ansible.builtin.service:

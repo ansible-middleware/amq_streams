@@ -1,4 +1,23 @@
 ---
+- name: "Ensure Zookeeper data dir exists and belongs to the appropriate user - if user is defined."
+  ansible.builtin.file:
+    path: "{{ amq_streams_install_zookeeper_data_dir }}"
+    state: directory
+    owner: "{{ amq_streams_install_zookeeper_user | default(omit) }}"
+    group: "{{ amq_streams_install_zookeeper_group | default(omit) }}"
+    mode: 0755
+  when:
+    - amq_streams_install_zookeeper_data_dir is defined
+
+- name: "Ensure broker home dir belongs to appropriate user - if user is defined."
+  ansible.builtin.file:
+    path: "{{ amq_streams_install_home }}"
+    state: directory
+    owner: "{{ amq_streams_install_broker_user | default(omit) }}"
+    group: "{{ amq_streams_install_broker_group | default(omit) }}"
+    mode: 0755
+  changed_when: False
+
 - name: "Ensure Zookeeper is running as a systemd service."
   ansible.builtin.include_tasks: start_server.yml
   vars:
@@ -8,3 +27,6 @@
     server_config_template: "{{ amq_streams_install.zookeeper.config.template }}"
     server_user: "{{ amq_streams_install_zookeeper_user | default(omit) }}"
     server_group: "{{ amq_streams_install_zookeeper_group | default(omit) }}"
+    server_log_dir: "{{ amq_streams_install_zookeeper_logs_dir | default(omit) }}"
+    service_systemd_env_file_template: "{{ amq_streams_install_zookeeper_service_config_template }}"
+    service_systemd_env_file: "{{ amq_streams_install_zookeeper_service_config_file }}"

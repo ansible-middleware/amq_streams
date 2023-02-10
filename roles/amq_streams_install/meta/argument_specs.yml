@@ -44,8 +44,21 @@ argument_specs:
             amq_streams_install_zookeeper_group:
                 default: "amq_streams"
                 description: "System group associated to the user of Kafka on the target"
-
-
+            amq_streams_install_zookeeper_service_config_file:
+                default: '/etc/zookeeper.conf'
+                description: "Path to zookeeper systemd service env vars config file"
+            amq_streams_install_zookeeper_service_config_template:
+                default: 'templates/service.conf.j2'
+                description: "Path to template file for systemd env vars file."
+            amq_streams_install_zookeeper_admin_enable_server:
+                default: 'false'
+                description: 'Specifiy if Zookeeper server should be set up.'
+            amq_streams_install_broker_service_config_template:
+              default: 'templates/broker.conf.j2'
+              description: 'Template for broker service env vars file'
+            amq_streams_install_broker_service_config_file:
+              default: '/etc/broker.conf'
+              description: 'Path to server env vars file.'
             amq_streams_install_path_to_archive_file:
                 default: "{{ amq_streams_install_download_dir }}/{{ amq_streams_install_archive_file }}"
                 description: "Full path to the Apache Kafka (downloaded) archive"
@@ -102,7 +115,7 @@ argument_specs:
                  default: 0
                  description: "Max number of client connexions to Zookeeper"
                  type: "str"
-            amq_streams_install_zookeeper_admin_enable_server:
+            amq_streams_install_broker_admin_enable_server:
                  default: False
                  description: "Set tp true to enable admin of the Zookeeper server"
                  str: "bool"
@@ -142,8 +155,11 @@ argument_specs:
                   default: 104857600
                   description: "Max size for Broker's socket's request in bytes"
                   type: "int"
-            amq_streams_install_broker_log_dirs:
-                  default: /tmp/kafka-logs
+            amq_streams_install_zookeeper_logs_dir:
+                  default: "/var/log/{{ amq_streams_install_zookeeper_service_name }}/"
+                  description: "Path to Zookeeper logs dir"
+            amq_streams_install_broker_logs_dir:
+                  default: "/var/log/{{ amq_streams_install_broker_service_name }}"
                   description: "Path to Kafka logs"
                   type: "str"
             amq_streams_install_broker_num_partitions:

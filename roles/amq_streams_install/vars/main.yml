@@ -31,7 +31,7 @@ amq_streams_install:
       buffer_send_bytes: "{{ amq_streams_install_broker_buffer_send_bytes }}"
       buffer_bytes: "{{ amq_streams_install_broker_buffer_bytes }}"
       socket_request_max_bytes: "{{ amq_streams_install_broker_socket_request_max_bytes }}"
-      log_dirs: "{{ amq_streams_install_broker_log_dirs }}"
+      logs_dir: "{{ amq_streams_install_broker_logs_dir }}"
       num_partitions: "{{ amq_streams_install_broker_num_partitions }}"
       num_recovery_threads_per_data_dir: "{{ amq_streams_install_broker_num_recovery_threads_per_data_dir }}"
       offsets_topic_replication_factor: "{{ amq_streams_install_broker_offsets_topic_replication_factor }}"

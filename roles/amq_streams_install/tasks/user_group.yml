@@ -13,4 +13,3 @@
 - name: "Ensure required group {{ group }} exists."
   ansible.builtin.group:
     name: "{{ group }}"
-

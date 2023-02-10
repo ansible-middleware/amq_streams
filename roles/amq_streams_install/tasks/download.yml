@@ -49,14 +49,3 @@
     dest: "{{ amq_streams_install.archive.install_dir }}"
     owner: "{{ amq_streams_install_user | default(omit) }}"
     group: "{{ amq_streams_install_group | default(omit) }}"
-
-- name: "Ensures {{ amq_streams_install_home_logs }}/logs belongs to the appropriate user and group"
-  ansible.builtin.file:
-    path: "{{ amq_streams_install_home_logs }}"
-    owner: "{{ amq_streams_install_user }}"
-    group: "{{ amq_streams_install_group }}"
-    recurse: yes
-  changed_when: False
-  when:
-    - amq_streams_install_user is defined
-    - amq_streams_install_group is defined
