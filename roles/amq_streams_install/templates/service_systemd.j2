@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description={{ service_description }}
+After=syslog.target network.target
+
+[Service]
+{% if service_systemd_env_file is defined %}EnvironmentFile=-{{ service_systemd_env_file }}{% endif %}
+User={{ service_user }}
+Group={{ service_group }}
+#
+#
+ExecStart={{ server_start }} {{ server_config }}
+{% if server_stop is defined %}ExecStop={{ server_stop }}{% endif %}
+
+[Install]
+WantedBy=multi-user.target

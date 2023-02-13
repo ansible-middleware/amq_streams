@@ -1,0 +1,223 @@
+argument_specs:
+    main:
+        options:
+            amq_streams_install_product_version:
+                default: 3.3.2
+                description: "Version of Apache Kafka to download and install"
+                type: "str"
+            amq_streams_install_scala_version:
+                default: 2.13
+                description: "Scala version used by Apache Kafka"
+                type: "str"
+            amq_streams_install_version:
+                default: "2.13-3.3.1"
+                description: "Apache Kafka version to install"
+                type: "str"
+            amq_streams_install_archive_file:
+                default: "kafka_{{ amq_streams_install_version }}.tgz"
+                description: "Apache Kafka download archive name"
+                type: "str"
+            amq_streams_install_download_url:
+                default: "https://dlcdn.apache.org/kafka/3.3.1/{{ amq_streams_install_archive_file }}"
+                description: "Download URL for Apache Kafka archive"
+                type: "str"
+            amq_streams_install_download_dir:
+                default: "/opt/"
+                description: "Root directory for downloaded archive of Apache Kafka"
+                type: "str"
+            amq_streams_install_install_dir:
+                default: "/opt"
+                description: "Root director for the Apache Kafka installation"
+                type: "str"
+            amq_streams_install_broker_user:
+                default: "amq_streams_broker"
+                description: "System user on the target executing Apache Kafka broker"
+                type: "str"
+            amq_streams_install_broker_group:
+                default: "amq_streams"
+                description: "System group associated to the user of Kafka on the target"
+                type: "str"
+            amq_streams_install_zookeeper_user:
+                default: "amq_streams_zookeeper"
+                description: "System user on the target executing Apache Kafka services"
+                type: "str"
+            amq_streams_install_zookeeper_group:
+                default: "amq_streams"
+                description: "System group associated to the user of Kafka on the target"
+            amq_streams_install_zookeeper_service_config_file:
+                default: '/etc/zookeeper.conf'
+                description: "Path to zookeeper systemd service env vars config file"
+            amq_streams_install_zookeeper_service_config_template:
+                default: 'templates/service.conf.j2'
+                description: "Path to template file for systemd env vars file."
+            amq_streams_install_zookeeper_admin_enable_server:
+                default: 'false'
+                description: 'Specifiy if Zookeeper server should be set up.'
+            amq_streams_install_broker_service_config_template:
+              default: 'templates/broker.conf.j2'
+              description: 'Template for broker service env vars file'
+            amq_streams_install_broker_service_config_file:
+              default: '/etc/broker.conf'
+              description: 'Path to server env vars file.'
+            amq_streams_install_path_to_archive_file:
+                default: "{{ amq_streams_install_download_dir }}/{{ amq_streams_install_archive_file }}"
+                description: "Full path to the Apache Kafka (downloaded) archive"
+                type: "str"
+            amq_streams_install_prereqs_dependencies:
+                default:
+                  - tar
+                description: "List of system dependencies to instal - not included the required JVM"
+                type: "list"
+            amq_streams_install_openjdk_version:
+                default: "17"
+                description: "Specify Java version requirement - if set, it will trigger the installation of the associared OpenJDK package on the target system."
+                type: "str"
+            amq_streams_install_home:
+                default: "{{ amq_streams_install_install_dir }}/kafka_{{ amq_streams_install_version }}/"
+                description: "Root directory of the installed Apache Kafka on the target"
+                type: "str"
+            amq_streams_install_create_topic_script:
+                default: "{{ amq_streams_install_home }}/bin/kafka-topics.sh"
+                description: "Path to the kafka-topics.sh script"
+                type: "str"
+            amq_streams_install_zookeeper_enabled:
+                default: "True"
+                description: "Set to true if Zookeeper server should be integrated into systemd and started as a service"
+                type: "bool"
+            amq_streams_install_zookeeper_config:
+                default: /etc/amq_streams_install_zookeeper.properties
+                description: "Path to the Zookeeper properties file"
+                type: "str"
+            amq_streams_install_zookeeper_config_template:
+                default: 'templates/zookeeper.properties.j2'
+                description: "Path to Jinja2 template to be used for the Zookeeper properties file."
+                type: "str"
+            amq_streams_install_zookeeper_server_start:
+                default: "{{ amq_streams_install_home }}/bin/zookeeper-server-start.sh"
+                description: "Path to the script to start Zookeeper."
+                type: "str"
+            amq_streams_install_zookeeper_service_name:
+                default: 'amq_streams_install_zookeeper'
+                description: "Name of the systemd service associated to Zookeeper"
+                type: "str"
+            amq_streams_install_zookeeper_port:
+                default: 2181
+                description: "Port used by Zookeeper"
+                type: "int"
+            amq_streams_install_zookeeper_host:
+                default: 'localhost'
+                description: "Hostname of the system running Zookeeper"
+                type: "str"
+            amq_streams_install_zookeeper_data_dir:
+                default: '/tmp/zookeeper'
+                description: "Data dir used by Zookeeper"
+            amq_streams_install_zookeeper_max_client_cnxns:
+                 default: 0
+                 description: "Max number of client connexions to Zookeeper"
+                 type: "str"
+            amq_streams_install_broker_admin_enable_server:
+                 default: False
+                 description: "Set tp true to enable admin of the Zookeeper server"
+                 str: "bool"
+            amq_streams_install_broker_enabled:
+                 default: True
+                 description: "Set to true if the broker should be integrated into systemd and started as a system service"
+                 type: "bool"
+            amq_streams_install_broker_server_start:
+                 default: "{{ amq_streams_install_home }}/bin/kafka-server-start.sh"
+                 description: "Path to the script to start the broker server"
+                 type: "str"
+            amq_streams_install_broker_config:
+                  default: "/etc/amq_streams_install_broker.properties"
+                  description: "Path to the broker properties file."
+                  type: "str"
+            amq_streams_install_broker_service_name:
+                  default: 'amq_streams_install_broker'
+                  description: "Name of the systemd service associated to the broker"
+                  type: "str"
+            amq_streams_install_broker_num_network_threads:
+                  default: "int"
+                  description: "Numbers of network threads used by the broker."
+                  type: "str"
+            amq_streams_install_broker_num_io_threads:
+                  default: 8
+                  description: "Numbers of I/O threads used by the broker."
+                  type: "int"
+            amq_streams_install_broker_buffer_send_bytes:
+                  default: 102400
+                  description: "Broker's SEND buffer size in bytes"
+                  type: "int"
+            amq_streams_install_broker_buffer_bytes:
+                  default: 102400
+                  description: "Broker's buffer size in bytes"
+                  type: "int"
+            amq_streams_install_broker_socket_request_max_bytes:
+                  default: 104857600
+                  description: "Max size for Broker's socket's request in bytes"
+                  type: "int"
+            amq_streams_install_zookeeper_logs_dir:
+                  default: "/var/log/{{ amq_streams_install_zookeeper_service_name }}/"
+                  description: "Path to Zookeeper logs dir"
+            amq_streams_install_broker_logs_dir:
+                  default: "/var/log/{{ amq_streams_install_broker_service_name }}"
+                  description: "Path to Kafka logs"
+                  type: "str"
+            amq_streams_install_broker_num_partitions:
+                  default: 1
+                  description: "Number of partition used by the broker"
+                  type: "int"
+            amq_streams_install_broker_num_recovery_threads_per_data_dir:
+                  default: 1
+                  description: "Number of recovery threads by data directory"
+                  type: "int"
+            amq_streams_install_broker_offsets_topic_replication_factor:
+                  default: 1
+                  description: "Broker's topic replication factor"
+                  type: "int"
+            amq_streams_install_broker_transaction_state_log_replication_factor:
+                  default: 1
+                  description: "Broker's transaction state log replication factor."
+                  type: "int"
+            amq_streams_install_broker_transaction_state_log_min_isr:
+                  default: 1
+                  description: "Broker's transaction state log min isr"
+                  type: "int"
+            amq_streams_install_broker_log_retention_hours:
+                  default: 168
+                  description: "Broker's log retention in hours"
+                  type: "int"
+            amq_streams_install_broker_log_retention_check_interval_ms:
+                  default: 300000
+                  description: "Broker's log retention check's interval in ms"
+                  type: "int"
+            amq_streams_install_broker_zookeeper_connection_timeout_ms:
+                  default: 18000
+                  description: "Broker's timeout for Zookeeper's connection in ms"
+                  type: "int"
+            amq_streams_install_broker_group_initial_rebalance_delay_ms:
+                  default: 0
+                  description: "Broker's group initial rebalance delay in ms"
+                  type: "int"
+            amq_streams_install_broker_properties_template:
+                  default: templates/server.properties.j2
+                  description: "Broker properties file templates"
+                  type: "str"
+            amq_streams_install_systemd_home:
+                  default: '/usr/lib/systemd/system'
+                  description: "Systemd config files home."
+                  type: "str"
+            amq_streams_install_systemd_service_config_file_template:
+                  default: 'templates/service_systemd.j2'
+                  description: "Template use to create systemd service for Kafka components (Zookeeper, Broker)."
+                  type: "str"
+            amq_streams_install_bootstrap_server_host:
+                  default: localhost
+                  description: "Bootsrap's server host"
+                  type: "str"
+            amq_streams_install_bootstrap_server_port:
+                  default: 9092
+                  description: "Boostrap's server port"
+                  type: "int"
+#
+#    downstream:
+#        options:

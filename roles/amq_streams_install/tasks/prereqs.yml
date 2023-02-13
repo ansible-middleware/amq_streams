@@ -1,0 +1,33 @@
+---
+- name: "Set required JDK package (if Java version is provided)."
+  ansible.builtin.set_fact:
+    amq_streams_install_dependencies: "{{ [ amq_streams_install.dependencies + ['java-{{ amq_streams_install.java.version }}-openjdk-headless'] ] | flatten }}"
+  when:
+    - amq_streams_install.java is defined
+    - amq_streams_install.java.version is defined
+
+- name: "Ensure user for broker exists (if provided)."
+  ansible.builtin.include_tasks: user_group.yml
+  vars:
+    user: "{{ amq_streams_install_broker_user }}"
+    group: "{{ amq_streams_install_broker_group }}"
+  when:
+    - amq_streams_install_broker_user is defined
+    - amq_streams_install_broker_group is defined
+
+- name: "Ensure user for zookeeper exists (if provided)."
+  ansible.builtin.include_tasks: user_group.yml
+  vars:
+    user: "{{ amq_streams_install_zookeeper_user }}"
+    group: "{{ amq_streams_install_zookeeper_group }}"
+  when:
+    - amq_streams_install_zookeeper_user is defined
+    - amq_streams_install_zookeeper_group is defined
+
+- name: "Ensure all required system dependencies are present."
+  ansible.builtin.package:
+    name: "{{ amq_streams_install_dependencies }}"
+    state: present
+  when:
+    - amq_streams_install.dependencies is defined
+    - amq_streams_install.dependencies | length > 0

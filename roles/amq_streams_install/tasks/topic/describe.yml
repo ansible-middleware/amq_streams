@@ -1,0 +1,17 @@
+---
+- name: "Get description of topic using the boostrap server."
+  ansible.builtin.include_tasks: topic/bootstrap.yml
+  vars:
+    bootstrap_operator: "--describe"
+
+- name: "Verify that information on {{ topic_name }} could be retrieved without any errors."
+  ansible.builtin.assert:
+    that:
+      - operation_result is defined
+      - operation_result.rc is defined and operation_result.rc == 0
+      - operation_result.stdout is defined
+    quiet: True
+
+- name: "Display information on topic: {{ topic_name }}."
+  ansible.builtin.debug:
+    var: operation_result.stdout
