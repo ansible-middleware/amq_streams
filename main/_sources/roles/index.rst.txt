@@ -2,4 +2,4 @@ Role Index
 ==========
 
 .. toctree::
-    *
+    amq_streams_install
