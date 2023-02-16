@@ -4,7 +4,7 @@
     that:
       - server_name is defined
       - server_config is defined
-    quiet: True
+    quiet: true
 
 - name: "Ensure {{ server_name }} configuration is deployed."
   ansible.builtin.template:
@@ -23,7 +23,7 @@
     group: "{{ server_group }}"
     recurse: yes
     state: directory
-  changed_when: False  # tofix
+  changed_when: false  # tofix
   when:
     - server_log_dir is defined
     - server_user is defined

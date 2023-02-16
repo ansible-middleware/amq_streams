@@ -6,7 +6,7 @@
     owner: "{{ amq_streams_install_broker_user | default(omit) }}"
     group: "{{ amq_streams_install_broker_group | default(omit) }}"
     mode: 0755
-  changed_when: False   # TODO: find a better way to deal with that
+  changed_when: false   # TODO: find a better way to deal with that
 
 - name: "Set server_id for {{ amq_streams_install.broker.service_name }} service."
   ansible.builtin.set_fact:
@@ -25,7 +25,7 @@
 - name: "Start Broker as a systemd service."
   ansible.builtin.include_tasks: start_server.yml
   vars:
-    server_name:  "{{ amq_streams_install.broker.service_name }}"
+    server_name: "{{ amq_streams_install.broker.service_name }}"
     server_start: "{{ amq_streams_install.broker.server_start }}"
     server_config: "{{ amq_streams_install.broker.config.dest }}"
     server_config_template: "{{ amq_streams_install.broker.config.template }}"
