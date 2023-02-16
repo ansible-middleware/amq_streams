@@ -6,5 +6,10 @@ middleware_automation.amq_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
-v1.0.0-devel
+v0.0.1-devel
 ============
+
+Major Changes
+-------------
+
+- Basic deployment of both Zookeeper and Brokers as systemd service on target `#2 <https://github.com/ansible-middleware/amq_streams/pull/2>`_
