@@ -1,1 +1,12 @@
 ancestor: 0.0.0
+releases:
+  0.0.1:
+    changes:
+      major_changes:
+      - 'Basic deployment of both Zookeeper and Brokers as systemd service on target
+        `#2 <https://github.com/ansible-middleware/amq_streams/pull/2>`_
+
+        '
+    fragments:
+    - 2.yaml
+    release_date: '2023-02-16'
