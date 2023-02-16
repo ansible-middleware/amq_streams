@@ -7,7 +7,7 @@
       - amq_streams_install.archive.download_dir is defined
       - amq_streams_install.archive.install_dir is defined
       - amq_streams_install.archive.file is defined
-    quiet: True
+    quiet: true
 
 - name: "Determine current working directory to set as download target - if not specified."
   ansible.builtin.set_fact:
@@ -28,7 +28,7 @@
       - download_dir.stat is defined
       - download_dir.stat.exists is defined
       - download_dir.stat.exists
-    quiet: True
+    quiet: true
 
 - name: "Load metadata on download target file: {{ amq_streams_install_path_to_archive_file }}"
   ansible.builtin.stat:

@@ -65,12 +65,12 @@ argument_specs:
                 type: "str"
             amq_streams_install_prereqs_dependencies:
                 default:
-                  - tar
+                    - tar
                 description: "List of system dependencies to instal - not included the required JVM"
                 type: "list"
             amq_streams_install_openjdk_version:
                 default: "17"
-                description: "Specify Java version requirement - if set, it will trigger the installation of the associared OpenJDK package on the target system."
+                description: "Java version - if set, triggers the installation of appropriate openjdk on the target system."
                 type: "str"
             amq_streams_install_home:
                 default: "{{ amq_streams_install_install_dir }}/kafka_{{ amq_streams_install_version }}/"
@@ -116,11 +116,11 @@ argument_specs:
                 description: "Max number of client connexions to Zookeeper"
                 type: "str"
             amq_streams_install_broker_admin_enable_server:
-                default: False
+                default: false
                 description: "Set tp true to enable admin of the Zookeeper server"
                 str: "bool"
             amq_streams_install_broker_enabled:
-                default: True
+                default: true
                 description: "Set to true if the broker should be integrated into systemd and started as a system service"
                 type: "bool"
             amq_streams_install_broker_server_start:
