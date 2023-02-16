@@ -17,3 +17,4 @@ Major Changes
 - Basic deployment of both Zookeeper and Brokers as systemd service on target `#2 <https://github.com/ansible-middleware/amq_streams/pull/2>`_
 - Basic deployment of both Zookeeper and Brokers as systemd service on target `#2 <https://github.com/ansible-middleware/amq_streams/pull/2>`_
 - Basic deployment of both Zookeeper and Brokers as systemd service on target `#2 <https://github.com/ansible-middleware/amq_streams/pull/2>`_
+- Basic deployment of both Zookeeper and Brokers as systemd service on target `#2 <https://github.com/ansible-middleware/amq_streams/pull/2>`_
