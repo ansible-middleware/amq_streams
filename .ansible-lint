@@ -29,6 +29,7 @@ warn_list:
   - fqcn[action]
   - no-jinja-nesting
   - no-changed-when
+  - schema[arg_specs]
   - galaxy[version-incorrect]
   - risky-file-permissions
 
