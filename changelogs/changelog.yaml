@@ -30,3 +30,12 @@ releases:
     - 2.yaml
     - 2.yaml
     release_date: '2023-02-16'
+  0.0.2:
+    changes:
+      bugfixes:
+      - 'Fixup invalid varnames `#4 <https://github.com/ansible-middleware/amq_streams/pull/4>`_
+
+        '
+    fragments:
+    - 4.yaml
+    release_date: '2023-03-09'

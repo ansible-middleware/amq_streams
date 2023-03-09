@@ -6,6 +6,14 @@ middleware_automation.amq_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
+v0.0.2
+======
+
+Bugfixes
+--------
+
+- Fixup invalid varnames `#4 <https://github.com/ansible-middleware/amq_streams/pull/4>`_
+
 v0.0.1
 ======
 
