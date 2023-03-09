@@ -22,7 +22,7 @@ amq_streams_install_zookeeper_service_name: 'amq_streams_zookeeper'
 amq_streams_install_zookeeper_service_config_template: 'templates/service.conf.j2'
 amq_streams_install_zookeeper_port: 2181
 amq_streams_install_zookeeper_host: 'localhost'
-amq_streams_install_zookeeper_data_dir: /tmp/zookeeper
+amq_streams_install_zookeeper_data_dir: /var/run/zookeeper
 amq_streams_install_zookeeper_logs_dir: "/var/log/{{ amq_streams_install_zookeeper_service_name }}/"
 amq_streams_install_zookeeper_max_client_cnxns: 0
 amq_streams_install_zookeeper_admin_enable_server: 'false'
