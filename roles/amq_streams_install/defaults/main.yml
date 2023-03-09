@@ -33,7 +33,7 @@ amq_streams_install_broker_config: "/etc/amq_streams_broker.properties"
 amq_streams_install_broker_service_name: 'amq_streams_broker'
 amq_streams_install_broker_user: 'amq_streams_broker'
 amq_streams_install_broker_group: 'amq_streams'
-amq_streams_install_broker_service_config_template: 'templates/broker.conf.j2'
+amq_streams_install_broker_service_config_template: 'templates/service.conf.j2'
 amq_streams_install_broker_service_config_file: '/etc/broker.conf'
 amq_streams_install_broker_logs_dir: "/var/logs/{{ amq_streams_install_broker_service_name }}/"
 amq_streams_install_broker_num_network_threads: 3
