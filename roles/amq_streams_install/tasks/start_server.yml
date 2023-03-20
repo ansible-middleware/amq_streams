@@ -15,6 +15,8 @@
     mode: 0644
   when:
     - server_config_template is defined
+  notify:
+    - "Restart {{ server_name }}"
 
 - name: "Ensure log dir belongs to the appropriate user and group - if all provided"
   ansible.builtin.file:

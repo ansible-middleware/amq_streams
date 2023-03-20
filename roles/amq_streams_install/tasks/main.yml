@@ -5,6 +5,11 @@
 - name: "Download artefacts from project's website"
   ansible.builtin.include_tasks: download.yml
 
+- name: "Configure firewalld (if enable)."
+  ansible.builtin.include_tasks: firewalld.yml
+  when:
+    - amq_streams_firewalld_enabled is defined and amq_streams_firewalld_enabled 
+
 - name: "Ensure Zookeeper is running."
   ansible.builtin.include_tasks: zookeeper.yml
   when:
