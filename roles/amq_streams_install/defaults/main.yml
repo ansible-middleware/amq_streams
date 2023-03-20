@@ -57,3 +57,7 @@ amq_streams_install_systemd_service_config_file_template: 'templates/service_sys
 
 amq_streams_install_bootstrap_server_host: localhost
 amq_streams_install_bootstrap_server_port: 9092
+
+amq_streams_firewalld_package_name:
+  - firewalld
+amq_streams_firewalld_enabled: false

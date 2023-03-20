@@ -218,3 +218,12 @@ argument_specs:
                 default: 9092
                 description: "Boostrap's server port"
                 type: "int"
+            amq_streams_firewalld_package_name:
+                default:
+                  - firewalld
+                description: "Package name(s) required to install firewalld."
+                type: "list"
+            amq_streams_firewalld_enabled:
+                default: true
+                description: "if true, configure firewalld port"
+                type: "str"

@@ -11,6 +11,9 @@
       ansible.builtin.include_role:
         name: amq_streams_install
         tasks_from: topic/create.yml
+      loop:
+        - { name: monTopic, partition: 3 }
+        - { name: topic2, partition: 2 }
 
     - name: "Describe created topic."
       ansible.builtin.include_role:
