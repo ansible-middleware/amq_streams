@@ -6,6 +6,16 @@
   roles:
     - role: amq_streams_install
   tasks:
+    - name: "Add an extra broker on each target."
+      ansible.builtin.include_role:
+        name: amq_streams_install
+        tasks_from: broker.yml
+      vars:
+        broker_id: 1
+        amq_streams_install_zookeeper_enabled: false
+        amq_streams_install_broker_service_name: amq_streams_broker-2
+        amq_streams_install_broker_listener_port: 9093
+        amq_streams_install_broker_config: /etc/amq_streams_broker-2.properties
 
     - name: "Ensures topic {{ topic_name }} exist."
       ansible.builtin.include_role:
@@ -19,3 +29,21 @@
       ansible.builtin.include_role:
         name: amq_streams_install
         tasks_from: topic/describe.yml
+
+  post_tasks:
+    - name: "Display numbers of Zookeeper instances managed by Ansible:"
+      ansible.builtin.debug:
+        msg: "Numbers of Zookeeper instances: {{ amq_streams_zookeeper_instance_count }}."
+      when:
+        - amq_streams_zookeeper_instance_count_enabled is defined and amq_streams_zookeeper_instance_count_enabled
+
+    - name: "Display numbers of broker instances managed by Ansible:"
+      ansible.builtin.debug:
+        msg: "Numbers of broker instances: {{ amq_streams_broker_instance_count }}."
+      when:
+        - amq_streams_broker_instance_count_enabled is defined and amq_streams_broker_instance_count_enabled
+
+    - name: "Validate that deployment is functionnal."
+      ansible.builtin.include_role:
+        name: amq_streams_install
+        tasks_from: validate.yml

@@ -1,0 +1,18 @@
+---
+- name: "Determine number of instances in the AMQ Streams cluster."
+  ansible.builtin.set_fact:
+    instances_count: "{{ amq_streams_broker_instance_count | int + amq_streams_zookeeper_instance_count | int }}"
+  when:
+    - amq_streams_broker_instance_count is defined and amq_streams_zookeeper_instance_count is defined
+
+- name: "Display number of instances in the AMQ Streams cluster (if computed)."
+  ansible.builtin.debug:
+    var: instances_count
+
+- name: "Verify that the balance of zookeeper and brokers instances is correct."
+  ansible.builtin.assert:
+    that:
+      - not ( (amq_streams_broker_instance_count + amq_streams_zookeeper_instance_count) | int is divisibleby 2)
+  when:
+    - amq_streams_deployment_balance_check_enabled is defined and amq_streams_deployment_balance_check_enabled
+    - amq_streams_broker_instance_count is defined and amq_streams_zookeeper_instance_count is defined

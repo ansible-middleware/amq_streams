@@ -33,6 +33,10 @@ argument_specs:
                 default: "amq_streams_broker"
                 description: "System user on the target executing Apache Kafka broker"
                 type: "str"
+            amq_streams_install_broker_listener_port:
+                default: 9092
+                description: "Listening port used by Broker"
+                type: "str"
             amq_streams_install_broker_group:
                 default: "amq_streams"
                 description: "System group associated to the user of Kafka on the target"
@@ -227,3 +231,22 @@ argument_specs:
                 default: true
                 description: "if true, configure firewalld port"
                 type: "str"
+            amq_streams_zookeeper_instance_count_enabled:
+                default: true
+                description: "Enable counting the number of Zookeper instances managed by Ansible."
+                type: "bool"
+            amq_streams_zookeeper_instance_count:
+                default: 0
+                description: "Number of Zookeper instances managed by Ansible."
+                type: "int"
+            amq_streams_broker_instance_count_enabled:
+                default: true
+                description: "Enable counting the number of broker instances managed by Ansible."
+                type: "bool"
+            amq_streams_broker_instance_count:
+                default: 0
+                description: "Number of brokers instances managed by Ansible."
+                type: "int"
+            amq_streams_deployment_balance_check_enabled:
+                default: true
+                description: "Checks that instances are deployed in odd numbers, as recommanded."
