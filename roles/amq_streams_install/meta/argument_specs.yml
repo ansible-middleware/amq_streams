@@ -250,3 +250,4 @@ argument_specs:
             amq_streams_deployment_balance_check_enabled:
                 default: true
                 description: "Checks that instances are deployed in odd numbers, as recommanded."
+                type: "bool"
