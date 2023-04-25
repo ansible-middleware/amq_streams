@@ -32,6 +32,7 @@ amq_streams_install_broker_server_start: "{{ amq_streams_install_home }}/bin/kaf
 amq_streams_install_broker_config: "/etc/amq_streams_broker.properties"
 amq_streams_install_broker_service_name: 'amq_streams_broker'
 amq_streams_install_broker_user: 'amq_streams_broker'
+amq_streams_install_broker_listener_port: 9092
 amq_streams_install_broker_group: 'amq_streams'
 amq_streams_install_broker_service_config_template: 'templates/service.conf.j2'
 amq_streams_install_broker_service_config_file: '/etc/broker.conf'
@@ -61,3 +62,10 @@ amq_streams_install_bootstrap_server_port: 9092
 amq_streams_firewalld_package_name:
   - firewalld
 amq_streams_firewalld_enabled: false
+
+amq_streams_zookeeper_instance_count_enabled: true
+amq_streams_zookeeper_instance_count: 0
+amq_streams_broker_instance_count_enabled: true
+amq_streams_broker_instance_count: 0
+
+amq_streams_deployment_balance_check_enabled: true
