@@ -9,6 +9,11 @@ This changelog describes changes after version 0.0.0.
 v0.0.2
 ======
 
+Minor Changes
+-------------
+
+- Validate the odd number of Zookeeper instances of the cluster `#12 <https://github.com/ansible-middleware/amq_streams/pull/12>`_
+
 Bugfixes
 --------
 
