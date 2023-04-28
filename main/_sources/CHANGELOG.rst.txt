@@ -13,6 +13,7 @@ Minor Changes
 -------------
 
 - Validate the odd number of Zookeeper instances of the cluster `#12 <https://github.com/ansible-middleware/amq_streams/pull/12>`_
+- all jvm and servers args for zookeeper and broker can be overriden thru Ansible `#13 <https://github.com/ansible-middleware/amq_streams/pull/13>`_
 
 Bugfixes
 --------
