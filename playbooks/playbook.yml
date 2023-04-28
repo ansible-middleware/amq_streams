@@ -6,17 +6,6 @@
   roles:
     - role: amq_streams_install
   tasks:
-    - name: "Add an extra broker on each target."
-      ansible.builtin.include_role:
-        name: amq_streams_install
-        tasks_from: broker.yml
-      vars:
-        broker_id: 1
-        amq_streams_install_zookeeper_enabled: false
-        amq_streams_install_broker_service_name: amq_streams_broker-2
-        amq_streams_install_broker_listener_port: 9093
-        amq_streams_install_broker_config: /etc/amq_streams_broker-2.properties
-
     - name: "Ensures topic {{ topic_name }} exist."
       ansible.builtin.include_role:
         name: amq_streams_install
