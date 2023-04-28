@@ -28,8 +28,9 @@
     server_user: "{{ amq_streams_install_zookeeper_user | default(omit) }}"
     server_group: "{{ amq_streams_install_zookeeper_group | default(omit) }}"
     server_log_dir: "{{ amq_streams_install_zookeeper_logs_dir | default(omit) }}"
-    service_systemd_env_file_template: "{{  amq_streams_install_zookeeper_config_template }}"
-    service_systemd_env_file: "{{ amq_streams_install_zookeeper_config }}"
+    service_systemd_env_file_template: "{{ amq_streams_install_zookeeper_service_config_template }}"
+    service_systemd_env_file: "{{ amq_streams_install_zookeeper_service_env_file }}"
+    server_java_heap_opts: "-Xmx256M -Xms256M"
 
 - name: "Add zookeeper {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
   ansible.builtin.set_fact:

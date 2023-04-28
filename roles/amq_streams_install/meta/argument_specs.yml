@@ -54,6 +54,9 @@ argument_specs:
             amq_streams_install_zookeeper_service_config_template:
                 default: 'templates/service.conf.j2'
                 description: "Path to template file for systemd env vars file."
+            amq_streams_install_zookeeper_service_env_file:
+                default: '/etc/zookeeper.conf'
+                description: "Path to env file"
             amq_streams_install_zookeeper_admin_enable_server:
                 default: 'false'
                 description: 'Specifiy if Zookeeper server should be set up.'

@@ -20,6 +20,7 @@ amq_streams_install_zookeeper_user: 'amq_streams_zookeeper'
 amq_streams_install_zookeeper_group: 'amq_streams'
 amq_streams_install_zookeeper_service_name: 'amq_streams_zookeeper'
 amq_streams_install_zookeeper_service_config_template: 'templates/service.conf.j2'
+amq_streams_install_zookeeper_service_env_file: '/etc/zookeeper.conf'
 amq_streams_install_zookeeper_port: 2181
 amq_streams_install_zookeeper_host: 'localhost'
 amq_streams_install_zookeeper_data_dir: /var/run/zookeeper
