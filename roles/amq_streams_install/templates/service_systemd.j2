@@ -5,7 +5,8 @@ Description={{ service_description }}
 After=syslog.target network.target
 
 [Service]
-{% if service_systemd_env_file is defined %}EnvironmentFile=-{{ service_systemd_env_file }}{% endif %}
+{% if service_systemd_env_file is defined %}EnvironmentFile=-{{ service_systemd_env_file }}
+{% endif %}
 User={{ service_user }}
 Group={{ service_group }}
 #

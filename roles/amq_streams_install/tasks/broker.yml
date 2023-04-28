@@ -27,7 +27,7 @@
   vars:
     server_name: "{{ amq_streams_install.broker.service_name }}"
     server_start: "{{ amq_streams_install.broker.server_start }}"
-    server_config: "{{ amq_streams_install.broker.config.dest }}"
+    server_config: "{{ amq_streams_install_broker_config }}"
     server_config_template: "{{ amq_streams_install.broker.config.template }}"
     server_id: "{{ broker_id | default('0') }}"
     server_user: "{{ amq_streams_install_broker_user | default(omit) }}"
@@ -35,6 +35,7 @@
     server_log_dir: "{{ amq_streams_install_broker_logs_dir | default(omit) }}"
     service_systemd_env_file_template: "{{ amq_streams_install_broker_service_config_template }}"
     service_systemd_env_file: "{{ amq_streams_install_broker_service_config_file }}"
+    server_java_opts: "{{ amq_streams_install_broker_java_opts | default('') }}"
 
 - name: "Add zookeeper {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
   ansible.builtin.set_fact:
