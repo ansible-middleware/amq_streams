@@ -13,6 +13,9 @@ tags:
   - server
   - application
   - messaging
+  - runtimes
+  - middleware
+  - A4MW
 dependencies:
   ansible.posix: '>=1.4.0'
 repository: https://github.com/ansible-middleware/amq_streams
