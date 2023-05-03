@@ -12,10 +12,11 @@ tags:
   - java
   - server
   - application
+  - kafka
   - messaging
   - runtimes
   - middleware
-  - A4MW
+  - a4mw
 dependencies:
   ansible.posix: '>=1.4.0'
 repository: https://github.com/ansible-middleware/amq_streams
