@@ -6,6 +6,8 @@ amq_streams_common:
     download_url: "{{ amq_streams_common_download_url }}"
     download_dir: "{{ amq_streams_common_download_dir }}"
     install_dir: "{{ amq_streams_common_install_dir }}"
+  java:
+    version: "{{ amq_streams_common_openjdk_version }}"
   dependencies: "{{ amq_streams_common_prereqs_dependencies }}"
   systemd:
     home: "{{ amq_streams_common_systemd_home }}"
