@@ -54,9 +54,6 @@ amq_streams_install_broker_zookeeper_connection_timeout_ms: 18000
 amq_streams_install_broker_group_initial_rebalance_delay_ms: 0
 amq_streams_install_broker_properties_template: templates/server.properties.j2
 
-amq_streams_install_systemd_home: '/usr/lib/systemd/system'
-amq_streams_install_systemd_service_config_file_template: 'templates/service_systemd.j2'
-
 amq_streams_install_bootstrap_server_host: localhost
 amq_streams_install_bootstrap_server_port: 9092
 

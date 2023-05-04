@@ -6,10 +6,12 @@
       - group is defined and group | length > 0
     quiet: true
 
-- name: "Ensure required user {{ user }} exists."
-  ansible.builtin.user:
-    name: "{{ user }}"
-
 - name: "Ensure required group {{ group }} exists."
   ansible.builtin.group:
     name: "{{ group }}"
+
+- name: "Ensure required user {{ user }} exists."
+  ansible.builtin.user:
+    name: "{{ user }}"
+    group: "{{ group }}"
+
