@@ -1,5 +1,12 @@
 ---
 amq_streams_common:
+  archive:
+    version: "{{ amq_streams_common_version }}"
+    file: "{{ amq_streams_common_archive_file }}"
+    download_url: "{{ amq_streams_common_download_url }}"
+    download_dir: "{{ amq_streams_common_download_dir }}"
+    install_dir: "{{ amq_streams_common_install_dir }}"
+  dependencies: "{{ amq_streams_common_prereqs_dependencies }}"
   systemd:
     home: "{{ amq_streams_common_systemd_home }}"
     service_config_file_template: "{{ amq_streams_common_systemd_service_config_file_template }}"

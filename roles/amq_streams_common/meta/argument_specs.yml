@@ -1,0 +1,52 @@
+argument_specs:
+    main:
+        options:
+            amq_streams_common_product_version:
+                default: 3.3.2
+                description: "Version of Apache Kafka to download and install"
+                type: "str"
+            amq_streams_common_scala_version:
+                default: 2.13
+                description: "Scala version used by Apache Kafka"
+                type: "str"
+            amq_streams_common_version:
+                default: "2.13-3.3.1"
+                description: "Apache Kafka version to install"
+                type: "str"
+            amq_streams_common_archive_file:
+                default: "kafka_{{ amq_streams_common_version }}.tgz"
+                description: "Apache Kafka download archive name"
+                type: "str"
+            amq_streams_common_download_url:
+                default: "https://dlcdn.apache.org/kafka/3.3.1/{{ amq_streams_common_archive_file }}"
+                description: "Download URL for Apache Kafka archive"
+                type: "str"
+            amq_streams_common_download_dir:
+                default: "/opt/"
+                description: "Root directory for downloaded archive of Apache Kafka"
+                type: "str"
+            amq_streams_common_install_dir:
+                default: "/opt"
+                description: "Root director for the Apache Kafka installation"
+                type: "str"
+            amq_streams_common_prereqs_dependencies:
+                default:
+                    - tar
+                description: "List of system dependencies to instal - not included the required JVM"
+                type: "list"
+            amq_streams_common_openjdk_version:
+                default: "17"
+                description: "Java version - if set, triggers the installation of appropriate openjdk on the target system."
+                type: "str"
+            amq_streams_common_home:
+                default: "{{ amq_streams_common_install_dir }}/kafka_{{ amq_streams_common_version }}/"
+                description: "Root directory of the installed Apache Kafka on the target"
+                type: "str"
+            amq_streams_common_systemd_home:
+                default: '/usr/lib/systemd/system'
+                description: "Systemd config files home."
+                type: "str"
+            amq_streams_common_systemd_service_config_file_template:
+                default: 'templates/service_systemd.j2'
+                description: "Template use to create systemd service for Kafka components (Zookeeper, Broker)."
+                type: "str"
