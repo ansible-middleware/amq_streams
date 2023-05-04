@@ -14,4 +14,3 @@
   ansible.builtin.user:
     name: "{{ user }}"
     group: "{{ group }}"
-
