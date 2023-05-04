@@ -1,6 +1,5 @@
 ---
 amq_streams_install:
-  dependencies: "{{ amq_streams_install_prereqs_dependencies }}"
   zookeeper:
     enabled: "{{ amq_streams_install_zookeeper_enabled }}"
     config:
@@ -39,7 +38,5 @@ amq_streams_install:
   bootstrap_server:
     host: "{{ amq_streams_install_bootstrap_server_host }}"
     port: "{{ amq_streams_install_bootstrap_server_port }}"
-  java:
-    version: "{{ amq_streams_install_openjdk_version }}"
   topic:
     script: "{{ amq_streams_install_create_topic_script }}"
