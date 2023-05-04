@@ -1,34 +1,6 @@
 argument_specs:
     main:
         options:
-            amq_streams_install_product_version:
-                default: 3.3.2
-                description: "Version of Apache Kafka to download and install"
-                type: "str"
-            amq_streams_install_scala_version:
-                default: 2.13
-                description: "Scala version used by Apache Kafka"
-                type: "str"
-            amq_streams_install_version:
-                default: "2.13-3.3.1"
-                description: "Apache Kafka version to install"
-                type: "str"
-            amq_streams_install_archive_file:
-                default: "kafka_{{ amq_streams_install_version }}.tgz"
-                description: "Apache Kafka download archive name"
-                type: "str"
-            amq_streams_install_download_url:
-                default: "https://dlcdn.apache.org/kafka/3.3.1/{{ amq_streams_install_archive_file }}"
-                description: "Download URL for Apache Kafka archive"
-                type: "str"
-            amq_streams_install_download_dir:
-                default: "/opt/"
-                description: "Root directory for downloaded archive of Apache Kafka"
-                type: "str"
-            amq_streams_install_install_dir:
-                default: "/opt"
-                description: "Root director for the Apache Kafka installation"
-                type: "str"
             amq_streams_install_broker_user:
                 default: "amq_streams_broker"
                 description: "System user on the target executing Apache Kafka broker"
@@ -66,25 +38,8 @@ argument_specs:
             amq_streams_install_broker_service_config_file:
                 default: '/etc/broker.conf'
                 description: 'Path to server env vars file.'
-            amq_streams_install_path_to_archive_file:
-                default: "{{ amq_streams_install_download_dir }}/{{ amq_streams_install_archive_file }}"
-                description: "Full path to the Apache Kafka (downloaded) archive"
-                type: "str"
-            amq_streams_install_prereqs_dependencies:
-                default:
-                    - tar
-                description: "List of system dependencies to instal - not included the required JVM"
-                type: "list"
-            amq_streams_install_openjdk_version:
-                default: "17"
-                description: "Java version - if set, triggers the installation of appropriate openjdk on the target system."
-                type: "str"
-            amq_streams_install_home:
-                default: "{{ amq_streams_install_install_dir }}/kafka_{{ amq_streams_install_version }}/"
-                description: "Root directory of the installed Apache Kafka on the target"
-                type: "str"
             amq_streams_install_create_topic_script:
-                default: "{{ amq_streams_install_home }}/bin/kafka-topics.sh"
+                default: "" #{{ amq_streams_install_home }}/bin/kafka-topics.sh"
                 description: "Path to the kafka-topics.sh script"
                 type: "str"
             amq_streams_install_zookeeper_enabled:
@@ -100,7 +55,7 @@ argument_specs:
                 description: "Path to Jinja2 template to be used for the Zookeeper properties file."
                 type: "str"
             amq_streams_install_zookeeper_server_start:
-                default: "{{ amq_streams_install_home }}/bin/zookeeper-server-start.sh"
+                default: "" #{{ amq_streams_install_home }}/bin/zookeeper-server-start.sh"
                 description: "Path to the script to start Zookeeper."
                 type: "str"
             amq_streams_install_zookeeper_service_name:
@@ -131,7 +86,7 @@ argument_specs:
                 description: "Set to true if the broker should be integrated into systemd and started as a system service"
                 type: "bool"
             amq_streams_install_broker_server_start:
-                default: "{{ amq_streams_install_home }}/bin/kafka-server-start.sh"
+                default: "" #{{ amq_streams_install_home }}/bin/kafka-server-start.sh"
                 description: "Path to the script to start the broker server"
                 type: "str"
             amq_streams_install_broker_config:

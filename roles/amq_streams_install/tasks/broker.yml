@@ -1,7 +1,7 @@
 ---
 - name: "Ensure broker home dir belongs to appropriate user - if user is defined."
   ansible.builtin.file:
-    path: "{{ amq_streams_install_home }}"
+    path: "{{ amq_streams_common_home }}"
     state: directory
     owner: "{{ amq_streams_install_broker_user | default(omit) }}"
     group: "{{ amq_streams_install_broker_group | default(omit) }}"

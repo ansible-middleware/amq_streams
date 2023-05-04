@@ -1,11 +1,5 @@
 ---
 amq_streams_install:
-  archive:
-    version: "{{ amq_streams_install_version }}"
-    file: "{{ amq_streams_install_archive_file }}"
-    download_url: "{{ amq_streams_install_download_url }}"
-    download_dir: "{{ amq_streams_install_download_dir }}"
-    install_dir: "{{ amq_streams_install_install_dir }}"
   dependencies: "{{ amq_streams_install_prereqs_dependencies }}"
   zookeeper:
     enabled: "{{ amq_streams_install_zookeeper_enabled }}"
