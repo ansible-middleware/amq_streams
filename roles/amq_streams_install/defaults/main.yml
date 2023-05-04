@@ -1,21 +1,8 @@
 ---
 amq_streams_install_create_topic_script: "{{ amq_streams_common_home }}/bin/kafka-topics.sh"
 amq_streams_install_zookeeper_enabled: true
-amq_streams_install_zookeeper_config: /etc/amq_streams_zookeeper.properties
-amq_streams_install_zookeeper_config_template: templates/zookeeper.properties.j2
-amq_streams_install_zookeeper_server_start: "{{ amq_streams_common_home }}/bin/zookeeper-server-start.sh"
-amq_streams_install_zookeeper_user: 'amq_streams_zookeeper'
-amq_streams_install_zookeeper_group: 'amq_streams'
-amq_streams_install_zookeeper_service_name: 'amq_streams_zookeeper'
-amq_streams_install_zookeeper_service_config_template: 'templates/service.conf.j2'
-amq_streams_install_zookeeper_service_env_file: '/etc/zookeeper.conf'
+amq_streams_install_zookeeper_host: localhost
 amq_streams_install_zookeeper_port: 2181
-amq_streams_install_zookeeper_host: 'localhost'
-amq_streams_install_zookeeper_data_dir: /var/run/zookeeper
-amq_streams_install_zookeeper_logs_dir: "/var/log/{{ amq_streams_install_zookeeper_service_name }}/"
-amq_streams_install_zookeeper_max_client_cnxns: 0
-amq_streams_install_zookeeper_admin_enable_server: 'false'
-
 amq_streams_install_broker_enabled: true
 amq_streams_install_broker_server_start: "{{ amq_streams_common_home }}/bin/kafka-server-start.sh"
 amq_streams_install_broker_config: "/etc/amq_streams_broker.properties"
@@ -49,8 +36,6 @@ amq_streams_firewalld_package_name:
   - firewalld
 amq_streams_firewalld_enabled: false
 
-amq_streams_zookeeper_instance_count_enabled: true
-amq_streams_zookeeper_instance_count: 0
 amq_streams_broker_instance_count_enabled: true
 amq_streams_broker_instance_count: 0
 

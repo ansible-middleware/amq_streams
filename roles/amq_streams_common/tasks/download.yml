@@ -2,7 +2,7 @@
 - name: "Ensure required parameter(s) are provided."
   ansible.builtin.assert:
     that:
-      - amq_streams_install is defined and amq_streams_common.archive is defined
+      - amq_streams_common is defined and amq_streams_common.archive is defined
       - amq_streams_common.archive.download_url is defined
       - amq_streams_common.archive.download_dir is defined
       - amq_streams_common.archive.install_dir is defined

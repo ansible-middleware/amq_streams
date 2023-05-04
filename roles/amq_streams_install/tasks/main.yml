@@ -1,6 +1,18 @@
 ---
 - name: "Ensure prerequirements for collection are met."
-  ansible.builtin.include_tasks: prereqs.yml
+  ansible.builtin.include_role: 
+    name: amq_streams_common
+
+- name: "Ensure prerequirements for collection are met."
+  ansible.builtin.include_role: 
+    name: amq_streams_common
+    tasks_from: user_group.yml
+  vars:
+    user: "{{ amq_streams_install_broker_user }}"
+    group: "{{ amq_streams_install_broker_group }}"
+  when:
+    - amq_streams_install_broker_user is defined 
+    - amq_streams_install_broker_group is defined
 
 - name: "Download artefacts from project's website"
   ansible.builtin.include_role:
@@ -13,9 +25,13 @@
     - amq_streams_firewalld_enabled is defined and amq_streams_firewalld_enabled
 
 - name: "Ensure Zookeeper is running."
-  ansible.builtin.include_tasks: zookeeper.yml
-  when:
-    - amq_streams_install.zookeeper.enabled is defined and amq_streams_install.zookeeper.enabled
+  ansible.builtin.include_role:
+    name: amq_streams_zookeeper
+#  when:
+#    - amq_streams_install.zookeeper.enabled is defined and amq_streams_install.zookeeper.enabled
+
+- ansible.builtin.debug:
+    var: amq_streams_zookeeper_instance_count
 
 - name: "Ensure Broker is running."
   ansible.builtin.include_tasks: broker.yml

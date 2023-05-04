@@ -34,5 +34,5 @@
 
     - name: "Validate that deployment is functionnal."
       ansible.builtin.include_role:
-        name: amq_streams_install
+        name: amq_streams_zookeeper
         tasks_from: validate.yml

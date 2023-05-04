@@ -42,41 +42,6 @@ argument_specs:
                 default: "" #{{ amq_streams_install_home }}/bin/kafka-topics.sh"
                 description: "Path to the kafka-topics.sh script"
                 type: "str"
-            amq_streams_install_zookeeper_enabled:
-                default: "True"
-                description: "Set to true if Zookeeper server should be integrated into systemd and started as a service"
-                type: "bool"
-            amq_streams_install_zookeeper_config:
-                default: /etc/amq_streams_install_zookeeper.properties
-                description: "Path to the Zookeeper properties file"
-                type: "str"
-            amq_streams_install_zookeeper_config_template:
-                default: 'templates/zookeeper.properties.j2'
-                description: "Path to Jinja2 template to be used for the Zookeeper properties file."
-                type: "str"
-            amq_streams_install_zookeeper_server_start:
-                default: "" #{{ amq_streams_install_home }}/bin/zookeeper-server-start.sh"
-                description: "Path to the script to start Zookeeper."
-                type: "str"
-            amq_streams_install_zookeeper_service_name:
-                default: 'amq_streams_install_zookeeper'
-                description: "Name of the systemd service associated to Zookeeper"
-                type: "str"
-            amq_streams_install_zookeeper_port:
-                default: 2181
-                description: "Port used by Zookeeper"
-                type: "int"
-            amq_streams_install_zookeeper_host:
-                default: 'localhost'
-                description: "Hostname of the system running Zookeeper"
-                type: "str"
-            amq_streams_install_zookeeper_data_dir:
-                default: '/tmp/zookeeper'
-                description: "Data dir used by Zookeeper"
-            amq_streams_install_zookeeper_max_client_cnxns:
-                default: 0
-                description: "Max number of client connexions to Zookeeper"
-                type: "str"
             amq_streams_install_broker_admin_enable_server:
                 default: false
                 description: "Set tp true to enable admin of the Zookeeper server"
@@ -117,9 +82,6 @@ argument_specs:
                 default: 104857600
                 description: "Max size for Broker's socket's request in bytes"
                 type: "int"
-            amq_streams_install_zookeeper_logs_dir:
-                default: "/var/log/{{ amq_streams_install_zookeeper_service_name }}/"
-                description: "Path to Zookeeper logs dir"
             amq_streams_install_broker_logs_dir:
                 default: "/var/log/{{ amq_streams_install_broker_service_name }}"
                 description: "Path to Kafka logs"
@@ -189,14 +151,6 @@ argument_specs:
                 default: true
                 description: "if true, configure firewalld port"
                 type: "str"
-            amq_streams_zookeeper_instance_count_enabled:
-                default: true
-                description: "Enable counting the number of Zookeper instances managed by Ansible."
-                type: "bool"
-            amq_streams_zookeeper_instance_count:
-                default: 0
-                description: "Number of Zookeper instances managed by Ansible."
-                type: "int"
             amq_streams_broker_instance_count_enabled:
                 default: true
                 description: "Enable counting the number of broker instances managed by Ansible."

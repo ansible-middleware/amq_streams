@@ -2,7 +2,6 @@
 - name: "Ensure required dependencies are present."
   ansible.builtin.include_role:
     name: amq_streams_common
-    tasks_from: prereqs.yml
 
 - name: "Ensure user for broker exists (if provided)."
   ansible.builtin.include_role:
@@ -14,14 +13,3 @@
   when:
     - amq_streams_install_broker_user is defined
     - amq_streams_install_broker_group is defined
-
-- name: "Ensure user for zookeeper exists (if provided)."
-  ansible.builtin.include_role:
-    name: amq_streams_common
-    tasks_from: user_group.yml
-  vars:
-    user: "{{ amq_streams_install_zookeeper_user }}"
-    group: "{{ amq_streams_install_zookeeper_group }}"
-  when:
-    - amq_streams_install_zookeeper_user is defined
-    - amq_streams_install_zookeeper_group is defined

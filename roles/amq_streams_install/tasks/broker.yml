@@ -39,7 +39,7 @@
     service_systemd_env_file: "{{ amq_streams_install_broker_service_config_file }}"
     server_java_opts: "{{ amq_streams_install_broker_java_opts | default('') }}"
 
-- name: "Add zookeeper {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
+- name: "Add broker {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
   ansible.builtin.set_fact:
     amq_streams_broker_instance_count: "{{ amq_streams_broker_instance_count | int + 1  }}"
   delegate_to: "{{ amq_streams_ansible_controller | default('localhost') }}"
