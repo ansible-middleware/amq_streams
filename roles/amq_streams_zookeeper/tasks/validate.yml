@@ -1,8 +1,10 @@
 ---
+-
 - name: "Verify that the balance of zookeeper and brokers instances is correct."
   ansible.builtin.assert:
     that:
       - not (amq_streams_zookeeper_instance_count | int is divisibleby 2)
+    fail_msg: "Invalid number of Zookeeper instance: {{ amq_streams_zookeeper_instance_count }} (must be an odd number)."
   when:
     - amq_streams_deployment_balance_check_enabled is defined and amq_streams_deployment_balance_check_enabled
     - amq_streams_zookeeper_instance_count is defined

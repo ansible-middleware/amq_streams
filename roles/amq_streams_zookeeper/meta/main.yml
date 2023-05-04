@@ -1,0 +1,3 @@
+---
+dependencies:
+- { role: amq_streams_common }
