@@ -1,3 +1,29 @@
 ---
+collections:
+  - middleware_automation.common
+
+galaxy_info:
+  role_name: amq_streams_install
+  namespace: middleware_automation
+  author: Romain Pelisse
+  description: Install AMQ Streams (or Apache Kafka) compoennets
+  company: Red Hat, Inc.
+
+  license: Apache License 2.0
+
+  min_ansible_version: "2.12"
+
+  platforms:
+   - name: EL
+     versions:
+     - 8
+
+  galaxy_tags:
+    - java
+    - jboss
+    - wildfly
+    - cli
+    - server
+
 dependencies:
 - { role: amq_streams_common }
