@@ -42,10 +42,6 @@ amq_streams_install:
       zookeeper_connection_timeout_ms: "{{ amq_streams_install_broker_zookeeper_connection_timeout_ms }}"
       group_initial_rebalance_delay_ms: "{{ amq_streams_install_broker_group_initial_rebalance_delay_ms }}"
       properties_template: "{{ amq_streams_install_broker_properties_template }}"
-
-  systemd:
-    home: "{{ amq_streams_install_systemd_home }}"
-    service_config_file_template: "{{ amq_streams_install_systemd_service_config_file_template }}"
   bootstrap_server:
     host: "{{ amq_streams_install_bootstrap_server_host }}"
     port: "{{ amq_streams_install_bootstrap_server_port }}"

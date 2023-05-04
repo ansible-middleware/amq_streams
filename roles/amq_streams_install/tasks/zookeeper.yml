@@ -19,7 +19,9 @@
   changed_when: False
 
 - name: "Ensure Zookeeper is running as a systemd service."
-  ansible.builtin.include_tasks: start_server.yml
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: systemd.yml
   vars:
     server_name: "{{ amq_streams_install.zookeeper.service_name }}"
     server_start: "{{ amq_streams_install.zookeeper.server_start }}"

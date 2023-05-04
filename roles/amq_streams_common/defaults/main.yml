@@ -1,0 +1,3 @@
+---
+amq_streams_common_systemd_home: '/usr/lib/systemd/system'
+amq_streams_common_systemd_service_config_file_template: 'templates/service_systemd.j2'

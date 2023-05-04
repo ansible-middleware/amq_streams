@@ -42,8 +42,8 @@
 
 - name: "Deploy Systemd descriptor for service: {{ server_name }}"
   ansible.builtin.template:
-    src: "{{ amq_streams_install.systemd.service_config_file_template }}"
-    dest: "{{ amq_streams_install.systemd.home }}/{{ server_systemd_name | default(server_name + '.service') }}"
+    src: "{{ server_service_config_file_template | default(amq_streams_common.systemd.service_config_file_template) }}"
+    dest: "{{ server_systemd_home | default(amq_streams_common.systemd.home) }}/{{ server_systemd_name | default(server_name + '.service') }}"
     group: root
     owner: root
     mode: 0644

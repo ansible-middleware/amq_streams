@@ -1,0 +1,5 @@
+---
+amq_streams_common:
+  systemd:
+    home: "{{ amq_streams_common_systemd_home }}"
+    service_config_file_template: "{{ amq_streams_common_systemd_service_config_file_template }}"
