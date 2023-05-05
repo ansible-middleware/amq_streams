@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # the directory where the snapshot is stored.
-dataDir={{ amq_streams_install_zookeeper_data_dir }}
+dataDir={{ amq_streams_zookeeper_data_dir }}
 # the port at which the clients will connect
-clientPort={{ amq_streams_install_zookeeper_port }}
+clientPort={{ amq_streams_zookeeper_port }}
 # disable the per-ip limit on the number of connections since this is a non-production config
-maxClientCnxns={{ amq_streams_install_zookeeper_max_client_cnxns }}
+maxClientCnxns={{ amq_streams_zookeeper_max_client_cnxns }}
 # Disable the adminserver by default to avoid port conflicts.
 # Set the port to something non-conflicting if choosing to enable this
-admin.enableServer={{ amq_streams_install_zookeeper_admin_enable_server }}
+admin.enableServer={{ amq_streams_zookeeper_admin_enable_server }}
 # admin.serverPort=8080

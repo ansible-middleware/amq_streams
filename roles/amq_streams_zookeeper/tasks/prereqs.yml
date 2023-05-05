@@ -8,8 +8,8 @@
     name: amq_streams_common
     tasks_from: user_group.yml
   vars:
-    user: "{{ amq_streams_install_zookeeper_user }}"
-    group: "{{ amq_streams_install_zookeeper_group }}"
+    user: "{{ amq_streams_zookeeper_user }}"
+    group: "{{ amq_streams_zookeeper_group }}"
   when:
-    - amq_streams_install_zookeeper_user is defined
-    - amq_streams_install_zookeeper_group is defined
+    - amq_streams_zookeeper_user is defined
+    - amq_streams_zookeeper_group is defined

@@ -1,10 +1,5 @@
 ---
-- name: "Restart {{ amq_streams_install_zookeeper_service_name }}"
+- name: "Restart {{ amq_streams_zookeeper.service_name }}"
   ansible.builtin.service:
-    name: "{{ amq_streams_install_zookeeper_service_name }}"
-    state: restarted
-
-- name: "Restart {{ amq_streams_install_broker_service_name }}"
-  ansible.builtin.service:
-    name: "{{ amq_streams_install_broker_service_name }}"
+    name: "{{ amq_streams_zookeeper.service_name }}"
     state: restarted

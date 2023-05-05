@@ -1,14 +1,13 @@
 ---
-amq_streams_install:
-  zookeeper:
-    enabled: "{{ amq_streams_install_zookeeper_enabled }}"
-    config:
-      dest: "{{ amq_streams_install_zookeeper_config }}"
-      template: "{{ amq_streams_install_zookeeper_config_template }}"
-      data_dir: "{{ amq_streams_install_zookeeper_data_dir }}"
-      max_client_cnxns: "{{ amq_streams_install_zookeeper_max_client_cnxns }}"
-      admin_enable_server: "{{ amq_streams_install_zookeeper_admin_enable_server }}"
-      port: "{{ amq_streams_install_zookeeper_port }}"
-      host: "{{ amq_streams_install_zookeeper_host }}"
-    server_start: "{{ amq_streams_install_zookeeper_server_start }}"
-    service_name: "{{ amq_streams_install_zookeeper_service_name }}"
+amq_streams_zookeeper:
+  enabled: "{{ amq_streams_zookeeper_enabled }}"
+  config:
+    dest: "{{ amq_streams_zookeeper_config }}"
+    template: "{{ amq_streams_zookeeper_config_template }}"
+    data_dir: "{{ amq_streams_zookeeper_data_dir }}"
+    max_client_cnxns: "{{ amq_streams_zookeeper_max_client_cnxns }}"
+    admin_enable_server: "{{ amq_streams_zookeeper_admin_enable_server }}"
+    port: "{{ amq_streams_zookeeper_port }}"
+    host: "{{ amq_streams_zookeeper_host }}"
+  server_start: "{{ amq_streams_zookeeper_server_start }}"
+  service_name: "{{ amq_streams_zookeeper_service_name }}"
