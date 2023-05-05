@@ -4,28 +4,28 @@
 
 - name: "Ensure Zookeeper data dir exists and belongs to the appropriate user - if user is defined."
   ansible.builtin.file:
-    path: "{{ amq_streams_install_zookeeper_data_dir }}"
+    path: "{{ amq_streams_zookeeper_data_dir }}"
     state: directory
-    owner: "{{ amq_streams_install_zookeeper_user | default(omit) }}"
-    group: "{{ amq_streams_install_zookeeper_group | default(omit) }}"
+    owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
+    group: "{{ amq_streams_zookeeper_group | default(omit) }}"
     mode: 0755
   when:
-    - amq_streams_install_zookeeper_data_dir is defined
+    - amq_streams_zookeeper_data_dir is defined
 
 - name: "Ensure Zookeeper is running as a systemd service."
   ansible.builtin.include_role:
     name: amq_streams_common
     tasks_from: systemd.yml
   vars:
-    server_name: "{{ amq_streams_install.zookeeper.service_name }}"
-    server_start: "{{ amq_streams_install.zookeeper.server_start }}"
-    server_config: "{{ amq_streams_install.zookeeper.config.dest }}"
-    server_config_template: "{{ amq_streams_install.zookeeper.config.template }}"
-    server_user: "{{ amq_streams_install_zookeeper_user | default(omit) }}"
-    server_group: "{{ amq_streams_install_zookeeper_group | default(omit) }}"
-    server_log_dir: "{{ amq_streams_install_zookeeper_logs_dir | default(omit) }}"
-    service_systemd_env_file_template: "{{ amq_streams_install_zookeeper_service_config_template }}"
-    service_systemd_env_file: "{{ amq_streams_install_zookeeper_service_env_file }}"
+    server_name: "{{ amq_streams_zookeeper.service_name }}"
+    server_start: "{{ amq_streams_zookeeper.server_start }}"
+    server_config: "{{ amq_streams_zookeeper.config.dest }}"
+    server_config_template: "{{ amq_streams_zookeeper.config.template }}"
+    server_user: "{{ amq_streams_zookeeper_user | default(omit) }}"
+    server_group: "{{ amq_streams_zookeeper_group | default(omit) }}"
+    server_log_dir: "{{ amq_streams_zookeeper_logs_dir | default(omit) }}"
+    service_systemd_env_file_template: "{{ amq_streams_zookeeper_service_config_template }}"
+    service_systemd_env_file: "{{ amq_streams_zookeeper_service_env_file }}"
     server_java_heap_opts: "-Xmx256M -Xms256M"
 
 - name: "Add zookeeper {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
