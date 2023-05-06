@@ -1,0 +1,45 @@
+---
+- name: "Ensure broker home dir belongs to appropriate user - if user is defined."
+  ansible.builtin.file:
+    path: "{{ amq_streams_common_home }}"
+    state: directory
+    owner: "{{ amq_streams_broker_user | default(omit) }}"
+    group: "{{ amq_streams_broker_group | default(omit) }}"
+    mode: 0755
+  changed_when: false   # TODO: find a better way to deal with that
+
+- name: "Set server_id for {{ amq_streams_broker.service_name }} service."
+  ansible.builtin.set_fact:
+    server_id: "{{ broker_id | default('0') }}"
+  when:
+    - not server_id is defined
+
+- name: "Wait for Zookeeper to be available - if host and port are provided."
+  ansible.builtin.wait_for:
+    host: "{{ amq_streams_broker_zookeeper_host }}"
+    port: "{{ amq_streams_broker_zookeeper_port }}"
+  when:
+    - amq_streams_broker_zookeeper_host is defined
+    - amq_streams_broker_zookeeper_host is defined
+
+- name: "Start Broker as a systemd service."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: systemd.yml
+  vars:
+    server_name: "{{ amq_streams_broker.service_name }}"
+    server_start: "{{ amq_streams_broker.server_start }}"
+    server_config: "{{ amq_streams_broker_config }}"
+    server_config_template: "{{ amq_streams_broker.config.template }}"
+    server_id: "{{ broker_id | default('0') }}"
+    server_user: "{{ amq_streams_broker_user | default(omit) }}"
+    server_group: "{{ amq_streams_broker_group | default(omit) }}"
+    server_log_dir: "{{ amq_streams_broker_logs_dir | default(omit) }}"
+    service_systemd_env_file_template: "{{ amq_streams_broker_service_config_template }}"
+    service_systemd_env_file: "{{ amq_streams_broker_service_config_file }}"
+    server_java_opts: "{{ amq_streams_broker_java_opts | default('') }}"
+
+- name: "Add broker {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
+  ansible.builtin.set_fact:
+    amq_streams_broker_instance_count: "{{ amq_streams_broker_instance_count | int + 1  }}"
+  delegate_to: "{{ amq_streams_ansible_controller | default('localhost') }}"
