@@ -1,4 +1,7 @@
 ---
+- name: "Ensure requirements for broker are fullfilled."
+  ansible.builtin.include_tasks: prereqs.yml
+
 - name: "Ensure broker home dir belongs to appropriate user - if user is defined."
   ansible.builtin.file:
     path: "{{ amq_streams_common_home }}"
@@ -21,6 +24,16 @@
   when:
     - amq_streams_broker_zookeeper_host is defined
     - amq_streams_broker_zookeeper_host is defined
+
+- name: "Configure firewalld  for Broker (if enable)."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: firewalld.yml
+  vars:
+    service_port: "{{ amq_streams_broker_bootstrap_server_port }}"
+  when:
+    - amq_streams_firewalld_enabled is defined and amq_streams_firewalld_enabled
+    - amq_streams_broker_bootstrap_server_port is defined
 
 - name: "Start Broker as a systemd service."
   ansible.builtin.include_role:

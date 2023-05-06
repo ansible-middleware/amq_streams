@@ -2,27 +2,27 @@
 - name: "Ensure required parameter(s) are provided."
   ansible.builtin.assert:
     that:
-      - amq_streams_install is defined
-      - amq_streams_install.topic is defined
-      - amq_streams_install.topic.script is defined
+      - amq_streams_broker is defined
+      - amq_streams_broker.topic is defined
+      - amq_streams_broker.topic.script is defined
       - topic_name is defined
     quiet: True
 
 - name: "Set bootstrap server host (if not defined)."
   ansible.builtin.set_fact:
-    bootstrap_server_host: "{{ amq_streams_install.bootstrap_server.host }}"
+    bootstrap_server_host: "{{ amq_streams_broker.bootstrap_server.host }}"
   when:
     - not bootstrap_server_host is defined
 
 - name: "Set bootstrap server port (if not defined)."
   ansible.builtin.set_fact:
-    bootstrap_server_port: "{{ amq_streams_install.bootstrap_server.port }}"
+    bootstrap_server_port: "{{ amq_streams_broker.bootstrap_server.port }}"
   when:
     - not bootstrap_server_port is defined
 
 - name: "Run operation {{ bootstrap_operator }} for topic: '{{ topic_name }}."
   block:
     - name: "Execute create request for topic '{{ topic_name }}'."
-      ansible.builtin.command: "{{ amq_streams_install.topic.script }} {{ bootstrap_operator }} --topic {{ topic_name }} --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}"
+      ansible.builtin.command: "{{ amq_streams_broker.topic.script }} {{ bootstrap_operator }} --topic {{ topic_name }} --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}"
       register: operation_result
       changed_when: False

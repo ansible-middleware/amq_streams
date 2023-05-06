@@ -4,11 +4,18 @@
   vars:
     topic_name: myTopic
   roles:
-    - role: amq_streams_install
+    - role: amq_streams_zookeeper
+  tasks:
+
+    - name: "Set up broker."
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+      vars:
+        amq_streams_common_skip_download: true
   tasks:
     - name: "Ensures topic {{ topic_name }} exist."
       ansible.builtin.include_role:
-        name: amq_streams_install
+        name: amq_streams_broker
         tasks_from: topic/create.yml
       loop:
         - { name: monTopic, partition: 3 }
@@ -16,7 +23,7 @@
 
     - name: "Describe created topic."
       ansible.builtin.include_role:
-        name: amq_streams_install
+        name: amq_streams_broker
         tasks_from: topic/describe.yml
 
   post_tasks:
