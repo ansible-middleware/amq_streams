@@ -2,14 +2,14 @@
 - name: "Ensure required parameters are provided."
   ansible.builtin.assert:
     that:
-      - amq_streams_firewalld_package_name is defined
+      - amq_streams_common_firewalld_package_name is defined
       - service_port is defined
     quiet: true
 
 - name: "Ensure firewalld is available."
   become: true
   ansible.builtin.package:
-    name: "{{ amq_streams_firewalld_package_name }}"
+    name: "{{ amq_streams_common_firewalld_package_name }}"
     state: present
   when:
     - firewalld_state_check is not defined or firewalld_state_check
@@ -17,7 +17,7 @@
 - name: "Ensure firewalld is running."
   become: true
   ansible.builtin.service:
-    name: "{{ amq_streams_firewalld_service_name | default('firewalld') }}"
+    name: "{{ amq_streams_common_firewalld_service_name | default('firewalld') }}"
     state: started
     enabled: true
 
