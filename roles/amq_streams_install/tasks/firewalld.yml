@@ -3,6 +3,7 @@
   ansible.builtin.assert:
     that:
       - amq_streams_firewalld_package_name is defined
+      - service_port is defined
     quiet: true
 
 - name: "Ensure firewalld is available."
@@ -10,6 +11,8 @@
   ansible.builtin.package:
     name: "{{ amq_streams_firewalld_package_name }}"
     state: present
+  when:
+    - firewalld_state_check is not defined or firewalld_state_check
 
 - name: "Ensure firewalld is running."
   become: true
@@ -20,20 +23,7 @@
 
 - name: "Ensure firewalld allows communication over {{ amq_streams_install_bootstrap_server_port }}."
   ansible.posix.firewalld:
-    port: "{{ amq_streams_install_bootstrap_server_port }}/tcp"
+    port: "{{ service_port }}/tcp"
     permanent: true
     state: enabled
     immediate: yes
-  when:
-    - amq_streams_install_bootstrap_server_port is defined
-    - amq_streams_install_broker_enabled is defined and amq_streams_install_broker_enabled
-
-- name: "Ensure firewalld allows communication over {{ amq_streams_install_zookeeper_port }}."
-  ansible.posix.firewalld:
-    port: "{{ amq_streams_install_zookeeper_port }}/tcp"
-    permanent: true
-    state: enabled
-    immediate: yes
-  when:
-    - amq_streams_install_zookeeper_port is defined
-    - amq_streams_install_zookeeper_enabled is defined and amq_streams_install_zookeeper_enabled
