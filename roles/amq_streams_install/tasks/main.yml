@@ -31,6 +31,7 @@
 #    - amq_streams_install.zookeeper.enabled is defined and amq_streams_install.zookeeper.enabled
 
 - name: "Ensure Broker is running."
-  ansible.builtin.include_tasks: broker.yml
-  when:
-    - amq_streams_install.broker.enabled is defined and amq_streams_install.broker.enabled
+  ansible.builtin.include_role:
+    name: amq_streams_broker
+#  when:
+#    - amq_streams_install.broker.enabled is defined and amq_streams_install.broker.enabled
