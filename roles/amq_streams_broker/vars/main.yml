@@ -23,7 +23,7 @@ amq_streams_broker:
     group_initial_rebalance_delay_ms: "{{ amq_streams_broker_group_initial_rebalance_delay_ms }}"
     properties_template: "{{ amq_streams_broker_properties_template }}"
   bootstrap_server:
-    host: "{{ amq_streams_install_bootstrap_server_host }}"
-    port: "{{ amq_streams_install_bootstrap_server_port }}"
+    host: "{{ amq_streams_broker_bootstrap_server_host }}"
+    port: "{{ amq_streams_broker_bootstrap_server_port }}"
   topic:
-    script: "{{ amq_streams_install_create_topic_script }}"
+    script: "{{ amq_streams_broker_create_topic_script }}"

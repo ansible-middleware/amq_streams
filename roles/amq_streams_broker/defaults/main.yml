@@ -1,5 +1,5 @@
 ---
-amq_streams_install_create_topic_script: "{{ amq_streams_common_home }}/bin/kafka-topics.sh"
+amq_streams_broker_create_topic_script: "{{ amq_streams_common_home }}/bin/kafka-topics.sh"
 amq_streams_broker_enabled: true
 amq_streams_broker_server_start: "{{ amq_streams_common_home }}/bin/kafka-server-start.sh"
 amq_streams_broker_config: "/etc/amq_streams_broker.properties"
@@ -26,8 +26,8 @@ amq_streams_broker_zookeeper_connection_timeout_ms: 18000
 amq_streams_broker_group_initial_rebalance_delay_ms: 0
 amq_streams_broker_properties_template: templates/server.properties.j2
 
-amq_streams_install_bootstrap_server_host: localhost
-amq_streams_install_bootstrap_server_port: 9092
+amq_streams_broker_bootstrap_server_host: localhost
+amq_streams_broker_bootstrap_server_port: 9092
 
 amq_streams_firewalld_package_name:
   - firewalld
