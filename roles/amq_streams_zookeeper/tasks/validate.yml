@@ -1,5 +1,4 @@
 ---
--
 - name: "Verify that the balance of zookeeper and brokers instances is correct."
   ansible.builtin.assert:
     that:

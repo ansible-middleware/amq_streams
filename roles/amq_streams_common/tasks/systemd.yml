@@ -33,10 +33,11 @@
 
 - name: "Deploy server configuration - if provided."
   ansible.builtin.template:
-    src: "{{ service_systemd_env_file_template }}"
+    src: "{{ service_systemd_env_file_template | default('templates/service.conf.j2') }}"
     dest: "{{ service_systemd_env_file }}"
     owner: root
     group: root
+    mode: 0644
   when:
     - service_systemd_env_file is defined
 

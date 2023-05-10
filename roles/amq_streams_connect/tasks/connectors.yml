@@ -1,0 +1,25 @@
+---
+- name: "Determine connect-file jar version."
+  ansible.builtin.find:
+    paths: "{{ amq_streams_common_home }}/libs"
+    patterns: connect-file-*.jar
+  register: list
+
+- name: "Ensure file connector libs has been found"
+  ansible.builtin.assert:
+    that:
+      - list is defined and list.files | length > 0 and list.files | length < 2
+      - list.files[0] is defined and list.files[0].path is defined
+    quiet: true
+
+- name: "Set path to file_connect jar to: {{ list.files[0].path }}."
+  ansible.builtin.set_fact:
+    path_to_file_connect_lib: "{{ list.files[0].path }}"
+
+- name: "Deploy Kafka connectors source file"
+  ansible.builtin.template:
+    src: "templates/file_connector_source.j2"
+    dest: "{{ amq_streams_common_home }}/test.txt"
+    owner: "{{ amq_streams_connect_user | default(omit) }}"
+    group: "{{ amq_streams_connect_group | default(omit) }}"
+    mode: 0644

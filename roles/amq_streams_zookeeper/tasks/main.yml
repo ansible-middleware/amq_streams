@@ -40,5 +40,5 @@
 
 - name: "Add zookeeper {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
   ansible.builtin.set_fact:
-    amq_streams_zookeeper_instance_count: "{{ amq_streams_zookeeper_instance_count | int + 1  }}"
+    amq_streams_zookeeper_instance_count: "{{ amq_streams_zookeeper_instance_count | int + 1 }}"
   delegate_to: "{{ amq_streams_ansible_controller | default('localhost') }}"
