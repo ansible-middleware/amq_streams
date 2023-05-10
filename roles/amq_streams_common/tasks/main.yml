@@ -1,7 +1,7 @@
 ---
 - name: "Set required JDK package (if Java version is provided)."
   ansible.builtin.set_fact:
-    amq_streams_common_dependencies: "{{ [ amq_streams_common.dependencies + ['java-{{ amq_streams_common.java.version }}-openjdk-headless'] ] | flatten }}"
+    amq_streams_common_dependencies: "{{ [amq_streams_common.dependencies + ['java-{{ amq_streams_common.java.version }}-openjdk-headless']] | flatten }}"
   when:
     - amq_streams_common.java is defined
     - amq_streams_common.java.version is defined
