@@ -1,5 +1,5 @@
 ---
-- name: "Restart {{ amq_streams_broker_broker_service_name }}"
+- name: "Restart {{ amq_streams_broker.service_name }}"
   ansible.builtin.service:
-    name: "{{ amq_streams_broker_broker_service_name }}"
+    name: "{{ amq_streams_zookeeper.service_name }}"
     state: restarted
