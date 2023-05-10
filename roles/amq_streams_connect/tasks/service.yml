@@ -1,0 +1,14 @@
+---
+- name: "Deploy Kafka Connect as a systemd service."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: systemd.yml
+  vars:
+    server_name: "{{ amq_streams_connect_service_name }}"
+    server_start: "{{ amq_streams_connect_server_start }}"
+    server_config: "{{ amq_streams_connect_server_config }}"
+    service_systemd_env_file: "{{ amq_streams_connect_systemd_env_file }}"
+    server_log_dir: "{{ amq_streams_connect_logs_dir | default(omit) }}"
+    server_extra_args: "{{ amq_streams_connect_server_extra_args }}"
+    server_user: "{{ amq_streams_connect_user | default(omit) }}"
+    server_group: "{{ amq_streams_connect_group | default(omit) }}"

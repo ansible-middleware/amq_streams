@@ -7,11 +7,12 @@
     - role: amq_streams_zookeeper
   tasks:
 
-    - name: "Set up broker."
+    - name: "Ensure AMQ Streams Broker is running and availbale."
       ansible.builtin.include_role:
         name: amq_streams_broker
       vars:
         amq_streams_common_skip_download: true
+
     - name: "Ensures topic {{ topic_name }} exist."
       ansible.builtin.include_role:
         name: amq_streams_broker
@@ -24,6 +25,10 @@
       ansible.builtin.include_role:
         name: amq_streams_broker
         tasks_from: topic/describe.yml
+
+    - name: "Ensure AMQ Streams Connect is running and available."
+      ansible.builtin.include_role:
+        name: amq_streams_connect
 
   post_tasks:
     - name: "Display numbers of Zookeeper instances managed by Ansible:"

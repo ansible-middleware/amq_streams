@@ -1,0 +1,19 @@
+---
+amq_streams_connect_user: amq_streams_connect
+amq_streams_connect_group: amq_streams
+amq_streams_connect_standalone_conf: "{{ amq_streams_common_home }}/config/connect-standalone.properties"
+amq_streams_connect_file_connector_data:
+  - foo
+  - bar
+#
+amq_streams_connect_file_source_conf: "{{ amq_streams_common_home }}/config/connect-file-source.properties"
+amq_streams_connect_file_sink: "{{ amq_streams_common_home }}/config/connect-file-sink.properties"
+#
+amq_streams_connect_service_name: amq_streams_connect
+amq_streams_connect_logs_dir: "/var/log/{{ amq_streams_connect_service_name }}/"
+amq_streams_connect_server_start: "{{ amq_streams_common_home }}/bin/connect-standalone.sh"
+amq_streams_connect_server_config: "{{ amq_streams_connect_standalone_conf }}"
+amq_streams_connect_server_extra_args: "{{ amq_streams_connect_file_source_conf }} {{ amq_streams_connect_file_sink }}"
+amq_streams_connect_systemd_env_file: /etc/amq_streams_connect.conf
+amq_streams_connect_systemd_home: '/usr/lib/systemd/system'
+amq_streams_connect_service_description: "Kafka Connect server"
