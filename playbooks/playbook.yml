@@ -12,7 +12,6 @@
         name: amq_streams_broker
       vars:
         amq_streams_common_skip_download: true
-  tasks:
     - name: "Ensures topic {{ topic_name }} exist."
       ansible.builtin.include_role:
         name: amq_streams_broker
