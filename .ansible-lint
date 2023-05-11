@@ -30,6 +30,7 @@ warn_list:
   - no-jinja-nesting
   - no-changed-when
   - schema[arg_specs]
+  - schema[meta]
   - schema[role-arg-spec]
   - galaxy[version-incorrect]
   - risky-file-permissions
