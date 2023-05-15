@@ -11,5 +11,6 @@
     name: "{{ amq_streams_common_dependencies }}"
     state: present
   when:
+    - not amq_streams_common_skip_deps is defined
     - amq_streams_common.dependencies is defined
     - amq_streams_common.dependencies | length > 0

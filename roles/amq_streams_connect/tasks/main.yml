@@ -23,7 +23,12 @@
     tasks_from: download
 
 - name: "Ensure connectors for AMQ Connect are deployed."
-  ansible.builtin.include_tasks: connectors.yml
+  ansible.builtin.include_tasks: "{{ connector.path }}"
+  loop: "{{ connectors }}"
+  loop_control:
+    loop_var: connector
+  when:
+    - connectors is defined and connectors | length > 0
 
 - name: "Ensure {{ amq_streams_connect_standalone_conf }} content is correct."
   ansible.builtin.template:
