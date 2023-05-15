@@ -29,6 +29,9 @@
     - name: "Ensure AMQ Streams Connect is running and available."
       ansible.builtin.include_role:
         name: amq_streams_connect
+      vars:
+        connectors:
+          - { name: "file", path: "connectors/file.yml" }
 
   post_tasks:
     - name: "Display numbers of Zookeeper instances managed by Ansible:"
