@@ -32,6 +32,7 @@
       vars:
         connectors:
           - { name: "file", path: "connectors/file.yml" }
+          - { name: "dummy", path: "dummy.yml" }
 
   post_tasks:
     - name: "Display numbers of Zookeeper instances managed by Ansible:"
