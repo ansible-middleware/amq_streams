@@ -34,6 +34,7 @@ warn_list:
   - schema[role-arg-spec]
   - galaxy[version-incorrect]
   - risky-file-permissions
+  - var-naming[no-role-prefix]
 
 skip_list:
   - vars_should_not_be_used
