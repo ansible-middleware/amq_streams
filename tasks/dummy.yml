@@ -1,0 +1,4 @@
+---
+- name: "Display message for custom connector."
+  ansible.builtin.debug:
+    msg: "Code for dummy connector"
