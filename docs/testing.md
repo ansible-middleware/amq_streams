@@ -2,14 +2,13 @@
 
 ## Continuous integration
 
-The collection is tested with a [molecule](https://github.com/ansible-community/molecule) setup covering the included roles and verifying correct installation and idempotency.
+The collection is tested with a [molecule](https://github.com/ansible-community/molecule) setup covering the included roles and verifying correct installation and idempotence.
 In order to run the molecule tests locally with python 3.9 available, after cloning the repository:
 
-```
+```shell
 pip install yamllint 'molecule[docker]~=3.5.2' ansible-core flake8 ansible-lint voluptuous
 molecule test --all
 ```
-
 
 ## Integration testing
 
@@ -20,27 +19,46 @@ The repositories are:
 
  - none at the moment
 
-
 ## Test playbooks
 
 Sample playbooks are provided in the `playbooks/` directory; to run the playbooks locally (requires a rhel system with python 3.9+, ansible, and systemd) the steps are as follows:
 
-```
-# setup environment
+1. Setup environment
+
+```shell
 pip install ansible-core
-# clone the repository
+```
+
+2. Clone the repository
+
+```shell
 git clone https://github.com/ansible-middleware/amq_streams
 cd amq_streams
-# install collection dependencies
+```
+
+3. Install collection dependencies
+
+```shell
 ansible-galaxy collection install -r requirements.yml
-# install collection python deps
+```
+
+4. Install collection python deps
+
+```shell
 pip install -r requirements.txt
-# create inventory for localhost
-cat << EOF > inventory
+```
+
+5. Create inventory for localhost
+
+```shell
+cat << EOF > inventory2
 [amq_streams]
 localhost ansible_connection=local
 EOF
-# run the playbook
-ansible-playbook -i inventory playbooks/amq_streams.yml
 ```
 
+6. Run the playbook
+
+```shell
+ansible-playbook -i inventory playbooks/amq_streams.yml
+```
