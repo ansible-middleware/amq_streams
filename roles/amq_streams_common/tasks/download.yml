@@ -19,7 +19,7 @@
   ansible.builtin.stat:
     path: "{{ amq_streams_common_download_dir }}"
   register: download_dir
-  delegate_to: localhost
+  delegate_to: "{{ amq_streams_common_download_node | default(omit) }}"
 
 - name: "Verify that download directory exist."
   ansible.builtin.assert:
