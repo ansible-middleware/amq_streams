@@ -29,7 +29,7 @@
             <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
             <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
             <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ Broker</a></li>
-            <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/amq_streams/">kafka / Red Hat AMQ Streams</a></li>
+            <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
             <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
             <li class="toctree-l1"><a class="reference internal" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
           </ul>
@@ -42,7 +42,7 @@
             <div role="navigation" aria-label="Page navigation">
               <ul class="wy-breadcrumbs">
                   <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-                  <li>Welcome to amq_streams Collection documentation</li>
+                  <li>Welcome to AMQ Streams Collection documentation</li>
                   <li class="wy-breadcrumbs-aside"></li>
               </ul>
               <hr/>
