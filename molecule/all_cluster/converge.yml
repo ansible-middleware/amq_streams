@@ -1,0 +1,2 @@
+---
+- import_playbook: ../../playbooks/amq_streams_connect.yml
