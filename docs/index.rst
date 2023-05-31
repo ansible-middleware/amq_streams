@@ -8,6 +8,7 @@ Welcome to AMQ Streams Collection documentation
    :caption: User documentation
 
    README
+   usage
    plugins/index
    roles/index
 
