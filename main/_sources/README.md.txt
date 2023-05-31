@@ -16,10 +16,10 @@ Plugins and modules within a collection may be tested with only specific Ansible
 
 ### Roles
 
-* [`amq_streams_common`](./roles/amq_streams_common/): Common tasks for the collection.
-* [`amq_streams_zookeeper`](./roles/amq_streams_zookeeper/): Perform installation and configuration of Zookeeper ensemble.
-* [`amq_streams_broker`](./roles/amq_streams_broker/): Perform installation and configuration of Kafka brokers cluster.
-* [`amq_streams_connect`](./roles/amq_streams_connect/): Perform installation and configuration of Kafka Connect cluster.
+* [`amq_streams_common`](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_common/): Common tasks for the collection.
+* [`amq_streams_zookeeper`](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_zookeeper/): Perform installation and configuration of Zookeeper ensemble.
+* [`amq_streams_broker`](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_broker/): Perform installation and configuration of Kafka brokers cluster.
+* [`amq_streams_connect`](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_connect/): Perform installation and configuration of Kafka Connect cluster.
 
 ## Installation
 
@@ -56,14 +56,14 @@ Clone the repository, checkout the tag you want to build, or pick the main branc
 
 ### Install Playbook
 
-* [`playbooks/playbook.yml`](./playbooks/playbook.yml) deploys based on the collections defaults.
+* [`playbooks/playbook.yml`](https://github.com/ansible-middleware/amq_streams/blob/main/playbooks/playbook.yml) deploys based on the collections defaults.
 
 For full service configuration details, refer to each role README file:
 
-* [Common Role](./roles/amq_streams_common/README.md)
-* [Zookeeper Role](./roles/amq_streams_zookeeper/README.md)
-* [Broker Role](./roles/amq_streams_broker/README.md)
-* [Connect Role](./roles/amq_streams_connect/README.md)
+* [Common Role](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_common/README.md)
+* [Zookeeper Role](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_zookeeper/README.md)
+* [Broker Role](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_broker/README.md)
+* [Connect Role](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_connect/README.md)
 
 ## Support
 
@@ -73,4 +73,4 @@ amq_streams collection is a Beta release and for Technical Preview. If you have 
 
 Apache License v2.0 or later
 
-See [LICENSE](LICENSE) to view the full text.
+See [LICENSE](https://github.com/ansible-middleware/amq_streams/blob/main/LICENSE) to view the full text.
