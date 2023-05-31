@@ -2,11 +2,10 @@
 - name: "Ansible Playbook to install a Kafka cluster (+Zookeeper)"
   hosts: all
   vars:
-    amq_streams_common_download_node: ""
     amq_streams_common_download_dir: "/tmp"
     topic_name: myTopic
   roles:
-    - role: amq_streams_zookeeper   
+    - role: amq_streams_zookeeper
   tasks:
     - name: "Ensure AMQ Streams Broker is running and available."
       ansible.builtin.include_role:
