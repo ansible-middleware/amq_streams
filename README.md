@@ -56,7 +56,7 @@ Clone the repository, checkout the tag you want to build, or pick the main branc
 
 ### Install Playbook
 
-* [`playbooks/playbook.yml`](./playbooks/playbook.yml) deploys based on the collections defaults.
+* [`playbooks/amq_streams.yml`](./playbooks/amq_streams.yml) deploys based on the collections defaults.
 
 For full service configuration details, refer to each role README file:
 
