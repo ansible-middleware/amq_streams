@@ -44,7 +44,7 @@
     owner: "{{ amq_streams_common_download_user | default(omit) }}"
     group: "{{ amq_streams_common_download_group | default(omit) }}"
     mode: 0644
-  delegate_to: localhost
+  delegate_to: "{{ amq_streams_common_download_node | default(omit) }}"
   when:
     - not download_target_file.stat.exists
 
