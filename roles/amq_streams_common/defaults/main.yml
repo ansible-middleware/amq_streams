@@ -21,3 +21,5 @@ amq_streams_common_home: "{{ amq_streams_common_install_dir }}/kafka_{{ amq_stre
 amq_streams_common_firewalld_package_name:
   - firewalld
 amq_streams_common_firewalld_enabled: false
+
+amq_streams_common_offline_install: false

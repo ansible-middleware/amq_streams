@@ -17,7 +17,7 @@
 - name: "Ensure AMQ Streams artefacts are available."
   ansible.builtin.include_role:
     name: amq_streams_common
-    tasks_from: download.yml
+    tasks_from: install.yml
   when:
     - not amq_streams_common_skip_download is defined or not amq_streams_common_skip_download
 
