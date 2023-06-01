@@ -1,8 +1,6 @@
 ---
 - name: "Ansible playbook to install a Kafka Connect cluster"
   hosts: kconnect
-  roles:
-    - role: amq_streams_connect
   tasks:
     - name: "Ensure Kafka Connect is running and available."
       ansible.builtin.include_role:
@@ -10,4 +8,3 @@
       vars:
         connectors:
           - { name: "file", path: "connectors/file.yml" }
-          - { name: "dummy", path: "dummy.yml" }
