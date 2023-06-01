@@ -126,7 +126,7 @@ log.retention.check.interval.ms={{ amq_streams_broker_log_retention_check_interv
 # server. e.g. "127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002".
 # You can also append an optional chroot string to the urls to specify the
 # root directory for all kafka znodes.
-zookeeper.connect={{ amq_streams_zookeeper_host }}:{{ amq_streams_zookeeper_port }}
+zookeeper.connect={{ amq_streams_broker_zookeeper_host }}:{{ amq_streams_broker_zookeeper_port }}
 
 # Timeout in ms for connecting to zookeeper
 zookeeper.connection.timeout.ms={{ amq_streams_broker_zookeeper_connection_timeout_ms }}

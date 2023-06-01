@@ -23,7 +23,8 @@
     port: "{{ amq_streams_broker_zookeeper_port }}"
   when:
     - amq_streams_broker_zookeeper_host is defined
-    - amq_streams_broker_zookeeper_host is defined
+    - amq_streams_broker_zookeeper_port is defined
+    - amq_streams_broker_zookeeper_wait is defined and amq_streams_broker_zookeeper_wait
 
 - name: "Configure firewalld  for Broker (if enable)."
   ansible.builtin.include_role:

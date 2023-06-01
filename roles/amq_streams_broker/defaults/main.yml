@@ -37,3 +37,7 @@ amq_streams_broker_instance_count_enabled: true
 amq_streams_broker_instance_count: 0
 
 amq_streams_deployment_balance_check_enabled: true
+
+amq_streams_broker_zookeeper_host_default_value: localhost
+amq_streams_broker_zookeeper_port_default_value: 2181
+amq_streams_broker_zookeeper_wait: True
