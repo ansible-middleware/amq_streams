@@ -9,6 +9,15 @@
       - amq_streams_common.archive.file is defined
     quiet: true
 
+- name: "Validate credentials (if required)"
+  ansible.builtin.assert:
+    that:
+      - (rhn_username is defined and amq_streams_common_redhat_enable is defined and amq_streams_common_redhat_enable) or not amq_streams_common_redhat_enable is defined or not amq_streams_common_redhat_enable or amq_streams_common_offline_install
+      - (rhn_password is defined and amq_streams_common_redhat_enable is defined and amq_streams_common_redhat_enable) or not amq_streams_common_redhat_enable is defined or not amq_streams_common_redhat_enable or amq_streams_common_offline_install
+    quiet: True
+    fail_msg: "Cannot install Red Hat Enterprise Application AMQ Streams without RHN service accounts credentials. Verify rhn_username and rhn_password are defined or set amq_streams_offline_install"
+
+
 - name: "Determine current working directory to set as download target - if not specified."
   ansible.builtin.set_fact:
     amq_streams_common_download_dir: "{{ lookup('env', 'pwd') | default('.') }}"
@@ -47,17 +56,3 @@
   delegate_to: "{{ amq_streams_common_download_node | default(omit) }}"
   when:
     - not download_target_file.stat.exists
-
-- name: "Load metadata on {{ amq_streams_common.archive.install_dir }}."
-  ansible.builtin.stat:
-    path: "{{ amq_streams_common_home }}/bin"
-  register: download_target
-
-- name: "Extract artefacts to {{ amq_streams_common_install_dir }}"
-  ansible.builtin.unarchive:
-    src: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
-    dest: "{{ amq_streams_common.archive.install_dir }}"
-    owner: "{{ amq_streams_common_user | default(omit) }}"
-    group: "{{ amq_streams_common_group | default(omit) }}"
-  when:
-    - download_target is defined and download_target.stat is defined and not download_target.stat.exists
