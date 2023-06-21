@@ -22,6 +22,7 @@
     host: "{{ amq_streams_broker_zookeeper_host }}"
     port: "{{ amq_streams_broker_zookeeper_port }}"
   when:
+    - 0 > 1 # Disabled until find a way to test the Zookeeper cluster connection (including all the zknodes)
     - amq_streams_broker_zookeeper_host is defined
     - amq_streams_broker_zookeeper_port is defined
     - amq_streams_broker_zookeeper_wait is defined and amq_streams_broker_zookeeper_wait
