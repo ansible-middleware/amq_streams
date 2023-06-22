@@ -10,7 +10,7 @@ amq_streams_connect_file_source_conf: "{{ amq_streams_common_home }}/config/conn
 amq_streams_connect_file_sink: "{{ amq_streams_common_home }}/config/connect-file-sink.properties"
 #
 amq_streams_connect_service_name: amq_streams_connect
-amq_streams_connect_logs_dir: "/var/log/{{ amq_streams_connect_service_name }}/"
+amq_streams_connect_logs_dir: "/var/logs/{{ amq_streams_connect_service_name }}/"
 amq_streams_connect_server_start: "{{ amq_streams_common_home }}/bin/connect-standalone.sh"
 amq_streams_connect_server_config: "{{ amq_streams_connect_standalone_conf }}"
 amq_streams_connect_server_extra_args: "{{ amq_streams_connect_file_source_conf }} {{ amq_streams_connect_file_sink }}"
