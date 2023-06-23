@@ -62,6 +62,9 @@ broker4
 |`amq_streams_broker_instance_count_enabled` |  | `true` |
 |`amq_streams_broker_instance_count` |  | `0` |
 |`amq_streams_deployment_balance_check_enabled` |  | `true` |
+|`amq_streams_zookeeper_auth_enabled` | Enable Zookeeper authentication. Zookeeper must be deployed with the authentication enabled. | `false` |
+|`amq_streams_broker_zookeeper_auth_config` | JAAS file for brokers | `/etc/broker-jaas.conf` |
+|`amq_streams_broker_zookeeper_auth_config_template` | JAAS template for brokers | `templates/broker-jaas.conf.j2` |
 
 ## Role Variables
 
@@ -69,7 +72,8 @@ The following are a set of required variables for the role:
 
 | Variable | Description | Required |
 |:---------|:------------|:---------|
-
+|`amq_streams_zookeeper_auth_user` | Zookeeper user to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true` | '' |
+|`amq_streams_zookeeper_auth_pass` | Zookeeper user password to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true`| '' |
 
 ## License
 
