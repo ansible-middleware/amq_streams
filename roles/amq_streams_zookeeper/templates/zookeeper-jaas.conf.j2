@@ -1,0 +1,32 @@
+// {{ ansible_managed }}
+
+// Zookeeper Server-to-Server Authentication
+// Zookeeper Intercluster - Server
+
+QuorumServer {
+       org.apache.zookeeper.server.auth.DigestLoginModule required
+       user_{{ amq_streams_zookeeper_auth_user }}="{{ amq_streams_zookeeper_auth_pass }}";
+};
+
+// Zookeeper Intercluster - Client
+
+QuorumLearner {
+       org.apache.zookeeper.server.auth.DigestLoginModule required
+       username="{{ amq_streams_zookeeper_auth_user }}"
+       password="{{ amq_streams_zookeeper_auth_pass }}";
+};
+
+// Zookeeper - Local clients
+
+Client {
+       org.apache.zookeeper.server.auth.DigestLoginModule required
+       username="{{ amq_streams_zookeeper_auth_user }}"
+       password="{{ amq_streams_zookeeper_auth_pass }}";
+};
+
+// Client-to-Server Authentication
+
+Server {
+    org.apache.zookeeper.server.auth.DigestLoginModule required
+    user_{{ amq_streams_zookeeper_auth_user }}="{{ amq_streams_zookeeper_auth_pass }}";
+};

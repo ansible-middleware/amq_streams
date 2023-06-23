@@ -17,6 +17,22 @@
   when:
     - not server_id is defined
 
+- name: "Configure Broker-Zookeeper authentication"
+  ansible.builtin.template:
+    src: "{{ amq_streams_broker_zookeeper_auth_config_template }}"
+    dest: "{{ amq_streams_broker_zookeeper_auth_config }}"
+    owner: "{{ amq_streams_broker_user | default(omit) }}"
+    group: "{{ amq_streams_broker_group | default(omit) }}"
+    mode: 0644  
+  when:
+    - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
+
+- name: "Enable Broker-Zookeeper authentication environment variable"
+  ansible.builtin.set_fact:
+    amq_streams_broker_java_opts: "-Djava.security.auth.login.config={{ amq_streams_broker_zookeeper_auth_config }}"
+  when:
+    - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
+
 - name: "Wait for Zookeeper to be available - if host and port are provided."
   ansible.builtin.wait_for:
     host: "{{ amq_streams_broker_zookeeper_host }}"

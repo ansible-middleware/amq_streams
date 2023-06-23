@@ -19,6 +19,22 @@
     owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
     group: "{{ amq_streams_zookeeper_group | default(omit) }}"
 
+- name: "Configure Zookeeper authentication"
+  ansible.builtin.template:
+    src: "{{ amq_streams_zookeeper_auth_config_template }}"
+    dest: "{{ amq_streams_zookeeper_auth_config }}"
+    owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
+    group: "{{ amq_streams_zookeeper_group | default(omit) }}"
+    mode: 0644  
+  when:
+    - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
+
+- name: "Enable Zookeeper authentication environment variable"
+  ansible.builtin.set_fact:
+    amq_streams_zookeeper_java_opts: "-Djava.security.auth.login.config={{ amq_streams_zookeeper_auth_config }}"
+  when:
+    - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
+
 - name: "Configure firewalld for Zookeeper (if enable)."
   ansible.builtin.include_role:
     name: amq_streams_common
@@ -44,6 +60,7 @@
     service_systemd_env_file_template: "{{ amq_streams_zookeeper_service_config_template }}"
     service_systemd_env_file: "{{ amq_streams_zookeeper_service_env_file }}"
     server_java_heap_opts: "-Xmx256M -Xms256M"
+    server_java_opts: "{{ amq_streams_zookeeper_java_opts | default('') }}"
 
 - name: "Add zookeeper {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
   ansible.builtin.set_fact:
