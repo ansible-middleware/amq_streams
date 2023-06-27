@@ -7,3 +7,27 @@ Client {
     username="{{ amq_streams_zookeeper_auth_user }}"
     password="{{ amq_streams_zookeeper_auth_pass }}";
 };
+
+{% if amq_streams_broker_auth_enabled  %}
+// Broker Authentication
+KafkaServer {
+
+    // Plain Login Module
+    org.apache.kafka.common.security.plain.PlainLoginModule required
+{% if amq_streams_broker_inter_broker_auth_broker_username is defined and amq_streams_broker_inter_broker_auth_broker_password is defined %}
+    username="{{ amq_streams_broker_inter_broker_auth_broker_username }}"
+    password="{{ amq_streams_broker_inter_broker_auth_broker_password }}"
+    user_{{ amq_streams_broker_inter_broker_auth_broker_username }}="{{ amq_streams_broker_inter_broker_auth_broker_password }}"
+{% endif %}
+{% for user in amq_streams_broker_auth_plain_users %}
+    user_{{ user.username }}="{{ user.password }}"
+{% endfor %}
+    ;
+
+{% if amq_streams_broker_auth_scram_enabled is defined %}
+    // SCRAM Login Module
+    org.apache.kafka.common.security.scram.ScramLoginModule required;
+{% endif %}
+
+};
+{% endif %}
