@@ -35,7 +35,8 @@ broker4
 |`amq_streams_broker_config` |  | `/etc/amq_streams_broker.properties` |
 |`amq_streams_broker_service_name` |  | `amq_streams_broker` |
 |`amq_streams_broker_user` |  | `amq_streams_broker` |
-|`amq_streams_broker_listener_port` |  | `9092` |
+|`amq_streams_broker_listener_port` | Port defined for external communications | `9092` |
+|`amq_streams_broker_listener_internal_port` | Port defined for inter-broker communications | `9091` |
 |`amq_streams_broker_group` |  | `amq_streams` |
 |`amq_streams_broker_service_config_template` |  | `templates/service.conf.j2` |
 |`amq_streams_broker_service_config_file` |  | `/etc/broker.conf` |
@@ -65,6 +66,11 @@ broker4
 |`amq_streams_zookeeper_auth_enabled` | Enable Zookeeper authentication. Zookeeper must be deployed with the authentication enabled. | `false` |
 |`amq_streams_broker_zookeeper_auth_config` | JAAS file for brokers | `/etc/broker-jaas.conf` |
 |`amq_streams_broker_zookeeper_auth_config_template` | JAAS template for brokers | `templates/broker-jaas.conf.j2` |
+|`amq_streams_broker_listeners` | Default list of broker listeners | `PLAINTEXT://:{{ amq_streams_broker_listener_port }}` |
+|`amq_streams_broker_auth_enabled` | Enable Broker authentication. | `false` |
+|`amq_streams_broker_auth_scram_enabled` | Enable SASL SCRAM authentication. | `false` |
+|`amq_streams_broker_auth_listeners` | Default list of authenticated listeners | `PLAINTEXT:PLAINTEXT` |
+|`amq_streams_broker_auth_sasl_mechanisms` | Default list of authenticated SASL mechanism | `PLAIN` |
 
 ## Role Variables
 
@@ -72,8 +78,110 @@ The following are a set of required variables for the role:
 
 | Variable | Description | Required |
 |:---------|:------------|:---------|
-|`amq_streams_zookeeper_auth_user` | Zookeeper user to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true` | '' |
-|`amq_streams_zookeeper_auth_pass` | Zookeeper user password to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true`| '' |
+|`amq_streams_zookeeper_auth_user` | Zookeeper user to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true` | 'true' |
+|`amq_streams_zookeeper_auth_pass` | Zookeeper user password to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true`| 'true' |
+
+Enabling the `amq_streams_broker_auth_enabled` requires to define the following variables to execute the role successfully:
+
+| Variable | Description | Required | Sample |
+|:---------|:------------|:---------|:-------|
+|`amq_streams_broker_auth_listeners` | List of authenticated listeners | `true` |
+` - PLAINTEXT:PLAINTEXT
+  - AUTHENTICATED://:9093` |
+|`amq_streams_broker_auth_sasl_mechanisms` | Default list of authenticated SASL mechanism | `true` | `PLAIN` |
+|`amq_streams_broker_auth_plain_users` | List of users (`username`, `password`) to add into the Kafka cluster | `true` | `` |
+
+## Broker Authentication
+
+This section includes a set of example to enable the broker authentication for the
+following scenarios:
+
+* SASL Plain authentication
+* SASL SCRAM authentication 
+
+### SASL Plain Authentication
+
+This is a sample configuration to enable that configuration using two
+different listeners, one for the clients (`AUTHENTICATED`) and other for
+the inter-broker connections (`REPLICATION`). Both listeners require
+a SASL plain authentication.
+
+The `amq_streams_broker_auth_plain_users` variable defines the list of
+different users to create to authenticate to the brokers.
+
+The `amq_streams_broker_inter_broker_auth_sasl_mechanisms: PLAIN` property defines
+the protocol to authenticate the inter-broker connections. That requires to
+identify which user will be used to establish these connections, that user is defined
+by the `amq_streams_broker_inter_broker_auth_broker_username` and `amq_streams_broker_inter_broker_auth_broker_password`
+variables.
+
+```yaml
+    # BK Listeners
+    amq_streams_broker_listeners:
+      - AUTHENTICATED://:{{ amq_streams_broker_listener_port }}
+      - REPLICATION://:{{ amq_streams_broker_listener_internal_port }}
+
+    amq_streams_broker_inter_broker_listener: REPLICATION
+
+    # BK Authentication
+    amq_streams_broker_auth_enabled: 'true'
+    amq_streams_broker_auth_listeners:
+      - AUTHENTICATED:SASL_PLAINTEXT
+      - REPLICATION:SASL_PLAINTEXT
+
+    amq_streams_broker_auth_sasl_mechanisms:
+      - PLAIN
+
+    # Kafka Plain Users
+    amq_streams_broker_auth_plain_users:
+      - username: admin
+        password: password
+      - username: usr
+        password: password
+
+    amq_streams_broker_inter_broker_auth_sasl_mechanisms: PLAIN
+    amq_streams_broker_inter_broker_auth_broker_username: interbroker
+    amq_streams_broker_inter_broker_auth_broker_password: password
+```
+
+### SASL SCRAM Authentication
+
+This is a sample configuration to enable that configuration using two
+different listeners, one for the clients (`AUTHENTICATED`) and other for
+the inter-broker connections (`REPLICATION`). Both listeners require
+a SASL plain authentication. SCRAM authentication is enabled by the
+`amq_streams_broker_auth_scram_enabled` variable.
+
+Users must be created using the `kafka-configs.sh` script from Kafka.
+
+The `amq_streams_broker_inter_broker_auth_sasl_mechanisms: SCRAM-SHA-512` property defines
+the protocol to authenticate the inter-broker connections. That requires to
+identify which user will be used to establish these connections, that user is defined
+by the `amq_streams_broker_inter_broker_listener_auth` variable.
+
+```yaml
+    # BK Listeners
+    amq_streams_broker_listeners:
+      - AUTHENTICATED://:{{ amq_streams_broker_listener_port }}
+      - REPLICATION://:{{ amq_streams_broker_listener_internal_port }}
+
+    amq_streams_broker_inter_broker_listener: REPLICATION
+
+    # BK Authentication
+    amq_streams_broker_auth_enabled: 'true'
+    amq_streams_broker_auth_scram_enabled: 'true'
+    amq_streams_broker_auth_listeners:
+      - AUTHENTICATED:SASL_PLAINTEXT
+      - REPLICATION:SASL_PLAINTEXT
+
+    amq_streams_broker_auth_sasl_mechanisms:
+      - PLAIN
+      - SCRAM-SHA-512
+
+    amq_streams_broker_inter_broker_auth_sasl_mechanisms: SCRAM-SHA-512
+    amq_streams_broker_inter_broker_listener_auth: |
+      listener.name.replication.scram-sha-512.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="<USER>" password="<PASSWORD>";
+```
 
 ## License
 
