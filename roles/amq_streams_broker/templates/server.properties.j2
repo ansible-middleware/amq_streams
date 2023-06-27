@@ -34,18 +34,42 @@ broker.id={{ groups['brokers'].index(inventory_hostname) }}
 #     listeners = listener_name://host_name:port
 #   EXAMPLE:
 #     listeners = PLAINTEXT://your.host.name:9092
-{% if amq_streams_broker_listener_port is defined %}
+{% if amq_streams_broker_listeners is defined %}
+listeners={{ amq_streams_broker_listeners | join(",") }}
+{% elif amq_streams_broker_listener_port is defined %}
 listeners=PLAINTEXT://:{{ amq_streams_broker_listener_port }}
 {% else %}
 #listeners=PLAINTEXT://:9092
+{% endif %}
+
+{% if amq_streams_broker_inter_broker_listener is defined %}
+# Name of listener used for communication between brokers
+inter.broker.listener.name={{ amq_streams_broker_inter_broker_listener }}
 {% endif %}
 
 # Listener name, hostname and port the broker will advertise to clients.
 # If not set, it uses the value for "listeners".
 #advertised.listeners=PLAINTEXT://your.host.name:9092
 
+{% if amq_streams_broker_auth_enabled and amq_streams_broker_auth_listeners is defined %}
+# Maps listener names to security protocols, the default is for them to be the same. See the config documentation for more details
+listener.security.protocol.map={{ amq_streams_broker_auth_listeners | join(",") }}
+
+# The list of SASL mechanisms enabled in the Kafka server
+sasl.enabled.mechanisms={{ amq_streams_broker_auth_sasl_mechanisms | join(",") }}
+{% if amq_streams_broker_inter_broker_auth_sasl_mechanisms is defined %}
+# SASL mechanism used for inter-broker communication
+sasl.mechanism.inter.broker.protocol={{ amq_streams_broker_inter_broker_auth_sasl_mechanisms }}
+{% endif %}
+{% else %}
 # Maps listener names to security protocols, the default is for them to be the same. See the config documentation for more details
 #listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+{% endif %}
+
+{% if amq_streams_broker_inter_broker_listener_auth is defined %}
+# Authentication mechanism for the inter-broker listener
+{{ amq_streams_broker_inter_broker_listener_auth }}
+{% endif %}
 
 # The number of threads that the server uses for receiving requests from the network and sending responses to the network
 num.network.threads={{ amq_streams_broker_num_network_threads }}
