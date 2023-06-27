@@ -6,6 +6,7 @@ amq_streams_broker_config: "/etc/amq_streams_broker.properties"
 amq_streams_broker_service_name: 'amq_streams_broker'
 amq_streams_broker_user: 'amq_streams_broker'
 amq_streams_broker_listener_port: 9092
+amq_streams_broker_listener_internal_port: 9091
 amq_streams_broker_group: 'amq_streams'
 amq_streams_broker_service_config_template: 'templates/service.conf.j2'
 amq_streams_broker_service_config_file: '/etc/broker.conf'
@@ -46,3 +47,22 @@ amq_streams_broker_zookeeper_wait: True
 amq_streams_zookeeper_auth_enabled: 'false'
 amq_streams_broker_zookeeper_auth_config: /etc/broker-jaas.conf
 amq_streams_broker_zookeeper_auth_config_template: templates/broker-jaas.conf.j2
+
+# Broker Listeners
+amq_streams_broker_listeners:
+  - PLAINTEXT://:{{ amq_streams_broker_listener_port }} # Insecure
+  #- REPLICATION://:{{ amq_streams_broker_listener_internal_port }} # Inter-broker communication
+  #- AUTHENTICATED://:9093 # Authenticated
+
+# Broker Authentication
+amq_streams_broker_auth_enabled: 'false'
+amq_streams_broker_auth_scram_enabled: 'false'
+
+amq_streams_broker_auth_listeners:
+  - PLAINTEXT:PLAINTEXT  
+  #- REPLICATION:PLAINTEXT
+  #- AUTHENTICATED:SASL_PLAINTEXT
+
+amq_streams_broker_auth_sasl_mechanisms:
+  - PLAIN
+  #- SCRAM-SHA-512
