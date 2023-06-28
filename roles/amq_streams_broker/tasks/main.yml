@@ -1,5 +1,5 @@
 ---
-- name: "Ensure requirements for broker are fullfilled."
+- name: "Ensure requirements for broker are fulfilled."
   ansible.builtin.include_tasks: prereqs.yml
 
 - name: "Ensure broker home dir belongs to appropriate user - if user is defined."
@@ -10,6 +10,16 @@
     group: "{{ amq_streams_broker_group | default(omit) }}"
     mode: 0755
   changed_when: false   # TODO: find a better way to deal with that
+
+- name: "Ensure Broker data dir exists and belongs to the appropriate user - if user is defined."
+  ansible.builtin.file:
+    path: "{{ amq_streams_broker_data_dir }}"
+    state: directory
+    owner: "{{ amq_streams_broker_user | default(omit) }}"
+    group: "{{ amq_streams_broker_group | default(omit) }}"
+    mode: 0755
+  when:
+    - amq_streams_broker_data_dir is defined
 
 - name: "Set server_id for {{ amq_streams_broker.service_name }} service."
   ansible.builtin.set_fact:

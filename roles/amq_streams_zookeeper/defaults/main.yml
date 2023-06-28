@@ -8,7 +8,7 @@ amq_streams_zookeeper_group: 'amq_streams'
 amq_streams_zookeeper_service_name: 'amq_streams_zookeeper'
 amq_streams_zookeeper_service_config_template: 'templates/service.conf.j2'
 amq_streams_zookeeper_service_env_file: '/etc/zookeeper.conf'
-amq_streams_zookeeper_data_dir: /var/run/zookeeper
+amq_streams_zookeeper_data_dir: /var/lib/{{ amq_streams_zookeeper_service_name }}/
 amq_streams_zookeeper_logs_dir: "/var/log/{{ amq_streams_zookeeper_service_name }}/"
 amq_streams_zookeeper_max_client_cnxns: 0
 amq_streams_zookeeper_admin_enable_server: 'false'
