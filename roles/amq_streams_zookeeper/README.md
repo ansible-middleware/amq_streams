@@ -28,8 +28,8 @@ zknode3
 |`amq_streams_zookeeper_service_name` | Zookeeper service name | `amq_streams_zookeeper` |
 |`amq_streams_zookeeper_service_config_template` | Zookeeper template service file | `templates/service.conf.j2` |
 |`amq_streams_zookeeper_service_env_file` | Zookeeper service environment configuration file | `/etc/zookeeper.conf` |
-|`amq_streams_zookeeper_data_dir` | Zookeeper data folder | `/var/run/zookeeper` |
-|`amq_streams_zookeeper_logs_dir` | Zookeeper logs foler | `/var/logs/{{ amq_streams_zookeeper_service_name }}/` |
+|`amq_streams_zookeeper_data_dir` | Zookeeper data folder | `/var/lib/{{ amq_streams_zookeeper_service_name }}/` |
+|`amq_streams_zookeeper_logs_dir` | Zookeeper logs folder | `/var/log/{{ amq_streams_zookeeper_service_name }}/` |
 |`amq_streams_zookeeper_max_client_cnxns` | Max client connections | `0` |
 |`amq_streams_zookeeper_admin_enable_server` | Enable zookeeper administration server | `false` |
 |`amq_streams_zookeeper_instance_count_enabled` | Count zookeeper instances | `true` |
