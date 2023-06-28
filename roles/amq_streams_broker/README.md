@@ -17,7 +17,7 @@ Perform installation and configuration of Kafka brokers cluster.
 |`amq_streams_broker_service_config_template` |  | `templates/service.conf.j2` |
 |`amq_streams_broker_service_config_file` |  | `/etc/broker.conf` |
 |`amq_streams_broker_data_dir` | Folders to store the commit logs (Comma-value property). | `/var/lib/{{ amq_streams_broker_service_name }}/` |
-|`amq_streams_broker_logs_dir` | Folder to store the logs of broker service | `/var/logs/{{ amq_streams_broker_service_name }}/` |
+|`amq_streams_broker_logs_dir` | Folder to store the logs of broker service | `/var/log/{{ amq_streams_broker_service_name }}/` |
 |`amq_streams_broker_num_network_threads` |  | `3` |
 |`amq_streams_broker_num_io_threads` |  | `8` |
 |`amq_streams_broker_buffer_send_bytes` |  | `102400` |

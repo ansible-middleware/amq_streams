@@ -13,7 +13,7 @@ Perform installation and configuration of Kafka Connect cluster.
 |`amq_streams_connect_file_source_conf` | Source connector configuration file | `{{ amq_streams_common_home }}/config/connect-file-source.properties` |
 |`amq_streams_connect_file_sink` | Sink connector configuration file  | `{{ amq_streams_common_home }}/config/connect-file-sink.properties` |
 |`amq_streams_connect_service_name` | Kafka connect service name | `amq_streams_connect` |
-|`amq_streams_connect_logs_dir` | Kafka connect logs folder | `/var/logs/{{ amq_streams_connect_service_name }}/` |
+|`amq_streams_connect_logs_dir` | Kafka connect logs folder | `/var/log/{{ amq_streams_connect_service_name }}/` |
 |`amq_streams_connect_server_start` | Kafka connect server start file | `{{ amq_streams_common_home }}/bin/connect-standalone.sh` |
 |`amq_streams_connect_server_config` | Kafka connect configuration file | `{{ amq_streams_connect_standalone_conf }}` |
 |`amq_streams_connect_server_extra_args` | Configuration extra arguments | `{{ amq_streams_connect_file_source_conf }} {{ amq_streams_connect_file_sink }}` |
