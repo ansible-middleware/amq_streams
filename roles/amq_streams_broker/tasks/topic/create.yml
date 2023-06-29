@@ -1,11 +1,23 @@
 ---
-- name: "Create topic using the boostrap server."
+- name: "Create topic using the bootstrap server."
   block:
+    - name: "Set bootstrap partitions to create topic (if defined)."
+      ansible.builtin.set_fact:
+        bootstrap_create_operator_partitions_option: "--partitions {{ topic_partitions }}"
+      when:
+        - topic_partitions is defined
+
+    - name: "Set bootstrap replication factor to create topic (if defined)."
+      ansible.builtin.set_fact:
+        bootstrap_create_operator_replication_factor_option: "--replication-factor {{ topic_replication_factor }}"
+      when:
+        - topic_replication_factor is defined        
 
     - name: "Use bootstrap server to create topic {{ topic_name }}"
       ansible.builtin.include_tasks: topic/bootstrap.yml
       vars:
         bootstrap_operator: "--create"
+        bootstrap_operator_options: "{{ bootstrap_create_operator_partitions_option | default('') }} {{ bootstrap_create_operator_replication_factor_option  | default('') }}"
   rescue:
     - name: "Set expected error message"
       ansible.builtin.set_fact:

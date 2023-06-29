@@ -1,0 +1,18 @@
+---
+- name: "Delete topic using the bootstrap server."
+  block:
+    - name: "Use bootstrap server to delete topic {{ topic_name }}"
+      ansible.builtin.include_tasks: topic/bootstrap.yml
+      vars:
+        bootstrap_operator: "--delete"
+  rescue:
+    - name: "Set expected error message"
+      ansible.builtin.set_fact:
+        topic_not_exists_err_msg: "Topic '{{ topic_name }}' does not exist as expected"
+
+    - name: "Ensure errors is only due to topic does not exist."
+      ansible.builtin.assert:
+        that:
+          - operation_result is defined and operation_result.stdout is defined
+          - topic_not_exists_err_msg in operation_result.stdout
+        fail_msg: "{{ operation_result.stdout }}"
