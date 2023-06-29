@@ -3,7 +3,7 @@
   hosts: all
   remote_user: rhmw
   vars:
-    topics:
+    amq_streams_broker_topics:
       - name: sampleTopic
         partitions: 2
         replication_factor: 1
@@ -23,7 +23,7 @@
       ansible.builtin.include_role:
         name: amq_streams_broker
         tasks_from: topic/create.yml
-      loop: "{{ topics }}"
+      loop: "{{ amq_streams_broker_topics }}"
       loop_control:
         loop_var: topic
       vars:
@@ -35,7 +35,7 @@
       ansible.builtin.include_role:
         name: amq_streams_broker
         tasks_from: topic/describe.yml
-      loop: "{{ topics }}"
+      loop: "{{ amq_streams_broker_topics }}"
       loop_control:
         loop_var: topic
       vars:
@@ -45,7 +45,7 @@
       ansible.builtin.include_role:
         name: amq_streams_broker
         tasks_from: topic/delete.yml
-      loop: "{{ topics }}"
+      loop: "{{ amq_streams_broker_topics }}"
       loop_control:
         loop_var: topic
       vars:
