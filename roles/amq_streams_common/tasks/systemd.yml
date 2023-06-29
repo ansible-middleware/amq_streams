@@ -23,9 +23,7 @@
     path: "{{ server_log_dir }}"
     owner: "{{ server_user }}"
     group: "{{ server_group }}"
-    recurse: yes
     state: directory
-  changed_when: false  # tofix
   when:
     - server_log_dir is defined
     - server_user is defined
