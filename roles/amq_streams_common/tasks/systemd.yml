@@ -71,3 +71,4 @@
     name: "{{ server_name }}"
     enabled: yes
     state: started
+  become: yes
