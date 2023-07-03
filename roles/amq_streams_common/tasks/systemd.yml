@@ -64,6 +64,20 @@
   notify:
     - "Restart {{ server_name }}"
 
+- name: Debug services state
+  block:
+    - name: Load data
+      ansible.builtin.slurp:
+        src: "{{ server_log_dir }}/server.log"
+      register: slurped_user_data
+    - name: "********* server.log *****************************************************************"
+      ansible.builtin.set_fact:
+        user_data: "{{ slurped_user_data.content | b64decode }}"
+  rescue:
+    - name: Failed to read log file
+      ansible.builtin.debug:
+        msg: "Failed to read log file"
+
 - name: "Ensure {{ server_name }} is enabled and running."
   ansible.builtin.service:
     name: "{{ server_name }}"
