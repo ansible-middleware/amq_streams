@@ -11,18 +11,12 @@
       vars:
         amq_streams_common_skip_download: true
 
-    - name: "Ensures topic {{ topic_name }} exist."
-      ansible.builtin.include_role:
-        name: amq_streams_broker
-        tasks_from: topic/create.yml
-      loop:
-        - { topic_name: monTopic, partition: 3 }
-        - { topic_name: topic2, partition: 2 }
-
     - name: "Describe created topic."
       ansible.builtin.include_role:
         name: amq_streams_broker
         tasks_from: topic/describe.yml
+      vars:
+        topic_name: myTopic
 
     - name: "Ensure AMQ Streams Connect is running and available."
       ansible.builtin.include_role:
