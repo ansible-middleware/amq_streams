@@ -2,4 +2,4 @@
 - import_playbook: ../../playbooks/playbook.yml
   vars:
     amq_streams_common_download_dir: /tmp/
-    amq_stream_zookeeper_max_session_timeout: 60000
+    amq_streams_broker_zookeeper_connection_timeout_ms: 300000
