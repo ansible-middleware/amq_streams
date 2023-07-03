@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -14,7 +16,22 @@
 # limitations under the License.
 
 # These are defaults. This file just demonstrates how to override some settings.
-bootstrap.servers=localhost:9092
+bootstrap.servers={{ amq_streams_connect_bootstrap_servers }}
+
+{% if amq_streams_connect_broker_auth_enabled %}
+security.protocol=SASL_PLAINTEXT
+{% if amq_streams_connect_broker_auth_scram_enabled is defined %}
+sasl.mechanism=SCRAM-SHA-512
+sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required \
+                 username={{ amq_streams_connect_broker_auth_username }} \
+                 password={{ amq_streams_connect_broker_auth_password }};
+{% else %}
+sasl.mechanism=PLAIN
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
+                 username={{ amq_streams_connect_broker_auth_username }} \
+                 password={{ amq_streams_connect_broker_auth_password }};
+{% endif %}
+{% endif %}
 
 # The converters specify the format of data in Kafka and how to translate it into Connect data. Every Connect user will
 # need to configure these based on the format they want their data in when loaded from or stored into Kafka
