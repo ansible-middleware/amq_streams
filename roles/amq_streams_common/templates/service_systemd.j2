@@ -12,6 +12,7 @@ Group={{ service_group }}
 #
 #
 ExecStart={{ server_start }} {{ server_config }} {% if server_extra_args is defined %}{{ server_extra_args }}{% endif %}
+{% if service_start_sleep is defined %}ExecStartPre=/bin/sleep {{ service_start_sleep }}{% endif %}
 {% if server_stop is defined %}ExecStop={{ server_stop }}{% endif %}
 
 [Install]

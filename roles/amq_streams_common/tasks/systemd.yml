@@ -17,6 +17,7 @@
     - server_config_template is defined
   notify:
     - "Restart {{ server_name }}"
+  become: yes
 
 - name: "Ensure log dir belongs to the appropriate user and group - if all provided"
   ansible.builtin.file:
@@ -28,6 +29,7 @@
     - server_log_dir is defined
     - server_user is defined
     - server_group is defined
+  become: yes
 
 - name: "Deploy server configuration - if provided."
   ansible.builtin.template:
@@ -38,6 +40,7 @@
     mode: 0644
   when:
     - service_systemd_env_file is defined
+  become: yes
 
 - name: "Deploy Systemd descriptor for service: {{ server_name }}"
   ansible.builtin.template:
@@ -51,6 +54,7 @@
     service_user: "{{ server_user | default('root') }}"
     service_group: "{{ server_group | default('root') }}"
     service_pidfile: "{{ server_pidfile | default(omit) }}"
+    service_start_sleep: "{{ server_start_sleep | default(omit) }}"
   register: daemon_reload
   become: yes
 
@@ -63,20 +67,6 @@
     - daemon_reload.changed
   notify:
     - "Restart {{ server_name }}"
-
-- name: Debug services state
-  block:
-    - name: Load data
-      ansible.builtin.slurp:
-        src: "{{ server_log_dir }}/server.log"
-      register: slurped_user_data
-    - name: "Display ********* server.log *****************************************************************"
-      ansible.builtin.set_fact:
-        user_data: "{{ slurped_user_data.content | b64decode }}"
-  rescue:
-    - name: Failed to read log file
-      ansible.builtin.debug:
-        msg: "Failed to read log file"
 
 - name: "Ensure {{ server_name }} is enabled and running."
   ansible.builtin.service:
