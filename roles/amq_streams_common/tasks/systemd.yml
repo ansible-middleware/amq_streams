@@ -54,7 +54,7 @@
     service_user: "{{ server_user | default('root') }}"
     service_group: "{{ server_group | default('root') }}"
     service_pidfile: "{{ server_pidfile | default(omit) }}"
-    service_start_sleep: "{{ server_start_sleep | default(omit) }}"
+    service_start_sleep: "{{ server_start_sleep | default(0) }}"
   register: daemon_reload
   become: yes
 
