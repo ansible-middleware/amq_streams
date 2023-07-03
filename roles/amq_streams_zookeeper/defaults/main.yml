@@ -27,3 +27,4 @@ amq_streams_zookeeper_cluster_port_end: 3888
 amq_streams_firewalld_package_name:
   - firewalld
 amq_streams_firewalld_enabled: false
+amq_stream_zookeeper_max_session_timeout: 18000

@@ -46,3 +46,5 @@ syncLimit={{ amq_streams_zookeeper_sync_limit }}
 {% for zknode in groups['zookeepers'] %}
 server.{{ loop.index }}={{ zknode }}:{{ amq_streams_zookeeper_cluster_port_start }}:{{ amq_streams_zookeeper_cluster_port_end }}:participant;{{ zknode }}:{{ amq_streams_zookeeper_port }}
 {% endfor %}
+
+maxSessionTimeout={{ amq_stream_max_session_timeout }}
