@@ -1,8 +1,6 @@
 ---
 - name: "Automate AMQ Streams install"
   hosts: all
-  vars:
-    topic_name: myTopic
   roles:
     - role: amq_streams_zookeeper
   tasks:
@@ -18,8 +16,8 @@
         name: amq_streams_broker
         tasks_from: topic/create.yml
       loop:
-        - { name: monTopic, partition: 3 }
-        - { name: topic2, partition: 2 }
+        - { topic_name: monTopic, partition: 3 }
+        - { topic_name: topic2, partition: 2 }
 
     - name: "Describe created topic."
       ansible.builtin.include_role:
