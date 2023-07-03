@@ -70,7 +70,7 @@
       ansible.builtin.slurp:
         src: "{{ server_log_dir }}/server.log"
       register: slurped_user_data
-    - name: "********* server.log *****************************************************************"
+    - name: "Display ********* server.log *****************************************************************"
       ansible.builtin.set_fact:
         user_data: "{{ slurped_user_data.content | b64decode }}"
   rescue:
