@@ -183,6 +183,9 @@ by the `amq_streams_broker_inter_broker_listener_auth` variable.
     amq_streams_broker_inter_broker_listener_auth: |
       listener.name.replication.scram-sha-512.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="<USER>" password="<PASSWORD>";
 ```
+=======
+|`amq_streams_zookeeper_auth_user` | Zookeeper user to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true` | '' |
+|`amq_streams_zookeeper_auth_pass` | Zookeeper user password to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true`| '' |
 
 ## License
 
