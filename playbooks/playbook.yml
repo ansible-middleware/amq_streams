@@ -1,30 +1,15 @@
 ---
 - name: "Automate AMQ Streams install"
   hosts: all
-  vars:
-    topic_name: myTopic
   roles:
     - role: amq_streams_zookeeper
   tasks:
 
-    - name: "Ensure AMQ Streams Broker is running and availbale."
+    - name: "Ensure AMQ Streams Broker is running and available."
       ansible.builtin.include_role:
         name: amq_streams_broker
       vars:
         amq_streams_common_skip_download: true
-
-    - name: "Ensures topic {{ topic_name }} exist."
-      ansible.builtin.include_role:
-        name: amq_streams_broker
-        tasks_from: topic/create.yml
-      loop:
-        - { name: monTopic, partition: 3 }
-        - { name: topic2, partition: 2 }
-
-    - name: "Describe created topic."
-      ansible.builtin.include_role:
-        name: amq_streams_broker
-        tasks_from: topic/describe.yml
 
     - name: "Ensure AMQ Streams Connect is running and available."
       ansible.builtin.include_role:
