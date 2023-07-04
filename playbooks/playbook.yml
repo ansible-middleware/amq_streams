@@ -1,15 +1,55 @@
 ---
 - name: "Automate AMQ Streams install"
   hosts: all
+  vars:
+    # Topic Management
+    amq_streams_broker_topics:
+      - name: sampleTopic
+        partitions: 2
+        replication_factor: 1
+      - name: otherTopic
+        partitions: 4
+        replication_factor: 1
   roles:
     - role: amq_streams_zookeeper
   tasks:
-
     - name: "Ensure AMQ Streams Broker is running and available."
       ansible.builtin.include_role:
         name: amq_streams_broker
       vars:
         amq_streams_common_skip_download: true
+
+    - name: "Ensures topics exist."
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: topic/create.yml
+      loop: "{{ amq_streams_broker_topics }}"
+      loop_control:
+        loop_var: topic
+      vars:
+        topic_name: "{{ topic.name }}"
+        topic_partitions: "{{ topic.partitions }}"
+        topic_replication_factor: "{{ topic.replication_factor }}"
+
+    - name: "Describe created topics."
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: topic/describe.yml
+      loop: "{{ amq_streams_broker_topics }}"
+      loop_control:
+        loop_var: topic
+      vars:
+        topic_name: "{{ topic.name }}"
+
+    - name: "Delete topics"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: topic/delete.yml
+      loop: "{{ amq_streams_broker_topics }}"
+      loop_control:
+        loop_var: topic
+      vars:
+        topic_name: "{{ topic.name }}"
 
     - name: "Ensure AMQ Streams Connect is running and available."
       ansible.builtin.include_role:
@@ -18,7 +58,6 @@
         connectors:
           - { name: "file", path: "connectors/file.yml" }
           - { name: "dummy", path: "dummy.yml" }
-
   post_tasks:
     - name: "Display numbers of Zookeeper instances managed by Ansible:"
       ansible.builtin.debug:
@@ -32,7 +71,7 @@
       when:
         - amq_streams_broker_instance_count_enabled is defined and amq_streams_broker_instance_count_enabled
 
-    - name: "Validate that deployment is functionnal."
+    - name: "Validate that deployment is functional."
       ansible.builtin.include_role:
         name: amq_streams_zookeeper
         tasks_from: validate.yml
