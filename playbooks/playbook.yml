@@ -1,8 +1,8 @@
 ---
 - name: "Automate AMQ Streams install"
   hosts: all
-  remote_user: rhmw
   vars:
+    # Topic Management
     amq_streams_broker_topics:
       - name: sampleTopic
         partitions: 2
