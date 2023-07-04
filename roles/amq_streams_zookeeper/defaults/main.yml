@@ -32,3 +32,5 @@ amq_streams_firewalld_enabled: false
 amq_streams_zookeeper_auth_enabled: 'false'
 amq_streams_zookeeper_auth_config: /etc/zookeeper-jaas.conf
 amq_streams_zookeeper_auth_config_template: templates/zookeeper-jaas.conf.j2
+amq_streams_zookeeper_auth_user: zookeeper
+amq_streams_zookeeper_auth_pass: PLEASE_CHANGE_ME_I_AM_NO_GOOD_FOR_PRODUCTION
