@@ -32,6 +32,7 @@
     host: "{{ amq_streams_broker_zookeeper_host }}"
     port: "{{ amq_streams_broker_zookeeper_port }}"
   when:
+    - 0 > 1 # Disabled until find a way to test the Zookeeper cluster connection (including all the zknodes)
     - amq_streams_broker_zookeeper_host is defined
     - amq_streams_broker_zookeeper_port is defined
     - amq_streams_broker_zookeeper_wait is defined and amq_streams_broker_zookeeper_wait
@@ -62,6 +63,7 @@
     service_systemd_env_file_template: "{{ amq_streams_broker_service_config_template }}"
     service_systemd_env_file: "{{ amq_streams_broker_service_config_file }}"
     server_java_opts: "{{ amq_streams_broker_java_opts | default('') }}"
+    server_start_sleep: "{{ amq_streams_broker_zookeeper_session_timeout_ms }}"
 
 - name: "Add broker {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
   ansible.builtin.set_fact:

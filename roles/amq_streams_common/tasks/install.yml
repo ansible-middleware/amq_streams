@@ -19,7 +19,7 @@
     - amq_streams_common_offline_install
     - amq_streams_common_redhat_enable is not defined or not amq_streams_common_redhat_enable
 
-- name: "Download artefacts (if required)."
+- name: "Download artifacts (if required)."
   ansible.builtin.include_tasks: download.yml
   when:
     - not amq_streams_common_offline_install is defined or not amq_streams_common_offline_install
@@ -29,7 +29,7 @@
     path: "{{ amq_streams_common_home }}/bin"
   register: download_target
 
-- name: "Extract artefacts to {{ amq_streams_common_install_dir }}"
+- name: "Extract artefact to {{ amq_streams_common_install_dir }}"
   ansible.builtin.unarchive:
     src: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
     dest: "{{ amq_streams_common.archive.install_dir }}"

@@ -6,6 +6,7 @@ readme: README.md
 authors:
   - Romain Pelisse <belaran@redhat.com>
   - Guido Grazioli <ggraziol@redhat.com>
+  - Roman Martin <rmarting@redhat.com>
 description: Install and configure Red Hat AMQ Streams (kafka) deployments
 license_file: "LICENSE"
 tags:

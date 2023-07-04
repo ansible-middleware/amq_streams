@@ -17,19 +17,19 @@
     - server_config_template is defined
   notify:
     - "Restart {{ server_name }}"
+  become: yes
 
 - name: "Ensure log dir belongs to the appropriate user and group - if all provided"
   ansible.builtin.file:
     path: "{{ server_log_dir }}"
     owner: "{{ server_user }}"
     group: "{{ server_group }}"
-    recurse: yes
     state: directory
-  changed_when: false  # tofix
   when:
     - server_log_dir is defined
     - server_user is defined
     - server_group is defined
+  become: yes
 
 - name: "Deploy server configuration - if provided."
   ansible.builtin.template:
@@ -40,6 +40,7 @@
     mode: 0644
   when:
     - service_systemd_env_file is defined
+  become: yes
 
 - name: "Deploy Systemd descriptor for service: {{ server_name }}"
   ansible.builtin.template:
@@ -53,6 +54,7 @@
     service_user: "{{ server_user | default('root') }}"
     service_group: "{{ server_group | default('root') }}"
     service_pidfile: "{{ server_pidfile | default(omit) }}"
+    service_start_sleep: "{{ server_start_sleep | default(0) }}"
   register: daemon_reload
   become: yes
 
@@ -71,3 +73,4 @@
     name: "{{ server_name }}"
     enabled: yes
     state: started
+  become: yes

@@ -41,15 +41,15 @@
       - download_dir.stat.exists
     quiet: true
 
-- name: "Load metadata on download target file: {{ amq_streams_common_path_to_archive_file }}"
+- name: "Load metadata on download target file: {{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
   ansible.builtin.stat:
-    path: "{{ amq_streams_common_path_to_archive_file }}"
+    path: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
   register: download_target_file
 
 - name: "Download Kafka: {{ amq_streams_common.archive.download_url }}."
   ansible.builtin.get_url:
     url: "{{ amq_streams_common.archive.download_url }}"
-    dest: "{{ amq_streams_common_download_dir }}"
+    dest: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
     owner: "{{ amq_streams_common_download_user | default(omit) }}"
     group: "{{ amq_streams_common_download_group | default(omit) }}"
     mode: 0644

@@ -12,6 +12,13 @@
   when:
     - amq_streams_zookeeper_data_dir is defined
 
+- name: Configure 'myid' file based on the position in the zookeepers group
+  copy: 
+    content: "{{ groups['zookeepers'].index(inventory_hostname) + 1 }}"
+    dest: "{{ amq_streams_zookeeper_data_dir }}/myid"
+    owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
+    group: "{{ amq_streams_zookeeper_group | default(omit) }}"
+
 - name: "Configure firewalld for Zookeeper (if enable)."
   ansible.builtin.include_role:
     name: amq_streams_common

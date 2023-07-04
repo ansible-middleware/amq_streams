@@ -2,6 +2,19 @@
 
 Perform installation and configuration of Zookeeper ensemble.
 
+This role requires to have a `zookeepers` group in the inventory file to identify
+each node of he Zookeeper cluster. This group is used to set up the right
+configuration files in order to establish the communication between Zookeeper cluster members.
+
+Example of inventory:
+
+```text
+[zookeepers]
+zknode1
+zknode2
+zknode3
+```
+
 ## Role Defaults
 
 | Variable | Description | Default |
@@ -25,6 +38,10 @@ Perform installation and configuration of Zookeeper ensemble.
 |`amq_streams_zookeeper_port` |  | `2181` |
 |`amq_streams_firewalld_package_name` |  | `- firewalld` |
 |`amq_streams_firewalld_enabled` |  | `false` |
+|`amq_streams_zookeeper_init_limit` |  | `5` |
+|`amq_streams_zookeeper_sync_limit` |  | `2` |
+|`amq_streams_zookeeper_cluster_port_start` |  | `2888` |
+|`amq_streams_zookeeper_cluster_port_end` |  | `3888` |
 
 ## Role Variables
 
@@ -41,3 +58,5 @@ Apache License v2.0 or later
 
 * [Romain Pelisse](https://github.com/rpelisse)
 * [Guido Grazioli](https://github.com/guidograzioli)
+* [Roman Martin](https://github.com/rmarting)
+
