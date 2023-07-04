@@ -9,6 +9,11 @@ This changelog describes changes after version 0.0.0.
 v0.0.2
 ======
 
+Major Changes
+-------------
+
+- Enable Zookeeper authentication `#42 <https://github.com/ansible-middleware/amq_streams/pull/42>`_
+
 Minor Changes
 -------------
 
