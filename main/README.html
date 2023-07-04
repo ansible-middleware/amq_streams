@@ -57,7 +57,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#install-playbook">Install Playbook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-playbook">Install Playbook</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#offline-installation">Offline installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-from-alternate-sources">Install from alternate sources</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#support">Support</a></li>
@@ -183,6 +187,24 @@ ansible-galaxy collection install middleware_automation-amq_streams-*.tar.gz
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_broker/README.md">Broker Role</a></p></li>
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_connect/README.md">Connect Role</a></p></li>
 </ul>
+<section id="offline-installation">
+<h4>Offline installation<a class="headerlink" href="#offline-installation" title="Permalink to this heading"></a></h4>
+<p>Making the <code class="docutils literal notranslate"><span class="pre">amq_streams_common_archive_file</span></code> archive available to the playbook working directory, and setting
+<code class="docutils literal notranslate"><span class="pre">amq_streams_common_offline_install</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>, allows to skip the download tasks. The <code class="docutils literal notranslate"><span class="pre">amq_streams_common_download_dir</span></code> path
+for the archive does match the downloaded archive path, so that it is also used as a cache when multiple hosts are
+provisioned in a cluster.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">amq_streams_common_offline_install</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">amq_streams_common_download_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/tmp&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="install-from-alternate-sources">
+<h4>Install from alternate sources<a class="headerlink" href="#install-from-alternate-sources" title="Permalink to this heading"></a></h4>
+<p>It is possible to perform downloads from alternate sources (like corporate Nexus, Artifactory, proxy, etc), using the
+<code class="docutils literal notranslate"><span class="pre">amq_streams_common_download_url</span></code> variable; make sure the final downloaded filename matches with the source filename
+described by the <code class="docutils literal notranslate"><span class="pre">amq_streams_common_archive_file</span></code> variable (ie. <em>kafka_-a.b.c-x.y.z.tgz</em>).</p>
+</section>
 </section>
 </section>
 <section id="support">

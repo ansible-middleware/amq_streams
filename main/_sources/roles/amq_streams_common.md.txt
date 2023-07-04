@@ -12,6 +12,7 @@ Common tasks for the collection.
 |`amq_streams_common_archive_file` | Kafka binary package | `kafka_{{ amq_streams_common_version }}.tgz` |
 |`amq_streams_common_download_url` | Download url | `https://downloads.apache.org/kafka/{{ amq_streams_common_product_version }}/kafka_{{ amq_streams_common_version }}.tgz` |
 |`amq_streams_common_download_dir` | Folder to store the downloaded binaries. This folder is located where the playbook is executed. | `/opt` |
+|`amq_streams_common_offline_install` | Perform an offline installation. | `false` |
 |`amq_streams_common_install_dir` | Installation folder | `/opt` |
 |`amq_streams_common_path_to_archive_file` | Path to download binary file | `{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}` |
 |`amq_streams_common_prereqs_dependencies` | List of prerequisites dependencies | `tar` |
@@ -28,6 +29,14 @@ The following are a set of required variables for the role:
 
 | Variable | Description | Required |
 |:---------|:------------|:---------|
+
+
+## Offline installation
+
+Performing an offline installation is possible by:
+
+* Setting `amq_streams_common_offline_install` to `True`
+* Making the `amq_streams_common_archive_file` file available to ansible controller in the folder `amq_streams_common_download_dir`.
 
 ## License
 
