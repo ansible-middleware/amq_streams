@@ -112,6 +112,16 @@
   <section id="zookeeper-role">
 <h1>Zookeeper Role<a class="headerlink" href="#zookeeper-role" title="Permalink to this heading"></a></h1>
 <p>Perform installation and configuration of Zookeeper ensemble.</p>
+<p>This role requires to have a <code class="docutils literal notranslate"><span class="pre">zookeepers</span></code> group in the inventory file to identify
+each node of he Zookeeper cluster. This group is used to set up the right
+configuration files in order to establish the communication between Zookeeper cluster members.</p>
+<p>Example of inventory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[zookeepers]
+zknode1
+zknode2
+zknode3
+</pre></div>
+</div>
 <section id="role-defaults">
 <h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Permalink to this heading"></a></h2>
 <table class="docutils align-default">
@@ -197,6 +207,22 @@
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_firewalld_enabled</span></code></p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_init_limit</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_sync_limit</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_cluster_port_start</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2888</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_cluster_port_end</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3888</span></code></p></td>
 </tr>
 </tbody>
 </table>

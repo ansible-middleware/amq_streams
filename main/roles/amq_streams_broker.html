@@ -112,6 +112,25 @@
   <section id="broker-role">
 <h1>Broker Role<a class="headerlink" href="#broker-role" title="Permalink to this heading"></a></h1>
 <p>Perform installation and configuration of Kafka brokers cluster.</p>
+<p>This role requires to have a <code class="docutils literal notranslate"><span class="pre">zookeepers</span></code> group in the inventory file to identify
+each node of he Zookeeper cluster. This group is used to set up the right
+configuration files in order to establish the communication between Zookeeper cluster members.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">brokers</span></code> group is used in the same way identifying the members of the Kafka cluster.
+The order of this group will be used to set up the right configuration files and establish
+the right cluster configuration:</p>
+<p>Example of inventory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[zookeepers]
+zknode1
+zknode2
+zknode3
+
+[brokers]
+broker1
+broker2
+broker3
+broker4
+</pre></div>
+</div>
 <section id="role-defaults">
 <h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Permalink to this heading"></a></h2>
 <table class="docutils align-default">
