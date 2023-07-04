@@ -47,3 +47,19 @@ syncLimit={{ amq_streams_zookeeper_sync_limit }}
 server.{{ loop.index }}={{ zknode }}:{{ amq_streams_zookeeper_cluster_port_start }}:{{ amq_streams_zookeeper_cluster_port_end }}:participant;{{ zknode }}:{{ amq_streams_zookeeper_port }}
 {% endfor %}
 
+{% if amq_streams_zookeeper_auth_enabled %}
+# Zookeeper Authentication
+# Server-to-Server Authentication
+quorum.auth.enableSasl=true
+quorum.auth.learnerRequireSasl=true
+quorum.auth.serverRequireSasl=true
+quorum.auth.learner.loginContext=QuorumLearner
+quorum.auth.server.loginContext=QuorumServer
+quorum.cnxn.threads.size=20
+
+# Client-to-Server Authentication
+requireClientAuthScheme=sasl
+{% for zknode in groups['zookeepers'] %}
+authProvider.{{ loop.index }}=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
+{% endfor %}
+{% endif %}

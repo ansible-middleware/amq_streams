@@ -42,6 +42,9 @@ zknode3
 |`amq_streams_zookeeper_sync_limit` |  | `2` |
 |`amq_streams_zookeeper_cluster_port_start` |  | `2888` |
 |`amq_streams_zookeeper_cluster_port_end` |  | `3888` |
+|`amq_streams_zookeeper_auth_enabled` | Enable Zookeeper authentication | `false` |
+|`amq_streams_zookeeper_auth_config` | JAAS file to set up Zookeeper authentication | `/etc/zookeeper-jaas.conf` |
+|`amq_streams_zookeeper_auth_config_template` | JAAS template for Zookeeper authentication | `templates/zookeeper-jaas.conf.j2` |
 
 ## Role Variables
 
@@ -49,6 +52,8 @@ The following are a set of required variables for the role:
 
 | Variable | Description | Required |
 |:---------|:------------|:---------|
+|`amq_streams_zookeeper_auth_user` | Zookeeper user to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true` | '' |
+|`amq_streams_zookeeper_auth_pass` | Zookeeper user password to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true`| '' |
 
 ## License
 

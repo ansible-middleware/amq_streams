@@ -1,0 +1,9 @@
+// {{ ansible_managed }}
+
+// Broker-Zookeeper Authentication
+
+Client {
+    org.apache.kafka.common.security.plain.PlainLoginModule required
+    username="{{ amq_streams_zookeeper_auth_user }}"
+    password="{{ amq_streams_zookeeper_auth_pass }}";
+};
