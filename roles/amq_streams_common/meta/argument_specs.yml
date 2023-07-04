@@ -10,7 +10,7 @@ argument_specs:
                 description: "Scala version used by Apache Kafka"
                 type: "str"
             amq_streams_common_version:
-                default: "2.13-3.3.1"
+                default: "{{ amq_streams_common_scala_version }}-{{ amq_streams_common_product_version }}"
                 description: "Apache Kafka version to install"
                 type: "str"
             amq_streams_common_archive_file:
@@ -18,11 +18,11 @@ argument_specs:
                 description: "Apache Kafka download archive name"
                 type: "str"
             amq_streams_common_download_url:
-                default: "https://dlcdn.apache.org/kafka/3.3.1/{{ amq_streams_common_archive_file }}"
+                default: "https://archive.apache.org/dist/kafka/{{ amq_streams_common_product_version }}/kafka_{{ amq_streams_common_version }}.tgz"
                 description: "Download URL for Apache Kafka archive"
                 type: "str"
             amq_streams_common_download_dir:
-                default: "/opt/"
+                default: "/opt"
                 description: "Root directory for downloaded archive of Apache Kafka"
                 type: "str"
             amq_streams_common_install_dir:
@@ -50,3 +50,11 @@ argument_specs:
                 default: 'templates/service_systemd.j2'
                 description: "Template use to create systemd service for Kafka components (Zookeeper, Broker)."
                 type: "str"
+            amq_streams_common_firewalld_enabled:
+                default: false
+                description: "Whether to enable firewall configuration"
+                type: "bool"
+            amq_streams_common_offline_install:
+                default: false
+                description: "Whether to install without downloading resources"
+                type: "bool"

@@ -3,7 +3,7 @@ amq_streams_common_product_version: 3.3.2
 amq_streams_common_scala_version: 2.13
 amq_streams_common_version: "{{ amq_streams_common_scala_version }}-{{ amq_streams_common_product_version }}"
 amq_streams_common_archive_file: "kafka_{{ amq_streams_common_version }}.tgz"
-amq_streams_common_download_url: "https://downloads.apache.org/kafka/{{ amq_streams_common_product_version }}/kafka_{{ amq_streams_common_version }}.tgz"
+amq_streams_common_download_url: "https://archive.apache.org/dist/kafka/{{ amq_streams_common_product_version }}/kafka_{{ amq_streams_common_version }}.tgz"
 amq_streams_common_download_dir: /opt
 amq_streams_common_download_user: "{{ amq_streams_common_user | default(omit) }}"
 amq_streams_common_download_group: "{{ amq_streams_common_group | default(omit) }}"
