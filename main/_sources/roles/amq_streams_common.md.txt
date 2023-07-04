@@ -46,3 +46,5 @@ Apache License v2.0 or later
 
 * [Romain Pelisse](https://github.com/rpelisse)
 * [Guido Grazioli](https://github.com/guidograzioli)
+* [Roman Martin](https://github.com/rmarting)
+
