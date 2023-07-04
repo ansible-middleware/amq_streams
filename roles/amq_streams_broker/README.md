@@ -2,6 +2,29 @@
 
 Perform installation and configuration of Kafka brokers cluster.
 
+This role requires to have a `zookeepers` group in the inventory file to identify
+each node of he Zookeeper cluster. This group is used to set up the right
+configuration files in order to establish the communication between Zookeeper cluster members.
+
+The `brokers` group is used in the same way identifying the members of the Kafka cluster.
+The order of this group will be used to set up the right configuration files and establish
+the right cluster configuration:
+
+Example of inventory:
+
+```text
+[zookeepers]
+zknode1
+zknode2
+zknode3
+
+[brokers]
+broker1
+broker2
+broker3
+broker4
+```
+
 ## Role Defaults
 
 | Variable | Description | Default |

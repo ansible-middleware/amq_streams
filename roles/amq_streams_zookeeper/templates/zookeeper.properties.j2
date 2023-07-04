@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -12,13 +14,35 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 # the directory where the snapshot is stored.
 dataDir={{ amq_streams_zookeeper_data_dir }}
+
 # the port at which the clients will connect
 clientPort={{ amq_streams_zookeeper_port }}
+
 # disable the per-ip limit on the number of connections since this is a non-production config
 maxClientCnxns={{ amq_streams_zookeeper_max_client_cnxns }}
+
+# Enable command list - https://zookeeper.apache.org/doc/r3.5.5/zookeeperAdmin.html
+4lw.commands.whitelist={{ amq_streams_zookeeper_4wl_commands_whitelist }}
+
 # Disable the adminserver by default to avoid port conflicts.
 # Set the port to something non-conflicting if choosing to enable this
 admin.enableServer={{ amq_streams_zookeeper_admin_enable_server }}
-# admin.serverPort=8080
+{% if amq_streams_zookeeper_admin_enable_server %}
+admin.serverPort={{ amq_streams_zookeeper_admin_server_port }}
+{% endif %}
+
+# Amount of time to allow followers to connect and sync to the cluster leader. 
+# The time is specified as a number of ticks
+initLimit={{ amq_streams_zookeeper_init_limit }}
+
+# Amount of time for which followers can be behind the leader.
+# The time is specified as a number of ticks
+syncLimit={{ amq_streams_zookeeper_sync_limit }}
+
+# List of servers which should be members of the Zookeeper cluster.
+{% for zknode in groups['zookeepers'] %}
+server.{{ loop.index }}={{ zknode }}:{{ amq_streams_zookeeper_cluster_port_start }}:{{ amq_streams_zookeeper_cluster_port_end }}:participant;{{ zknode }}:{{ amq_streams_zookeeper_port }}
+{% endfor %}

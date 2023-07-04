@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -21,7 +23,8 @@
 ############################# Server Basics #############################
 
 # The id of the broker. This must be set to a unique integer for each broker.
-broker.id={{ server_id }}
+#broker.id={{ server_id }}
+broker.id={{ groups['brokers'].index(inventory_hostname) }}
 
 ############################# Socket Server Settings #############################
 
@@ -125,11 +128,10 @@ log.retention.check.interval.ms={{ amq_streams_broker_log_retention_check_interv
 # server. e.g. "127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002".
 # You can also append an optional chroot string to the urls to specify the
 # root directory for all kafka znodes.
-zookeeper.connect={{ amq_streams_broker_zookeeper_host }}:{{ amq_streams_broker_zookeeper_port }}
+zookeeper.connect={{ amq_streams_broker_zookeeper_host }}:{{ amq_streams_broker_zookeeper_port }}{% for zknode in groups['zookeepers'] %},{{ zknode }}:{{ amq_streams_broker_zookeeper_port }}{% endfor %}
 
 # Timeout in ms for connecting to zookeeper
 zookeeper.connection.timeout.ms={{ amq_streams_broker_zookeeper_connection_timeout_ms }}
-
 
 ############################# Group Coordinator Settings #############################
 

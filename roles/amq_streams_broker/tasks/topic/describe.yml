@@ -1,5 +1,5 @@
 ---
-- name: "Get description of topic using the boostrap server."
+- name: "Get description of topic using the bootstrap server."
   ansible.builtin.include_tasks: topic/bootstrap.yml
   vars:
     bootstrap_operator: "--describe"
