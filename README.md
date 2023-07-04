@@ -65,6 +65,26 @@ For full service configuration details, refer to each role README file:
 * [Broker Role](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_broker/README.md)
 * [Connect Role](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_connect/README.md)
 
+
+#### Offline installation
+
+Making the `amq_streams_common_archive_file` archive available to the playbook working directory, and setting
+`amq_streams_common_offline_install` to `True`, allows to skip the download tasks. The `amq_streams_common_download_dir` path
+for the archive does match the downloaded archive path, so that it is also used as a cache when multiple hosts are
+provisioned in a cluster.
+
+```yaml
+  vars:
+    amq_streams_common_offline_install: true
+    amq_streams_common_download_dir: "/tmp"
+```
+
+#### Install from alternate sources
+
+It is possible to perform downloads from alternate sources (like corporate Nexus, Artifactory, proxy, etc), using the
+`amq_streams_common_download_url` variable; make sure the final downloaded filename matches with the source filename
+described by the `amq_streams_common_archive_file` variable (ie. *kafka_-a.b.c-x.y.z.tgz*).
+
 ## Support
 
 amq_streams collection is a Beta release and for Technical Preview. If you have any issues or questions related to collection, please don't hesitate to contact us on Ansible-middleware-core@redhat.com or open an issue on https://github.com/ansible-middleware/amq_streams/issues
