@@ -59,9 +59,11 @@ amq_streams_broker_listeners:
 # Broker Authentication
 amq_streams_broker_auth_enabled: 'false'
 amq_streams_broker_auth_scram_enabled: 'false'
+amq_streams_connect_broker_auth_username: broker
+amq_streams_connect_broker_auth_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION
 
 amq_streams_broker_auth_listeners:
-  - PLAINTEXT:PLAINTEXT  
+  - PLAINTEXT:PLAINTEXT
   #- REPLICATION:PLAINTEXT
   #- AUTHENTICATED:SASL_PLAINTEXT
 
