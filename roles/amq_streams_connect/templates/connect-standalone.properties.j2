@@ -18,7 +18,7 @@
 # These are defaults. This file just demonstrates how to override some settings.
 bootstrap.servers={{ amq_streams_connect_bootstrap_servers }}
 
-{% if amq_streams_connect_broker_auth_enabled %}
+{% if amq_streams_connect_broker_auth_enabled is defined %}
 security.protocol=SASL_PLAINTEXT
 {% if amq_streams_connect_broker_auth_scram_enabled is defined %}
 sasl.mechanism=SCRAM-SHA-512
