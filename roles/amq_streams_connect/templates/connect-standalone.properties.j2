@@ -18,7 +18,7 @@
 # These are defaults. This file just demonstrates how to override some settings.
 bootstrap.servers={{ amq_streams_connect_bootstrap_servers }}
 
-{% if amq_streams_connect_broker_auth_enabled %}
+{% if amq_streams_connect_broker_auth_enabled is defined and amq_streams_connect_broker_auth_enabled %}
 security.protocol=SASL_PLAINTEXT
 {% if amq_streams_connect_broker_auth_scram_enabled is defined %}
 sasl.mechanism=SCRAM-SHA-512
@@ -47,13 +47,13 @@ offset.storage.file.filename=/tmp/connect.offsets
 offset.flush.interval.ms=10000
 
 # Set to a list of filesystem paths separated by commas (,) to enable class loading isolation for plugins
-# (connectors, converters, transformations). The list should consist of top level directories that include 
-# any combination of: 
+# (connectors, converters, transformations). The list should consist of top level directories that include
+# any combination of:
 # a) directories immediately containing jars with plugins and their dependencies
 # b) uber-jars with plugins and their dependencies
 # c) directories immediately containing the package directory structure of classes of plugins and their dependencies
 # Note: symlinks will be followed to discover dependencies or plugins.
-# Examples: 
+# Examples:
 # plugin.path=/usr/local/share/java,/usr/local/share/kafka/plugins,/opt/connectors,
 {% if  path_to_file_connect_lib is defined %}
 plugin.path={{ path_to_file_connect_lib }}
