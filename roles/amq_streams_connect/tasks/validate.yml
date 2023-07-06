@@ -1,0 +1,8 @@
+---
+- name: "Ensure required parameter(s) are provided."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: validate.yml
+  vars:
+    server_log_validation_min_size: "{{ amq_streams_connect_server_log_validation_min_size }}"
+    server_log_dir: "{{ amq_streams_connect_logs_dir }}/connect.log"

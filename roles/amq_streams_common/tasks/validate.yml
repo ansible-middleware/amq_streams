@@ -1,0 +1,56 @@
+---
+- name: "Ensure required parameter(s) are provided."
+  ansible.builtin.assert:
+    that:
+      - server_log_dir is defined
+      - server_log_dir is exists
+      - server_log_validation_min_size is defined
+    quiet: true
+    fail_msg: "{{ server_log_dir }} is invalid"
+
+- name: "Set error handling behavior"
+  ansible.builtin.set_fact:
+    server_log_fail_if_error_is_found: true
+  when:
+    - not server_log_fail_if_error_is_found is defined
+
+- name: "Read the content of {{ server_log_dir  }}."
+  ansible.builtin.slurp:
+    src: "{{ server_log_dir }}"
+  register: server_log_slurped
+
+- name: "Set number of characters in {{ server_log_dir }}"
+  ansible.builtin.set_fact:
+    server_log_content: "{{ server_log_slurped['content'] | b64decode }}"
+    nb_chars_in_server_log: "{{ server_log_slurped['content'] | b64decode | length }}"
+
+- name: "Check that {{ server_log_dir }} is not empty."
+  ansible.builtin.assert:
+    that:
+      - nb_chars_in_server_log is defined
+      - nb_chars_in_server_log | int > server_log_validation_min_size
+    quiet: True
+
+- name: "Set expected string for fail error message."
+  ansible.builtin.set_fact:
+    error_label: "ERROR"
+  when:
+    - not error_label is defined
+
+- name: "Check logfile {{ server_log_dir }} does not contains {{ error_label }}."
+  block:
+
+    - name: "Display logfile if {{ error_label }} is found."
+      ansible.builtin.debug:
+        msg: "{{ server_log_content }}"
+      when:
+          - error_label in server_log_content
+    - name:
+      ansible.builtin.assert:
+        that:
+          - not error_label in server_log_content
+        quiet: true
+        fail_msg: "Server logfile contains {{ error_label }} error lines."
+      when:
+  when:
+    - server_log_fail_if_error_is_found
