@@ -1,4 +1,9 @@
 ---
+- name: "Wait for Connect to be available."
+  ansible.builtin.wait_for:
+    timeout: 60
+    delay: 10
+
 - name: "Ensure required parameter(s) are provided."
   ansible.builtin.include_role:
     name: amq_streams_common
