@@ -30,11 +30,5 @@
   when:
     - connectors is defined and connectors | length > 0
 
-- name: "Ensure {{ amq_streams_connect_standalone_conf }} content is correct."
-  ansible.builtin.template:
-    src: templates/connect-standalone.properties.j2
-    dest: "{{ amq_streams_connect_standalone_conf }}"
-    mode: 0644
-
 - name: "Deploy Kafka Connect as a systemd service."
   ansible.builtin.include_tasks: service.yml
