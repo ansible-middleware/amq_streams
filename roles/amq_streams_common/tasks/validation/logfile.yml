@@ -33,7 +33,7 @@
 
 - name: "Set expected string for fail error message."
   ansible.builtin.set_fact:
-    error_label: "ERROR"
+    error_label: 'ERROR'
   when:
     - not error_label is defined
 

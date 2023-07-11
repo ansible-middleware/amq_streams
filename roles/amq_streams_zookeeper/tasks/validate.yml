@@ -1,4 +1,20 @@
 ---
+- name: "Verify that service {{ amq_streams_zookeeper_service_name }} is functional."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: validation/service.yml
+  vars:
+    service_name: "{{ amq_streams_zookeeper_service_name }}"
+
+- name: "Verify that logfile {{ amq_streams_zookeeper_logs_dir }}/server.log and it contains no errors."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: validation/logfile.yml
+  vars:
+    server_log_validation_min_size: "{{ amq_streams_zookeeper_server_log_validation_min_size }}"
+    server_log_dir: "{{ amq_streams_zookeeper_logs_dir }}/server.log"
+    error_label: 'FATAL'
+
 - name: "Verify that the balance of zookeeper and brokers instances is correct."
   ansible.builtin.assert:
     that:
