@@ -24,6 +24,8 @@ amq_streams_zookeeper_sync_limit: 2
 amq_streams_zookeeper_cluster_port_start: 2888
 amq_streams_zookeeper_cluster_port_end: 3888
 
+amq_streams_zookeeper_inventory_group: "{{ groups['zookeepers'] | default('') }}"
+
 amq_streams_firewalld_package_name:
   - firewalld
 amq_streams_firewalld_enabled: false

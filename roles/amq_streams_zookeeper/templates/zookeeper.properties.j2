@@ -34,7 +34,7 @@ admin.enableServer={{ amq_streams_zookeeper_admin_enable_server }}
 admin.serverPort={{ amq_streams_zookeeper_admin_server_port }}
 {% endif %}
 
-# Amount of time to allow followers to connect and sync to the cluster leader. 
+# Amount of time to allow followers to connect and sync to the cluster leader.
 # The time is specified as a number of ticks
 initLimit={{ amq_streams_zookeeper_init_limit }}
 
@@ -43,7 +43,7 @@ initLimit={{ amq_streams_zookeeper_init_limit }}
 syncLimit={{ amq_streams_zookeeper_sync_limit }}
 
 # List of servers which should be members of the Zookeeper cluster.
-{% for zknode in groups['zookeepers'] %}
+{% for zknode in amq_streams_zookeeper_inventory_group %}
 server.{{ loop.index }}={{ zknode }}:{{ amq_streams_zookeeper_cluster_port_start }}:{{ amq_streams_zookeeper_cluster_port_end }}:participant;{{ zknode }}:{{ amq_streams_zookeeper_port }}
 {% endfor %}
 
@@ -59,7 +59,7 @@ quorum.cnxn.threads.size=20
 
 # Client-to-Server Authentication
 requireClientAuthScheme=sasl
-{% for zknode in groups['zookeepers'] %}
+{% for zknode in amq_streams_zookeeper_inventory_group %}
 authProvider.{{ loop.index }}=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
 {% endfor %}
 {% endif %}
