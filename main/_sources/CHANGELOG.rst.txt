@@ -12,6 +12,7 @@ v0.0.2
 Major Changes
 -------------
 
+- Enable Broker Authentication usign SASL mechanism `#43 <https://github.com/ansible-middleware/amq_streams/pull/43>`_
 - Enable Zookeeper authentication `#42 <https://github.com/ansible-middleware/amq_streams/pull/42>`_
 
 Minor Changes
