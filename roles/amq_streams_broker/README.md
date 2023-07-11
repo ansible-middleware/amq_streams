@@ -2,11 +2,13 @@
 
 Perform installation and configuration of Kafka brokers cluster.
 
-This role requires to have a `zookeepers` group in the inventory file to identify
+This role requires to have a `zookeepers` group (identified by the
+`amq_streams_zookeeper_inventory_group` variable) in the inventory file to identify
 each node of he Zookeeper cluster. This group is used to set up the right
 configuration files in order to establish the communication between Zookeeper cluster members.
 
-The `brokers` group is used in the same way identifying the members of the Kafka cluster.
+The `brokers` group (identified by the `amq_streams_broker_inventory_group` variable)
+is used in the same way identifying the members of the Kafka cluster.
 The order of this group will be used to set up the right configuration files and establish
 the right cluster configuration:
 
@@ -72,6 +74,7 @@ broker4
 |`amq_streams_broker_auth_scram_enabled` | Enable SASL SCRAM authentication. | `false` |
 |`amq_streams_broker_auth_listeners` | Default list of authenticated listeners | `PLAINTEXT:PLAINTEXT` |
 |`amq_streams_broker_auth_sasl_mechanisms` | Default list of authenticated SASL mechanism | `PLAIN` |
+|`amq_streams_broker_inventory_group` | Identify the group of broker nodes | `groups['brokers']` |
 
 ## Role Variables
 

@@ -2,7 +2,8 @@
 
 Perform installation and configuration of Zookeeper ensemble.
 
-This role requires to have a `zookeepers` group in the inventory file to identify
+This role requires to have a `zookeepers` group (identified by the
+`amq_streams_zookeeper_inventory_group` variable) in the inventory file to identify
 each node of he Zookeeper cluster. This group is used to set up the right
 configuration files in order to establish the communication between Zookeeper cluster members.
 
@@ -45,6 +46,7 @@ zknode3
 |`amq_streams_zookeeper_auth_enabled` | Enable Zookeeper authentication | `false` |
 |`amq_streams_zookeeper_auth_config` | JAAS file to set up Zookeeper authentication | `/etc/zookeeper-jaas.conf` |
 |`amq_streams_zookeeper_auth_config_template` | JAAS template for Zookeeper authentication | `templates/zookeeper-jaas.conf.j2` |
+|`amq_streams_zookeeper_inventory_group` | Identify the group of zookeeper nodes | `groups['zookeepers']` |
 
 ## Role Variables
 
@@ -64,4 +66,3 @@ Apache License v2.0 or later
 * [Romain Pelisse](https://github.com/rpelisse)
 * [Guido Grazioli](https://github.com/guidograzioli)
 * [Roman Martin](https://github.com/rmarting)
-
