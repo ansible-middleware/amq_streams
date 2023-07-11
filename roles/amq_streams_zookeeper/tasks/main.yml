@@ -13,11 +13,14 @@
     - amq_streams_zookeeper_data_dir is defined
 
 - name: Configure 'myid' file based on the position in the zookeepers group
-  copy: 
-    content: "{{ groups['zookeepers'].index(inventory_hostname) + 1 }}"
+  copy:
+    content: "{{ amq_streams_zookeeper_inventory_group.index(inventory_hostname) + 1 }}"
     dest: "{{ amq_streams_zookeeper_data_dir }}/myid"
     owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
     group: "{{ amq_streams_zookeeper_group | default(omit) }}"
+  when:
+    - amq_streams_zookeeper_inventory_group is defined
+    - amq_streams_zookeeper_inventory_group | length > 0
 
 - name: "Configure Zookeeper authentication"
   ansible.builtin.template:
@@ -25,7 +28,7 @@
     dest: "{{ amq_streams_zookeeper_auth_config }}"
     owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
     group: "{{ amq_streams_zookeeper_group | default(omit) }}"
-    mode: 0644  
+    mode: 0644
   when:
     - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
 
