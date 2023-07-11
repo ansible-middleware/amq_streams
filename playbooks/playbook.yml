@@ -71,12 +71,17 @@
       when:
         - amq_streams_broker_instance_count_enabled is defined and amq_streams_broker_instance_count_enabled
 
-    - name: "Validate that deployment is functional."
+    - name: "Validate that Zookeeper deployment is functional."
       ansible.builtin.include_role:
         name: amq_streams_zookeeper
         tasks_from: validate.yml
 
-    - name: "Validate that deployment is functional."
+    - name: "Validate that Broker deployment is functional."
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: validate.yml
+
+    - name: "Validate that Connect deployment is functional."
       ansible.builtin.include_role:
         name: amq_streams_connect
         tasks_from: validate.yml

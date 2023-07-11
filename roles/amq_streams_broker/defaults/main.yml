@@ -70,3 +70,5 @@ amq_streams_broker_auth_listeners:
 amq_streams_broker_auth_sasl_mechanisms:
   - PLAIN
   #- SCRAM-SHA-512
+
+amq_streams_broker_server_log_validation_min_size: 20
