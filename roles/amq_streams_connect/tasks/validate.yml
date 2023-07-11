@@ -4,6 +4,23 @@
     timeout: 60
     delay: 10
 
+- name: Populate service facts
+  ansible.builtin.service_facts:
+
+- name: Check if service is started
+  ansible.builtin.assert:
+    that:
+      - ansible_facts is defined
+      - ansible_facts.services is defined
+      - ansible_facts.services["{{ amq_streams_connect_service_name }}.service"] is defined
+      - ansible_facts.services["{{ amq_streams_connect_service_name }}.service"]['state'] is defined
+      - ansible_facts.services["{{ amq_streams_connect_service_name }}.service"]['state'] == 'running'
+      - ansible_facts.services["{{ amq_streams_connect_service_name }}.service"]['status'] == 'enabled'
+    quiet: true
+    fail_msg: "Service is not started."
+
+
+
 - name: "Ensure required parameter(s) are provided."
   ansible.builtin.include_role:
     name: amq_streams_common
