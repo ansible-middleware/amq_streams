@@ -112,7 +112,8 @@
   <section id="zookeeper-role">
 <h1>Zookeeper Role<a class="headerlink" href="#zookeeper-role" title="Permalink to this heading"></a></h1>
 <p>Perform installation and configuration of Zookeeper ensemble.</p>
-<p>This role requires to have a <code class="docutils literal notranslate"><span class="pre">zookeepers</span></code> group in the inventory file to identify
+<p>This role requires to have a <code class="docutils literal notranslate"><span class="pre">zookeepers</span></code> group (identified by the
+<code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_inventory_group</span></code> variable) in the inventory file to identify
 each node of he Zookeeper cluster. This group is used to set up the right
 configuration files in order to establish the communication between Zookeeper cluster members.</p>
 <p>Example of inventory:</p>
@@ -235,6 +236,10 @@ zknode3
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_config_template</span></code></p></td>
 <td class="text-left"><p>JAAS template for Zookeeper authentication</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/zookeeper-jaas.conf.j2</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_inventory_group</span></code></p></td>
+<td class="text-left"><p>Identify the group of zookeeper nodes</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">groups['zookeepers']</span></code></p></td>
 </tr>
 </tbody>
 </table>

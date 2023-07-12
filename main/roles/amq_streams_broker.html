@@ -117,10 +117,12 @@
   <section id="broker-role">
 <h1>Broker Role<a class="headerlink" href="#broker-role" title="Permalink to this heading"></a></h1>
 <p>Perform installation and configuration of Kafka brokers cluster.</p>
-<p>This role requires to have a <code class="docutils literal notranslate"><span class="pre">zookeepers</span></code> group in the inventory file to identify
+<p>This role requires to have a <code class="docutils literal notranslate"><span class="pre">zookeepers</span></code> group (identified by the
+<code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_inventory_group</span></code> variable) in the inventory file to identify
 each node of he Zookeeper cluster. This group is used to set up the right
 configuration files in order to establish the communication between Zookeeper cluster members.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">brokers</span></code> group is used in the same way identifying the members of the Kafka cluster.
+<p>The <code class="docutils literal notranslate"><span class="pre">brokers</span></code> group (identified by the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inventory_group</span></code> variable)
+is used in the same way identifying the members of the Kafka cluster.
 The order of this group will be used to set up the right configuration files and establish
 the right cluster configuration:</p>
 <p>Example of inventory:</p>
@@ -317,6 +319,10 @@ broker4
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_sasl_mechanisms</span></code></p></td>
 <td class="text-left"><p>Default list of authenticated SASL mechanism</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLAIN</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inventory_group</span></code></p></td>
+<td class="text-left"><p>Identify the group of broker nodes</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">groups['brokers']</span></code></p></td>
 </tr>
 </tbody>
 </table>
