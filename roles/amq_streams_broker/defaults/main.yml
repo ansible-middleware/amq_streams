@@ -74,3 +74,4 @@ amq_streams_broker_auth_sasl_mechanisms:
 amq_streams_broker_server_log_validation_min_size: 20
 
 amq_streams_broker_inventory_group: "{{ groups['brokers'] | default('') }}"
+amq_streams_zookeeper_inventory_group: "{{ groups['zookeepers'] | default('') }}"
