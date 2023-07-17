@@ -1,22 +1,8 @@
 ---
-- name: "Ensure required dependencies are present."
-  ansible.builtin.include_role:
-    name: amq_streams_common
-
 - name: "Ensure user for zookeeper exists (if provided)."
   ansible.builtin.include_role:
     name: amq_streams_common
-    tasks_from: user_group.yml
+    tasks_from: prereqs.yml
   vars:
-    user: "{{ amq_streams_zookeeper_user }}"
-    group: "{{ amq_streams_zookeeper_group }}"
-  when:
-    - amq_streams_zookeeper_user is defined
-    - amq_streams_zookeeper_group is defined
-
-- name: "Ensure AMQ Streams artefacts are available."
-  ansible.builtin.include_role:
-    name: amq_streams_common
-    tasks_from: install.yml
-  when:
-    - not amq_streams_common_skip_download is defined or not amq_streams_common_skip_download
+    prereqs_user: "{{ amq_streams_zookeeper_user }}"
+    prereqs_group: "{{ amq_streams_zookeeper_group }}"
