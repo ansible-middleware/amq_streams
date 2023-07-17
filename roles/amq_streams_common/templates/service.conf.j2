@@ -5,5 +5,5 @@
 {% endif %}
 {% if server_log4j_opts is defined %}KAFKA_LOG4J_OPTS="{{ server_log4j_opts  }}"
 {% endif %}
-{% if server_java_heap_opts is defined %}KAFKA_HEAP_OPTS="{{ server_java_heap_opts }}"
+{% if server_java_heap_opts is defined and server_java_heap_opts | length %}KAFKA_HEAP_OPTS="{{ server_java_heap_opts }}"
 {% endif %}

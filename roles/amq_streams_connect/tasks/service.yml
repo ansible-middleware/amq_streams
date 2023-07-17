@@ -16,4 +16,5 @@
     server_user: "{{ amq_streams_connect_user | default(omit) }}"
     server_group: "{{ amq_streams_connect_group | default(omit) }}"
     server_java_opts: "{{ amq_streams_connect_java_opts | default('') }}"
+    server_java_heap_opts: "{{ amq_streams_connect_java_heap_opts | default('') }}"
     server_start_sleep: "{{ amq_streams_connect_zookeeper_session_timeout_ms }}"
