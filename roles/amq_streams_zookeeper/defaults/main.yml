@@ -16,6 +16,7 @@ amq_streams_zookeeper_admin_server_port: 8080
 amq_streams_zookeeper_instance_count_enabled: true
 amq_streams_zookeeper_4wl_commands_whitelist: stat,dump # "*"
 amq_streams_zookeeper_instance_count: 0
+amq_streams_zookeeper_java_heap_opts: '-Xmx256M -Xms256M'
 
 amq_streams_zookeeper_host: localhost
 amq_streams_zookeeper_port: 2181
