@@ -33,7 +33,7 @@
     dest: "{{ amq_streams_broker_zookeeper_auth_config }}"
     owner: "{{ amq_streams_broker_user | default(omit) }}"
     group: "{{ amq_streams_broker_group | default(omit) }}"
-    mode: 0644  
+    mode: 0644
   when:
     - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
 
