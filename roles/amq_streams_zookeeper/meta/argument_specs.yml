@@ -1,0 +1,200 @@
+argument_specs:
+    main:
+        options:
+            # line 2 of defaults/main.yml
+            amq_streams_zookeeper_enabled:
+                default: true
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 3 of defaults/main.yml
+            amq_streams_zookeeper_config:
+                default: "/etc/amq_streams_zookeeper.properties"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 4 of defaults/main.yml
+            amq_streams_zookeeper_config_template:
+                default: "templates/zookeeper.properties.j2"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 5 of defaults/main.yml
+            amq_streams_zookeeper_server_start:
+                default: "{{ amq_streams_common_home }}/bin/zookeeper-server-start.sh"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 6 of defaults/main.yml
+            amq_streams_zookeeper_user:
+                default: "amq_streams_zookeeper"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 7 of defaults/main.yml
+            amq_streams_zookeeper_group:
+                default: "amq_streams"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 8 of defaults/main.yml
+            amq_streams_zookeeper_service_name:
+                default: "amq_streams_zookeeper"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 9 of defaults/main.yml
+            amq_streams_zookeeper_service_config_template:
+                default: "templates/service.conf.j2"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 10 of defaults/main.yml
+            amq_streams_zookeeper_service_env_file:
+                default: "/etc/zookeeper.conf"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 11 of defaults/main.yml
+            amq_streams_zookeeper_data_dir:
+                default: "/var/lib/{{ amq_streams_zookeeper_service_name }}/"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 12 of defaults/main.yml
+            amq_streams_zookeeper_logs_dir:
+                default: "/var/log/{{ amq_streams_zookeeper_service_name }}/"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 13 of defaults/main.yml
+            amq_streams_zookeeper_max_client_cnxns:
+                default: 0
+                description: "TODO document argument"
+                type: "int"
+
+            # line 14 of defaults/main.yml
+            amq_streams_zookeeper_admin_enable_server:
+                default: "true"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 15 of defaults/main.yml
+            amq_streams_zookeeper_admin_server_port:
+                default: 8080
+                description: "TODO document argument"
+                type: "int"
+
+            # line 16 of defaults/main.yml
+            amq_streams_zookeeper_instance_count_enabled:
+                default: true
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 17 of defaults/main.yml
+            amq_streams_zookeeper_4wl_commands_whitelist:
+                default: "stat,dump"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 18 of defaults/main.yml
+            amq_streams_zookeeper_instance_count:
+                default: 0
+                description: "TODO document argument"
+                type: "int"
+
+            # line 19 of defaults/main.yml
+            amq_streams_zookeeper_java_heap_opts:
+                default: "-Xmx512M -Xms512M"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 21 of defaults/main.yml
+            amq_streams_zookeeper_host:
+                default: "localhost"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 22 of defaults/main.yml
+            amq_streams_zookeeper_port:
+                default: 2181
+                description: "TODO document argument"
+                type: "int"
+
+            # line 23 of defaults/main.yml
+            amq_streams_zookeeper_init_limit:
+                default: 5
+                description: "TODO document argument"
+                type: "int"
+
+            # line 24 of defaults/main.yml
+            amq_streams_zookeeper_sync_limit:
+                default: 2
+                description: "TODO document argument"
+                type: "int"
+
+            # line 25 of defaults/main.yml
+            amq_streams_zookeeper_cluster_port_start:
+                default: 2888
+                description: "TODO document argument"
+                type: "int"
+
+            # line 26 of defaults/main.yml
+            amq_streams_zookeeper_cluster_port_end:
+                default: 3888
+                description: "TODO document argument"
+                type: "int"
+
+            # line 28 of defaults/main.yml
+            amq_streams_zookeeper_inventory_group:
+                default: "{{ groups['zookeepers'] | default('') }}"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 30 of defaults/main.yml
+            amq_streams_firewalld_package_name:
+                default: "['firewalld']"
+                description: "TODO document argument"
+                type: "list"
+
+            # line 32 of defaults/main.yml
+            amq_streams_firewalld_enabled:
+                default: false
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 35 of defaults/main.yml
+            amq_streams_zookeeper_auth_enabled:
+                default: "false"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 36 of defaults/main.yml
+            amq_streams_zookeeper_auth_config:
+                default: "/etc/zookeeper-jaas.conf"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 37 of defaults/main.yml
+            amq_streams_zookeeper_auth_config_template:
+                default: "templates/zookeeper-jaas.conf.j2"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 38 of defaults/main.yml
+            amq_streams_zookeeper_auth_user:
+                default: "zookeeper"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 39 of defaults/main.yml
+            amq_streams_zookeeper_auth_pass:
+                default: "PLEASE_CHANGE_ME_I_AM_NO_GOOD_FOR_PRODUCTION"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 41 of defaults/main.yml
+            amq_streams_zookeeper_server_log_validation_min_size:
+                default: 20
+                description: "TODO document argument"
+                type: "int"
