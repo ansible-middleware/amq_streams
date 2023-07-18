@@ -20,6 +20,7 @@ Perform installation and configuration of Kafka Connect cluster.
 |`amq_streams_connect_systemd_env_file` | Kafka connect environment file configuration | `/etc/amq_streams_connect.conf` |
 |`amq_streams_connect_systemd_home:` | Systemd home | `/usr/lib/systemd/system` |
 |`amq_streams_connect_service_description` | Kafka connect service description | `Kafka Connect server` |
+|`amq_streams_connect_java_heap_opts` | Default values to apply to `KAFKA_HEAP_OPTS` env variable | `-Xms256M -Xmx2G` |
 
 ## Role Variables
 
