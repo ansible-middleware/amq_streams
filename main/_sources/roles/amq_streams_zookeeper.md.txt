@@ -35,6 +35,7 @@ zknode3
 |`amq_streams_zookeeper_admin_enable_server` | Enable zookeeper administration server | `false` |
 |`amq_streams_zookeeper_instance_count_enabled` | Count zookeeper instances | `true` |
 |`amq_streams_zookeeper_instance_count` |  | `0` |
+|`amq_streams_zookeeper_java_heap_opts` | Default values to apply to `KAFKA_HEAP_OPTS` env variable | `-Xmx512M -Xms512M` |
 |`amq_streams_zookeeper_host` |  | `localhost` |
 |`amq_streams_zookeeper_port` |  | `2181` |
 |`amq_streams_firewalld_package_name` |  | `- firewalld` |
