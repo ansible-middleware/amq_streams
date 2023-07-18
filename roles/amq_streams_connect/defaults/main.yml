@@ -31,3 +31,4 @@ amq_streams_connect_server_log_validation_min_size: 20
 
 amq_streams_connect_config_template: templates/connect-standalone.properties.j2
 amq_streams_connect_service_config_template: templates/service.conf.j2
+amq_streams_connect_server_port: 8083

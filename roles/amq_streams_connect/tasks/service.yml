@@ -1,4 +1,14 @@
 ---
+- name: "Configure firewalld for Zookeeper (if enable)."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: firewalld.yml
+  vars:
+    service_port: "{{ amq_streams_connect_server_port }}"
+  when:
+    - amq_streams_firewalld_enabled is defined and amq_streams_firewalld_enabled
+    - amq_streams_connect_server_port is defined
+
 - name: "Deploy Kafka Connect as a systemd service."
   ansible.builtin.include_role:
     name: amq_streams_common
