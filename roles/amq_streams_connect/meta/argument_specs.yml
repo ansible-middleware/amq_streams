@@ -1,0 +1,152 @@
+argument_specs:
+    main:
+        options:
+            # line 2 of defaults/main.yml
+            amq_streams_connect_user:
+                default: "amq_streams_connect"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 3 of defaults/main.yml
+            amq_streams_connect_group:
+                default: "amq_streams"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 4 of defaults/main.yml
+            amq_streams_connect_standalone_conf:
+                default: "{{ amq_streams_common_home }}/config/connect-standalone.properties"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 5 of defaults/main.yml
+            amq_streams_connect_file_connector_data:
+                default: "['foo', 'bar']"
+                description: "TODO document argument"
+                type: "list"
+
+            # line 9 of defaults/main.yml
+            amq_streams_connect_file_source_conf:
+                default: "{{ amq_streams_common_home }}/config/connect-file-source.properties"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 10 of defaults/main.yml
+            amq_streams_connect_file_sink:
+                default: "{{ amq_streams_common_home }}/config/connect-file-sink.properties"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 12 of defaults/main.yml
+            amq_streams_connect_service_name:
+                default: "amq_streams_connect"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 13 of defaults/main.yml
+            amq_streams_connect_logs_dir:
+                default: "/var/log/{{ amq_streams_connect_service_name }}/"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 14 of defaults/main.yml
+            amq_streams_connect_server_start:
+                default: "{{ amq_streams_common_home }}/bin/connect-standalone.sh"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 15 of defaults/main.yml
+            amq_streams_connect_server_config:
+                default: "{{ amq_streams_connect_standalone_conf }}"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 16 of defaults/main.yml
+            amq_streams_connect_server_extra_args:
+                default: "{{ amq_streams_connect_file_source_conf }} {{ amq_streams_connect_file_sink }}"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 17 of defaults/main.yml
+            amq_streams_connect_systemd_env_file:
+                default: "/etc/amq_streams_connect.conf"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 18 of defaults/main.yml
+            amq_streams_connect_systemd_home:
+                default: "/usr/lib/systemd/system"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 19 of defaults/main.yml
+            amq_streams_connect_service_description:
+                default: "Kafka Connect server"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 20 of defaults/main.yml
+            amq_streams_connect_java_heap_opts:
+                default: "-Xms256M -Xmx2G"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 22 of defaults/main.yml
+            amq_streams_connect_bootstrap_servers:
+                default: "localhost:9092"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 25 of defaults/main.yml
+            amq_streams_connect_broker_auth_enabled:
+                default: false
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 26 of defaults/main.yml
+            amq_streams_connect_broker_auth_scram_enabled:
+                default: false
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 27 of defaults/main.yml
+            amq_streams_connect_broker_auth_username:
+                default: "broker"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 28 of defaults/main.yml
+            amq_streams_connect_broker_auth_password:
+                default: "PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 29 of defaults/main.yml
+            amq_streams_connect_zookeeper_session_timeout_ms:
+                default: 18000
+                description: "TODO document argument"
+                type: "int"
+
+            # line 30 of defaults/main.yml
+            amq_streams_connect_server_log_validation_min_size:
+                default: 20
+                description: "TODO document argument"
+                type: "int"
+
+            # line 32 of defaults/main.yml
+            amq_streams_connect_config_template:
+                default: "templates/connect-standalone.properties.j2"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 33 of defaults/main.yml
+            amq_streams_connect_service_config_template:
+                default: "templates/service.conf.j2"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 34 of defaults/main.yml
+            amq_streams_connect_server_port:
+                default: 8083
+                description: "TODO document argument"
+                type: "int"
