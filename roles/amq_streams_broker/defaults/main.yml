@@ -28,6 +28,7 @@ amq_streams_broker_zookeeper_connection_timeout_ms: 30000
 amq_streams_broker_zookeeper_session_timeout_ms: 18000
 amq_streams_broker_group_initial_rebalance_delay_ms: 0
 amq_streams_broker_properties_template: templates/server.properties.j2
+amq_streams_broker_java_heap_opts: '-Xmx1G -Xms1G'
 
 amq_streams_broker_bootstrap_server_host: localhost
 amq_streams_broker_bootstrap_server_port: 9092
