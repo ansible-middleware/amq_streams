@@ -17,6 +17,7 @@ amq_streams_connect_server_extra_args: "{{ amq_streams_connect_file_source_conf 
 amq_streams_connect_systemd_env_file: /etc/amq_streams_connect.conf
 amq_streams_connect_systemd_home: '/usr/lib/systemd/system'
 amq_streams_connect_service_description: "Kafka Connect server"
+amq_streams_connect_java_heap_opts: '-Xms256M -Xmx2G'
 
 amq_streams_connect_bootstrap_servers: localhost:9092
 
