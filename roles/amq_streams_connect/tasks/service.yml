@@ -1,5 +1,5 @@
 ---
-- name: "Configure firewalld for Zookeeper (if enable)."
+- name: "Configure firewalld for Kafka Connect (if enable)."
   ansible.builtin.include_role:
     name: amq_streams_common
     tasks_from: firewalld.yml
