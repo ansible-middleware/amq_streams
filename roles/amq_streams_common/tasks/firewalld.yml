@@ -21,7 +21,7 @@
     state: started
     enabled: true
 
-- name: "Ensure firewalld allows communication over {{ amq_streams_broker_bootstrap_server_port }}."
+- name: "Ensure firewalld allows communication over {{ service_port }}."
   ansible.posix.firewalld:
     port: "{{ service_port }}/tcp"
     permanent: true
