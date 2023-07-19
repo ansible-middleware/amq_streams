@@ -25,6 +25,9 @@
     service_systemd_env_file: "{{ amq_streams_zookeeper_service_env_file }}"
     server_java_heap_opts: "{{ amq_streams_zookeeper_java_heap_opts }}"
     server_java_opts: "{{ amq_streams_zookeeper_java_opts | default('') }}"
+    server_java_performance_opts: "{{ amq_streams_zookeeper_java_performance_opts | default('') }}"
+    server_java_gc_log_opts: "{{ amq_streams_zookeeper_java_java_gc_log_opts | default('') }}"
+    server_java_jmx_opts: "{{ amq_streams_zookeeper_java_jmx_opts | default('') }}"
 
 - name: "Add zookeeper {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
   ansible.builtin.set_fact:
