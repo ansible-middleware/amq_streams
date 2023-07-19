@@ -27,7 +27,6 @@
     server_group: "{{ amq_streams_connect_group | default(omit) }}"
     server_java_opts: "{{ amq_streams_connect_java_opts | default('') }}"
     server_java_heap_opts: "{{ amq_streams_connect_java_heap_opts | default('') }}"
-    server_java_opts: "{{ amq_streams_connect_java_opts | default('') }}"
     server_java_performance_opts: "{{ amq_streams_connect_java_performance_opts | default('') }}"
     server_java_gc_log_opts: "{{ amq_streams_connect_java_java_gc_log_opts | default('') }}"
     server_start_sleep: "{{ amq_streams_connect_zookeeper_session_timeout_ms }}"
