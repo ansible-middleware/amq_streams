@@ -44,7 +44,11 @@ broker4
 |`amq_streams_broker_service_config_file` |  | `/etc/broker.conf` |
 |`amq_streams_broker_data_dir` | Folders to store the commit logs (Comma-value property). | `/var/lib/{{ amq_streams_broker_service_name }}/` |
 |`amq_streams_broker_logs_dir` | Folder to store the logs of broker service | `/var/log/{{ amq_streams_broker_service_name }}/` |
+|`amq_streams_broker_java_opts` | Default values to apply to `KAFKA_OPTS` env variable |  |
 |`amq_streams_broker_java_heap_opts` | Default values to apply to `KAFKA_HEAP_OPTS` env variable | `-Xmx1G -Xms1G` |
+|`amq_streams_broker_java_performance_opts` | Default values to apply to `KAFKA_JVM_PERFORMANCE_OPTS` env variable |  |
+|`amq_streams_broker_java_java_gc_log_opts` | Default values to apply to `KAFKA_GC_LOG_OPTS` env variable |  |
+|`amq_streams_broker_java_jmx_opts` | Default values to apply to `KAFKA_JMX_OPTS` env variable |  |
 |`amq_streams_broker_num_network_threads` |  | `3` |
 |`amq_streams_broker_num_io_threads` |  | `8` |
 |`amq_streams_broker_buffer_send_bytes` |  | `102400` |
@@ -76,6 +80,8 @@ broker4
 |`amq_streams_broker_auth_listeners` | Default list of authenticated listeners | `PLAINTEXT:PLAINTEXT` |
 |`amq_streams_broker_auth_sasl_mechanisms` | Default list of authenticated SASL mechanism | `PLAIN` |
 |`amq_streams_broker_inventory_group` | Identify the group of broker nodes | `groups['brokers']` |
+
+
 
 ## Role Variables
 
