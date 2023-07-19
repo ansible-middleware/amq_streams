@@ -26,6 +26,9 @@
     service_systemd_env_file: "{{ amq_streams_broker_service_config_file }}"
     server_java_opts: "{{ amq_streams_broker_java_opts | default('') }}"
     server_java_heap_opts: "{{ amq_streams_broker_java_heap_opts | default('') }}"
+    server_java_performance_opts: "{{ amq_streams_broker_java_performance_opts | default('') }}"
+    server_java_gc_log_opts: "{{ amq_streams_broker_java_java_gc_log_opts | default('') }}"
+    server_java_jmx_opts: "{{ amq_streams_broker_java_jmx_opts | default('') }}"
     server_start_sleep: "{{ amq_streams_broker_zookeeper_session_timeout_ms }}"
 
 - name: "Add broker {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
