@@ -25,6 +25,7 @@
     service_systemd_env_file_template: "{{ amq_streams_broker_service_config_template }}"
     service_systemd_env_file: "{{ amq_streams_broker_service_config_file }}"
     server_java_opts: "{{ amq_streams_broker_java_opts | default('') }}"
+    server_log4j_opts: "{{ amq_streams_broker_java_log4j_opts | default('') }}"
     server_java_heap_opts: "{{ amq_streams_broker_java_heap_opts | default('') }}"
     server_java_performance_opts: "{{ amq_streams_broker_java_performance_opts | default('') }}"
     server_java_gc_log_opts: "{{ amq_streams_broker_java_java_gc_log_opts | default('') }}"
