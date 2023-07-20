@@ -38,7 +38,8 @@ amq_streams_firewalld_package_name:
 amq_streams_firewalld_enabled: false
 
 amq_streams_broker_instance_count_enabled: true
-amq_streams_broker_instance_count: 0
+amq_streams_broker_inventory_group_name: 'brokers'
+amq_streams_broker_instance_count: "{{ groups[amq_streams_broker_inventory_group_name] | length }}"
 
 amq_streams_deployment_balance_check_enabled: true
 

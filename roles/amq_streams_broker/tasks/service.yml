@@ -30,8 +30,3 @@
     server_java_gc_log_opts: "{{ amq_streams_broker_java_java_gc_log_opts | default('') }}"
     server_java_jmx_opts: "{{ amq_streams_broker_java_jmx_opts | default('') }}"
     server_start_sleep: "{{ amq_streams_broker_zookeeper_session_timeout_ms }}"
-
-- name: "Add broker {{ ansible_nodename | default('[no hostname provided]') }} to instances count."
-  ansible.builtin.set_fact:
-    amq_streams_broker_instance_count: "{{ amq_streams_broker_instance_count | int + 1 }}"
-  delegate_to: "{{ amq_streams_ansible_controller | default('localhost') }}"

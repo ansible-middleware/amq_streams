@@ -1,8 +1,10 @@
 ---
 - name: "Ansible Playbook to install a Zookeeper ensemble"
-  hosts: all
+  hosts: zookeepers
   vars:
     amq_streams_common_download_dir: "/tmp"
+    amq_streams_zookeeper_auth_user: amq_streams_user
+    amq_streams_zookeeper_auth_pass: amq_streams_pass
   roles:
     - role: amq_streams_zookeeper
   tasks:
@@ -17,9 +19,11 @@
         - amq_streams_zookeeper_instance_count_enabled is defined and amq_streams_zookeeper_instance_count_enabled
 
 - name: "Ansible Playbook to install a Kafka cluster"
-  hosts: all
+  hosts: brokers
   vars:
     amq_streams_common_download_dir: "/tmp"
+    amq_streams_zookeeper_auth_user: amq_streams_user
+    amq_streams_zookeeper_auth_pass: amq_streams_pass
     topic_name: myTopic
   roles:
     - role: amq_streams_broker

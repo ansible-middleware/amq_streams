@@ -14,8 +14,9 @@ amq_streams_zookeeper_max_client_cnxns: 0
 amq_streams_zookeeper_admin_enable_server: 'true'
 amq_streams_zookeeper_admin_server_port: 8080
 amq_streams_zookeeper_instance_count_enabled: true
+amq_streams_zookeeper_inventory_group_name: 'zookeepers'
+amq_streams_zookeeper_instance_count: "{{ groups[amq_streams_zookeeper_inventory_group_name] | length }}"
 amq_streams_zookeeper_4wl_commands_whitelist: stat,dump # "*"
-amq_streams_zookeeper_instance_count: 0
 amq_streams_zookeeper_java_heap_opts: '-Xmx512M -Xms512M'
 
 amq_streams_zookeeper_host: localhost
@@ -25,7 +26,7 @@ amq_streams_zookeeper_sync_limit: 2
 amq_streams_zookeeper_cluster_port_start: 2888
 amq_streams_zookeeper_cluster_port_end: 3888
 
-amq_streams_zookeeper_inventory_group: "{{ groups['zookeepers'] | default('') }}"
+amq_streams_zookeeper_inventory_group: "{{ groups[amq_streams_zookeeper_inventory_group_name] | default('') }}"
 
 amq_streams_firewalld_package_name:
   - firewalld
