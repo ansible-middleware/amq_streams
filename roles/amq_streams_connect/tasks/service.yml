@@ -26,6 +26,7 @@
     server_user: "{{ amq_streams_connect_user | default(omit) }}"
     server_group: "{{ amq_streams_connect_group | default(omit) }}"
     server_java_opts: "{{ amq_streams_connect_java_opts | default('') }}"
+    server_log4j_opts: "{{ amq_streams_connect_java_log4j_opts | default('') }}"
     server_java_heap_opts: "{{ amq_streams_connect_java_heap_opts | default('') }}"
     server_java_performance_opts: "{{ amq_streams_connect_java_performance_opts | default('') }}"
     server_java_gc_log_opts: "{{ amq_streams_connect_java_java_gc_log_opts | default('') }}"
