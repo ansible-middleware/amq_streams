@@ -6,7 +6,7 @@ Common tasks for the collection.
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`amq_streams_common_product_version` | Kafka version | `3.3.2` |
+|`amq_streams_common_product_version` | Kafka version | `3.4.0` |
 |`amq_streams_common_scala_version` | Scala version | `2.13` |
 |`amq_streams_common_version` | Combination version | `{{ amq_streams_common_scala_version }}-{{ amq_streams_common_product_version }}` |
 |`amq_streams_common_archive_file` | Kafka binary package | `kafka_{{ amq_streams_common_version }}.tgz` |

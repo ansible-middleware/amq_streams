@@ -2,7 +2,7 @@ argument_specs:
     main:
         options:
             amq_streams_common_product_version:
-                default: 3.3.2
+                default: 3.4.0
                 description: "Version of Apache Kafka to download and install"
                 type: "str"
             amq_streams_common_scala_version:
