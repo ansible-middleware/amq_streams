@@ -20,6 +20,7 @@ Minor Changes
 
 - Validate the odd number of Zookeeper instances of the cluster `#12 <https://github.com/ansible-middleware/amq_streams/pull/12>`_
 - all jvm and servers args for zookeeper and broker can be overriden thru Ansible `#13 <https://github.com/ansible-middleware/amq_streams/pull/13>`_
+- ⬆️ Upgrade to Kafka 3.4.0 `#59 <https://github.com/ansible-middleware/amq_streams/pull/59>`_
 - 📦 Use archive site to download any version `#41 <https://github.com/ansible-middleware/amq_streams/pull/41>`_
 
 Bugfixes
