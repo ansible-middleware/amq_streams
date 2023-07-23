@@ -1,0 +1,14 @@
+// {{ ansible_managed }}
+
+{% if amq_streams_broker_auth_enabled %}
+security.protocol=SASL_PLAINTEXT
+{% if amq_streams_broker_admin_mechanism == "PLAIN" %}
+# Plain Login Module
+sasl.mechanism=PLAIN
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="{{ amq_streams_broker_admin_username }}" password="{{ amq_streams_broker_admin_password }}";
+{% elif amq_streams_broker_admin_mechanism == "SCRAM-SHA-512" %}
+# SCRAM Login Module
+sasl.mechanism=SCRAM-SHA-512
+sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="{{ amq_streams_broker_admin_username }}" password="{{ amq_streams_broker_admin_password }}";
+{% endif %}
+{% endif %}
