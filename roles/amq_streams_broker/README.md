@@ -80,8 +80,7 @@ broker4
 |`amq_streams_broker_auth_listeners` | Default list of authenticated listeners | `PLAINTEXT:PLAINTEXT` |
 |`amq_streams_broker_auth_sasl_mechanisms` | Default list of authenticated SASL mechanism | `PLAIN` |
 |`amq_streams_broker_inventory_group` | Identify the group of broker nodes | `groups['brokers']` |
-
-
+|`amq_streams_broker_topics` | List of topics to create. Each topics requires the `name` property, and optionally the `partitions` and `replication_factor` | | 
 
 ## Role Variables
 
@@ -101,6 +100,8 @@ Enabling the `amq_streams_broker_auth_enabled` requires to define the following 
   - AUTHENTICATED://:9093` |
 |`amq_streams_broker_auth_sasl_mechanisms` | Default list of authenticated SASL mechanism | `true` | `PLAIN` |
 |`amq_streams_broker_auth_plain_users` | List of users (`username`, `password`) to add into the Kafka cluster | `true` | `` |
+|`amq_streams_broker_admin_username` | Default admin user to manage topics | `false` |  | 
+|`amq_streams_broker_admin_password` | Default password of the admin user to manage topics | `false` |  | 
 
 ## Broker Authentication
 
@@ -192,6 +193,109 @@ by the `amq_streams_broker_inter_broker_listener_auth` variable.
     amq_streams_broker_inter_broker_auth_sasl_mechanisms: SCRAM-SHA-512
     amq_streams_broker_inter_broker_listener_auth: |
       listener.name.replication.scram-sha-512.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="<USER>" password="<PASSWORD>";
+```
+
+## Topic Management
+
+The role allows to manage the following stages of the life cycle of topics:
+
+* Create
+* Describe
+* Delete
+
+The role uses the `amq_streams_broker_topics` variable to identify the list of topics
+to be managed by the role for each stage of the life cycle. 
+
+Example of definition of topics:
+
+```yaml
+  vars:
+    # Topic management
+    amq_streams_broker_topics:
+      - name: sampleTopic
+        partitions: 2
+        replication_factor: 1
+      - name: otherTopic
+        partitions: 4
+        replication_factor: 1
+```
+
+**NOTE:** To manage topics in a distributed Kafka broker, the operation should be done
+in one single broker instance. Create or delete actions are replicated across the Kafka cluster. 
+
+### Create Topics
+
+This task will create new topics in a Kafka broker:
+
+```yaml
+    - name: "Create topics"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: topic/create.yml
+      loop: "{{ amq_streams_broker_topics }}"
+      loop_control:
+        loop_var: topic
+      vars:
+        topic_name: "{{ topic.name }}"
+        topic_partitions: "{{ topic.partitions }}"
+        topic_replication_factor: "{{ topic.replication_factor }}"
+```
+
+### Describe Topics
+
+This task will describe the information and details of each topic from a Kafka broker:
+
+```yaml
+    - name: "Describe topics"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: topic/describe.yml
+      loop: "{{ amq_streams_broker_topics }}"
+      loop_control:
+        loop_var: topic
+      vars:
+        topic_name: "{{ topic.name }}"
+```
+
+### Delete Topics
+
+This task will delete topics from a Kafka broker:
+
+```yaml
+    - name: "Delete topics"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: topic/delete.yml
+      loop: "{{ amq_streams_broker_topics }}"
+      loop_control:
+        loop_var: topic
+      vars:
+        topic_name: "{{ topic.name }}"
+```
+
+### Topic Management with Broker Authentication
+
+To operate topics with this role in Broker with authentication enabled, it is required
+to identify the mechanism of authentication and admin user credentials. The admin user
+must be identified to connect to the Broker and execute the topic action.
+
+The `amq_streams_broker_admin_mechanism` variable identifies the authentication mechanism from
+one of the following options: `PLAIN`, `SCRAM-SHA-512`.
+
+The `amq_streams_admin_username`, and `amq_streams_broker_admin_password` variables identify the
+admin user.
+
+All these variables are required to execute the actions.
+
+Example of definition:
+
+```yaml
+  vars:
+    # Enabling Kafka Broker Authentication
+    amq_streams_broker_auth_enabled: 'true'
+    amq_streams_broker_admin_mechanism: PLAIN
+    amq_streams_broker_admin_username: admin
+    amq_streams_broker_admin_password: password
 ```
 
 ## License
