@@ -29,7 +29,7 @@
     path: "{{ amq_streams_common_home }}/bin"
   register: download_target
 
-- name: "Extract artefact to {{ amq_streams_common_install_dir }}"
+- name: "Extract artifact to {{ amq_streams_common_install_dir }}"
   ansible.builtin.unarchive:
     src: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
     dest: "{{ amq_streams_common.archive.install_dir }}"
