@@ -25,17 +25,17 @@
     src: "{{ amq_streams_broker_admin_cli_config_template }}"
     dest: "{{ amq_streams_broker_admin_cli_config_file }}"
   when:
-    - amq_streams_broker_auth_enabled is defined
+    - amq_streams_broker_auth_enabled is defined and amq_streams_broker_auth_enabled
 
 - name: "Set command-config argument to run operation '{{ bootstrap_operator }}' for topic: '{{ topic_name }}'."
   ansible.builtin.set_fact:
     bootstrap_command_config_operator_option: "--command-config {{ amq_streams_broker_admin_cli_config_file }}"
   when:
-    - amq_streams_broker_auth_enabled is defined
+    - amq_streams_broker_auth_enabled is defined and amq_streams_broker_auth_enabled
 
 - name: "Run operation '{{ bootstrap_operator }}' for topic: '{{ topic_name }}'."
   block:
     - name: "Execute create request for topic '{{ topic_name }}'."
-      ansible.builtin.command: "{{ amq_streams_broker.topic.script }} {{ bootstrap_operator }} {{ bootstrap_operator_options | default('') }} {{ bootstrap_command_config_operator_option }} --topic {{ topic_name }} --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}"
+      ansible.builtin.command: "{{ amq_streams_broker.topic.script }} {{ bootstrap_operator }} {{ bootstrap_operator_options | default('') }} {{ bootstrap_command_config_operator_option | default('')}} --topic {{ topic_name }} --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}"
       register: operation_result
       changed_when: False
