@@ -30,7 +30,16 @@
     amq_streams_broker_auth_plain_users:
       - username: admin
         password: p@ssw0rd
-      - username: kafkauser
+      - username: kafkauser01
+        password: p@ssw0rd
+      - username: kafkauser02
+        password: p@ssw0rd
+
+    # Kafka SCRAM Users
+    amq_streams_broker_auth_scram_users:
+      - username: kafkascramuser01
+        password: p@ssw0rd
+      - username: kafkascramuser02
         password: p@ssw0rd
 
     # Defining default Kafka user for administrative tasks
@@ -93,6 +102,37 @@
         loop_var: topic
       vars:
         topic_name: "{{ topic.name }}"
+
+    - name: "Create SCRAM users"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: user-scram/create.yml
+      loop: "{{ amq_streams_broker_auth_scram_users }}"
+      loop_control:
+        loop_var: user
+      vars:
+        user_username: "{{ user.username }}"
+        user_password: "{{ user.password }}"
+
+    - name: "Describe SCRAM users"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: user-scram/describe.yml
+      loop: "{{ amq_streams_broker_auth_scram_users }}"
+      loop_control:
+        loop_var: user
+      vars:
+        user_username: "{{ user.username }}"
+
+    - name: "Delete SCRAM users"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: user-scram/delete.yml
+      loop: "{{ amq_streams_broker_auth_scram_users }}"
+      loop_control:
+        loop_var: user
+      vars:
+        user_username: "{{ user.username }}"
 
   post_tasks:
     - name: "Display numbers of Zookeeper instances managed by Ansible."
