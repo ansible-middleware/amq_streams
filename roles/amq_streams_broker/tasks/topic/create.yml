@@ -11,7 +11,7 @@
       ansible.builtin.set_fact:
         bootstrap_create_operator_replication_factor_option: "--replication-factor {{ topic_replication_factor }}"
       when:
-        - topic_replication_factor is defined        
+        - topic_replication_factor is defined
 
     - name: "Use bootstrap server to create topic {{ topic_name }}"
       ansible.builtin.include_tasks: topic/bootstrap.yml
