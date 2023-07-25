@@ -1,0 +1,25 @@
+---
+- name: "Create user using the bootstrap server."
+  block:
+    - name: "Set password to create user."
+      ansible.builtin.set_fact:
+        bootstrap_create_operator_password_option: "--add-config 'SCRAM-SHA-512=[password={{ user_password }}]'"
+      when:
+        - user_password is defined
+
+    - name: "Use bootstrap server to create user {{ user_username }}"
+      ansible.builtin.include_tasks: user-scram/bootstrap.yml
+      vars:
+        bootstrap_operator: "--alter"
+        bootstrap_operator_options: "{{ bootstrap_create_operator_password_option | default('') }}"
+  rescue:
+    - name: "Set expected error message"
+      ansible.builtin.set_fact:
+        user_already_exists_err_msg: "User '{{ user_username }}' already exists"
+
+    - name: "Ensure errors is only due to user already existing."
+      ansible.builtin.assert:
+        that:
+          - operation_result is defined and operation_result.stdout is defined
+          - user_already_exists_err_msg in operation_result.stdout
+        fail_msg: "{{ operation_result.stdout }}"
