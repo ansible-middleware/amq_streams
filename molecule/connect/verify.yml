@@ -1,0 +1,12 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Check if amq_streams service started
+      assert:
+        that:
+          - ansible_facts.services["amq_streams_connect.service"]["state"] == "running"
+          - ansible_facts.services["amq_streams_connect.service"]["status"] == "enabled"

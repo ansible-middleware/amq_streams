@@ -1,6 +1,6 @@
 ---
 - name: "Ansible playbook to install a Kafka Connect cluster"
-  hosts: kconnect
+  hosts: all
   tasks:
     - name: "Ensure Kafka Connect is running and available."
       ansible.builtin.include_role:
