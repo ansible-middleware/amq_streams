@@ -30,7 +30,7 @@
     owner: "{{ amq_streams_common_download_user | default(omit) }}"
     group: "{{ amq_streams_common_download_group | default(omit) }}"
   register: download_dir
-  delegate_to: "{{ amq_streams_common_download_node | default(omit) }}"
+  delegate_to: localhost
 
 - name: "Verify that download directory exist."
   ansible.builtin.assert:
@@ -53,6 +53,6 @@
     owner: "{{ amq_streams_common_download_user | default(omit) }}"
     group: "{{ amq_streams_common_download_group | default(omit) }}"
     mode: 0644
-  delegate_to: "{{ amq_streams_common_download_node | default(omit) }}"
+  delegate_to: localhost
   when:
     - not download_target_file.stat.exists
