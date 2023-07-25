@@ -33,7 +33,7 @@ amq_streams_firewalld_package_name:
 amq_streams_firewalld_enabled: false
 
 # Zookeeper Authentication with SASL
-amq_streams_zookeeper_auth_enabled: 'false'
+amq_streams_zookeeper_auth_enabled: false
 amq_streams_zookeeper_auth_config: /etc/zookeeper-jaas.conf
 amq_streams_zookeeper_auth_config_template: templates/zookeeper-jaas.conf.j2
 amq_streams_zookeeper_auth_user: zookeeper
