@@ -80,7 +80,7 @@ broker4
 |`amq_streams_broker_auth_listeners` | Default list of authenticated listeners | `PLAINTEXT:PLAINTEXT` |
 |`amq_streams_broker_auth_sasl_mechanisms` | Default list of authenticated SASL mechanism | `PLAIN` |
 |`amq_streams_broker_inventory_group` | Identify the group of broker nodes | `groups['brokers']` |
-|`amq_streams_broker_topics` | List of topics to create. Each topics requires the `name` property, and optionally the `partitions` and `replication_factor` | | 
+|`amq_streams_broker_topics` | List of topics to create. Each topics requires the `name` property, and optionally the `partitions` and `replication_factor` | |
 
 ## Role Variables
 
@@ -100,8 +100,8 @@ Enabling the `amq_streams_broker_auth_enabled` requires to define the following 
   - AUTHENTICATED://:9093` |
 |`amq_streams_broker_auth_sasl_mechanisms` | Default list of authenticated SASL mechanism | `true` | `PLAIN` |
 |`amq_streams_broker_auth_plain_users` | List of users (`username`, `password`) to add into the Kafka cluster | `true` | `` |
-|`amq_streams_broker_admin_username` | Default admin user to manage topics | `false` |  | 
-|`amq_streams_broker_admin_password` | Default password of the admin user to manage topics | `false` |  | 
+|`amq_streams_broker_admin_username` | Default admin user to manage topics | `false` |  |
+|`amq_streams_broker_admin_password` | Default password of the admin user to manage topics | `false` |  |
 
 ## Broker Authentication
 
@@ -109,7 +109,7 @@ This section includes a set of example to enable the broker authentication for t
 following scenarios:
 
 * SASL PLAIN authentication
-* SASL SCRAM authentication 
+* SASL SCRAM authentication
 
 ### SASL Plain Authentication
 
@@ -195,6 +195,74 @@ by the `amq_streams_broker_inter_broker_listener_auth` variable.
       listener.name.replication.scram-sha-512.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="<USER>" password="<PASSWORD>";
 ```
 
+To manage SCRAM users, the role includes the following tasks:
+
+* Create
+* Describe
+* Delete
+
+
+The role uses the `amq_streams_broker_topics` variable to identify the list of topics
+to be managed by the role for each stage of the life cycle.
+
+The `amq_streams_broker_auth_scram_users` variable defines the list of
+different SCRAM users to manage in the Kafka cluster.
+
+Example of definition of SCRAM users:
+
+```yaml
+  vars:
+    # Kafka SCRAM Users
+    amq_streams_broker_auth_scram_users:
+      - username: kafkauser01
+        password: p@ssw0rd
+      - username: kafkauser02
+        password: p@ssw0rd
+```
+
+Creating SCRAM users can be done with this task:
+
+```yaml
+    - name: "Create SCRAM users"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: user-scram/create.yml
+      loop: "{{ amq_streams_broker_auth_scram_users }}"
+      loop_control:
+        loop_var: user
+      vars:
+        user_username: "{{ user.username }}"
+        user_password: "{{ user.password }}"
+```
+
+Describing SCRAM users can be done with this task:
+
+```yaml
+    - name: "Describe SCRAM users"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: user-scram/describe.yml
+      loop: "{{ amq_streams_broker_auth_scram_users }}"
+      loop_control:
+        loop_var: user
+      vars:
+        user_username: "{{ user.username }}"
+```
+
+Deleting SCRAM users can be done with this task:
+
+```yaml
+    - name: "Delete SCRAM users"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: user-scram/delete.yml
+      loop: "{{ amq_streams_broker_auth_scram_users }}"
+      loop_control:
+        loop_var: user
+      vars:
+        user_username: "{{ user.username }}"
+```
+
 ## Topic Management
 
 The role allows to manage the following stages of the life cycle of topics:
@@ -204,7 +272,7 @@ The role allows to manage the following stages of the life cycle of topics:
 * Delete
 
 The role uses the `amq_streams_broker_topics` variable to identify the list of topics
-to be managed by the role for each stage of the life cycle. 
+to be managed by the role for each stage of the life cycle.
 
 Example of definition of topics:
 
@@ -221,7 +289,7 @@ Example of definition of topics:
 ```
 
 **NOTE:** To manage topics in a distributed Kafka broker, the operation should be done
-in one single broker instance. Create or delete actions are replicated across the Kafka cluster. 
+in one single broker instance. Create or delete actions are replicated across the Kafka cluster.
 
 ### Create Topics
 
