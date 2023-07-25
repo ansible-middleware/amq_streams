@@ -1,0 +1,17 @@
+---
+- name: "Get description of user using the bootstrap server."
+  ansible.builtin.include_tasks: user-scram/bootstrap.yml
+  vars:
+    bootstrap_operator: "--describe"
+
+- name: "Verify that information on {{ user_username }} could be retrieved without any errors."
+  ansible.builtin.assert:
+    that:
+      - operation_result is defined
+      - operation_result.rc is defined and operation_result.rc == 0
+      - operation_result.stdout is defined
+    quiet: True
+
+- name: "Display information on user: {{ user_username }}."
+  ansible.builtin.debug:
+    var: operation_result.stdout

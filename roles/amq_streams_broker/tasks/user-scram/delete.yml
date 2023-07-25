@@ -1,0 +1,25 @@
+---
+- name: "Delete user using the bootstrap server."
+  block:
+    - name: "Set password config to delete user."
+      ansible.builtin.set_fact:
+        bootstrap_delete_operator_password_option: "--delete-config SCRAM-SHA-512"
+      when:
+        - user_username is defined
+
+    - name: "Use bootstrap server to delete user {{ user_username }}"
+      ansible.builtin.include_tasks: user-scram/bootstrap.yml
+      vars:
+        bootstrap_operator: "--alter"
+        bootstrap_operator_options: "{{ bootstrap_delete_operator_password_option | default('') }}"
+  rescue:
+    - name: "Set expected error message"
+      ansible.builtin.set_fact:
+        user_not_exists_err_msg: "Attempt to delete a user credential that does not exist"
+
+    - name: "Ensure errors is only due to user does not exist."
+      ansible.builtin.assert:
+        that:
+          - operation_result is defined and operation_result.stdout is defined
+          - user_not_exists_err_msg in operation_result.stdout
+        fail_msg: "{{ operation_result.stdout }}"
