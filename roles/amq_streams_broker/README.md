@@ -89,7 +89,7 @@ The following are a set of required variables for the role:
 | Variable | Description | Required |
 |:---------|:------------|:---------|
 |`amq_streams_zookeeper_auth_user` | Zookeeper user to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true` | 'true' |
-|`amq_streams_zookeeper_auth_pass` | Zookeeper user password to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true`| 'true' |
+|`amq_streams_zookeeper_auth_pass` | Zookeeper user password to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true`| `true` |
 
 Enabling the `amq_streams_broker_auth_enabled` requires to define the following variables to execute the role successfully:
 
@@ -108,7 +108,7 @@ Enabling the `amq_streams_broker_auth_enabled` requires to define the following 
 This section includes a set of example to enable the broker authentication for the
 following scenarios:
 
-* SASL Plain authentication
+* SASL PLAIN authentication
 * SASL SCRAM authentication 
 
 ### SASL Plain Authentication
