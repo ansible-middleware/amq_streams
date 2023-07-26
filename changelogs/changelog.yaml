@@ -39,3 +39,50 @@ releases:
     fragments:
     - 4.yaml
     release_date: '2023-03-09'
+  0.0.3:
+    changes:
+      major_changes:
+      - 'Enable Broker Authentication usign SASL mechanism `#43 <https://github.com/ansible-middleware/amq_streams/pull/43>`_
+
+        '
+      - 'Enable Zookeeper authentication `#42 <https://github.com/ansible-middleware/amq_streams/pull/42>`_
+
+        '
+      - 'Manage topics in a Kafka authenticated broker `#60 <https://github.com/ansible-middleware/amq_streams/pull/60>`_
+
+        '
+      minor_changes:
+      - 'Add a molecule scenario for all_auth `#61 <https://github.com/ansible-middleware/amq_streams/pull/61>`_
+
+        '
+      - 'Declare Java Heap options as variables `#48 <https://github.com/ansible-middleware/amq_streams/pull/48>`_
+
+        '
+      - 'Set up KAFKA environment variables for the service execution `#54 <https://github.com/ansible-middleware/amq_streams/pull/54>`_
+
+        '
+      - 'Validate the odd number of Zookeeper instances of the cluster `#12 <https://github.com/ansible-middleware/amq_streams/pull/12>`_
+
+        '
+      - 'all jvm and servers args for zookeeper and broker can be overriden thru Ansible
+        `#13 <https://github.com/ansible-middleware/amq_streams/pull/13>`_
+
+        '
+      - "\u2B06\uFE0F Upgrade to Kafka 3.4.0 `#59 <https://github.com/ansible-middleware/amq_streams/pull/59>`_\n"
+      - "\U0001F41B Add zk inventory group var into broker role `#46 <https://github.com/ansible-middleware/amq_streams/pull/46>`_\n"
+      - "\U0001F49A Update topic management in test playbooks `#67 <https://github.com/ansible-middleware/amq_streams/pull/67>`_\n"
+      - "\U0001F4E6 Use archive site to download any version `#41 <https://github.com/ansible-middleware/amq_streams/pull/41>`_\n"
+    fragments:
+    - 12.yaml
+    - 13.yaml
+    - 41.yaml
+    - 42.yaml
+    - 43.yaml
+    - 46.yaml
+    - 48.yaml
+    - 54.yaml
+    - 59.yaml
+    - 60.yaml
+    - 61.yaml
+    - 67.yaml
+    release_date: '2023-07-26'
