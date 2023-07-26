@@ -7,9 +7,9 @@ driver:
 platforms:
   - name: instance
     image: registry.access.redhat.com/ubi8/ubi-init:latest
+    command: "/usr/sbin/init"
     pre_build_image: true
     privileged: true
-    command: "/usr/sbin/init"
     groups:
      - zookeepers
      - brokers
