@@ -6,8 +6,8 @@ middleware_automation.amq_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
-v0.0.2
-======
+v0.0.3-devel
+============
 
 Major Changes
 -------------
@@ -28,6 +28,9 @@ Minor Changes
 - 🐛 Add zk inventory group var into broker role `#46 <https://github.com/ansible-middleware/amq_streams/pull/46>`_
 - 💚 Update topic management in test playbooks `#67 <https://github.com/ansible-middleware/amq_streams/pull/67>`_
 - 📦 Use archive site to download any version `#41 <https://github.com/ansible-middleware/amq_streams/pull/41>`_
+
+v0.0.2
+======
 
 Bugfixes
 --------
