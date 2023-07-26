@@ -402,7 +402,7 @@ broker4
 </tbody>
 </table>
 <ul class="simple">
-<li><p>AUTHENTICATED://:9093<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_auth_sasl_mechanisms<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">authenticated</span> <span class="pre">SASL</span> <span class="pre">mechanism</span> <span class="pre">|</span></code>true<code class="docutils literal notranslate"><span class="pre">|</span></code>PLAIN<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_auth_plain_users<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">List</span> <span class="pre">of</span> <span class="pre">users</span> <span class="pre">(</span></code>username<code class="docutils literal notranslate"><span class="pre">,</span> </code>password<code class="docutils literal notranslate"><span class="pre">)</span> <span class="pre">to</span> <span class="pre">add</span> <span class="pre">into</span> <span class="pre">the</span> <span class="pre">Kafka</span> <span class="pre">cluster</span> <span class="pre">|</span> </code>true<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">``</span> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_admin_username<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">admin</span> <span class="pre">user</span> <span class="pre">to</span> <span class="pre">manage</span> <span class="pre">topics</span> <span class="pre">|</span></code>false<code class="docutils literal notranslate"> <span class="pre">|</span>&#160; <span class="pre">|</span>&#160; <span class="pre">|</span></code>amq_streams_broker_admin_password<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">password</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">admin</span> <span class="pre">user</span> <span class="pre">to</span> <span class="pre">manage</span> <span class="pre">topics</span> <span class="pre">|</span></code>false` |  |</p></li>
+<li><p>AUTHENTICATED://:9093<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_auth_sasl_mechanisms<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">authenticated</span> <span class="pre">SASL</span> <span class="pre">mechanism</span> <span class="pre">|</span></code>true<code class="docutils literal notranslate"><span class="pre">|</span></code>PLAIN<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_auth_plain_users<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">List</span> <span class="pre">of</span> <span class="pre">users</span> <span class="pre">(</span></code>username<code class="docutils literal notranslate"><span class="pre">,</span> </code>password<code class="docutils literal notranslate"><span class="pre">)</span> <span class="pre">to</span> <span class="pre">add</span> <span class="pre">into</span> <span class="pre">the</span> <span class="pre">Kafka</span> <span class="pre">cluster</span> <span class="pre">|</span> </code>true<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">``</span> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_admin_username<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">admin</span> <span class="pre">user</span> <span class="pre">to</span> <span class="pre">manage</span> <span class="pre">topics</span> <span class="pre">|</span></code>false<code class="docutils literal notranslate"> <span class="pre">|</span>&#160; <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_admin_password<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">password</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">admin</span> <span class="pre">user</span> <span class="pre">to</span> <span class="pre">manage</span> <span class="pre">topics</span> <span class="pre">|</span></code>false` |  |</p></li>
 </ul>
 </section>
 <section id="broker-authentication">
@@ -488,6 +488,63 @@ by the <code class="docutils literal notranslate"><span class="pre">amq_streams_
 <span class="w">    </span><span class="nt">amq_streams_broker_inter_broker_auth_sasl_mechanisms</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SCRAM-SHA-512</span>
 <span class="w">    </span><span class="nt">amq_streams_broker_inter_broker_listener_auth</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">      </span><span class="no">listener.name.replication.scram-sha-512.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username=&quot;&lt;USER&gt;&quot; password=&quot;&lt;PASSWORD&gt;&quot;;</span>
+</pre></div>
+</div>
+<p>To manage SCRAM users, the role includes the following tasks:</p>
+<ul class="simple">
+<li><p>Create</p></li>
+<li><p>Describe</p></li>
+<li><p>Delete</p></li>
+</ul>
+<p>The role uses the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_topics</span></code> variable to identify the list of topics
+to be managed by the role for each stage of the life cycle.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_scram_users</span></code> variable defines the list of
+different SCRAM users to manage in the Kafka cluster.</p>
+<p>Example of definition of SCRAM users:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Kafka SCRAM Users</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_scram_users</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafkauser01</span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">p@ssw0rd</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafkauser02</span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">p@ssw0rd</span>
+</pre></div>
+</div>
+<p>Creating SCRAM users can be done with this task:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Create</span><span class="nv"> </span><span class="s">SCRAM</span><span class="nv"> </span><span class="s">users&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_broker</span>
+<span class="w">        </span><span class="nt">tasks_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-scram/create.yml</span>
+<span class="w">      </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">amq_streams_broker_auth_scram_users</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">loop_control</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">loop_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">user_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">user.username</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">user_password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">user.password</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</pre></div>
+</div>
+<p>Describing SCRAM users can be done with this task:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Describe</span><span class="nv"> </span><span class="s">SCRAM</span><span class="nv"> </span><span class="s">users&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_broker</span>
+<span class="w">        </span><span class="nt">tasks_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-scram/describe.yml</span>
+<span class="w">      </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">amq_streams_broker_auth_scram_users</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">loop_control</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">loop_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">user_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">user.username</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</pre></div>
+</div>
+<p>Deleting SCRAM users can be done with this task:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Delete</span><span class="nv"> </span><span class="s">SCRAM</span><span class="nv"> </span><span class="s">users&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_broker</span>
+<span class="w">        </span><span class="nt">tasks_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-scram/delete.yml</span>
+<span class="w">      </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">amq_streams_broker_auth_scram_users</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">loop_control</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">loop_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">user_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">user.username</span><span class="nv"> </span><span class="s">}}&quot;</span>
 </pre></div>
 </div>
 </section>
