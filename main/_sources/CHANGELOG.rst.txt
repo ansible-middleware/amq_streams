@@ -6,27 +6,39 @@ middleware_automation.amq_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
-v0.0.3-devel
-============
+v0.0.3
+======
 
 Major Changes
 -------------
 
 - Enable Broker Authentication usign SASL mechanism `#43 <https://github.com/ansible-middleware/amq_streams/pull/43>`_
+- Enable Broker Authentication usign SASL mechanism `#43 <https://github.com/ansible-middleware/amq_streams/pull/43>`_
 - Enable Zookeeper authentication `#42 <https://github.com/ansible-middleware/amq_streams/pull/42>`_
+- Enable Zookeeper authentication `#42 <https://github.com/ansible-middleware/amq_streams/pull/42>`_
+- Manage topics in a Kafka authenticated broker `#60 <https://github.com/ansible-middleware/amq_streams/pull/60>`_
 - Manage topics in a Kafka authenticated broker `#60 <https://github.com/ansible-middleware/amq_streams/pull/60>`_
 
 Minor Changes
 -------------
 
 - Add a molecule scenario for all_auth `#61 <https://github.com/ansible-middleware/amq_streams/pull/61>`_
+- Add a molecule scenario for all_auth `#61 <https://github.com/ansible-middleware/amq_streams/pull/61>`_
+- Declare Java Heap options as variables `#48 <https://github.com/ansible-middleware/amq_streams/pull/48>`_
 - Declare Java Heap options as variables `#48 <https://github.com/ansible-middleware/amq_streams/pull/48>`_
 - Set up KAFKA environment variables for the service execution `#54 <https://github.com/ansible-middleware/amq_streams/pull/54>`_
+- Set up KAFKA environment variables for the service execution `#54 <https://github.com/ansible-middleware/amq_streams/pull/54>`_
+- Validate the odd number of Zookeeper instances of the cluster `#12 <https://github.com/ansible-middleware/amq_streams/pull/12>`_
 - Validate the odd number of Zookeeper instances of the cluster `#12 <https://github.com/ansible-middleware/amq_streams/pull/12>`_
 - all jvm and servers args for zookeeper and broker can be overriden thru Ansible `#13 <https://github.com/ansible-middleware/amq_streams/pull/13>`_
+- all jvm and servers args for zookeeper and broker can be overriden thru Ansible `#13 <https://github.com/ansible-middleware/amq_streams/pull/13>`_
+- ⬆️ Upgrade to Kafka 3.4.0 `#59 <https://github.com/ansible-middleware/amq_streams/pull/59>`_
 - ⬆️ Upgrade to Kafka 3.4.0 `#59 <https://github.com/ansible-middleware/amq_streams/pull/59>`_
 - 🐛 Add zk inventory group var into broker role `#46 <https://github.com/ansible-middleware/amq_streams/pull/46>`_
+- 🐛 Add zk inventory group var into broker role `#46 <https://github.com/ansible-middleware/amq_streams/pull/46>`_
 - 💚 Update topic management in test playbooks `#67 <https://github.com/ansible-middleware/amq_streams/pull/67>`_
+- 💚 Update topic management in test playbooks `#67 <https://github.com/ansible-middleware/amq_streams/pull/67>`_
+- 📦 Use archive site to download any version `#41 <https://github.com/ansible-middleware/amq_streams/pull/41>`_
 - 📦 Use archive site to download any version `#41 <https://github.com/ansible-middleware/amq_streams/pull/41>`_
 
 v0.0.2
