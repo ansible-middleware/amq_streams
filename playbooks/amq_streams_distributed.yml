@@ -24,7 +24,11 @@
     amq_streams_common_download_dir: "/tmp"
     amq_streams_zookeeper_auth_user: amq_streams_user
     amq_streams_zookeeper_auth_pass: amq_streams_pass
-    topic_name: myTopic
+    # Topic Management
+    amq_streams_broker_topics:
+      - name: myTopic
+        partitions: 1
+        replication_factor: 1
   roles:
     - role: amq_streams_broker
   tasks:
@@ -34,18 +38,27 @@
       vars:
         amq_streams_common_skip_download: true
 
-    - name: "Ensures topic {{ topic_name }} exist."
+    - name: "Create topics"
       ansible.builtin.include_role:
         name: amq_streams_broker
         tasks_from: topic/create.yml
-      loop:
-        - { name: monTopic, partition: 3 }
-        - { name: topic2, partition: 2 }
+      loop: "{{ amq_streams_broker_topics }}"
+      loop_control:
+        loop_var: topic
+      vars:
+        topic_name: "{{ topic.name }}"
+        topic_partitions: "{{ topic.partitions }}"
+        topic_replication_factor: "{{ topic.replication_factor }}"
 
-    - name: "Describe created topic."
+    - name: "Describe topics"
       ansible.builtin.include_role:
         name: amq_streams_broker
         tasks_from: topic/describe.yml
+      loop: "{{ amq_streams_broker_topics }}"
+      loop_control:
+        loop_var: topic
+      vars:
+        topic_name: "{{ topic.name }}"
   post_tasks:
     - name: "Display numbers of broker instances managed by Ansible."
       ansible.builtin.debug:
