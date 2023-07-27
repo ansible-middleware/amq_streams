@@ -71,11 +71,14 @@ sasl.mechanism.inter.broker.protocol={{ amq_streams_broker_inter_broker_auth_sas
 {% endif %}
 
 {% if amq_streams_broker_tls_enabled %}
+# Broker Keystore and Trustore files
 ssl.keystore.location={{ amq_streams_broker_tls_keystore_location }}/{{ amq_streams_broker_tls_keystore }}
 ssl.keystore.password={{ amq_streams_broker_tls_keystore_password }}
-#ssl.key.password={{ amq_streams_broker_tls_keystore_password }}
 ssl.truststore.location={{ amq_streams_broker_tls_truststore_location }}/{{ amq_streams_broker_tls_truststore }}
 ssl.truststore.password={{ amq_streams_broker_tls_truststore_password }}
+{% if amq_streams_broker_auth_enabled %}
+ssl.client.auth=required
+{% endif %}
 {% endif %}
 
 # The number of threads that the server uses for receiving requests from the network and sending responses to the network
