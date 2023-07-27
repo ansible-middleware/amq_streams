@@ -2,6 +2,15 @@
 - name: "Ensure requirements for Zookeeper are present."
   ansible.builtin.include_tasks: prereqs.yml
 
+- name: "Ensure OS has been properly tuned (RHEL specific)."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: os_tuning.yml
+  vars:
+    sysctl_vm_max_map_count: "{{ amq_streams_zookeeper_sysctl_vm_max_map_count }}"
+  when:
+    - ansible_distribution == "RedHat"
+
 - name: "Ensure Zookeeper data dir exists and belongs to the appropriate user - if user is defined."
   ansible.builtin.file:
     path: "{{ amq_streams_zookeeper_data_dir }}"
