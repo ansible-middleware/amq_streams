@@ -53,5 +53,25 @@
     - amq_streams_broker_zookeeper_port is defined
     - amq_streams_broker_zookeeper_wait is defined and amq_streams_broker_zookeeper_wait
 
+- name: "Copy Server Keystore with certificates"
+  ansible.builtin.copy:
+    src: "{{ amq_streams_broker_tls_keystore_dir }}/{{ amq_streams_broker_tls_keystore }}"
+    dest: "{{ amq_streams_broker_tls_keystore_location }}/{{ amq_streams_broker_tls_keystore }}"
+    force: true
+    owner: "{{ amq_streams_broker_user | default(omit) }}"
+    group: "{{ amq_streams_broker_group | default(omit) }}"
+  when:
+    - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
+
+- name: "Copy Server Truststore with certificates"
+  ansible.builtin.copy:
+    src: "{{ amq_streams_broker_tls_truststore_dir }}/{{ amq_streams_broker_tls_truststore }}"
+    dest: "{{ amq_streams_broker_tls_truststore_location }}/{{ amq_streams_broker_tls_truststore }}"
+    force: true
+    owner: "{{ amq_streams_broker_user | default(omit) }}"
+    group: "{{ amq_streams_broker_group | default(omit) }}"
+  when:
+    - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
+
 - name: "Configure firewalld  for Broker (if enable)."
   ansible.builtin.include_tasks: service.yml

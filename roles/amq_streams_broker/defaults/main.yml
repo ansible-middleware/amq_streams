@@ -8,6 +8,7 @@ amq_streams_broker_service_name: 'amq_streams_broker'
 amq_streams_broker_user: 'amq_streams_broker'
 amq_streams_broker_listener_port: 9092
 amq_streams_broker_listener_internal_port: 9091
+amq_streams_broker_listener_tls_port: 9093
 amq_streams_broker_group: 'amq_streams'
 amq_streams_broker_service_config_template: 'templates/service.conf.j2'
 amq_streams_broker_service_config_file: '/etc/broker.conf'
@@ -57,7 +58,8 @@ amq_streams_broker_zookeeper_auth_config_template: templates/broker-jaas.conf.j2
 amq_streams_broker_listeners:
   - PLAINTEXT://:{{ amq_streams_broker_listener_port }} # Insecure
   #- REPLICATION://:{{ amq_streams_broker_listener_internal_port }} # Inter-broker communication
-  #- AUTHENTICATED://:9093 # Authenticated
+  #- AUTHENTICATED://:{{ amq_streams_broker_listener_port }} # Authenticated
+  #- SSL://:{{ amq_streams_broker_listener_tls_port }} # TLS enabled
 
 # Broker Authentication
 amq_streams_broker_auth_enabled: false
@@ -69,10 +71,28 @@ amq_streams_broker_auth_listeners:
   - PLAINTEXT:PLAINTEXT
   #- REPLICATION:PLAINTEXT
   #- AUTHENTICATED:SASL_PLAINTEXT
+  #- SSL:SSL
+  #- SSL:SASL_SSL
 
 amq_streams_broker_auth_sasl_mechanisms:
   - PLAIN
   #- SCRAM-SHA-512
+
+amq_streams_broker_tls_enabled: false
+# Keystore and truststore for Brokers
+amq_streams_broker_tls_keystore_dir: /tmp
+amq_streams_broker_tls_keystore: server.keystore.jks
+amq_streams_broker_tls_keystore_location: /opt
+amq_streams_broker_tls_keystore_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION
+amq_streams_broker_tls_truststore_dir: /tmp
+amq_streams_broker_tls_truststore: server.truststore.jks
+amq_streams_broker_tls_truststore_location: /opt
+amq_streams_broker_tls_truststore_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION
+# Truststore for Clients
+amq_streams_broker_tls_truststore_client_dir: /tmp
+amq_streams_broker_tls_truststore_client: client.truststore.jks
+amq_streams_broker_tls_truststore_client_location: /opt
+amq_streams_broker_tls_truststore_client_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION
 
 amq_streams_broker_server_log_validation_min_size: 20
 

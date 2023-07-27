@@ -12,3 +12,11 @@ sasl.mechanism=SCRAM-SHA-512
 sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="{{ amq_streams_broker_admin_username }}" password="{{ amq_streams_broker_admin_password }}";
 {% endif %}
 {% endif %}
+
+{% if amq_streams_broker_tls_enabled %}
+security.protocol=SSL
+ssl.truststore.location={{ amq_streams_broker_tls_truststore_client_location }}/{{ amq_streams_broker_tls_truststore_client }}
+ssl.truststore.password={{ amq_streams_broker_tls_truststore_client_password }}
+# Disable hostname verification
+ssl.endpoint.identification.algorithm=
+{% endif %}

@@ -25,13 +25,23 @@
     src: "{{ amq_streams_broker_admin_cli_config_template }}"
     dest: "{{ amq_streams_broker_admin_cli_config_file }}"
   when:
-    - amq_streams_broker_auth_enabled is defined and amq_streams_broker_auth_enabled
+    - (amq_streams_broker_auth_enabled is defined and amq_streams_broker_auth_enabled) or (amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled)
+
+- name: "Copy Client Truststore with certificates"
+  ansible.builtin.copy:
+    src: "{{ amq_streams_broker_tls_truststore_client_dir }}/{{ amq_streams_broker_tls_truststore_client }}"
+    dest: "{{ amq_streams_broker_tls_truststore_client_location }}/{{ amq_streams_broker_tls_truststore_client }}"
+    force: true
+    owner: "{{ amq_streams_broker_user | default(omit) }}"
+    group: "{{ amq_streams_broker_group | default(omit) }}"
+  when:
+    - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
 
 - name: "Set command-config argument to run operation '{{ bootstrap_operator }}' for user: '{{ user_username }}'."
   ansible.builtin.set_fact:
     bootstrap_command_config_operator_option: "--command-config {{ amq_streams_broker_admin_cli_config_file }}"
   when:
-    - amq_streams_broker_auth_enabled is defined and amq_streams_broker_auth_enabled
+    - (amq_streams_broker_auth_enabled is defined and amq_streams_broker_auth_enabled) or (amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled)
 
 - name: "Run operation '{{ bootstrap_operator }}' for user: '{{ user_username }}'."
   block:
