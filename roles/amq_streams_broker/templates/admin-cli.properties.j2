@@ -1,7 +1,18 @@
 // {{ ansible_managed }}
 
-{% if amq_streams_broker_auth_enabled %}
+// Security protocol
+
+{% if amq_streams_broker_tls_enabled and not amq_streams_broker_auth_enabled %}
+security.protocol=SSL
+{% elif amq_streams_broker_tls_enabled and amq_streams_broker_auth_enabled %}
+security.protocol=SASL_SSL
+{% elif not amq_streams_broker_tls_enabled and amq_streams_broker_auth_enabled %}
 security.protocol=SASL_PLAINTEXT
+{% else %}
+# No security protocol
+{% endif %}
+
+{% if amq_streams_broker_auth_enabled %}
 {% if amq_streams_broker_admin_mechanism == "PLAIN" %}
 # Plain Login Module
 sasl.mechanism=PLAIN
@@ -14,7 +25,6 @@ sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule require
 {% endif %}
 
 {% if amq_streams_broker_tls_enabled %}
-security.protocol=SSL
 ssl.truststore.location={{ amq_streams_broker_tls_truststore_client_location }}/{{ amq_streams_broker_tls_truststore_client }}
 ssl.truststore.password={{ amq_streams_broker_tls_truststore_client_password }}
 # Disable hostname verification
