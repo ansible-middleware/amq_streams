@@ -1,3 +1,4 @@
+# shellcheck disable=SC2096
 #!/bin/bash -eo pipefail
 readonly KEYS_HOME='/opt'
 readonly KEYSTORE_FILE="${KEYS_HOME}/server.keystore.jks"
