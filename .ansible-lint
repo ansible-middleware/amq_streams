@@ -36,12 +36,12 @@ warn_list:
   - risky-file-permissions
   - var-naming[no-role-prefix]
   - name[play]
+  - sanity[cannot-ignore]
 
 skip_list:
   - vars_should_not_be_used
   - file_is_small_enough
   - name[template]
-  - sanity[cannot-ignore]
 
 use_default_rules: true
 parseable: true
