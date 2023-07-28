@@ -1,5 +1,4 @@
-# shellcheck disable=SC2096
-#!/bin/bash -eo pipefail
+#!/bin/bash -eo
 readonly KEYS_HOME='/opt'
 readonly KEYSTORE_FILE="${KEYS_HOME}/server.keystore.jks"
 readonly KAFKA_SERVER_KEY="${KEYS_HOME}/kafka.server.key"
