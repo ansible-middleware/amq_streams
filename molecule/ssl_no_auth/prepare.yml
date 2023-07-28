@@ -1,0 +1,42 @@
+---
+- name: Prepare
+  hosts: all
+#  collections:
+#    - community.general.java_keystore
+#    - community.crypto
+  tasks:
+
+    - name: "Ensure required packages are installed."
+      ansible.builtin.yum:
+        name:
+          - sudo
+          - java-17-openjdk-headless
+          - openssl
+        state: present
+
+    - ansible.builtin.copy:
+        src: generate_keys_and_certs.sh
+        dest: /tmp/
+        owner: root
+        group: root
+        mode: 0077
+
+    - name: "Generate required SSL artefacts."
+      ansible.builtin.command: "/tmp/generate_keys_and_certs.sh"
+      register: output
+
+    - ansible.builtin.debug:
+        var: output
+
+# TODO: use Ansible crypto and jks collections to replace above script
+#    - name: Generate an OpenSSH keypair with the default values (4096 bits, rsa)
+#      community.crypto.openssh_keypair:
+#        path: /tmp/id_ssh_rsa
+#
+#    - name: Create a keystore for the given certificate/private key pair (inline)
+#      community.general.java_keystore:
+#        name: example
+#        certificate: /etc/ssl/certs/ca-bundle.crt
+#        private_key: /tmp/id_ssh_rsa
+#        password: changeit
+#        dest: /etc/security/keystore.jks
