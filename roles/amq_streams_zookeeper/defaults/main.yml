@@ -19,6 +19,7 @@ amq_streams_zookeeper_instance_count: "{{ groups[amq_streams_zookeeper_inventory
 amq_streams_zookeeper_4wl_commands_whitelist: stat,dump # "*"
 amq_streams_zookeeper_java_heap_opts: '-Xmx512M -Xms512M'
 amq_streams_zookeeper_sysctl_vm_max_map_count: 65530
+amq_streams_zookeeper_ulimit_max_value: 1024
 
 amq_streams_zookeeper_host: localhost
 amq_streams_zookeeper_port: 2181
