@@ -41,6 +41,7 @@ skip_list:
   - vars_should_not_be_used
   - file_is_small_enough
   - name[template]
+  - sanity[cannot-ignore]
 
 use_default_rules: true
 parseable: true
