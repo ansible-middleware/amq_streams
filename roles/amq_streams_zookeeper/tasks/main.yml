@@ -8,6 +8,8 @@
     tasks_from: os_tuning.yml
   vars:
     sysctl_vm_max_map_count: "{{ amq_streams_zookeeper_sysctl_vm_max_map_count }}"
+    ulimit_user: "{{ amq_streams_zookeeper_user }}"
+    ulimit_limit: "{{ amq_streams_zookeeper_ulimit_max_value }}"
   when:
     - ansible_distribution == "RedHat"
 
