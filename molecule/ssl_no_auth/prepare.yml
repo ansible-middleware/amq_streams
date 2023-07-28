@@ -14,15 +14,13 @@
           - openssl
         state: present
 
-    - ansible.builtin.template:
-        src: generate_keys_and_certs.sh.j2
+    - ansible.builtin.copy:
+        src: generate_keys_and_certs.sh
         dest: /tmp/
-        mode: 0655
-      vars:
-        she_band: '#!/bin/bash'
+        mode: 0664
 
     - name: "Generate required SSL artefacts."
-      ansible.builtin.command: /tmp/generate_keys_and_certs.sh
+      ansible.builtin.command: "/bin/bash /tmp/generate_keys_and_certs.sh"
       register: output
 
     - ansible.builtin.debug:
