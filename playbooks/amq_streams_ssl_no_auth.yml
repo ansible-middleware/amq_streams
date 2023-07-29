@@ -2,7 +2,7 @@
 - name: "Ansible Playbook to install Zookeeper and Broker with SSL and no authentication"
   hosts: all
   vars:
-    # Enabling SSL listenere
+    # Enabling SSL listeners
     amq_streams_broker_tls_enabled: true
     amq_streams_broker_tls_keystore_dir: ./certs
     amq_streams_broker_tls_truststore_dir: ./certs
