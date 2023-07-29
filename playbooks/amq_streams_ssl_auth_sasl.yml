@@ -36,7 +36,7 @@
     amq_streams_broker_bootstrap_server_host: localhost
     amq_streams_broker_bootstrap_server_port: 9093
 
-    # # Defining default Kafka user for administrative tasks
+    # Defining default Kafka user for administrative tasks
     amq_streams_broker_admin_mechanism: PLAIN
     #amq_streams_broker_admin_mechanism: SCRAM-SHA-512
     amq_streams_broker_admin_username: admin
