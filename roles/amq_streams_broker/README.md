@@ -42,7 +42,7 @@ broker4
 |`amq_streams_broker_group` |  | `amq_streams` |
 |`amq_streams_broker_service_config_template` |  | `templates/service.conf.j2` |
 |`amq_streams_broker_service_config_file` |  | `/etc/broker.conf` |
-|`amq_streams_broker_data_dir` | Folders to store the commit logs (Comma-value property). | `/var/lib/{{ amq_streams_broker_service_name }}/` |
+|`amq_streams_broker_data_dir` | Folders to store the commit logs (Comma-value property) | `/var/lib/{{ amq_streams_broker_service_name }}/` |
 |`amq_streams_broker_logs_dir` | Folder to store the logs of broker service | `/var/log/{{ amq_streams_broker_service_name }}/` |
 |`amq_streams_broker_java_opts` | Default values to apply to `KAFKA_OPTS` env variable |  |
 |`amq_streams_broker_java_heap_opts` | Default values to apply to `KAFKA_HEAP_OPTS` env variable | `-Xmx1G -Xms1G` |
@@ -75,21 +75,21 @@ broker4
 |`amq_streams_broker_zookeeper_auth_config` | JAAS file for brokers | `/etc/broker-jaas.conf` |
 |`amq_streams_broker_zookeeper_auth_config_template` | JAAS template for brokers | `templates/broker-jaas.conf.j2` |
 |`amq_streams_broker_listeners` | Default list of broker listeners | `PLAINTEXT://:{{ amq_streams_broker_listener_port }}` |
-|`amq_streams_broker_auth_enabled` | Enable Broker authentication. | `false` |
-|`amq_streams_broker_auth_scram_enabled` | Enable SASL SCRAM authentication. | `false` |
+|`amq_streams_broker_auth_enabled` | Enable Broker authentication | `false` |
+|`amq_streams_broker_auth_scram_enabled` | Enable SASL SCRAM authentication | `false` |
 |`amq_streams_broker_auth_listeners` | Default list of authenticated listeners | `PLAINTEXT:PLAINTEXT` |
 |`amq_streams_broker_auth_sasl_mechanisms` | Default list of authenticated SASL mechanism | `PLAIN` |
 |`amq_streams_broker_inventory_group` | Identify the group of broker nodes | `groups['brokers']` |
-|`amq_streams_broker_topics` | List of topics to create. Each topics requires the `name` property, and optionally the `partitions` and `replication_factor` | |
+|`amq_streams_broker_topics` | List of topics to create. Each topics requires the `name` property, and optionally the `partitions` and `replication_factor`. | |
 
 ## Role Variables
 
-The following are a set of required variables for the role:
+List of required variables for the role:
 
 | Variable | Description | Required |
 |:---------|:------------|:---------|
-|`amq_streams_zookeeper_auth_user` | Zookeeper user to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true` | 'true' |
-|`amq_streams_zookeeper_auth_pass` | Zookeeper user password to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true`| `true` |
+|`amq_streams_zookeeper_auth_user` | Zookeeper user to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true`. | 'true' |
+|`amq_streams_zookeeper_auth_pass` | Zookeeper user password to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true`.| `true` |
 
 Enabling the `amq_streams_broker_auth_enabled` requires to define the following variables to execute the role successfully:
 
@@ -102,6 +102,60 @@ Enabling the `amq_streams_broker_auth_enabled` requires to define the following 
 |`amq_streams_broker_auth_plain_users` | List of users (`username`, `password`) to add into the Kafka cluster | `true` | `` |
 |`amq_streams_broker_admin_username` | Default admin user to manage topics | `false` |  |
 |`amq_streams_broker_admin_password` | Default password of the admin user to manage topics | `false` |  |
+
+## TLS Encryption
+
+Kafka supports TLS for encrypting communication with Kafka clients. The role allows
+to enable TLS encryption but it is required to have a keystore containing private and
+public keys.
+
+The following variables are involved to enable TLS encryption:
+
+| Variable | Description | Required | Default |
+|:---------|:------------|:---------|:---------
+|`amq_streams_broker_tls_enabled` | Enable TLS encryption for listeners | `false` | `false` |
+|`amq_streams_broker_tls_keystore_dir` | Local folder with the keystore | `true` | `/tmp` |
+|`amq_streams_broker_tls_keystore` | Filename of the keystore | `true` | `server.keystore.jks` |
+|`amq_streams_broker_tls_keystore_location` | Location on Kafka server for the keystore | `true` | `/opt` |
+|`amq_streams_broker_tls_keystore_password` | Password of the keystore | `true` | `PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION` |
+|`amq_streams_broker_tls_truststore_dir` | Local folder with the truststore | `true` | `/tmp` |
+|`amq_streams_broker_tls_truststore` | Filename of the truststore | `true` | `server.truststore.jks` |
+|`amq_streams_broker_tls_truststore_location` | Location on Kafka server for the truststore | `true` | `/opt` |
+|`amq_streams_broker_tls_truststore_password` | Password of the truststore | `true` | `PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION` |
+|`amq_streams_broker_tls_truststore_client_dir` | Local folder with the keystore file used by clients | `false` | `/tmp` |
+|`amq_streams_broker_tls_truststore_client` | Filename of the client truststore | `false` | `client.truststore.jks` |
+|`amq_streams_broker_tls_truststore_client_location` | Location on Kafka server for the client truststore | `false` | `/opt` |
+|`amq_streams_broker_tls_truststore_client_password` | Password of the client truststore | `false` | `PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION` |
+
+Here a sample to enable SSL listeners at port `9093` for client connections and using
+plain connections for inter-broker communication:
+
+```yaml
+  vars:
+    # Enabling SSL listeners
+    amq_streams_broker_tls_enabled: true
+    amq_streams_broker_tls_keystore_dir: ./certs
+    amq_streams_broker_tls_truststore_dir: ./certs
+    amq_streams_broker_tls_truststore_client_dir: ./certs
+    amq_streams_broker_tls_keystore_password: password
+    amq_streams_broker_tls_truststore_password: password
+    amq_streams_broker_tls_keystore_client_password: password
+    amq_streams_broker_tls_truststore_client_password: password
+
+    # Broker Listeners
+    amq_streams_broker_listeners:
+      - PLAINTEXT://:{{ amq_streams_broker_listener_port }} # Insecure for inter-broker connections
+      - SSL://:{{ amq_streams_broker_listener_tls_port }} # Secure for client connections
+
+    # Using SSL bootstrap server port for management operations
+    amq_streams_broker_bootstrap_server_host: localhost
+    amq_streams_broker_bootstrap_server_port: 9093
+```
+
+The client truststore identified by the `amq_streams_broker_tls_truststore_client` is only
+required for topic or user management operations done by the role. The properties
+`amq_streams_broker_bootstrap_server_host` and `amq_streams_broker_bootstrap_server_port`
+are used to establish the admin connections to operate with topics or users.
 
 ## Broker Authentication
 
@@ -128,14 +182,14 @@ by the `amq_streams_broker_inter_broker_auth_broker_username` and `amq_streams_b
 variables.
 
 ```yaml
-    # BK Listeners
+    # Broker Listeners
     amq_streams_broker_listeners:
       - AUTHENTICATED://:{{ amq_streams_broker_listener_port }}
       - REPLICATION://:{{ amq_streams_broker_listener_internal_port }}
 
     amq_streams_broker_inter_broker_listener: REPLICATION
 
-    # BK Authentication
+    # Broker Authentication
     amq_streams_broker_auth_enabled: 'true'
     amq_streams_broker_auth_listeners:
       - AUTHENTICATED:SASL_PLAINTEXT
@@ -172,14 +226,14 @@ identify which user will be used to establish these connections, that user is de
 by the `amq_streams_broker_inter_broker_listener_auth` variable.
 
 ```yaml
-    # BK Listeners
+    # Broker Listeners
     amq_streams_broker_listeners:
       - AUTHENTICATED://:{{ amq_streams_broker_listener_port }}
       - REPLICATION://:{{ amq_streams_broker_listener_internal_port }}
 
     amq_streams_broker_inter_broker_listener: REPLICATION
 
-    # BK Authentication
+    # Broker Authentication
     amq_streams_broker_auth_enabled: 'true'
     amq_streams_broker_auth_scram_enabled: 'true'
     amq_streams_broker_auth_listeners:
@@ -261,6 +315,40 @@ Deleting SCRAM users can be done with this task:
         loop_var: user
       vars:
         user_username: "{{ user.username }}"
+```
+
+### SASL Authentication over SSL listeners
+
+SASL authentication mechanism using SSL listeners follows the same configuration described
+above, however the listener must be declared as `SASL_SSL` and the authentication for
+that listener must be declared as `SASL_SSL:SASL_SSL`.
+
+Here an example of `vars` to authenticate over a SSL listener at `9093` port:
+
+```yaml
+  vars:
+    # Enabling SSL
+    amq_streams_broker_tls_enabled: true
+
+    # Broker Listeners
+    amq_streams_broker_listeners:
+      - PLAINTEXT://:{{ amq_streams_broker_listener_port }} # Insecure for inter-broker connections
+      - SASL_SSL://:{{ amq_streams_broker_listener_tls_port }} # Secured connections
+
+    # Enabling Kafka Broker Authentication
+    amq_streams_broker_auth_enabled: true
+    amq_streams_broker_auth_scram_enabled: true
+    amq_streams_broker_auth_listeners:
+      - PLAINTEXT:PLAINTEXT
+      - SASL_SSL:SASL_SSL
+
+    amq_streams_broker_auth_sasl_mechanisms:
+      - PLAIN
+      - SCRAM-SHA-512
+
+    # Using SSL bootstrap server port
+    amq_streams_broker_bootstrap_server_host: localhost
+    amq_streams_broker_bootstrap_server_port: 9093
 ```
 
 ## Topic Management
