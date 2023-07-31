@@ -212,6 +212,75 @@
 </tr>
 </thead>
 </table>
+<p>If the Kafka Connect cluster has to connect to a Kafka Broker with authentication enabled, then
+the <code class="docutils literal notranslate"><span class="pre">amq_streams_connect_broker_auth_enabled</span></code> is required, and the following variables to execute
+the role successfully:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Required</p></th>
+<th class="head text-left"><p>Sample</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_connect_bootstrap_servers</span></code></p></td>
+<td class="text-left"><p>Bootstrap connection to the Kafka Brokers</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">localhost:9092</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_connect_broker_admin_mechanism</span></code></p></td>
+<td class="text-left"><p>Authentication mechanism to connect to the Kafka brokers</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLAIN</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_connect_broker_auth_username</span></code></p></td>
+<td class="text-left"><p>Default user to connect to the Kafka brokers</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">broker</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_connect_broker_auth_password</span></code></p></td>
+<td class="text-left"><p>Default password to connecto to the Kafka brokers</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_admin_password</span></code></p></td>
+<td class="text-left"><p>Default password of the admin user to manage topics</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_connect_broker_tls_enabled</span></code></p></td>
+<td class="text-left"><p>Enable SSL connections to the Kafka brokers</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_connect_broker_tls_truststore_client_dir</span></code></p></td>
+<td class="text-left"><p>Local folder of the client truststore to use</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/tmp</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_connect_broker_tls_truststore_client</span></code></p></td>
+<td class="text-left"><p>Filename of the truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">client.truststore.jks</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_connect_broker_tls_truststore_client_location</span></code></p></td>
+<td class="text-left"><p>Location of the truststore in the Kafka Connect host</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_connect_broker_tls_truststore_client_password</span></code></p></td>
+<td class="text-left"><p>Password of the truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
