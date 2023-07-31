@@ -16,7 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ["3.9"]
+        python_version: ["3.11"]
+        molecule_test:
+          - default
+          - all_auth
+          - connect
+          - ssl_auth_sasl
+          - ssl_no_auth
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -52,7 +58,7 @@ jobs:
         working-directory: ./ansible_collections/middleware_automation/amq_streams
 
       - name: Run molecule test
-        run: molecule test --all
+        run: molecule test -s ${{ matrix.molecule_test }}
         working-directory: ./ansible_collections/middleware_automation/amq_streams
         env:
           PY_COLORS: '1'
