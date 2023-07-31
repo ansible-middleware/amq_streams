@@ -78,6 +78,8 @@ ssl.truststore.location={{ amq_streams_broker_tls_truststore_location }}/{{ amq_
 ssl.truststore.password={{ amq_streams_broker_tls_truststore_password }}
 {% if amq_streams_broker_auth_enabled %}
 ssl.client.auth=required
+{% else %}
+ssl.client.auth=none
 {% endif %}
 {% endif %}
 
