@@ -1,7 +1,7 @@
 ---
 amq_streams_connect_user: amq_streams_connect
 amq_streams_connect_group: amq_streams
-amq_streams_connect_standalone_conf: "{{ amq_streams_common_home }}/config/connect-standalone.properties"
+amq_streams_connect_standalone_conf: "/etc/amq_streams_connect-standalone.properties"
 amq_streams_connect_file_connector_data:
   - foo
   - bar
@@ -24,6 +24,7 @@ amq_streams_connect_bootstrap_servers: localhost:9092
 # Enabling Broker Authentication
 amq_streams_connect_broker_auth_enabled: false
 amq_streams_connect_broker_auth_scram_enabled: false
+amq_streams_connect_broker_admin_mechanism: PLAIN
 amq_streams_connect_broker_auth_username: broker
 amq_streams_connect_broker_auth_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION
 amq_streams_connect_zookeeper_session_timeout_ms: 18000
@@ -32,3 +33,10 @@ amq_streams_connect_server_log_validation_min_size: 20
 amq_streams_connect_config_template: templates/connect-standalone.properties.j2
 amq_streams_connect_service_config_template: templates/service.conf.j2
 amq_streams_connect_server_port: 8083
+
+# SSL/TLS Connections
+amq_streams_connect_broker_tls_enabled: false
+amq_streams_connect_broker_tls_truststore_client_dir: /tmp
+amq_streams_connect_broker_tls_truststore_client: client.truststore.jks
+amq_streams_connect_broker_tls_truststore_client_location: /opt
+amq_streams_connect_broker_tls_truststore_client_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION
