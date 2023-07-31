@@ -36,6 +36,13 @@
       - name: otherTopic
         partitions: 1
         replication_factor: 1
+
+    # Enabling SSL/TLS communications between Kafka Connect and Kafka Broker
+    amq_streams_connect_broker_tls_enabled: true
+    amq_streams_connect_broker_tls_truststore_client_password: password
+
+    # Connection to SSL endpoint
+    amq_streams_connect_bootstrap_servers: localhost:9093
   roles:
     - role: amq_streams_zookeeper
   tasks:
@@ -114,6 +121,15 @@
       vars:
         user_username: "{{ user.username }}"
 
+    - name: "Ensure AMQ Streams Connect is running and available."
+      ansible.builtin.include_role:
+        name: amq_streams_connect
+      vars:
+        amq_streams_common_skip_download: true
+        connectors:
+          - { name: "file", path: "connectors/file.yml" }
+          - { name: "dummy", path: "dummy.yml" }
+
   post_tasks:
     - name: "Display numbers of Zookeeper instances managed by Ansible."
       ansible.builtin.debug:
@@ -135,4 +151,9 @@
     - name: "Validate that Broker deployment is functional."
       ansible.builtin.include_role:
         name: amq_streams_broker
+        tasks_from: validate.yml
+
+    - name: "Validate that Connect deployment is functional."
+      ansible.builtin.include_role:
+        name: amq_streams_connect
         tasks_from: validate.yml
