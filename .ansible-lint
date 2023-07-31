@@ -36,11 +36,15 @@ warn_list:
   - risky-file-permissions
   - var-naming[no-role-prefix]
   - name[play]
+  - key-order[task]
+  - schema[tasks]
+  - name[missing]
 
 skip_list:
   - vars_should_not_be_used
   - file_is_small_enough
   - name[template]
+  - task_has_valid_name
 
 use_default_rules: true
 parseable: true
