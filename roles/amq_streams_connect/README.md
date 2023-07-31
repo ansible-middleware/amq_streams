@@ -33,6 +33,24 @@ The following are a set of required variables for the role:
 | Variable | Description | Required |
 |:---------|:------------|:---------|
 
+If the Kafka Connect cluster has to connect to a Kafka Broker with authentication enabled, then
+the `amq_streams_connect_broker_auth_enabled` is required, and the following variables to execute
+the role successfully:
+
+| Variable | Description | Required | Sample |
+|:---------|:------------|:---------|:-------|
+|`amq_streams_connect_bootstrap_servers` | Bootstrap connection to the Kafka Brokers | `true` |
+`localhost:9092` |
+|`amq_streams_connect_broker_admin_mechanism` | Authentication mechanism to connect to the Kafka brokers | `true` | `PLAIN` |
+|`amq_streams_connect_broker_auth_username` | Default user to connect to the Kafka brokers | `true` | `broker` |
+|`amq_streams_connect_broker_auth_password` | Default password to connecto to the Kafka brokers | `true` | `PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION` |
+|`amq_streams_broker_admin_password` | Default password of the admin user to manage topics | `false` |  |
+|`amq_streams_connect_broker_tls_enabled` | Enable SSL connections to the Kafka brokers | `false` | `false` |
+|`amq_streams_connect_broker_tls_truststore_client_dir` | Local folder of the client truststore to use | `true` | `/tmp` |
+|`amq_streams_connect_broker_tls_truststore_client` | Filename of the truststore | `true` | `client.truststore.jks` |
+|`amq_streams_connect_broker_tls_truststore_client_location` | Location of the truststore in the Kafka Connect host | `true` | `/opt` |
+|`amq_streams_connect_broker_tls_truststore_client_password` | Password of the truststore | `true` | `PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION` |
+
 ## License
 
 Apache License v2.0 or later
@@ -42,4 +60,3 @@ Apache License v2.0 or later
 * [Romain Pelisse](https://github.com/rpelisse)
 * [Guido Grazioli](https://github.com/guidograzioli)
 * [Roman Martin](https://github.com/rmarting)
-
