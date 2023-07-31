@@ -51,9 +51,11 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Broker Role</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#role-defaults">Role Defaults</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#role-variables">Role Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tls-encryption">TLS Encryption</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#broker-authentication">Broker Authentication</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#sasl-plain-authentication">SASL Plain Authentication</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#sasl-scram-authentication">SASL SCRAM Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sasl-authentication-over-ssl-listeners">SASL Authentication over SSL listeners</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#topic-management">Topic Management</a><ul>
@@ -200,7 +202,7 @@ broker4
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/etc/broker.conf</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_data_dir</span></code></p></td>
-<td class="text-left"><p>Folders to store the commit logs (Comma-value property).</p></td>
+<td class="text-left"><p>Folders to store the commit logs (Comma-value property)</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/var/lib/{{</span> <span class="pre">amq_streams_broker_service_name</span> <span class="pre">}}/</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_logs_dir</span></code></p></td>
@@ -332,11 +334,11 @@ broker4
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLAINTEXT://:{{</span> <span class="pre">amq_streams_broker_listener_port</span> <span class="pre">}}</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_enabled</span></code></p></td>
-<td class="text-left"><p>Enable Broker authentication.</p></td>
+<td class="text-left"><p>Enable Broker authentication</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_scram_enabled</span></code></p></td>
-<td class="text-left"><p>Enable SASL SCRAM authentication.</p></td>
+<td class="text-left"><p>Enable SASL SCRAM authentication</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_listeners</span></code></p></td>
@@ -352,7 +354,7 @@ broker4
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">groups['brokers']</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_topics</span></code></p></td>
-<td class="text-left"><p>List of topics to create. Each topics requires the <code class="docutils literal notranslate"><span class="pre">name</span></code> property, and optionally the <code class="docutils literal notranslate"><span class="pre">partitions</span></code> and <code class="docutils literal notranslate"><span class="pre">replication_factor</span></code></p></td>
+<td class="text-left"><p>List of topics to create. Each topics requires the <code class="docutils literal notranslate"><span class="pre">name</span></code> property, and optionally the <code class="docutils literal notranslate"><span class="pre">partitions</span></code> and <code class="docutils literal notranslate"><span class="pre">replication_factor</span></code>.</p></td>
 <td class="text-left"><p></p></td>
 </tr>
 </tbody>
@@ -360,7 +362,7 @@ broker4
 </section>
 <section id="role-variables">
 <h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this heading"></a></h2>
-<p>The following are a set of required variables for the role:</p>
+<p>List of required variables for the role:</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -370,11 +372,11 @@ broker4
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_user</span></code></p></td>
-<td class="text-left"><p>Zookeeper user to authenticate. Mandatory if <code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_enabled:</span> <span class="pre">true</span></code></p></td>
+<td class="text-left"><p>Zookeeper user to authenticate. Mandatory if <code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_enabled:</span> <span class="pre">true</span></code>.</p></td>
 <td class="text-left"><p>‘true’</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_pass</span></code></p></td>
-<td class="text-left"><p>Zookeeper user password to authenticate. Mandatory if <code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_enabled:</span> <span class="pre">true</span></code></p></td>
+<td class="text-left"><p>Zookeeper user password to authenticate. Mandatory if <code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_enabled:</span> <span class="pre">true</span></code>.</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
 </tr>
 </tbody>
@@ -405,6 +407,116 @@ broker4
 <li><p>AUTHENTICATED://:9093<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_auth_sasl_mechanisms<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">authenticated</span> <span class="pre">SASL</span> <span class="pre">mechanism</span> <span class="pre">|</span></code>true<code class="docutils literal notranslate"><span class="pre">|</span></code>PLAIN<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_auth_plain_users<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">List</span> <span class="pre">of</span> <span class="pre">users</span> <span class="pre">(</span></code>username<code class="docutils literal notranslate"><span class="pre">,</span> </code>password<code class="docutils literal notranslate"><span class="pre">)</span> <span class="pre">to</span> <span class="pre">add</span> <span class="pre">into</span> <span class="pre">the</span> <span class="pre">Kafka</span> <span class="pre">cluster</span> <span class="pre">|</span> </code>true<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">``</span> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_admin_username<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">admin</span> <span class="pre">user</span> <span class="pre">to</span> <span class="pre">manage</span> <span class="pre">topics</span> <span class="pre">|</span></code>false<code class="docutils literal notranslate"> <span class="pre">|</span>&#160; <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_admin_password<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">password</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">admin</span> <span class="pre">user</span> <span class="pre">to</span> <span class="pre">manage</span> <span class="pre">topics</span> <span class="pre">|</span></code>false` |  |</p></li>
 </ul>
 </section>
+<section id="tls-encryption">
+<h2>TLS Encryption<a class="headerlink" href="#tls-encryption" title="Permalink to this heading"></a></h2>
+<p>Kafka supports TLS for encrypting communication with Kafka clients. The role allows
+to enable TLS encryption but it is required to have a keystore containing private and
+public keys.</p>
+<p>The following variables are involved to enable TLS encryption:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Required</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_enabled</span></code></p></td>
+<td class="text-left"><p>Enable TLS encryption for listeners</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_keystore_dir</span></code></p></td>
+<td class="text-left"><p>Local folder with the keystore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/tmp</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_keystore</span></code></p></td>
+<td class="text-left"><p>Filename of the keystore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">server.keystore.jks</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_keystore_location</span></code></p></td>
+<td class="text-left"><p>Location on Kafka server for the keystore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_keystore_password</span></code></p></td>
+<td class="text-left"><p>Password of the keystore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_dir</span></code></p></td>
+<td class="text-left"><p>Local folder with the truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/tmp</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore</span></code></p></td>
+<td class="text-left"><p>Filename of the truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">server.truststore.jks</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_location</span></code></p></td>
+<td class="text-left"><p>Location on Kafka server for the truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_password</span></code></p></td>
+<td class="text-left"><p>Password of the truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_client_dir</span></code></p></td>
+<td class="text-left"><p>Local folder with the keystore file used by clients</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/tmp</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_client</span></code></p></td>
+<td class="text-left"><p>Filename of the client truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">client.truststore.jks</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_client_location</span></code></p></td>
+<td class="text-left"><p>Location on Kafka server for the client truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_client_password</span></code></p></td>
+<td class="text-left"><p>Password of the client truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Here a sample to enable SSL listeners at port <code class="docutils literal notranslate"><span class="pre">9093</span></code> for client connections and using
+plain connections for inter-broker communication:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Enabling SSL listeners</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_keystore_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./certs</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_truststore_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./certs</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_truststore_client_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./certs</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_keystore_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_truststore_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_keystore_client_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_truststore_client_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+
+<span class="w">    </span><span class="c1"># Broker Listeners</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_listeners</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT://:{{ amq_streams_broker_listener_port }}</span><span class="w"> </span><span class="c1"># Insecure for inter-broker connections</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SSL://:{{ amq_streams_broker_listener_tls_port }}</span><span class="w"> </span><span class="c1"># Secure for client connections</span>
+
+<span class="w">    </span><span class="c1"># Using SSL bootstrap server port for management operations</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_bootstrap_server_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_bootstrap_server_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9093</span>
+</pre></div>
+</div>
+<p>The client truststore identified by the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_client</span></code> is only
+required for topic or user management operations done by the role. The properties
+<code class="docutils literal notranslate"><span class="pre">amq_streams_broker_bootstrap_server_host</span></code> and <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_bootstrap_server_port</span></code>
+are used to establish the admin connections to operate with topics or users.</p>
+</section>
 <section id="broker-authentication">
 <h2>Broker Authentication<a class="headerlink" href="#broker-authentication" title="Permalink to this heading"></a></h2>
 <p>This section includes a set of example to enable the broker authentication for the
@@ -426,14 +538,14 @@ the protocol to authenticate the inter-broker connections. That requires to
 identify which user will be used to establish these connections, that user is defined
 by the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inter_broker_auth_broker_username</span></code> and <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inter_broker_auth_broker_password</span></code>
 variables.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1"># BK Listeners</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1"># Broker Listeners</span>
 <span class="w">    </span><span class="nt">amq_streams_broker_listeners</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AUTHENTICATED://:{{ amq_streams_broker_listener_port }}</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REPLICATION://:{{ amq_streams_broker_listener_internal_port }}</span>
 
 <span class="w">    </span><span class="nt">amq_streams_broker_inter_broker_listener</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REPLICATION</span>
 
-<span class="w">    </span><span class="c1"># BK Authentication</span>
+<span class="w">    </span><span class="c1"># Broker Authentication</span>
 <span class="w">    </span><span class="nt">amq_streams_broker_auth_enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;true&#39;</span>
 <span class="w">    </span><span class="nt">amq_streams_broker_auth_listeners</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AUTHENTICATED:SASL_PLAINTEXT</span>
@@ -467,14 +579,14 @@ a SASL plain authentication. SCRAM authentication is enabled by the
 the protocol to authenticate the inter-broker connections. That requires to
 identify which user will be used to establish these connections, that user is defined
 by the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inter_broker_listener_auth</span></code> variable.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1"># BK Listeners</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1"># Broker Listeners</span>
 <span class="w">    </span><span class="nt">amq_streams_broker_listeners</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AUTHENTICATED://:{{ amq_streams_broker_listener_port }}</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REPLICATION://:{{ amq_streams_broker_listener_internal_port }}</span>
 
 <span class="w">    </span><span class="nt">amq_streams_broker_inter_broker_listener</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REPLICATION</span>
 
-<span class="w">    </span><span class="c1"># BK Authentication</span>
+<span class="w">    </span><span class="c1"># Broker Authentication</span>
 <span class="w">    </span><span class="nt">amq_streams_broker_auth_enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;true&#39;</span>
 <span class="w">    </span><span class="nt">amq_streams_broker_auth_scram_enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;true&#39;</span>
 <span class="w">    </span><span class="nt">amq_streams_broker_auth_listeners</span><span class="p">:</span>
@@ -545,6 +657,38 @@ different SCRAM users to manage in the Kafka cluster.</p>
 <span class="w">        </span><span class="nt">loop_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
 <span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">user_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">user.username</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="sasl-authentication-over-ssl-listeners">
+<h3>SASL Authentication over SSL listeners<a class="headerlink" href="#sasl-authentication-over-ssl-listeners" title="Permalink to this heading"></a></h3>
+<p>SASL authentication mechanism using SSL listeners follows the same configuration described
+above, however the listener must be declared as <code class="docutils literal notranslate"><span class="pre">SASL_SSL</span></code> and the authentication for
+that listener must be declared as <code class="docutils literal notranslate"><span class="pre">SASL_SSL:SASL_SSL</span></code>.</p>
+<p>Here an example of <code class="docutils literal notranslate"><span class="pre">vars</span></code> to authenticate over a SSL listener at <code class="docutils literal notranslate"><span class="pre">9093</span></code> port:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Enabling SSL</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">    </span><span class="c1"># Broker Listeners</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_listeners</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT://:{{ amq_streams_broker_listener_port }}</span><span class="w"> </span><span class="c1"># Insecure for inter-broker connections</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SASL_SSL://:{{ amq_streams_broker_listener_tls_port }}</span><span class="w"> </span><span class="c1"># Secured connections</span>
+
+<span class="w">    </span><span class="c1"># Enabling Kafka Broker Authentication</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_scram_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_listeners</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT:PLAINTEXT</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SASL_SSL:SASL_SSL</span>
+
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_sasl_mechanisms</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAIN</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SCRAM-SHA-512</span>
+
+<span class="w">    </span><span class="c1"># Using SSL bootstrap server port</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_bootstrap_server_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_bootstrap_server_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9093</span>
 </pre></div>
 </div>
 </section>
