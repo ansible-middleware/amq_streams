@@ -98,8 +98,8 @@ amq_streams_broker_tls_truststore_client_password: PLEASE_CHANGEME_IAMNOTGOOD_FO
 
 amq_streams_broker_server_log_validation_min_size: 20
 
-amq_streams_broker_inventory_group: "{{ groups['brokers'] | default('') }}"
-amq_streams_zookeeper_inventory_group: "{{ groups['zookeepers'] | default('') }}"
+amq_streams_broker_inventory_group: "{{ groups['brokers'] | default([]) }}"
+amq_streams_zookeeper_inventory_group: "{{ groups['zookeepers'] | default([]) }}"
 
 amq_streams_broker_admin_cli_config_template: 'templates/admin-cli.properties.j2'
 amq_streams_broker_admin_cli_config_file: '/tmp/admin-cli.properties'
