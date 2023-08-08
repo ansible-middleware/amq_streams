@@ -6,13 +6,29 @@ middleware_automation.amq_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
+v0.0.4-devel
+============
+
+Major Changes
+-------------
+
+- :closed_lock_with_key: Enable secured connection from Kafka Connect `#76 <https://github.com/ansible-middleware/amq_streams/pull/76>`_
+- :lock: Enable SSL listeners for Kafka Brokers `#70 <https://github.com/ansible-middleware/amq_streams/pull/70>`_
+- :memo: How to enable TLS encryption `#74 <https://github.com/ansible-middleware/amq_streams/pull/74>`_
+- ✅ Add test for SSL listeners with SASL authentication `#73 <https://github.com/ansible-middleware/amq_streams/pull/73>`_
+
+Minor Changes
+-------------
+
+- Mol all cluster `#78 <https://github.com/ansible-middleware/amq_streams/pull/78>`_
+- ensure required information for auth are passed `#79 <https://github.com/ansible-middleware/amq_streams/pull/79>`_
+
 v0.0.3
 ======
 
 Major Changes
 -------------
 
-- :lock: Enable SSL listeners for Kafka Brokers `#70 <https://github.com/ansible-middleware/amq_streams/pull/70>`_
 - Enable Broker Authentication usign SASL mechanism `#43 <https://github.com/ansible-middleware/amq_streams/pull/43>`_
 - Enable Zookeeper authentication `#42 <https://github.com/ansible-middleware/amq_streams/pull/42>`_
 - Manage topics in a Kafka authenticated broker `#60 <https://github.com/ansible-middleware/amq_streams/pull/60>`_
@@ -25,7 +41,6 @@ Minor Changes
 - Set up KAFKA environment variables for the service execution `#54 <https://github.com/ansible-middleware/amq_streams/pull/54>`_
 - Validate the odd number of Zookeeper instances of the cluster `#12 <https://github.com/ansible-middleware/amq_streams/pull/12>`_
 - all jvm and servers args for zookeeper and broker can be overriden thru Ansible `#13 <https://github.com/ansible-middleware/amq_streams/pull/13>`_
-- ensure required information for auth are passed `#79 <https://github.com/ansible-middleware/amq_streams/pull/79>`_
 - ⬆️ Upgrade to Kafka 3.4.0 `#59 <https://github.com/ansible-middleware/amq_streams/pull/59>`_
 - 🐛 Add zk inventory group var into broker role `#46 <https://github.com/ansible-middleware/amq_streams/pull/46>`_
 - 💚 Update topic management in test playbooks `#67 <https://github.com/ansible-middleware/amq_streams/pull/67>`_
