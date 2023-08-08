@@ -6,7 +6,7 @@
       - server_config is defined
     quiet: true
 
-- name: "Ensure {{ server_name }} configuration is deployed."
+- name: "Ensure {{ server_name }} configuration is deployed ({{ server_config_template }} -> {{ server_config }}."
   ansible.builtin.template:
     src: "{{ server_config_template }}"
     dest: "{{ server_config }}"
