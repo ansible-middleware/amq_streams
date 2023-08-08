@@ -1,0 +1,4 @@
+---
+- import_playbook: ../../playbooks/amq_streams_all_cluster.yml
+  vars:
+    amq_streams_common_download_dir: /tmp/
