@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Common Role &mdash; AmqStreams Ansible Collection  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/ansible-basic-sphinx-ext.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Connect Role" href="amq_streams_connect.html" />
+    <link rel="prev" title="Broker Role" href="amq_streams_broker.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AmqStreams Ansible Collection
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Ansible Collection - middleware_automation.amq_streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage Patterns</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Role Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_broker.html">Broker Role</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Common Role</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#role-defaults">Role Defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#role-variables">Role Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#offline-installation">Offline installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#license">License</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#author-information">Author Information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_connect.html">Connect Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_zookeeper.html">Zookeeper Role</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing.html">Contributor’s Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html">Collection Versioning Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html#release-automation">Release automation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ Broker</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AmqStreams Ansible Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Role Index</a></li>
+      <li class="breadcrumb-item active">Common Role</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/roles/amq_streams_common.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="common-role">
+<h1>Common Role<a class="headerlink" href="#common-role" title="Permalink to this heading"></a></h1>
+<p>Common tasks for the collection.</p>
+<section id="role-defaults">
+<h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_product_version</span></code></p></td>
+<td class="text-left"><p>Kafka version</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3.4.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_scala_version</span></code></p></td>
+<td class="text-left"><p>Scala version</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2.13</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_version</span></code></p></td>
+<td class="text-left"><p>Combination version</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_common_scala_version</span> <span class="pre">}}-{{</span> <span class="pre">amq_streams_common_product_version</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_archive_file</span></code></p></td>
+<td class="text-left"><p>Kafka binary package</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">kafka_{{</span> <span class="pre">amq_streams_common_version</span> <span class="pre">}}.tgz</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_download_url</span></code></p></td>
+<td class="text-left"><p>Download url</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://downloads.apache.org/kafka/{{</span> <span class="pre">amq_streams_common_product_version</span> <span class="pre">}}/kafka_{{</span> <span class="pre">amq_streams_common_version</span> <span class="pre">}}.tgz</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_download_dir</span></code></p></td>
+<td class="text-left"><p>Folder to store the downloaded binaries. This folder is located where the playbook is executed.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_offline_install</span></code></p></td>
+<td class="text-left"><p>Perform an offline installation.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_install_dir</span></code></p></td>
+<td class="text-left"><p>Installation folder</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_path_to_archive_file</span></code></p></td>
+<td class="text-left"><p>Path to download binary file</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_common_download_dir</span> <span class="pre">}}/{{</span> <span class="pre">amq_streams_common_archive_file</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_prereqs_dependencies</span></code></p></td>
+<td class="text-left"><p>List of prerequisites dependencies</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">tar</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_openjdk_version</span></code></p></td>
+<td class="text-left"><p>Java version</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">17</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_systemd_home</span></code></p></td>
+<td class="text-left"><p>Systemd home</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/usr/lib/systemd/system'</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_systemd_service_config_file_template</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/service_systemd.j2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_home</span></code></p></td>
+<td class="text-left"><p>Kafka home</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">&quot;{{</span> <span class="pre">amq_streams_common_install_dir</span> <span class="pre">}}/kafka_{{</span> <span class="pre">amq_streams_common_version</span> <span class="pre">}}/&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_firewalld_package_name</span></code></p></td>
+<td class="text-left"><p>Firewalld package name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">firewalld</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_common_firewalld_enabled</span></code></p></td>
+<td class="text-left"><p>Ensure firewalld is running and configure keycloak ports</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role-variables">
+<h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this heading"></a></h2>
+<p>The following are a set of required variables for the role:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Required</p></th>
+</tr>
+</thead>
+</table>
+</section>
+<section id="offline-installation">
+<h2>Offline installation<a class="headerlink" href="#offline-installation" title="Permalink to this heading"></a></h2>
+<p>Performing an offline installation is possible by:</p>
+<ul class="simple">
+<li><p>Setting <code class="docutils literal notranslate"><span class="pre">amq_streams_common_offline_install</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p>Making the <code class="docutils literal notranslate"><span class="pre">amq_streams_common_archive_file</span></code> file available to ansible controller in the folder <code class="docutils literal notranslate"><span class="pre">amq_streams_common_download_dir</span></code>.</p></li>
+</ul>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<p>Apache License v2.0 or later</p>
+</section>
+<section id="author-information">
+<h2>Author Information<a class="headerlink" href="#author-information" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/rpelisse">Romain Pelisse</a></p></li>
+<li><p><a class="reference external" href="https://github.com/guidograzioli">Guido Grazioli</a></p></li>
+<li><p><a class="reference external" href="https://github.com/rmarting">Roman Martin</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="amq_streams_broker.html" class="btn btn-neutral float-left" title="Broker Role" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="amq_streams_connect.html" class="btn btn-neutral float-right" title="Connect Role" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Red Hat, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
