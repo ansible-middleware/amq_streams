@@ -86,3 +86,32 @@ releases:
     - 61.yaml
     - 67.yaml
     release_date: '2023-07-26'
+  0.0.4:
+    changes:
+      major_changes:
+      - ':closed_lock_with_key: Enable secured connection from Kafka Connect `#76
+        <https://github.com/ansible-middleware/amq_streams/pull/76>`_
+
+        '
+      - ':lock: Enable SSL listeners for Kafka Brokers `#70 <https://github.com/ansible-middleware/amq_streams/pull/70>`_
+
+        '
+      - ':memo: How to enable TLS encryption `#74 <https://github.com/ansible-middleware/amq_streams/pull/74>`_
+
+        '
+      - "\u2705 Add test for SSL listeners with SASL authentication `#73 <https://github.com/ansible-middleware/amq_streams/pull/73>`_\n"
+      minor_changes:
+      - 'Mol all cluster `#78 <https://github.com/ansible-middleware/amq_streams/pull/78>`_
+
+        '
+      - 'ensure required information for auth are passed `#79 <https://github.com/ansible-middleware/amq_streams/pull/79>`_
+
+        '
+    fragments:
+    - 70.yaml
+    - 73.yaml
+    - 74.yaml
+    - 76.yaml
+    - 78.yaml
+    - 79.yaml
+    release_date: '2023-08-08'

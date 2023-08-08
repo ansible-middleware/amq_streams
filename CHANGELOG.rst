@@ -6,6 +6,23 @@ middleware_automation.amq_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
+v0.0.4
+======
+
+Major Changes
+-------------
+
+- :closed_lock_with_key: Enable secured connection from Kafka Connect `#76 <https://github.com/ansible-middleware/amq_streams/pull/76>`_
+- :lock: Enable SSL listeners for Kafka Brokers `#70 <https://github.com/ansible-middleware/amq_streams/pull/70>`_
+- :memo: How to enable TLS encryption `#74 <https://github.com/ansible-middleware/amq_streams/pull/74>`_
+- ✅ Add test for SSL listeners with SASL authentication `#73 <https://github.com/ansible-middleware/amq_streams/pull/73>`_
+
+Minor Changes
+-------------
+
+- Mol all cluster `#78 <https://github.com/ansible-middleware/amq_streams/pull/78>`_
+- ensure required information for auth are passed `#79 <https://github.com/ansible-middleware/amq_streams/pull/79>`_
+
 v0.0.3
 ======
 
