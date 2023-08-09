@@ -6,6 +6,14 @@ middleware_automation.amq_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
+v0.0.5-devel
+============
+
+Minor Changes
+-------------
+
+- add remote_src attribute to unarchive: to allow deployment using archive on target `#80 <https://github.com/ansible-middleware/amq_streams/pull/80>`_
+
 v0.0.4
 ======
 
@@ -21,7 +29,6 @@ Minor Changes
 -------------
 
 - Mol all cluster `#78 <https://github.com/ansible-middleware/amq_streams/pull/78>`_
-- add remote_src attribute to unarchive: to allow deployment using archive on target `#80 <https://github.com/ansible-middleware/amq_streams/pull/80>`_
 - ensure required information for auth are passed `#79 <https://github.com/ansible-middleware/amq_streams/pull/79>`_
 
 v0.0.3
