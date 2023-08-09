@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Broker Role &mdash; AmqStreams Ansible Collection  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/ansible-basic-sphinx-ext.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Common Role" href="amq_streams_common.html" />
+    <link rel="prev" title="Role Index" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AmqStreams Ansible Collection
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Ansible Collection - middleware_automation.amq_streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage Patterns</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Role Index</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Broker Role</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#role-defaults">Role Defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#role-variables">Role Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tls-encryption">TLS Encryption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#broker-authentication">Broker Authentication</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sasl-plain-authentication">SASL Plain Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sasl-scram-authentication">SASL SCRAM Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sasl-authentication-over-ssl-listeners">SASL Authentication over SSL listeners</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#topic-management">Topic Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-topics">Create Topics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#describe-topics">Describe Topics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-topics">Delete Topics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#topic-management-with-broker-authentication">Topic Management with Broker Authentication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#license">License</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#author-information">Author Information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_common.html">Common Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_connect.html">Connect Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_zookeeper.html">Zookeeper Role</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing.html">Contributor’s Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html">Collection Versioning Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html#release-automation">Release automation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ Broker</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AmqStreams Ansible Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Role Index</a></li>
+      <li class="breadcrumb-item active">Broker Role</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/roles/amq_streams_broker.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="broker-role">
+<h1>Broker Role<a class="headerlink" href="#broker-role" title="Permalink to this heading"></a></h1>
+<p>Perform installation and configuration of Kafka brokers cluster.</p>
+<p>This role requires to have a <code class="docutils literal notranslate"><span class="pre">zookeepers</span></code> group (identified by the
+<code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_inventory_group</span></code> variable) in the inventory file to identify
+each node of he Zookeeper cluster. This group is used to set up the right
+configuration files in order to establish the communication between Zookeeper cluster members.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">brokers</span></code> group (identified by the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inventory_group</span></code> variable)
+is used in the same way identifying the members of the Kafka cluster.
+The order of this group will be used to set up the right configuration files and establish
+the right cluster configuration:</p>
+<p>Example of inventory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[zookeepers]
+zknode1
+zknode2
+zknode3
+
+[brokers]
+broker1
+broker2
+broker3
+broker4
+</pre></div>
+</div>
+<section id="role-defaults">
+<h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_create_topic_script</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_common_home</span> <span class="pre">}}/bin/kafka-topics.sh</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_enabled</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_server_start</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_common_home</span> <span class="pre">}}/bin/kafka-server-start.sh</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_config</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/etc/amq_streams_broker.properties</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_service_name</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_user</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_listener_port</span></code></p></td>
+<td class="text-left"><p>Port defined for external communications</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">9092</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_listener_internal_port</span></code></p></td>
+<td class="text-left"><p>Port defined for inter-broker communications</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">9091</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_group</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_service_config_template</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/service.conf.j2</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_service_config_file</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/etc/broker.conf</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_data_dir</span></code></p></td>
+<td class="text-left"><p>Folders to store the commit logs (Comma-value property)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/var/lib/{{</span> <span class="pre">amq_streams_broker_service_name</span> <span class="pre">}}/</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_logs_dir</span></code></p></td>
+<td class="text-left"><p>Folder to store the logs of broker service</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/var/log/{{</span> <span class="pre">amq_streams_broker_service_name</span> <span class="pre">}}/</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_java_opts</span></code></p></td>
+<td class="text-left"><p>Default values to apply to <code class="docutils literal notranslate"><span class="pre">KAFKA_OPTS</span></code> env variable</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_java_heap_opts</span></code></p></td>
+<td class="text-left"><p>Default values to apply to <code class="docutils literal notranslate"><span class="pre">KAFKA_HEAP_OPTS</span></code> env variable</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-Xmx1G</span> <span class="pre">-Xms1G</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_java_performance_opts</span></code></p></td>
+<td class="text-left"><p>Default values to apply to <code class="docutils literal notranslate"><span class="pre">KAFKA_JVM_PERFORMANCE_OPTS</span></code> env variable</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_java_java_gc_log_opts</span></code></p></td>
+<td class="text-left"><p>Default values to apply to <code class="docutils literal notranslate"><span class="pre">KAFKA_GC_LOG_OPTS</span></code> env variable</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_java_jmx_opts</span></code></p></td>
+<td class="text-left"><p>Default values to apply to <code class="docutils literal notranslate"><span class="pre">KAFKA_JMX_OPTS</span></code> env variable</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_num_network_threads</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_num_io_threads</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">8</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_buffer_send_bytes</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">102400</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_buffer_bytes</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">102400</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_socket_request_max_bytes</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">104857600</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_num_partitions</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_num_recovery_threads_per_data_dir</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_offsets_topic_replication_factor</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_transaction_state_log_replication_factor</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_transaction_state_log_min_isr</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_log_retention_hours</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">168</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_log_retention_check_interval_ms</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">300000</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_zookeeper_connection_timeout_ms</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">18000</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_group_initial_rebalance_delay_ms</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_properties_template</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/server.properties.j2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_bootstrap_server_host</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_bootstrap_server_port</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">9092</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_firewalld_package_name:</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">firewalld</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_firewalld_enabled</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_instance_count_enabled</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_instance_count</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_deployment_balance_check_enabled</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_enabled</span></code></p></td>
+<td class="text-left"><p>Enable Zookeeper authentication. Zookeeper must be deployed with the authentication enabled.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_zookeeper_auth_config</span></code></p></td>
+<td class="text-left"><p>JAAS file for brokers</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/etc/broker-jaas.conf</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_zookeeper_auth_config_template</span></code></p></td>
+<td class="text-left"><p>JAAS template for brokers</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/broker-jaas.conf.j2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_listeners</span></code></p></td>
+<td class="text-left"><p>Default list of broker listeners</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLAINTEXT://:{{</span> <span class="pre">amq_streams_broker_listener_port</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_enabled</span></code></p></td>
+<td class="text-left"><p>Enable Broker authentication</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_scram_enabled</span></code></p></td>
+<td class="text-left"><p>Enable SASL SCRAM authentication</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_listeners</span></code></p></td>
+<td class="text-left"><p>Default list of authenticated listeners</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLAINTEXT:PLAINTEXT</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_sasl_mechanisms</span></code></p></td>
+<td class="text-left"><p>Default list of authenticated SASL mechanism</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLAIN</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inventory_group</span></code></p></td>
+<td class="text-left"><p>Identify the group of broker nodes</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">groups['brokers']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_topics</span></code></p></td>
+<td class="text-left"><p>List of topics to create. Each topics requires the <code class="docutils literal notranslate"><span class="pre">name</span></code> property, and optionally the <code class="docutils literal notranslate"><span class="pre">partitions</span></code> and <code class="docutils literal notranslate"><span class="pre">replication_factor</span></code>.</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role-variables">
+<h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this heading"></a></h2>
+<p>List of required variables for the role:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Required</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_user</span></code></p></td>
+<td class="text-left"><p>Zookeeper user to authenticate. Mandatory if <code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_enabled:</span> <span class="pre">true</span></code>.</p></td>
+<td class="text-left"><p>‘true’</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_pass</span></code></p></td>
+<td class="text-left"><p>Zookeeper user password to authenticate. Mandatory if <code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_enabled:</span> <span class="pre">true</span></code>.</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Enabling the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_enabled</span></code> requires to define the following variables to execute the role successfully:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Required</p></th>
+<th class="head text-left"><p>Sample</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_listeners</span></code></p></td>
+<td class="text-left"><p>List of authenticated listeners</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>` - PLAINTEXT:PLAINTEXT</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>AUTHENTICATED://:9093<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_auth_sasl_mechanisms<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">authenticated</span> <span class="pre">SASL</span> <span class="pre">mechanism</span> <span class="pre">|</span></code>true<code class="docutils literal notranslate"><span class="pre">|</span></code>PLAIN<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_auth_plain_users<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">List</span> <span class="pre">of</span> <span class="pre">users</span> <span class="pre">(</span></code>username<code class="docutils literal notranslate"><span class="pre">,</span> </code>password<code class="docutils literal notranslate"><span class="pre">)</span> <span class="pre">to</span> <span class="pre">add</span> <span class="pre">into</span> <span class="pre">the</span> <span class="pre">Kafka</span> <span class="pre">cluster</span> <span class="pre">|</span> </code>true<code class="docutils literal notranslate"> <span class="pre">|</span> <span class="pre">``</span> <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_admin_username<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">admin</span> <span class="pre">user</span> <span class="pre">to</span> <span class="pre">manage</span> <span class="pre">topics</span> <span class="pre">|</span></code>false<code class="docutils literal notranslate"> <span class="pre">|</span>&#160; <span class="pre">|</span> <span class="pre">|</span></code>amq_streams_broker_admin_password<code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">Default</span> <span class="pre">password</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">admin</span> <span class="pre">user</span> <span class="pre">to</span> <span class="pre">manage</span> <span class="pre">topics</span> <span class="pre">|</span></code>false` |  |</p></li>
+</ul>
+</section>
+<section id="tls-encryption">
+<h2>TLS Encryption<a class="headerlink" href="#tls-encryption" title="Permalink to this heading"></a></h2>
+<p>Kafka supports TLS for encrypting communication with Kafka clients. The role allows
+to enable TLS encryption but it is required to have a keystore containing private and
+public keys.</p>
+<p>The following variables are involved to enable TLS encryption:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Required</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_enabled</span></code></p></td>
+<td class="text-left"><p>Enable TLS encryption for listeners</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_keystore_dir</span></code></p></td>
+<td class="text-left"><p>Local folder with the keystore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/tmp</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_keystore</span></code></p></td>
+<td class="text-left"><p>Filename of the keystore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">server.keystore.jks</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_keystore_location</span></code></p></td>
+<td class="text-left"><p>Location on Kafka server for the keystore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_keystore_password</span></code></p></td>
+<td class="text-left"><p>Password of the keystore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_dir</span></code></p></td>
+<td class="text-left"><p>Local folder with the truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/tmp</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore</span></code></p></td>
+<td class="text-left"><p>Filename of the truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">server.truststore.jks</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_location</span></code></p></td>
+<td class="text-left"><p>Location on Kafka server for the truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_password</span></code></p></td>
+<td class="text-left"><p>Password of the truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_client_dir</span></code></p></td>
+<td class="text-left"><p>Local folder with the keystore file used by clients</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/tmp</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_client</span></code></p></td>
+<td class="text-left"><p>Filename of the client truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">client.truststore.jks</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_client_location</span></code></p></td>
+<td class="text-left"><p>Location on Kafka server for the client truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/opt</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_client_password</span></code></p></td>
+<td class="text-left"><p>Password of the client truststore</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Here a sample to enable SSL listeners at port <code class="docutils literal notranslate"><span class="pre">9093</span></code> for client connections and using
+plain connections for inter-broker communication:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Enabling SSL listeners</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_keystore_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./certs</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_truststore_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./certs</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_truststore_client_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./certs</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_keystore_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_truststore_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_keystore_client_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_truststore_client_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+
+<span class="w">    </span><span class="c1"># Broker Listeners</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_listeners</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT://:{{ amq_streams_broker_listener_port }}</span><span class="w"> </span><span class="c1"># Insecure for inter-broker connections</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SSL://:{{ amq_streams_broker_listener_tls_port }}</span><span class="w"> </span><span class="c1"># Secure for client connections</span>
+
+<span class="w">    </span><span class="c1"># Using SSL bootstrap server port for management operations</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_bootstrap_server_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_bootstrap_server_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9093</span>
+</pre></div>
+</div>
+<p>The client truststore identified by the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_tls_truststore_client</span></code> is only
+required for topic or user management operations done by the role. The properties
+<code class="docutils literal notranslate"><span class="pre">amq_streams_broker_bootstrap_server_host</span></code> and <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_bootstrap_server_port</span></code>
+are used to establish the admin connections to operate with topics or users.</p>
+</section>
+<section id="broker-authentication">
+<h2>Broker Authentication<a class="headerlink" href="#broker-authentication" title="Permalink to this heading"></a></h2>
+<p>This section includes a set of example to enable the broker authentication for the
+following scenarios:</p>
+<ul class="simple">
+<li><p>SASL PLAIN authentication</p></li>
+<li><p>SASL SCRAM authentication</p></li>
+</ul>
+<section id="sasl-plain-authentication">
+<h3>SASL Plain Authentication<a class="headerlink" href="#sasl-plain-authentication" title="Permalink to this heading"></a></h3>
+<p>This is a sample configuration to enable that configuration using two
+different listeners, one for the clients (<code class="docutils literal notranslate"><span class="pre">AUTHENTICATED</span></code>) and other for
+the inter-broker connections (<code class="docutils literal notranslate"><span class="pre">REPLICATION</span></code>). Both listeners require
+a SASL plain authentication.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_plain_users</span></code> variable defines the list of
+different users to create to authenticate to the brokers.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inter_broker_auth_sasl_mechanisms:</span> <span class="pre">PLAIN</span></code> property defines
+the protocol to authenticate the inter-broker connections. That requires to
+identify which user will be used to establish these connections, that user is defined
+by the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inter_broker_auth_broker_username</span></code> and <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inter_broker_auth_broker_password</span></code>
+variables.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1"># Broker Listeners</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_listeners</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AUTHENTICATED://:{{ amq_streams_broker_listener_port }}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REPLICATION://:{{ amq_streams_broker_listener_internal_port }}</span>
+
+<span class="w">    </span><span class="nt">amq_streams_broker_inter_broker_listener</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REPLICATION</span>
+
+<span class="w">    </span><span class="c1"># Broker Authentication</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;true&#39;</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_listeners</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AUTHENTICATED:SASL_PLAINTEXT</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REPLICATION:SASL_PLAINTEXT</span>
+
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_sasl_mechanisms</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAIN</span>
+
+<span class="w">    </span><span class="c1"># Kafka Plain Users</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_plain_users</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">usr</span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+
+<span class="w">    </span><span class="nt">amq_streams_broker_inter_broker_auth_sasl_mechanisms</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAIN</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_inter_broker_auth_broker_username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">interbroker</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_inter_broker_auth_broker_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+</pre></div>
+</div>
+</section>
+<section id="sasl-scram-authentication">
+<h3>SASL SCRAM Authentication<a class="headerlink" href="#sasl-scram-authentication" title="Permalink to this heading"></a></h3>
+<p>This is a sample configuration to enable that configuration using two
+different listeners, one for the clients (<code class="docutils literal notranslate"><span class="pre">AUTHENTICATED</span></code>) and other for
+the inter-broker connections (<code class="docutils literal notranslate"><span class="pre">REPLICATION</span></code>). Both listeners require
+a SASL plain authentication. SCRAM authentication is enabled by the
+<code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_scram_enabled</span></code> variable.</p>
+<p>Users must be created using the <code class="docutils literal notranslate"><span class="pre">kafka-configs.sh</span></code> script from Kafka.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inter_broker_auth_sasl_mechanisms:</span> <span class="pre">SCRAM-SHA-512</span></code> property defines
+the protocol to authenticate the inter-broker connections. That requires to
+identify which user will be used to establish these connections, that user is defined
+by the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inter_broker_listener_auth</span></code> variable.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1"># Broker Listeners</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_listeners</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AUTHENTICATED://:{{ amq_streams_broker_listener_port }}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REPLICATION://:{{ amq_streams_broker_listener_internal_port }}</span>
+
+<span class="w">    </span><span class="nt">amq_streams_broker_inter_broker_listener</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REPLICATION</span>
+
+<span class="w">    </span><span class="c1"># Broker Authentication</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;true&#39;</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_scram_enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;true&#39;</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_listeners</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AUTHENTICATED:SASL_PLAINTEXT</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">REPLICATION:SASL_PLAINTEXT</span>
+
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_sasl_mechanisms</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAIN</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SCRAM-SHA-512</span>
+
+<span class="w">    </span><span class="nt">amq_streams_broker_inter_broker_auth_sasl_mechanisms</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SCRAM-SHA-512</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_inter_broker_listener_auth</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">listener.name.replication.scram-sha-512.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username=&quot;&lt;USER&gt;&quot; password=&quot;&lt;PASSWORD&gt;&quot;;</span>
+</pre></div>
+</div>
+<p>To manage SCRAM users, the role includes the following tasks:</p>
+<ul class="simple">
+<li><p>Create</p></li>
+<li><p>Describe</p></li>
+<li><p>Delete</p></li>
+</ul>
+<p>The role uses the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_topics</span></code> variable to identify the list of topics
+to be managed by the role for each stage of the life cycle.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_scram_users</span></code> variable defines the list of
+different SCRAM users to manage in the Kafka cluster.</p>
+<p>Example of definition of SCRAM users:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Kafka SCRAM Users</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_scram_users</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafkauser01</span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">p@ssw0rd</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafkauser02</span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">p@ssw0rd</span>
+</pre></div>
+</div>
+<p>Creating SCRAM users can be done with this task:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Create</span><span class="nv"> </span><span class="s">SCRAM</span><span class="nv"> </span><span class="s">users&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_broker</span>
+<span class="w">        </span><span class="nt">tasks_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-scram/create.yml</span>
+<span class="w">      </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">amq_streams_broker_auth_scram_users</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">loop_control</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">loop_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">user_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">user.username</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">user_password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">user.password</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</pre></div>
+</div>
+<p>Describing SCRAM users can be done with this task:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Describe</span><span class="nv"> </span><span class="s">SCRAM</span><span class="nv"> </span><span class="s">users&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_broker</span>
+<span class="w">        </span><span class="nt">tasks_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-scram/describe.yml</span>
+<span class="w">      </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">amq_streams_broker_auth_scram_users</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">loop_control</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">loop_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">user_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">user.username</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</pre></div>
+</div>
+<p>Deleting SCRAM users can be done with this task:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Delete</span><span class="nv"> </span><span class="s">SCRAM</span><span class="nv"> </span><span class="s">users&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_broker</span>
+<span class="w">        </span><span class="nt">tasks_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user-scram/delete.yml</span>
+<span class="w">      </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">amq_streams_broker_auth_scram_users</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">loop_control</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">loop_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">user_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">user.username</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="sasl-authentication-over-ssl-listeners">
+<h3>SASL Authentication over SSL listeners<a class="headerlink" href="#sasl-authentication-over-ssl-listeners" title="Permalink to this heading"></a></h3>
+<p>SASL authentication mechanism using SSL listeners follows the same configuration described
+above, however the listener must be declared as <code class="docutils literal notranslate"><span class="pre">SASL_SSL</span></code> and the authentication for
+that listener must be declared as <code class="docutils literal notranslate"><span class="pre">SASL_SSL:SASL_SSL</span></code>.</p>
+<p>Here an example of <code class="docutils literal notranslate"><span class="pre">vars</span></code> to authenticate over a SSL listener at <code class="docutils literal notranslate"><span class="pre">9093</span></code> port:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Enabling SSL</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_tls_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">    </span><span class="c1"># Broker Listeners</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_listeners</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT://:{{ amq_streams_broker_listener_port }}</span><span class="w"> </span><span class="c1"># Insecure for inter-broker connections</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SASL_SSL://:{{ amq_streams_broker_listener_tls_port }}</span><span class="w"> </span><span class="c1"># Secured connections</span>
+
+<span class="w">    </span><span class="c1"># Enabling Kafka Broker Authentication</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_scram_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_listeners</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAINTEXT:PLAINTEXT</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SASL_SSL:SASL_SSL</span>
+
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_sasl_mechanisms</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAIN</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SCRAM-SHA-512</span>
+
+<span class="w">    </span><span class="c1"># Using SSL bootstrap server port</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_bootstrap_server_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_bootstrap_server_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9093</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="topic-management">
+<h2>Topic Management<a class="headerlink" href="#topic-management" title="Permalink to this heading"></a></h2>
+<p>The role allows to manage the following stages of the life cycle of topics:</p>
+<ul class="simple">
+<li><p>Create</p></li>
+<li><p>Describe</p></li>
+<li><p>Delete</p></li>
+</ul>
+<p>The role uses the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_topics</span></code> variable to identify the list of topics
+to be managed by the role for each stage of the life cycle.</p>
+<p>Example of definition of topics:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Topic management</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_topics</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sampleTopic</span>
+<span class="w">        </span><span class="nt">partitions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">        </span><span class="nt">replication_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">otherTopic</span>
+<span class="w">        </span><span class="nt">partitions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">        </span><span class="nt">replication_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+<p><strong>NOTE:</strong> To manage topics in a distributed Kafka broker, the operation should be done
+in one single broker instance. Create or delete actions are replicated across the Kafka cluster.</p>
+<section id="create-topics">
+<h3>Create Topics<a class="headerlink" href="#create-topics" title="Permalink to this heading"></a></h3>
+<p>This task will create new topics in a Kafka broker:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Create</span><span class="nv"> </span><span class="s">topics&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_broker</span>
+<span class="w">        </span><span class="nt">tasks_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topic/create.yml</span>
+<span class="w">      </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">amq_streams_broker_topics</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">loop_control</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">loop_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topic</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">topic_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">topic.name</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">topic_partitions</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">topic.partitions</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">topic_replication_factor</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">topic.replication_factor</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="describe-topics">
+<h3>Describe Topics<a class="headerlink" href="#describe-topics" title="Permalink to this heading"></a></h3>
+<p>This task will describe the information and details of each topic from a Kafka broker:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Describe</span><span class="nv"> </span><span class="s">topics&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_broker</span>
+<span class="w">        </span><span class="nt">tasks_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topic/describe.yml</span>
+<span class="w">      </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">amq_streams_broker_topics</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">loop_control</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">loop_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topic</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">topic_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">topic.name</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="delete-topics">
+<h3>Delete Topics<a class="headerlink" href="#delete-topics" title="Permalink to this heading"></a></h3>
+<p>This task will delete topics from a Kafka broker:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Delete</span><span class="nv"> </span><span class="s">topics&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_broker</span>
+<span class="w">        </span><span class="nt">tasks_from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topic/delete.yml</span>
+<span class="w">      </span><span class="nt">loop</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">amq_streams_broker_topics</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">loop_control</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">loop_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">topic</span>
+<span class="w">      </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">topic_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">topic.name</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="topic-management-with-broker-authentication">
+<h3>Topic Management with Broker Authentication<a class="headerlink" href="#topic-management-with-broker-authentication" title="Permalink to this heading"></a></h3>
+<p>To operate topics with this role in Broker with authentication enabled, it is required
+to identify the mechanism of authentication and admin user credentials. The admin user
+must be identified to connect to the Broker and execute the topic action.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_admin_mechanism</span></code> variable identifies the authentication mechanism from
+one of the following options: <code class="docutils literal notranslate"><span class="pre">PLAIN</span></code>, <code class="docutils literal notranslate"><span class="pre">SCRAM-SHA-512</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">amq_streams_admin_username</span></code>, and <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_admin_password</span></code> variables identify the
+admin user.</p>
+<p>All these variables are required to execute the actions.</p>
+<p>Example of definition:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Enabling Kafka Broker Authentication</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_auth_enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;true&#39;</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_admin_mechanism</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PLAIN</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_admin_username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin</span>
+<span class="w">    </span><span class="nt">amq_streams_broker_admin_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<p>Apache License v2.0 or later</p>
+</section>
+<section id="author-information">
+<h2>Author Information<a class="headerlink" href="#author-information" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/rpelisse">Romain Pelisse</a></p></li>
+<li><p><a class="reference external" href="https://github.com/guidograzioli">Guido Grazioli</a></p></li>
+<li><p><a class="reference external" href="https://github.com/rmarting">Roman Martin</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Role Index" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="amq_streams_common.html" class="btn btn-neutral float-right" title="Common Role" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Red Hat, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
