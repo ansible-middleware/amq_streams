@@ -35,5 +35,6 @@
     dest: "{{ amq_streams_common.archive.install_dir }}"
     owner: "{{ amq_streams_common_user | default(omit) }}"
     group: "{{ amq_streams_common_group | default(omit) }}"
+    remote_src: "{{ amq_streams_common_download_remote_src | default('no') }}"
   when:
     - download_target is defined and download_target.stat is defined and not download_target.stat.exists
