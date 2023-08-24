@@ -12,11 +12,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -124,7 +124,7 @@
            <div itemprop="articleBody">
              
   <section id="broker-role">
-<h1>Broker Role<a class="headerlink" href="#broker-role" title="Permalink to this heading"></a></h1>
+<h1>Broker Role<a class="headerlink" href="#broker-role" title="Link to this heading"></a></h1>
 <p>Perform installation and configuration of Kafka brokers cluster.</p>
 <p>This role requires to have a <code class="docutils literal notranslate"><span class="pre">zookeepers</span></code> group (identified by the
 <code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_inventory_group</span></code> variable) in the inventory file to identify
@@ -148,7 +148,7 @@ broker4
 </pre></div>
 </div>
 <section id="role-defaults">
-<h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Permalink to this heading"></a></h2>
+<h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
@@ -361,7 +361,7 @@ broker4
 </table>
 </section>
 <section id="role-variables">
-<h2>Role Variables<a class="headerlink" href="#role-variables" title="Permalink to this heading"></a></h2>
+<h2>Role Variables<a class="headerlink" href="#role-variables" title="Link to this heading"></a></h2>
 <p>List of required variables for the role:</p>
 <table class="docutils align-default">
 <thead>
@@ -408,7 +408,7 @@ broker4
 </ul>
 </section>
 <section id="tls-encryption">
-<h2>TLS Encryption<a class="headerlink" href="#tls-encryption" title="Permalink to this heading"></a></h2>
+<h2>TLS Encryption<a class="headerlink" href="#tls-encryption" title="Link to this heading"></a></h2>
 <p>Kafka supports TLS for encrypting communication with Kafka clients. The role allows
 to enable TLS encryption but it is required to have a keystore containing private and
 public keys.</p>
@@ -518,7 +518,7 @@ required for topic or user management operations done by the role. The propertie
 are used to establish the admin connections to operate with topics or users.</p>
 </section>
 <section id="broker-authentication">
-<h2>Broker Authentication<a class="headerlink" href="#broker-authentication" title="Permalink to this heading"></a></h2>
+<h2>Broker Authentication<a class="headerlink" href="#broker-authentication" title="Link to this heading"></a></h2>
 <p>This section includes a set of example to enable the broker authentication for the
 following scenarios:</p>
 <ul class="simple">
@@ -526,7 +526,7 @@ following scenarios:</p>
 <li><p>SASL SCRAM authentication</p></li>
 </ul>
 <section id="sasl-plain-authentication">
-<h3>SASL Plain Authentication<a class="headerlink" href="#sasl-plain-authentication" title="Permalink to this heading"></a></h3>
+<h3>SASL Plain Authentication<a class="headerlink" href="#sasl-plain-authentication" title="Link to this heading"></a></h3>
 <p>This is a sample configuration to enable that configuration using two
 different listeners, one for the clients (<code class="docutils literal notranslate"><span class="pre">AUTHENTICATED</span></code>) and other for
 the inter-broker connections (<code class="docutils literal notranslate"><span class="pre">REPLICATION</span></code>). Both listeners require
@@ -568,7 +568,7 @@ variables.</p>
 </div>
 </section>
 <section id="sasl-scram-authentication">
-<h3>SASL SCRAM Authentication<a class="headerlink" href="#sasl-scram-authentication" title="Permalink to this heading"></a></h3>
+<h3>SASL SCRAM Authentication<a class="headerlink" href="#sasl-scram-authentication" title="Link to this heading"></a></h3>
 <p>This is a sample configuration to enable that configuration using two
 different listeners, one for the clients (<code class="docutils literal notranslate"><span class="pre">AUTHENTICATED</span></code>) and other for
 the inter-broker connections (<code class="docutils literal notranslate"><span class="pre">REPLICATION</span></code>). Both listeners require
@@ -661,7 +661,7 @@ different SCRAM users to manage in the Kafka cluster.</p>
 </div>
 </section>
 <section id="sasl-authentication-over-ssl-listeners">
-<h3>SASL Authentication over SSL listeners<a class="headerlink" href="#sasl-authentication-over-ssl-listeners" title="Permalink to this heading"></a></h3>
+<h3>SASL Authentication over SSL listeners<a class="headerlink" href="#sasl-authentication-over-ssl-listeners" title="Link to this heading"></a></h3>
 <p>SASL authentication mechanism using SSL listeners follows the same configuration described
 above, however the listener must be declared as <code class="docutils literal notranslate"><span class="pre">SASL_SSL</span></code> and the authentication for
 that listener must be declared as <code class="docutils literal notranslate"><span class="pre">SASL_SSL:SASL_SSL</span></code>.</p>
@@ -694,7 +694,7 @@ that listener must be declared as <code class="docutils literal notranslate"><sp
 </section>
 </section>
 <section id="topic-management">
-<h2>Topic Management<a class="headerlink" href="#topic-management" title="Permalink to this heading"></a></h2>
+<h2>Topic Management<a class="headerlink" href="#topic-management" title="Link to this heading"></a></h2>
 <p>The role allows to manage the following stages of the life cycle of topics:</p>
 <ul class="simple">
 <li><p>Create</p></li>
@@ -718,7 +718,7 @@ to be managed by the role for each stage of the life cycle.</p>
 <p><strong>NOTE:</strong> To manage topics in a distributed Kafka broker, the operation should be done
 in one single broker instance. Create or delete actions are replicated across the Kafka cluster.</p>
 <section id="create-topics">
-<h3>Create Topics<a class="headerlink" href="#create-topics" title="Permalink to this heading"></a></h3>
+<h3>Create Topics<a class="headerlink" href="#create-topics" title="Link to this heading"></a></h3>
 <p>This task will create new topics in a Kafka broker:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Create</span><span class="nv"> </span><span class="s">topics&quot;</span>
 <span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
@@ -735,7 +735,7 @@ in one single broker instance. Create or delete actions are replicated across th
 </div>
 </section>
 <section id="describe-topics">
-<h3>Describe Topics<a class="headerlink" href="#describe-topics" title="Permalink to this heading"></a></h3>
+<h3>Describe Topics<a class="headerlink" href="#describe-topics" title="Link to this heading"></a></h3>
 <p>This task will describe the information and details of each topic from a Kafka broker:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Describe</span><span class="nv"> </span><span class="s">topics&quot;</span>
 <span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
@@ -750,7 +750,7 @@ in one single broker instance. Create or delete actions are replicated across th
 </div>
 </section>
 <section id="delete-topics">
-<h3>Delete Topics<a class="headerlink" href="#delete-topics" title="Permalink to this heading"></a></h3>
+<h3>Delete Topics<a class="headerlink" href="#delete-topics" title="Link to this heading"></a></h3>
 <p>This task will delete topics from a Kafka broker:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Delete</span><span class="nv"> </span><span class="s">topics&quot;</span>
 <span class="w">      </span><span class="nt">ansible.builtin.include_role</span><span class="p">:</span>
@@ -765,7 +765,7 @@ in one single broker instance. Create or delete actions are replicated across th
 </div>
 </section>
 <section id="topic-management-with-broker-authentication">
-<h3>Topic Management with Broker Authentication<a class="headerlink" href="#topic-management-with-broker-authentication" title="Permalink to this heading"></a></h3>
+<h3>Topic Management with Broker Authentication<a class="headerlink" href="#topic-management-with-broker-authentication" title="Link to this heading"></a></h3>
 <p>To operate topics with this role in Broker with authentication enabled, it is required
 to identify the mechanism of authentication and admin user credentials. The admin user
 must be identified to connect to the Broker and execute the topic action.</p>
@@ -786,11 +786,11 @@ admin user.</p>
 </section>
 </section>
 <section id="license">
-<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
 <p>Apache License v2.0 or later</p>
 </section>
 <section id="author-information">
-<h2>Author Information<a class="headerlink" href="#author-information" title="Permalink to this heading"></a></h2>
+<h2>Author Information<a class="headerlink" href="#author-information" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/rpelisse">Romain Pelisse</a></p></li>
 <li><p><a class="reference external" href="https://github.com/guidograzioli">Guido Grazioli</a></p></li>

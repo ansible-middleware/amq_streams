@@ -13,7 +13,6 @@ Minor Changes
 -------------
 
 - add remote_src attribute to unarchive: to allow deployment using archive on target `#80 <https://github.com/ansible-middleware/amq_streams/pull/80>`_
-- add remote_src attribute to unarchive: to allow deployment using archive on target `#80 <https://github.com/ansible-middleware/amq_streams/pull/80>`_
 
 v0.0.4
 ======
