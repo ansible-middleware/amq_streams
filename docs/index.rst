@@ -1,7 +1,7 @@
 .. Red Hat middleware_automation AMQ Streams Ansible Collection documentation main file
 
 Welcome to AMQ Streams Collection documentation
-==============================================
+===============================================
 
 .. toctree::
    :maxdepth: 2
