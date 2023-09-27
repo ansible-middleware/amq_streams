@@ -1,0 +1,41 @@
+---
+- name: "Ensure required parameter(s) are defined."
+  ansible.builtin.assert:
+    that:
+      - amq_stream_cruise_control_home is defined
+    quiet: true
+
+- name: "Ensure Cruise Control artifacts are available."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+
+- name: "Ensure Cruise Control artifacts are available."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: install.yml
+
+# TODO deal with FW, if enabled
+
+- name: "Deploy Cruise Control as a systemd service."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: systemd.yml
+  vars:
+#    service_systemd_workdir: "{{ amq_streams_common_home }}"
+    server_name: "{{ amq_streams_cruise_control_service_name }}"
+    server_start: "{{ amq_streams_cruise_control_server_start }}"
+    server_stop: "{{ amq_streams_cruise_control_server_stop }}"
+    server_config: "{{ amq_streams_cruise_control_server_config }}"
+    server_config_template: "{{ amq_streams_cruise_control_config_properties_template }}"
+#    service_systemd_env_file: "{{ amq_streams_connect_systemd_env_file }}"
+#    service_systemd_env_file_template: "{{ amq_streams_connect_service_config_template }}"
+#    server_log_dir: "{{ amq_streams_connect_logs_dir | default(omit) }}"
+#    server_extra_args: "{{ amq_streams_connect_server_extra_args }}"
+    server_user: "{{ amq_streams_cruise_control_user }}"
+    server_group: "{{ amq_streams_cruise_control_group }}"
+#    server_java_opts: "{{ amq_streams_connect_java_opts | default('') }}"
+#    server_log4j_opts: "{{ amq_streams_connect_java_log4j_opts | default('') }}"
+#    server_java_heap_opts: "{{ amq_streams_connect_java_heap_opts | default('') }}"
+#    server_java_performance_opts: "{{ amq_streams_connect_java_performance_opts | default('') }}"
+#    server_java_gc_log_opts: "{{ amq_streams_connect_java_java_gc_log_opts | default('') }}"
+#    server_start_sleep: "{{ amq_streams_connect_zookeeper_session_timeout_ms }}"
