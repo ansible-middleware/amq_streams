@@ -17,7 +17,6 @@
     quiet: True
     fail_msg: "Cannot install Red Hat Enterprise Application AMQ Streams without RHN service accounts credentials. Verify rhn_username and rhn_password are defined or set amq_streams_offline_install"
 
-
 - name: "Determine current working directory to set as download target - if not specified."
   ansible.builtin.set_fact:
     amq_streams_common_download_dir: "{{ lookup('env', 'pwd') | default('.') }}"
@@ -30,6 +29,7 @@
     owner: "{{ amq_streams_common_download_user | default(omit) }}"
     group: "{{ amq_streams_common_download_group | default(omit) }}"
   register: download_dir
+  become: "{{ amq_streams_common_download_become | default('no') }}"
   delegate_to: localhost
 
 - name: "Verify that download directory exist."
@@ -54,5 +54,6 @@
     group: "{{ amq_streams_common_download_group | default(omit) }}"
     mode: 0644
   delegate_to: localhost
+  become: "{{ amq_streams_common_download_become | default('no') }}"
   when:
     - not download_target_file.stat.exists
