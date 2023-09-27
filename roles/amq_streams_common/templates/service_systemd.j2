@@ -9,8 +9,10 @@ After=syslog.target network.target
 {% endif %}
 {% if service_systemd_env_file is defined %}EnvironmentFile=-{{ service_systemd_env_file }}
 {% endif %}
-User={{ service_user }}
-Group={{ service_group }}
+{% if service_user is defined %}User={{ service_user }}
+{% endif %}
+{% if service_group is defined %}Group={{ service_group }}
+{% endif %}
 #
 #
 ExecStart={{ server_start }} {{ server_config }} {% if server_extra_args is defined %}{{ server_extra_args }}{% endif %}
