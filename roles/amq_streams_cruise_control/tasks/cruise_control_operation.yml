@@ -1,0 +1,28 @@
+---
+- name: "Ensure required parameters have been provided"
+  ansible.builtin.assert:
+    that:
+      - amq_streams_cruise_control_host is defined and amq_streams_cruise_control_host | length > 0
+      - amq_streams_cruise_control_port is defined and amq_streams_cruise_control_port | string | length > 0
+      - operation_name is defined and operation_name | length > 0
+    quiet: true
+
+- name: "Build request"
+  ansible.builtin.set_fact:
+    cruise_control_url_request: "http://{{ amq_streams_cruise_control_host }}:{{ amq_streams_cruise_control_port }}/{{ amq_streams_cruise_control_api_path }}/{{ operation_name }}"
+
+- name: "Use Cruise Control to perform {{ operation_name }} on the cluster"
+  when:
+    - amq_streams_cruise_control_operation_exec is defined and amq_streams_cruise_control_operation_exec
+  block:
+    - name: "Execute request"
+      ansible.builtin.uri:
+        url: "{{ cruise_control_url_request }}"
+        method: POST
+        return_content: True
+      register: operation_result
+
+  rescue:
+    - name: "Display Cruise Control response to operation request ({{ operation_name }})"
+      ansible.builtin.debug:
+        var: operation_result
