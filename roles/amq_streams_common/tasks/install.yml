@@ -24,15 +24,15 @@
   when:
     - not amq_streams_common_offline_install is defined or not amq_streams_common_offline_install
 
-- name: "Load metadata on {{ amq_streams_common.archive.install_dir }}."
+- name: "Load metadata on {{ amq_streams_common_install_dir }}."
   ansible.builtin.stat:
-    path: "{{ amq_streams_common_home }}/bin"
+    path: "{{ amq_streams_common_install_dir }}/{{ amq_streams_common_subdir | default('bin') }}"
   register: download_target
 
 - name: "Extract artifact to {{ amq_streams_common_install_dir }}"
   ansible.builtin.unarchive:
     src: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
-    dest: "{{ amq_streams_common.archive.install_dir }}"
+    dest: "{{ amq_streams_common_install_dir }}"
     owner: "{{ amq_streams_common_user | default(omit) }}"
     group: "{{ amq_streams_common_group | default(omit) }}"
     remote_src: "{{ amq_streams_common_download_remote_src | default('no') }}"
