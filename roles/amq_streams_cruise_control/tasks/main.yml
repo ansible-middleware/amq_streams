@@ -14,7 +14,29 @@
     name: amq_streams_common
     tasks_from: install.yml
 
-# TODO deal with FW, if enabled
+- name: "Deploy custom log4j config (if provided)"
+  when:
+    - amq_streams_cruise_control_logfilename is defined
+  block:
+    - name: "Ensure dirname for logfile exits {{ amq_streams_cruise_control_logfilename | dirname }}"
+      ansible.builtin.file:
+        path: "{{ amq_streams_cruise_control_logfilename | dirname }}"
+        state: directory
+
+    - name: "Ensure log4j logging is properly configured"
+      ansible.builtin.template:
+        src: "{{ amq_streams_cruise_control_log4j_template }}"
+        dest: "{{ amq_streams_cruise_control_path_to_log4j_properties }}"
+        owner: "{{ amq_streams_cruise_control_user | default(omit) }}"
+        group: "{{ amq_streams_cruise_control_group | default(omit) }}"
+        mode: 0644
+
+- name: "Ensure capacity.json is properly configured"
+  ansible.builtin.include_tasks: capacity.yml
+  when:
+    - amq_streams_broker_inventory_group is defined and amq_streams_broker_inventory_group | length > 0
+
+#TODO: Deal with FW if enabled
 
 - name: "Deploy Cruise Control as a systemd service."
   ansible.builtin.include_role:

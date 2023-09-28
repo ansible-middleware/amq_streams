@@ -1,0 +1,16 @@
+---
+- name: "Ensure required parameters are provided"
+  ansible.builtin.assert:
+    that:
+      - amq_streams_cruise_control_capacity_template is defined and amq_streams_cruise_control_capacity_template | length > 0
+      - amq_streams_cruise_control_path_to_capacity_file is defined and amq_streams_cruise_control_path_to_capacity_file | length > 0
+    quiet: True
+
+- name: "Ensure capacity.json is properly configured"
+  ansible.builtin.template:
+    src: "{{ amq_streams_cruise_control_capacity_template }}"
+    dest: "{{ amq_streams_cruise_control_path_to_capacity_file }}"
+    owner: "{{ amq_streams_cruise_control_user | default(omit) }}"
+    group: "{{ amq_streams_cruise_control_group | default(omit) }}"
+    mode: 0644
+  notify: "Restart {{ amq_streams_cruise_control_service_name }}"

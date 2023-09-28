@@ -1,11 +1,16 @@
 ---
 amq_streams_cruise_control_home: /opt/cruise-control/
 amq_streams_cruise_control_service_name: amq_streams_cruise_control
-amq_streams_cruise_control_server_start: "{{ amq_streams_cruise_control_home  }}/kafka-cruise-control-start.sh"
+amq_streams_cruise_control_server_start: "{{ amq_streams_cruise_control_home }}/kafka-cruise-control-start.sh"
 amq_streams_cruise_control_server_stop: "{{ amq_streams_cruise_control_home }}/kafka-cruise-control-stop.sh"
 amq_streams_cruise_control_server_config: "/etc/amq_streams_cruise_control.properties"
 amq_streams_cruise_control_config_template: 'templates/service.conf.j2'
 amq_streams_cruise_control_config_properties_template: 'templates/cruisecontrol.properties.j2'
+amq_streams_cruise_control_path_to_log4j_properties: "{{ amq_streams_cruise_control_home }}/config/log4j.properties"
+amq_streams_cruise_control_log4j_template: 'templates/log4j.properties.j2'
+amq_streams_cruise_control_logfilename: '/var/log/cruise-control'
+amq_streams_cruise_control_capacity_template: 'templates/capacity.json.j2'
+amq_streams_cruise_control_path_to_capacity_file: "{{ amq_streams_cruise_control_home }}/config/capacity.json"
 amq_streams_cruise_control_user: root
 amq_streams_cruise_control_group: root
 amq_streams_cruise_control_zk_host: "{{ groups['zookeepers'][0] }}"

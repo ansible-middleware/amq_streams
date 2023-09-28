@@ -1,0 +1,25 @@
+{
+  "brokerCapacities":[
+    {%if amq_streams_broker_inventory_group is defined and amq_streams_broker_inventory_group | length > 0 %}{% for broker in amq_streams_broker_inventory_group %}{
+      "brokerId": "{{ amq_streams_broker_inventory_group.index(broker) }}",
+      "capacity": {
+        "DISK": "500000",
+        "CPU": "100",
+        "NW_IN": "50000",
+        "NW_OUT": "50000"
+      },
+      "doc": "This overrides the capacity for broker {{ amq_streams_broker_inventory_group.index(broker) }}."
+    },{% endfor %}{% endif %}
+    {
+      "brokerId": "-1",
+      "capacity": {
+        "DISK": "100000",
+        "CPU": "100",
+        "NW_IN": "10000",
+        "NW_OUT": "10000"
+      },
+      "doc": "This is the default capacity. Capacity unit used for disk is in MB, cpu is in percentage, network throughput is in KB."
+    }
+  ]
+}
+
