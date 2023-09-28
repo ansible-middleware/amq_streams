@@ -6,6 +6,9 @@ middleware_automation.amq_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
+v0.0.6
+======
+
 v0.0.5
 ======
 
