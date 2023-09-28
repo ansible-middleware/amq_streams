@@ -12,7 +12,7 @@
 - name: Validate existing zipfiles for offline installs
   ansible.builtin.assert:
     that:
-      - amq_streams_common_version is defined and amq_streams_common_path_to_archive_file is exists
+      - amq_streams_common_path_to_archive_file is exists
     quiet: True
     fail_msg: "An offline install was requested, but files are not present on the controller: {{ amq_streams_common_path_to_archive_file }}"
   when:
