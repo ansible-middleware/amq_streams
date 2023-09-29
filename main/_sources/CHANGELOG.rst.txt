@@ -6,8 +6,16 @@ middleware_automation.amq_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
-v0.0.6-devel
+v0.0.7-devel
 ============
+
+Bugfixes
+--------
+
+- Fixup validation logic for offline install `#89 <https://github.com/ansible-middleware/amq_streams/pull/89>`_
+
+v0.0.6
+======
 
 v0.0.5
 ======
