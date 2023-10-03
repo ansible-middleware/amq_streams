@@ -1,0 +1,12 @@
+---
+- name: "Ensure required parameters are provided."
+  ansible.builtin.assert:
+    that:
+      - amq_streams_common_prometheus_bind_addr is defined and amq_streams_common_prometheus_bind_addr | length > 0
+      - amq_streams_common_prometheus_port is defined and amq_streams_common_prometheus_port > 0
+    quiet: True
+
+- name: "Check that Prometheus port is accessible: {{ amq_streams_common_prometheus_bind_addr }}:{{ amq_streams_common_prometheus_port }}"
+  ansible.builtin.wait_for:
+    host: "{{ amq_streams_common_prometheus_bind_addr }}"
+    port: "{{ amq_streams_common_prometheus_port }}"

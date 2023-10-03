@@ -2,6 +2,18 @@
 - name: "Ensure requirements for broker are fulfilled."
   ansible.builtin.include_tasks: prereqs.yml
 
+- name: "Ensure Prometheus requirements are met (if enabled: {{ amq_streams_broker_prometheus_enabled }})."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: prometheus.yml
+  vars:
+    amq_streams_common_prometheus_port: "{{ amq_streams_broker_prometheus_port }}"
+    amq_streams_common_prometheus_bind_addr: "{{ amq_streams_broker_prometheus_bind_addr }}"
+    amq_streams_common_prometheus_config_file: "{{ amq_streams_broker_prometheus_config_file }}"
+    amq_streams_common_prometheus_config_file_template: "{{ amq_streams_broker_prometheus_config_file_template }}"
+  when:
+    - amq_streams_broker_prometheus_enabled is defined and amq_streams_broker_prometheus_enabled
+
 - name: "Ensure OS has been properly tuned (RHEL specific)."
   ansible.builtin.include_role:
     name: amq_streams_common

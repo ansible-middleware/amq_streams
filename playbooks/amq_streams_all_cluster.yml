@@ -4,6 +4,9 @@
   vars:
     amq_streams_common_download_node: ""
     amq_streams_common_download_dir: "/tmp"
+    amq_streams_broker_prometheus_enabled: True
+    amq_streams_zookeeper_prometheus_enabled: True
+    amq_streams_zookeeper_prometheus_port: 18081
 
     # Topic Management
     amq_streams_broker_topics:

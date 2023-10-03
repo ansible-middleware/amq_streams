@@ -13,3 +13,13 @@
   vars:
     server_log_validation_min_size: "{{ amq_streams_broker_server_log_validation_min_size }}"
     server_log_dir: "{{ amq_streams_broker_logs_dir }}/server.log"
+
+- name: "Check that Prometheus port is accessible (if enabled: {{ amq_streams_broker_prometheus_enabled }}"
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: validation/prometheus.yml
+  vars:
+    amq_streams_common_prometheus_bind_addr: "{{ amq_streams_broker_prometheus_bind_addr }}"
+    amq_streams_common_prometheus_port: "{{ amq_streams_broker_prometheus_port  }}"
+  when:
+    - amq_streams_broker_prometheus_enabled is defined and amq_streams_broker_prometheus_enabled

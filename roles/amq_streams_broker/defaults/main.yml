@@ -106,3 +106,9 @@ amq_streams_broker_admin_cli_config_file: '/tmp/admin-cli.properties'
 amq_streams_broker_admin_mechanism: PLAIN
 amq_streams_broker_admin_username: PLEASE_IDENTIFY_THE_ADMIN_USER
 amq_streams_broker_admin_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION
+
+amq_streams_broker_prometheus_enabled: False
+amq_streams_broker_prometheus_port: 18080
+amq_streams_broker_prometheus_bind_addr: '0.0.0.0'
+amq_streams_broker_prometheus_config_file: broker-config.yaml
+amq_streams_broker_prometheus_config_file_template: prometheus/broker-config.yaml.j2

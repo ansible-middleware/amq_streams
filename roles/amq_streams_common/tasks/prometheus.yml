@@ -19,8 +19,10 @@
     group: "{{ amq_streams_common_prometheus_group | default(omit) }}"
     mode: 0644
 
-- name: "Add prometheus dependency (if enabled: {{ amq_streams_common_prometheus_enabled }})."
-  ansible.builtin.set_fact:
-    amq_streams_common_dependencies: "{{ [amq_streams_common_dependencies + ['{{ amq_streams_common_prometheus_package_name }}']] | flatten }}"
+- name: "Ensure Prometheus jar exporter is installed ({{ amq_streams_common_prometheus_package_name }})."
+  ansible.builtin.package:
+    name: "{{ amq_streams_common_prometheus_package_name }}"
+    state: present
   when:
     - amq_streams_common_prometheus_install_rpm is defined and amq_streams_common_prometheus_install_rpm
+    - not amq_streams_common_skip_download is defined or not amq_streams_common_skip_download
