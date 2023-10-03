@@ -1,0 +1,26 @@
+---
+- name: "Ensure required parameters for Prometheus are provided."
+  ansible.builtin.assert:
+    that:
+      - amq_streams_common_prometheus_config_file is defined and amq_streams_common_prometheus_config_file | length > 0
+      - amq_streams_common_prometheus_config_file_template is defined and amq_streams_common_prometheus_config_file_template | length > 0
+    quiet: True
+
+- name: "Ensure directory {{ amq_streams_common_prometheus_metrics_config_home }} exits."
+  ansible.builtin.file:
+    path: "{{ amq_streams_common_prometheus_metrics_config_home }}"
+    state: directory
+
+- name: "Deploy Prometheus metrics file (src: {{ amq_streams_common_prometheus_config_file_template }} to dest: {{ amq_streams_common_prometheus_metrics_config_home }}{{ amq_streams_common_prometheus_config_file }}"
+  ansible.builtin.template:
+    src: "{{ amq_streams_common_prometheus_config_file_template }}"
+    dest: "{{ amq_streams_common_prometheus_metrics_config_home }}{{ amq_streams_common_prometheus_config_file }}"
+    owner: "{{ amq_streams_common_prometheus_user | default(omit) }}"
+    group: "{{ amq_streams_common_prometheus_group | default(omit) }}"
+    mode: 0644
+
+- name: "Add prometheus dependency (if enabled: {{ amq_streams_common_prometheus_enabled }})."
+  ansible.builtin.set_fact:
+    amq_streams_common_dependencies: "{{ [amq_streams_common_dependencies + ['{{ amq_streams_common_prometheus_package_name }}']] | flatten }}"
+  when:
+    - amq_streams_common_prometheus_install_rpm is defined and amq_streams_common_prometheus_install_rpm
