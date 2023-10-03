@@ -24,3 +24,11 @@ amq_streams_common_firewalld_package_name:
 amq_streams_common_firewalld_enabled: false
 
 amq_streams_common_offline_install: false
+
+amq_streams_common_prometheus_install_rpm: True
+amq_streams_common_prometheus_package_name: 'prometheus-jmx-exporter'
+amq_streams_common_prometheus_path_to_jar: /usr/share/java/prometheus-jmx-exporter
+amq_streams_common_prometheus_jarname: jmx_prometheus_javaagent.jar
+amq_streams_common_prometheus_bind_addr: 0.0.0.0
+amq_streams_common_prometheus_port: 18080
+amq_streams_common_prometheus_metrics_config_home: /etc/

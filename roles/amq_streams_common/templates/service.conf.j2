@@ -1,7 +1,10 @@
 # {{ ansible_managed }}
 {% if server_log_dir is defined %}LOG_DIR="{{ server_log_dir  }}"
 {% endif %}
-{% if server_java_opts is defined %}KAFKA_OPTS="{{ server_java_opts }}"
+{% if server_java_opts is defined and server_java_opts | length > 0 %}KAFKA_OPTS="{{ server_java_opts }}"
+{% endif %}
+{% if server_prometheus_enabled is defined and server_prometheus_enabled %}
+KAFKA_OPTS="{{ server_java_opts }} -javaagent:{{ amq_streams_common_prometheus_path_to_jar }}/{{ amq_streams_common_prometheus_jarname }}={{ amq_streams_common_prometheus_bind_addr }}:{{ amq_streams_common_prometheus_port }}:{{ amq_streams_common_prometheus_metrics_config_home }}{{ server_prometheus_config_file }}"
 {% endif %}
 {% if server_log4j_opts is defined %}KAFKA_LOG4J_OPTS="{{ server_log4j_opts  }}"
 {% endif %}
