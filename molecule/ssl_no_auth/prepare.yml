@@ -19,7 +19,7 @@
         dest: /tmp/
         owner: root
         group: root
-        mode: 0077
+        mode: "0077"
 
     - name: "Generate required SSL artefacts."
       ansible.builtin.command: "/tmp/generate_keys_and_certs.sh"
