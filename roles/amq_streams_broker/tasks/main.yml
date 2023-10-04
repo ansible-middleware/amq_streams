@@ -54,15 +54,14 @@
   when:
     - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
 
-- name: "Wait for Zookeeper to be available - if host and port are provided."
+- name: "Wait for Zookeeper to be available - if enabled ({{ amq_streams_broker_zookeeper_host }}:{{ amq_streams_broker_zookeeper_port }})."
   ansible.builtin.wait_for:
     host: "{{ amq_streams_broker_zookeeper_host }}"
     port: "{{ amq_streams_broker_zookeeper_port }}"
   when:
-    - 0 > 1 # Disabled until find a way to test the Zookeeper cluster connection (including all the zknodes)
+    - amq_streams_broker_zookeeper_wait is defined and amq_streams_broker_zookeeper_wait
     - amq_streams_broker_zookeeper_host is defined
     - amq_streams_broker_zookeeper_port is defined
-    - amq_streams_broker_zookeeper_wait is defined and amq_streams_broker_zookeeper_wait
 
 - name: "Copy Server Keystore with certificates"
   ansible.builtin.copy:
