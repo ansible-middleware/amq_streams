@@ -9,6 +9,11 @@ This changelog describes changes after version 0.0.0.
 v0.0.7-devel
 ============
 
+Minor Changes
+-------------
+
+- Misc. enhacements `#90 <https://github.com/ansible-middleware/amq_streams/pull/90>`_
+
 Bugfixes
 --------
 
