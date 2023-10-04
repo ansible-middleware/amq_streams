@@ -47,9 +47,9 @@ amq_streams_broker_instance_count: "{{ groups[amq_streams_broker_inventory_group
 
 amq_streams_deployment_balance_check_enabled: true
 
-amq_streams_broker_zookeeper_host_default_value: localhost
+amq_streams_broker_zookeeper_host_default_value: "{{ groups['zookeepers'][0] | default('localhost') }}"
 amq_streams_broker_zookeeper_port_default_value: 2181
-amq_streams_broker_zookeeper_wait: True
+amq_streams_broker_zookeeper_wait: False
 
 # Broker-Zookeeper Authentication with SASL
 amq_streams_zookeeper_auth_enabled: false
