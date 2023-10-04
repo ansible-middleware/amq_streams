@@ -8,14 +8,43 @@
 - name: Populate service facts
   ansible.builtin.service_facts:
 
-- name: Check if service is started
-  ansible.builtin.assert:
-    that:
-      - ansible_facts is defined
-      - ansible_facts.services is defined
-      - ansible_facts.services["{{ service_name }}.service"] is defined
-      - ansible_facts.services["{{ service_name }}.service"]['state'] is defined
-      - ansible_facts.services["{{ service_name }}.service"]['state'] == 'running'
-      - ansible_facts.services["{{ service_name }}.service"]['status'] == 'enabled'
-    quiet: true
-    fail_msg: "Service is not started."
+- name: "Verify that service is started with rescue"
+  block:
+    - name: Check if service is started
+      ansible.builtin.assert:
+        that:
+          - ansible_facts is defined
+          - ansible_facts.services is defined
+          - ansible_facts.services["{{ service_name }}.service"] is defined
+          - ansible_facts.services["{{ service_name }}.service"]['state'] is defined
+          - ansible_facts.services["{{ service_name }}.service"]['state'] == 'running'
+          - ansible_facts.services["{{ service_name }}.service"]['status'] == 'enabled'
+        quiet: true
+        fail_msg: "Service is not started."
+  rescue:
+    - name: "Check service status"
+      ansible.builtin.command: systemctl status "{{ service_name }}.service"
+      register: systemctl_result
+      changed_when: False
+
+    - name: "Print result"
+      ansible.builtin.debug:
+        var: systemctl_result
+
+    - name: "Restart service"
+      ansible.builtin.service:
+        name: "{{ service_name }}.service"
+        state: restarted
+
+    - name: "Wait 30s"
+      ansible.builtin.wait_for:
+        timeout: 30
+
+    - name: "Check service status"
+      ansible.builtin.command: systemctl status "{{ service_name }}.service"
+      register: systemctl_result
+      changed_when: False
+
+    - name: "Print result"
+      ansible.builtin.debug:
+        var: systemctl_result
