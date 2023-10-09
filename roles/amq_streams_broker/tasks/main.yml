@@ -46,7 +46,7 @@
 
 - name: "Set server_id for {{ amq_streams_broker.service_name }} service."
   ansible.builtin.set_fact:
-    server_id: "{{ broker_id | default('0') }}"
+    server_id: "{{ amq_streams_broker_broker_id | default('0') }}"
   when:
     - not server_id is defined
 
