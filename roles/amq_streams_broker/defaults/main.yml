@@ -63,6 +63,9 @@ amq_streams_broker_listeners:
   #- AUTHENTICATED://:{{ amq_streams_broker_listener_port }} # Authenticated
   #- SSL://:{{ amq_streams_broker_listener_tls_port }} # TLS enabled
 
+#amq_streams_broker_advertised_listeners
+#  - PLAINTEXT://:{{ amq_streams_broker_listener_port }} # Insecure
+
 # Broker Authentication
 amq_streams_broker_auth_enabled: false
 amq_streams_broker_auth_scram_enabled: false

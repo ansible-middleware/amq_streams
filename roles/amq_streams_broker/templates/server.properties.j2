@@ -48,7 +48,11 @@ inter.broker.listener.name={{ amq_streams_broker_inter_broker_listener }}
 
 # Listener name, hostname and port the broker will advertise to clients.
 # If not set, it uses the value for "listeners".
+{% if amq_streams_broker_advertised_listeners is defined %}
+advertised.listeners={{ amq_streams_broker_advertised_listeners | join(",") }}
+{% else %}
 #advertised.listeners=PLAINTEXT://your.host.name:9092
+{% endif %}
 
 {% if amq_streams_broker_auth_enabled and amq_streams_broker_auth_listeners is defined %}
 # Maps listener names to security protocols, the default is for them to be the same. See the config documentation for more details
