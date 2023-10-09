@@ -23,7 +23,8 @@
 ############################# Server Basics #############################
 
 # The id of the broker. This must be set to a unique integer for each broker.
-broker.id={{ amq_streams_broker_inventory_group.index(inventory_hostname) }}
+broker.id={{ amq_streams_broker_broker_id | default(amq_streams_broker_inventory_group.index(inventory_hostname)) }}
+
 
 ############################# Socket Server Settings #############################
 
