@@ -37,7 +37,7 @@
 
 - name: "Configure 'myid' file based on the position in the zookeepers group"
   copy:
-    content: "{{ amq_streams_zookeeper_inventory_group.index(inventory_hostname) + 1 }}"
+    content: "{{ amq_streams_zookeeper_zookeeper_id | default(amq_streams_zookeeper_inventory_group.index(inventory_hostname) + 1) }}"
     dest: "{{ amq_streams_zookeeper_data_dir }}/myid"
     owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
     group: "{{ amq_streams_zookeeper_group | default(omit) }}"
