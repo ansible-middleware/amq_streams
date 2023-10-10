@@ -75,6 +75,7 @@ broker4
 |`amq_streams_broker_zookeeper_auth_config` | JAAS file for brokers | `/etc/broker-jaas.conf` |
 |`amq_streams_broker_zookeeper_auth_config_template` | JAAS template for brokers | `templates/broker-jaas.conf.j2` |
 |`amq_streams_broker_listeners` | Default list of broker listeners | `PLAINTEXT://:{{ amq_streams_broker_listener_port }}` |
+|`amq_streams_broker_advertised_listeners` | Default list of advertised listener per broker (hosts variable). Name must match those listed in the `amq_streams_broker_listeners` property |  |
 |`amq_streams_broker_auth_enabled` | Enable Broker authentication | `false` |
 |`amq_streams_broker_auth_scram_enabled` | Enable SASL SCRAM authentication | `false` |
 |`amq_streams_broker_auth_listeners` | Default list of authenticated listeners | `PLAINTEXT:PLAINTEXT` |

@@ -334,27 +334,31 @@ broker4
 <td class="text-left"><p>Default list of broker listeners</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLAINTEXT://:{{</span> <span class="pre">amq_streams_broker_listener_port</span> <span class="pre">}}</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_enabled</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_advertised_listeners</span></code></p></td>
+<td class="text-left"><p>Default list of advertised listener per broker (hosts variable). Name must match those listed in the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_listeners</span></code> property</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_enabled</span></code></p></td>
 <td class="text-left"><p>Enable Broker authentication</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_scram_enabled</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_scram_enabled</span></code></p></td>
 <td class="text-left"><p>Enable SASL SCRAM authentication</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_listeners</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_listeners</span></code></p></td>
 <td class="text-left"><p>Default list of authenticated listeners</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLAINTEXT:PLAINTEXT</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_sasl_mechanisms</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_auth_sasl_mechanisms</span></code></p></td>
 <td class="text-left"><p>Default list of authenticated SASL mechanism</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PLAIN</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inventory_group</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inventory_group</span></code></p></td>
 <td class="text-left"><p>Identify the group of broker nodes</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">groups['brokers']</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_topics</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_topics</span></code></p></td>
 <td class="text-left"><p>List of topics to create. Each topics requires the <code class="docutils literal notranslate"><span class="pre">name</span></code> property, and optionally the <code class="docutils literal notranslate"><span class="pre">partitions</span></code> and <code class="docutils literal notranslate"><span class="pre">replication_factor</span></code>.</p></td>
 <td class="text-left"><p></p></td>
 </tr>
