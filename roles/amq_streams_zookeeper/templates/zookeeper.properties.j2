@@ -44,7 +44,11 @@ syncLimit={{ amq_streams_zookeeper_sync_limit }}
 
 # List of servers which should be members of the Zookeeper cluster.
 {% for zknode in amq_streams_zookeeper_inventory_group %}
-server.{{ zknode.amq_streams_zookeeper_zookeeper_id | default(loop.index) }}={{ zknode }}:{{ amq_streams_zookeeper_cluster_port_start }}:{{ amq_streams_zookeeper_cluster_port_end }}:participant;{{ zknode }}:{{ amq_streams_zookeeper_port }}
+server.{% if hostvars[zknode]['amq_streams_zookeeper_zookeeper_id'] is defined -%}
+{{ hostvars[zknode]['amq_streams_zookeeper_zookeeper_id'] }}
+{%- else -%}
+{{ loop.index }}
+{%- endif %}={{ zknode }}:{{ amq_streams_zookeeper_cluster_port_start }}:{{ amq_streams_zookeeper_cluster_port_end }}:participant;{{ zknode }}:{{ amq_streams_zookeeper_port }}
 {% endfor %}
 
 {% if amq_streams_zookeeper_auth_enabled %}
@@ -60,6 +64,10 @@ quorum.cnxn.threads.size=20
 # Client-to-Server Authentication
 requireClientAuthScheme=sasl
 {% for zknode in amq_streams_zookeeper_inventory_group %}
-authProvider.{{ zknode.amq_streams_zookeeper_zookeeper_id | default(loop.index)}}=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
+authProvider.{% if hostvars[zknode]['amq_streams_zookeeper_zookeeper_id'] is defined -%}
+{{ hostvars[zknode]['amq_streams_zookeeper_zookeeper_id'] }}
+{%- else -%}
+{{ loop.index }}
+{%- endif %}=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
 {% endfor %}
 {% endif %}

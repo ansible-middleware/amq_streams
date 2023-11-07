@@ -1,12 +1,13 @@
 ---
 namespace: middleware_automation
 name: amq_streams
-version: "0.0.7"
+version: "0.0.8"
 readme: README.md
 authors:
   - Romain Pelisse <belaran@redhat.com>
   - Guido Grazioli <ggraziol@redhat.com>
   - Roman Martin <rmarting@redhat.com>
+  - Guilherme Baufaker Rêgo <baufaker@redhat.com>
 description: Install and configure Red Hat AMQ Streams (kafka) deployments
 license_file: "LICENSE"
 tags:
