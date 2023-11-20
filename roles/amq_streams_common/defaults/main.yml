@@ -1,5 +1,5 @@
 ---
-amq_streams_common_product_version: 3.5.0
+amq_streams_common_product_version: 3.6.0
 amq_streams_common_scala_version: 2.13
 amq_streams_common_version: "{{ amq_streams_common_scala_version }}-{{ amq_streams_common_product_version }}"
 amq_streams_common_archive_file: "kafka_{{ amq_streams_common_version }}.tgz"
