@@ -1,7 +1,8 @@
 ---
 - name: "Get description of topic using the bootstrap server."
-  ansible.builtin.include_tasks: topic/bootstrap.yml
+  ansible.builtin.include_tasks: cli/bootstrap.yml
   vars:
+    main_argument: "--topic {{ topic_name }}"
     bootstrap_operator: "--describe"
 
 - name: "Verify that information on {{ topic_name }} could be retrieved without any errors."

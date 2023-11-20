@@ -2,11 +2,14 @@
 - name: "Ensure required parameter(s) are provided."
   ansible.builtin.assert:
     that:
-      - amq_streams_broker is defined
-      - amq_streams_broker.topic is defined
-      - amq_streams_broker.topic.script is defined
-      - topic_name is defined
+      - main_argument is defined
     quiet: True
+
+- name: "Set script to {{ amq_streams_broker_create_topic_script }} - if not defined."
+  ansible.builtin.set_fact:
+    script: "{{ amq_streams_broker_create_topic_script }}"
+  when:
+    - not script is defined
 
 - name: "Set bootstrap server host (if not defined)."
   ansible.builtin.set_fact:
@@ -50,13 +53,13 @@
         src: "{{ amq_streams_broker_admin_cli_config_template }}"
         dest: "{{ amq_streams_broker_admin_cli_config_file }}"
 
-    - name: "Set command-config argument to run operation '{{ bootstrap_operator }}' for topic: '{{ topic_name }}'."
+    - name: "Set command-config argument to run operation '{{ bootstrap_operator }}' for topic: '{{ main_argument }}'."
       ansible.builtin.set_fact:
         bootstrap_command_config_operator_option: "--command-config {{ amq_streams_broker_admin_cli_config_file }}"
 
-- name: "Run operation '{{ bootstrap_operator }}' for topic: '{{ topic_name }}'."
+- name: "Run operation '{{ bootstrap_operator }}' for with: '{{ main_argument }}'."
   block:
-    - name: "Execute create request for topic '{{ topic_name }}'."
-      ansible.builtin.command: "{{ amq_streams_broker.topic.script }} {{ bootstrap_operator }} {{ bootstrap_operator_options | default('') }} {{ bootstrap_command_config_operator_option | default('')}} --topic {{ topic_name }} --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}"
+    - name: "Execute {{ script }} request for operation {{ bootstrap_operator }}."
+      ansible.builtin.command: "{{ script }} {{ bootstrap_operator }} {{ bootstrap_operator_options | default('') }} {{ bootstrap_command_config_operator_option | default('')}} {{ main_argument }} --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}"
       register: operation_result
       changed_when: False

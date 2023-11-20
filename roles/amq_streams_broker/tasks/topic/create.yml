@@ -14,8 +14,9 @@
         - topic_replication_factor is defined
 
     - name: "Use bootstrap server to create topic {{ topic_name }}"
-      ansible.builtin.include_tasks: topic/bootstrap.yml
+      ansible.builtin.include_tasks: cli/bootstrap.yml
       vars:
+        main_argument: "--topic {{ topic_name }}"
         bootstrap_operator: "--create"
         bootstrap_operator_options: "{{ bootstrap_create_operator_partitions_option | default('') }} {{ bootstrap_create_operator_replication_factor_option  | default('') }}"
   rescue:
