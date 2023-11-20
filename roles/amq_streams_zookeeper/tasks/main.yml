@@ -11,7 +11,7 @@
     ulimit_user: "{{ amq_streams_zookeeper_user }}"
     ulimit_limit: "{{ amq_streams_zookeeper_ulimit_max_value }}"
   when:
-    - ansible_distribution == "RedHat"
+    - ansible_distribution == "RedHat" and amq_streams_common_systctl_update_enable is defined and amq_streams_common_systctl_update_enable
 
 - name: "Ensure Prometheus requirements are met (if enabled: {{ amq_streams_zookeeper_prometheus_enabled }}) - {{ amq_streams_zookeeper_prometheus_config_file_template }}."
   ansible.builtin.include_role:
