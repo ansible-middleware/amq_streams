@@ -8,8 +8,10 @@
         - user_username is defined
 
     - name: "Use bootstrap server to delete user {{ user_username }}"
-      ansible.builtin.include_tasks: user-scram/bootstrap.yml
+      ansible.builtin.include_tasks: cli/bootstrap.yml
       vars:
+        script: "{{ amq_streams_broker_kafka_config_script }}"
+        main_argument: "--entity-type users --entity-name {{ user_username }}"
         bootstrap_operator: "--alter"
         bootstrap_operator_options: "{{ bootstrap_delete_operator_password_option | default('') }}"
   rescue:

@@ -2,8 +2,9 @@
 - name: "Delete topic using the bootstrap server."
   block:
     - name: "Use bootstrap server to delete topic {{ topic_name }}"
-      ansible.builtin.include_tasks: topic/bootstrap.yml
+      ansible.builtin.include_tasks: cli/bootstrap.yml
       vars:
+        main_argument: "--topic {{ topic_name }}"
         bootstrap_operator: "--delete"
   rescue:
     - name: "Set expected error message"
