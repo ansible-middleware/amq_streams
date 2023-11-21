@@ -1,0 +1,32 @@
+---
+- name: "Ensure required parameters are provided"
+  ansible.builtin.assert:
+    that:
+      - rhn_username is defined and rhn_username | length > 0
+      - rhn_password is defined and rhn_password | length > 0
+      - rhn_product_category is defined and rhn_product_category | length > 0
+      - rhn_product_type is defined
+      - rhn_product_version is defined and rhn_product_version | length > 0
+      - rhn_product_type == 'BUGFIX' or rhn_product_type == 'DISTRIBUTION'
+    quiet: True
+
+- name: Retrieve product download using JBossNetwork API
+  middleware_automation.common.product_search:
+    client_id: "{{ rhn_username }}"
+    client_secret: "{{ rhn_password }}"
+    product_type: "{{ rhn_product_type }}"
+    product_version: "{{ rhn_product_version }}"
+    product_category: "{{ rhn_product_category }}"
+  register: rhn_products
+  no_log: "{{ omit_rhn_output | default(true) }}"
+  delegate_to: localhost
+  become: "{{ rhn_download_become | default(False) }}"
+  run_once: yes
+
+- name: "Ensure search results are valid."
+  ansible.builtin.assert:
+    that:
+      - rhn_products is defined
+      - rhn_products.results is defined
+    quiet: True
+    fail_msg: "Invalid results returned: {{ rhn_products }}"
