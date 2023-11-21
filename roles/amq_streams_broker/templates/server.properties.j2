@@ -183,3 +183,9 @@ zookeeper.session.timeout.ms={{ amq_streams_broker_zookeeper_session_timeout_ms 
 # We override this to 0 here as it makes for a better out-of-the-box experience for development and testing.
 # However, in production environments the default value of 3 seconds is more suitable as this will help to avoid unnecessary, and potentially expensive, rebalances during application startup.
 group.initial.rebalance.delay.ms={{ amq_streams_broker_group_initial_rebalance_delay_ms }}
+
+{%if amq_streams_broker_acl_enabled is defined and amq_streams_broker_acl_enabled %}
+authorizer.class.name=kafka.security.authorizer.AclAuthorizer
+super.users=User:admin
+allow.everyone.if.no.acl.found=true
+{% endif %}
