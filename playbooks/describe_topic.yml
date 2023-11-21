@@ -1,0 +1,16 @@
+---
+- name: "Describe topic {{ topic_name }}"
+  hosts: brokers
+  collections:
+    - middleware_automation.amq_streams
+  pre_tasks:
+    - name: "Ensure required parameters has been provided"
+      ansible.builtin.assert:
+        that:
+          - topic_name is defined and topic_name | length > 0
+        quiet: true
+  tasks:
+    - name: "Describe created topic."
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: topic/describe.yml
