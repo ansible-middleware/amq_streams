@@ -22,11 +22,19 @@
 - name: "Download artifacts (if required)."
   ansible.builtin.include_tasks: download.yml
   when:
+    - not amq_streams_common_redhat_enabled is defined or not amq_streams_common_redhat_enabled
     - not amq_streams_common_offline_install is defined or not amq_streams_common_offline_install
 
-- name: "Load metadata on {{ amq_streams_common_install_dir }}."
+- name: "Download archive from RHN"
+  ansible.builtin.include_tasks: rhn/main.yml
+  when:
+    - amq_streams_common_redhat_enabled is defined and amq_streams_common_redhat_enabled
+    - not amq_streams_common_offline_install is defined or not amq_streams_common_offline_install
+    - rhn_username is defined and rhn_password is defined
+
+- name: "Load metadata on {{ amq_streams_common_home }}."
   ansible.builtin.stat:
-    path: "{{ amq_streams_common_install_dir }}/{{ amq_streams_common_subdir | default('bin') }}"
+    path: "{{ amq_streams_common_home }}/{{ amq_streams_common_subdir | default('bin') }}"
   register: download_target
 
 - name: "Extract artifact to {{ amq_streams_common_install_dir }}"

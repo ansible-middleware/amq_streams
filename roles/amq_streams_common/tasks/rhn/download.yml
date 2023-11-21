@@ -1,0 +1,35 @@
+---
+- name: "Ensure required parameters are provided"
+  ansible.builtin.assert:
+    that:
+      - rhn_username is defined and rhn_username | length > 0
+      - rhn_password is defined and rhn_password | length > 0
+      - rhn_product_id is defined and rhn_product_id | length > 0
+      - rhn_product_path is defined and rhn_product_path | length > 0
+    quiet: True
+
+- name: "Load metadata on target location for download ({{ rhn_product_path }})"
+  ansible.builtin.stat:
+    path: "{{ rhn_product_path | dirname }}"
+  register: rhn_product_path_metadata
+  delegate_to: localhost
+  become: "{{ rhn_download_become | default(False) }}"
+
+- name: "Ensure {{ rhn_product_path }} is accessible"
+  ansible.builtin.assert:
+    that:
+      - rhn_product_path_metadata is defined and rhn_product_path_metadata.stat is defined
+      - rhn_product_path_metadata.stat.writeable is defined and rhn_product_path_metadata.stat.writeable
+    quiet: True
+    fail_msg: "Path for download product is not writeable on the Ansible controller: {{ rhn_product_path }}."
+
+- name: "Download Red Hat product into {{ rhn_product_path }} (rhn_download_become: {{ rhn_download_become }})"
+  middleware_automation.common.product_download:  # noqa risky-file-permissions delegated, uses controller host user
+    client_id: "{{ rhn_username }}"
+    client_secret: "{{ rhn_password }}"
+    product_id: "{{ rhn_product_id }}"
+    dest: "{{ rhn_product_path }}"
+  no_log: "{{ omit_rhn_output | default(true) }}"
+  delegate_to: localhost
+  run_once: yes
+  become: "{{ rhn_download_become | default(False) }}"

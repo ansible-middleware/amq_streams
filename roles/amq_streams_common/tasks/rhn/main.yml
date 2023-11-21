@@ -1,0 +1,32 @@
+---
+- name: "Ensure required parameters are provided."
+  ansible.builtin.assert:
+    that:
+      - amq_streams_common_download_dir is defined
+    quiet: true
+
+- name: "Search RHN artefact for {{ amq_streams_common_rhn_product_version }}."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: rhn/search.yml
+  vars:
+    rhn_product_type: 'DISTRIBUTION'
+    rhn_product_category: "{{ amq_streams_common_rhn_product_category }}"
+    rhn_product_version: "{{ amq_streams_common_rhn_product_version }}" #"{{ amq_version.split('.')[:2] | join('.') }}"
+
+- name: "Determine which archive to download"
+  ansible.builtin.set_fact:
+    rhn_filtered_products: "{{ rhn_products.results | selectattr('file_path', 'match', '^.*/amq-streams-[0-9.]*-bin.zip$') }}"
+
+- name: "Download rhn_filtered_products[0]"
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: rhn/download.yml
+  vars:
+    rhn_product_id: "{{ rhn_filtered_products[0].id }}"
+    rhn_product_path: "{{ amq_streams_common_download_dir }}"
+
+- name: "XXX"
+  ansible.builtin.set_fact:
+    amq_streams_common_archive_file: "amq-streams-{{ amq_streams_common_rhn_product_version }}-bin.zip"
+    amq_streams_common_home: "{{ amq_streams_common_install_dir }}/{{ amq_streams_common_rhn_home_dir }}"
