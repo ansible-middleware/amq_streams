@@ -17,6 +17,7 @@
 
     # Enabling Kafka Broker Authentication
     amq_streams_broker_auth_enabled: true
+    amq_streams_broker_acl_enabled: true
     amq_streams_broker_auth_scram_enabled: true
     amq_streams_broker_auth_listeners:
       - AUTHENTICATED:SASL_PLAINTEXT
@@ -59,12 +60,6 @@
   roles:
     - role: amq_streams_zookeeper
   tasks:
-    - name: "Ensure Zookeeper is running and available."
-      ansible.builtin.include_role:
-        name: amq_streams_zookeeper
-      vars:
-        amq_streams_common_skip_download: true
-
     - name: "Ensure Broker is running and available."
       ansible.builtin.include_role:
         name: amq_streams_broker
@@ -92,6 +87,23 @@
         loop_var: topic
       vars:
         topic_name: "{{ topic.name }}"
+
+    - name: "ACL: allow principal on {{ topic.name }} for {{ amq_streams_broker_auth_plain_users[0].username }}"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: acl/allow_deny_principal.yml
+      vars:
+        user: "{{ amq_streams_broker_auth_plain_users[0].username }}"
+        topic_name: 'otherTopic'
+
+    - name: "ACL: deny principal on {{ topic.name }} for {{ amq_streams_broker_auth_plain_users[0].username }}"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: acl/allow_deny_principal.yml
+      vars:
+        user: "{{ amq_streams_broker_auth_plain_users[0].username }}"
+        acl_switch: deny
+        topic_name: 'otherTopic'
 
     - name: "Delete topics"
       ansible.builtin.include_role:

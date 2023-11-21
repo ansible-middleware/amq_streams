@@ -1,6 +1,6 @@
 ---
 - name: "Get description of user using the bootstrap server."
-  ansible.builtin.include_tasks: user-scram/bootstrap.yml
+  ansible.builtin.include_tasks: cli/bootstrap.yml
   vars:
     main_argument: "--entity-type users --entity-name {{ user_username }}"
     script: "{{ amq_streams_broker_kafka_config_script }}"

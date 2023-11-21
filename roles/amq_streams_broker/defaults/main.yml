@@ -1,6 +1,7 @@
 ---
 amq_streams_broker_create_topic_script: "{{ amq_streams_common_home }}/bin/kafka-topics.sh"
 amq_streams_broker_kafka_config_script: "{{ amq_streams_common_home }}/bin/kafka-configs.sh"
+amq_streams_broker_kafka_acl_script: "{{ amq_streams_common_home }}/bin/kafka-acls.sh"
 amq_streams_broker_enabled: true
 amq_streams_broker_server_start: "{{ amq_streams_common_home }}/bin/kafka-server-start.sh"
 amq_streams_broker_config: "/etc/amq_streams_broker.properties"
