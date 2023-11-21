@@ -1,24 +1,28 @@
 ---
-- name: "Ensure required parameters are provided."
-  ansible.builtin.assert:
-    that:
-      - sysctl_vm_max_map_count is defined
-    quiet: true
-
-- name: "Update vm.max_map_count to {{ sysctl_vm_max_map_count }}."
-  ansible.posix.sysctl:
-    name: vm.max_map_count
-    value: "{{ sysctl_vm_max_map_count }}"
-    state: present
+- name: "Tuned OS - if requested amq_streams_common_systctl_update_enabled is true."
   when:
-    - amq_streams_common_systctl_update_enable is defined and amq_streams_common_systctl_update_enable
+    - amq_streams_common_systctl_update_enabled is defined and amq_streams_common_systctl_update_enabled
+  block:
+    - name: "Ensure required parameters are provided."
+      ansible.builtin.assert:
+        that:
+          - sysctl_vm_max_map_count is defined
+        quiet: true
 
-- name: "Ensure that {{ ulimit_user }} ulimit is set to {{ ulimit_limit }}."
-  ansible.builtin.template:
-    src: templates/ulimit.j2
-    dest: /etc/security/limits.d/{{ ulimit_user }}
-    owner: root
-    group: root
-    mode: 0755
-  when:
-    - ulimit_limit is defined and ulimit_user is defined
+    - name: "Update vm.max_map_count to {{ sysctl_vm_max_map_count }}."
+      ansible.posix.sysctl:
+        name: vm.max_map_count
+        value: "{{ sysctl_vm_max_map_count }}"
+        state: present
+      when:
+        - amq_streams_common_systctl_update_enable is defined and amq_streams_common_systctl_update_enable
+
+    - name: "Ensure that {{ ulimit_user }} ulimit is set to {{ ulimit_limit }}."
+      ansible.builtin.template:
+        src: templates/ulimit.j2
+        dest: /etc/security/limits.d/{{ ulimit_user }}
+        owner: root
+        group: root
+        mode: 0755
+      when:
+        - ulimit_limit is defined and ulimit_user is defined
