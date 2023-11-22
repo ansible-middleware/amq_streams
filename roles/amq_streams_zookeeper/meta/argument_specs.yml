@@ -4,197 +4,197 @@ argument_specs:
             # line 2 of defaults/main.yml
             amq_streams_zookeeper_enabled:
                 default: true
-                description: "TODO document argument"
+                description: "Whether or not Ansible should managed Zookeeper instances"
                 type: "bool"
 
             # line 3 of defaults/main.yml
             amq_streams_zookeeper_config:
                 default: "/etc/amq_streams_zookeeper.properties"
-                description: "TODO document argument"
+                description: "Path, on the target, to the Zk properties file"
                 type: "str"
 
             # line 4 of defaults/main.yml
             amq_streams_zookeeper_config_template:
                 default: "templates/zookeeper.properties.j2"
-                description: "TODO document argument"
+                description: "Relative path to the templates used for Zk properties file"
                 type: "str"
 
             # line 5 of defaults/main.yml
             amq_streams_zookeeper_server_start:
                 default: "{{ amq_streams_common_home }}/bin/zookeeper-server-start.sh"
-                description: "TODO document argument"
+                description: "Path to the script used to start the Zk server"
                 type: "str"
 
             # line 6 of defaults/main.yml
             amq_streams_zookeeper_user:
                 default: "amq_streams_zookeeper"
-                description: "TODO document argument"
+                description: "User account used, on the target, to run Zk"
                 type: "str"
 
             # line 7 of defaults/main.yml
             amq_streams_zookeeper_group:
                 default: "amq_streams"
-                description: "TODO document argument"
+                description: "Name of the system's group used to run Zk on the target"
                 type: "str"
 
             # line 8 of defaults/main.yml
             amq_streams_zookeeper_service_name:
                 default: "amq_streams_zookeeper"
-                description: "TODO document argument"
+                description: "Name of systemd service associated to Zk"
                 type: "str"
 
             # line 9 of defaults/main.yml
             amq_streams_zookeeper_service_config_template:
                 default: "templates/service.conf.j2"
-                description: "TODO document argument"
+                description: "Relative path to the template used to generate the systemd configuration for the Zk server"
                 type: "str"
 
             # line 10 of defaults/main.yml
             amq_streams_zookeeper_service_env_file:
                 default: "/etc/zookeeper.conf"
-                description: "TODO document argument"
+                description: "Path to the Zk systemd's configuration on the target"
                 type: "str"
 
             # line 11 of defaults/main.yml
             amq_streams_zookeeper_data_dir:
                 default: "/var/lib/{{ amq_streams_zookeeper_service_name }}/"
-                description: "TODO document argument"
+                description: "Path to the datadir used by Zk on the target system"
                 type: "str"
 
             # line 12 of defaults/main.yml
             amq_streams_zookeeper_logs_dir:
                 default: "/var/log/{{ amq_streams_zookeeper_service_name }}/"
-                description: "TODO document argument"
+                description: "Path to the logdir used by Zk on the target system"
                 type: "str"
 
             # line 13 of defaults/main.yml
             amq_streams_zookeeper_max_client_cnxns:
                 default: 0
-                description: "TODO document argument"
+                description: "Number of max client connections for Zk"
                 type: "int"
 
             # line 14 of defaults/main.yml
             amq_streams_zookeeper_admin_enable_server:
                 default: "true"
-                description: "TODO document argument"
+                description: "Whether or not Zk admin server is enabled"
                 type: "str"
 
             # line 15 of defaults/main.yml
             amq_streams_zookeeper_admin_server_port:
                 default: 8080
-                description: "TODO document argument"
+                description: "Zk admin server port"
                 type: "int"
 
             # line 16 of defaults/main.yml
             amq_streams_zookeeper_instance_count_enabled:
                 default: true
-                description: "TODO document argument"
+                description: "Whether or not Ansible should count and keep track of the number of Zk instances deployed"
                 type: "bool"
 
             # line 17 of defaults/main.yml
             amq_streams_zookeeper_4wl_commands_whitelist:
                 default: "stat,dump"
-                description: "TODO document argument"
+                description: "Zk 4wl commands whitelist"
                 type: "str"
 
             # line 18 of defaults/main.yml
             amq_streams_zookeeper_instance_count:
                 default: 0
-                description: "TODO document argument"
+                description: "Zk instance count"
                 type: "int"
 
             # line 19 of defaults/main.yml
             amq_streams_zookeeper_java_heap_opts:
                 default: "-Xmx512M -Xms512M"
-                description: "TODO document argument"
+                description: "Zk Java heap options"
                 type: "str"
 
             # line 21 of defaults/main.yml
             amq_streams_zookeeper_host:
                 default: "localhost"
-                description: "TODO document argument"
+                description: "Zk hostname"
                 type: "str"
 
             # line 22 of defaults/main.yml
             amq_streams_zookeeper_port:
                 default: 2181
-                description: "TODO document argument"
+                description: "Zk port used"
                 type: "int"
 
             # line 23 of defaults/main.yml
             amq_streams_zookeeper_init_limit:
                 default: 5
-                description: "TODO document argument"
+                description: "Zk init limit"
                 type: "int"
 
             # line 24 of defaults/main.yml
             amq_streams_zookeeper_sync_limit:
                 default: 2
-                description: "TODO document argument"
+                description: "Zk sync limit"
                 type: "int"
 
             # line 25 of defaults/main.yml
             amq_streams_zookeeper_cluster_port_start:
                 default: 2888
-                description: "TODO document argument"
+                description: "Zk cluster port range start"
                 type: "int"
 
             # line 26 of defaults/main.yml
             amq_streams_zookeeper_cluster_port_end:
                 default: 3888
-                description: "TODO document argument"
+                description: "Zk cluster port range end"
                 type: "int"
 
             # line 28 of defaults/main.yml
             amq_streams_zookeeper_inventory_group:
                 default: "{{ groups['zookeepers'] | default('') }}"
-                description: "TODO document argument"
+                description: "Zk inventory"
                 type: "str"
 
             # line 30 of defaults/main.yml
             amq_streams_firewalld_package_name:
                 default: "['firewalld']"
-                description: "TODO document argument"
+                description: "Packages required to install Firewalld"
                 type: "list"
 
             # line 32 of defaults/main.yml
             amq_streams_firewalld_enabled:
                 default: false
-                description: "TODO document argument"
+                description: "Whether or not Ansible should install and managed Firewalld for Zk"
                 type: "bool"
 
             # line 35 of defaults/main.yml
             amq_streams_zookeeper_auth_enabled:
                 default: "false"
-                description: "TODO document argument"
+                description: "Whether or not authenfication for Zk is enabled"
                 type: "str"
 
             # line 36 of defaults/main.yml
             amq_streams_zookeeper_auth_config:
                 default: "/etc/zookeeper-jaas.conf"
-                description: "TODO document argument"
+                description: "Path to the Zk JAAS conf file on the target system"
                 type: "str"
 
             # line 37 of defaults/main.yml
             amq_streams_zookeeper_auth_config_template:
                 default: "templates/zookeeper-jaas.conf.j2"
-                description: "TODO document argument"
+                description: "Relative path to the template used to generate the JAAS config"
                 type: "str"
 
             # line 38 of defaults/main.yml
             amq_streams_zookeeper_auth_user:
                 default: "zookeeper"
-                description: "TODO document argument"
+                description: "Zk username used for authentification"
                 type: "str"
 
             # line 39 of defaults/main.yml
             amq_streams_zookeeper_auth_pass:
                 default: "PLEASE_CHANGE_ME_I_AM_NO_GOOD_FOR_PRODUCTION"
-                description: "TODO document argument"
+                description: "Zk password used for authentification"
                 type: "str"
 
             # line 41 of defaults/main.yml
             amq_streams_zookeeper_server_log_validation_min_size:
                 default: 20
-                description: "TODO document argument"
+                description: "Zk server log minimal size (to be considered functional)"
                 type: "int"
