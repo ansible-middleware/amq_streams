@@ -50,6 +50,10 @@ argument_specs:
                 default: 'templates/service_systemd.j2'
                 description: "Template use to create systemd service for Kafka components (Zookeeper, Broker)."
                 type: "str"
+            amq_streams_common_systctl_update_enabled:
+                default: false
+                description: "Whether or not to perform OS tuning using sysctl"
+                type: "bool"
             amq_streams_common_firewalld_enabled:
                 default: false
                 description: "Whether to enable firewall configuration"
