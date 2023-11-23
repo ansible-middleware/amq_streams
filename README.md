@@ -24,7 +24,7 @@ Plugins and modules within a collection may be tested with only specific Ansible
 ## Installation
 
 ### Installing the Collection from Ansible Galaxy
-
+<!--start galaxy_download -->
 Before using the collection, you need to install it with the Ansible Galaxy CLI:
 
     ansible-galaxy collection install middleware_automation.amq_streams
@@ -51,7 +51,7 @@ Clone the repository, checkout the tag you want to build, or pick the main branc
 
     ansible-galaxy collection build .
     ansible-galaxy collection install middleware_automation-amq_streams-*.tar.gz
-
+<!--end galaxy_download -->
 ## Usage
 
 ### Install Playbook
@@ -65,6 +65,8 @@ For full service configuration details, refer to each role README file:
 * [Broker Role](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_broker/README.md)
 * [Connect Role](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_connect/README.md)
 
+<!--start rhn_credentials -->
+<!--end rhn_credentials -->
 
 #### Offline installation
 
@@ -94,3 +96,14 @@ amq_streams collection is a Beta release and for Technical Preview. If you have 
 Apache License v2.0 or later
 
 See [LICENSE](https://github.com/ansible-middleware/amq_streams/blob/main/LICENSE) to view the full text.
+
+<!--start support -->
+For Red Hat customers, this collection is released as a [Technology Preview](https://access.redhat.com/support/offerings/techpreview) feature as the [Red Hat Ansible certified content collection for AMQ Streams](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/amq_streams). If you have any issues or questions related to this collection, please contact <Ansible-middleware-core@redhat.com> or open an issue at https://github.com/ansible-middleware/amq_streams/issues.
+<!--end support -->
+
+## License
+
+Apache License v2.0 or later
+
+See [LICENSE](LICENSE) to view the full text.
+
