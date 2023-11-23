@@ -66,6 +66,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#support">Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">License</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Patterns</a></li>
@@ -145,6 +146,7 @@
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <section id="installing-the-collection-from-ansible-galaxy">
 <h3>Installing the Collection from Ansible Galaxy<a class="headerlink" href="#installing-the-collection-from-ansible-galaxy" title="Link to this heading"></a></h3>
+<!--start galaxy_download -->
 <p>Before using the collection, you need to install it with the Ansible Galaxy CLI:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ansible-galaxy collection install middleware_automation.amq_streams
 </pre></div>
@@ -171,6 +173,7 @@
 ansible-galaxy collection install middleware_automation-amq_streams-*.tar.gz
 </pre></div>
 </div>
+<!--end galaxy_download -->
 </section>
 </section>
 <section id="usage">
@@ -187,6 +190,8 @@ ansible-galaxy collection install middleware_automation-amq_streams-*.tar.gz
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_broker/README.md">Broker Role</a></p></li>
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_connect/README.md">Connect Role</a></p></li>
 </ul>
+<!--start rhn_credentials -->
+<!--end rhn_credentials -->
 <section id="offline-installation">
 <h4>Offline installation<a class="headerlink" href="#offline-installation" title="Link to this heading"></a></h4>
 <p>Making the <code class="docutils literal notranslate"><span class="pre">amq_streams_common_archive_file</span></code> archive available to the playbook working directory, and setting
@@ -215,6 +220,14 @@ described by the <code class="docutils literal notranslate"><span class="pre">am
 <h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
 <p>Apache License v2.0 or later</p>
 <p>See <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/blob/main/LICENSE">LICENSE</a> to view the full text.</p>
+<!--start support -->
+<p>For Red Hat customers, this collection is released as a <a class="reference external" href="https://access.redhat.com/support/offerings/techpreview">Technology Preview</a> feature as the <a class="reference external" href="https://console.redhat.com/ansible/automation-hub/repo/published/redhat/amq_streams">Red Hat Ansible certified content collection for AMQ Streams</a>. If you have any issues or questions related to this collection, please contact <a class="reference external" href="mailto:Ansible-middleware-core&#37;&#52;&#48;redhat&#46;com">Ansible-middleware-core<span>&#64;</span>redhat<span>&#46;</span>com</a> or open an issue at https://github.com/ansible-middleware/amq_streams/issues.</p>
+<!--end support -->
+</section>
+<section id="id1">
+<h2>License<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>Apache License v2.0 or later</p>
+<p>See <a class="reference internal" href="#LICENSE"><span class="xref myst">LICENSE</span></a> to view the full text.</p>
 </section>
 </section>
 
