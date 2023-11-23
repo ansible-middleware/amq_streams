@@ -2,6 +2,7 @@
 amq_streams_common_product_version: 3.6.0
 amq_streams_common_rhn_product_version: 2.5.1
 amq_streams_common_rhn_home_dir: kafka_2.13-3.5.0.redhat-00014
+amq_streams_common_redhat_enabled: false
 amq_streams_common_rhn_product_category: 'jboss.amq.streams'
 amq_streams_common_scala_version: 2.13
 amq_streams_common_version: "{{ amq_streams_common_scala_version }}-{{ amq_streams_common_product_version }}"
