@@ -21,6 +21,7 @@ tags:
   - a4mw
 dependencies:
   ansible.posix: '>=1.4.0'
+  middleware_automation.common: '>=1.0.0'
 repository: https://github.com/ansible-middleware/amq_streams
 documentation: https://ansible-middleware.github.io/amq_streams
 homepage: https://github.com/ansible-middleware/amq_streams
