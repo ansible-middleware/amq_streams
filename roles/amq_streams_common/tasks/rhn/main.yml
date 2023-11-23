@@ -26,7 +26,7 @@
     rhn_product_id: "{{ rhn_filtered_products[0].id }}"
     rhn_product_path: "{{ amq_streams_common_download_dir }}"
 
-- name: "XXX"
+- name: "Compute vars for AMQ Streams {{ amq_streams_common_rhn_product_version }}"
   ansible.builtin.set_fact:
     amq_streams_common_archive_file: "amq-streams-{{ amq_streams_common_rhn_product_version }}-bin.zip"
     amq_streams_common_home: "{{ amq_streams_common_install_dir }}/{{ amq_streams_common_rhn_home_dir }}"
