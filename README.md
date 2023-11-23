@@ -87,10 +87,6 @@ It is possible to perform downloads from alternate sources (like corporate Nexus
 `amq_streams_common_download_url` variable; make sure the final downloaded filename matches with the source filename
 described by the `amq_streams_common_archive_file` variable (ie. *kafka_-a.b.c-x.y.z.tgz*).
 
-## Support
-
-amq_streams collection is a Beta release and for Technical Preview. If you have any issues or questions related to collection, please don't hesitate to contact us on Ansible-middleware-core@redhat.com or open an issue on https://github.com/ansible-middleware/amq_streams/issues
-
 ## License
 
 Apache License v2.0 or later
@@ -98,7 +94,6 @@ Apache License v2.0 or later
 See [LICENSE](https://github.com/ansible-middleware/amq_streams/blob/main/LICENSE) to view the full text.
 
 <!--start support -->
-For Red Hat customers, this collection is released as a [Technology Preview](https://access.redhat.com/support/offerings/techpreview) feature as the [Red Hat Ansible certified content collection for AMQ Streams](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/amq_streams). If you have any issues or questions related to this collection, please contact <Ansible-middleware-core@redhat.com> or open an issue at https://github.com/ansible-middleware/amq_streams/issues.
 <!--end support -->
 
 ## License
