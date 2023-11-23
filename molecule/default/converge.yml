@@ -27,7 +27,7 @@
           - { name: "file", path: "connectors/file.yml" }
 
     - ansible.builtin.wait_for:
-        timeout: 3000
+        timeout: 0
       delegate_to: localhost
 
     - name: "Validate that deployment is functional."
