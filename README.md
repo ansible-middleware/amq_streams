@@ -44,14 +44,14 @@ The amq_streams collection also depends on the following python packages to be p
 A requirement file is provided to install:
 
     pip install -r requirements.txt
-
+<!--end galaxy_download -->
 ### Build and install locally
 
 Clone the repository, checkout the tag you want to build, or pick the main branch for the development version; then:
 
     ansible-galaxy collection build .
     ansible-galaxy collection install middleware_automation-amq_streams-*.tar.gz
-<!--end galaxy_download -->
+
 ## Usage
 
 ### Install Playbook

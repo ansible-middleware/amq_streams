@@ -61,6 +61,8 @@ broker4
 |`amq_streams_broker_transaction_state_log_min_isr` |  | `1` |
 |`amq_streams_broker_log_retention_hours` |  | `168` |
 |`amq_streams_broker_log_retention_check_interval_ms` |  | `300000` |
+|`amq_streams_broker_log_message_format_version` | Log message format version. Required for Kafka upgrade. |  |
+|`amq_streams_broker_inter_broker_protocol_version` | Inter broker protocol version. Required for Kafka upgrade. |  |
 |`amq_streams_broker_zookeeper_connection_timeout_ms` |  | `18000` |
 |`amq_streams_broker_group_initial_rebalance_delay_ms` |  | `0` |
 |`amq_streams_broker_properties_template` |  | `templates/server.properties.j2` |
@@ -81,7 +83,7 @@ broker4
 |`amq_streams_broker_auth_listeners` | Default list of authenticated listeners | `PLAINTEXT:PLAINTEXT` |
 |`amq_streams_broker_auth_sasl_mechanisms` | Default list of authenticated SASL mechanism | `PLAIN` |
 |`amq_streams_broker_inventory_group` | Identify the group of broker nodes | `groups['brokers']` |
-|`amq_streams_broker_broker_id` | Identify the broker with specific id in the inventory
+|`amq_streams_broker_broker_id` | Identify the broker with specific id in the inventory. | |
 |`amq_streams_broker_topics` | List of topics to create. Each topics requires the `name` property, and optionally the `partitions` and `replication_factor`. | |
 
 ## Role Variables
@@ -256,7 +258,6 @@ To manage SCRAM users, the role includes the following tasks:
 * Create
 * Describe
 * Delete
-
 
 The role uses the `amq_streams_broker_topics` variable to identify the list of topics
 to be managed by the role for each stage of the life cycle.
@@ -454,6 +455,65 @@ Example of definition:
     amq_streams_broker_admin_mechanism: PLAIN
     amq_streams_broker_admin_username: admin
     amq_streams_broker_admin_password: password
+```
+
+## Kafka Upgrading
+
+Kafka upgrading requires a coordinated exercise between the actions to use the latest version of Apache Kafka, and the different applications
+(consumer and producers). This process requires first to use the lates version of Apache Kafka, maintaining the same log message format and
+inter-broker protocol. Once the platform is using the new binaries of the latest version, then an upgrade of the log message format and
+inter-broker protocol can be done. This upgrade process must require finally code changes to client applications (consumers and producers) to
+align the log message format to the newer version of the Kafka brokers.
+
+The log message format version is managed by the `log.message.format.version` property of Kafka. This property is managed by
+the `amq_streams_broker_log_message_format_version` role variable.
+
+The inter-broker protocol version is managed by the `inter.broker.protocol.version` property of Kafka. This property is managed by the
+`amq_streams_broker_inter_broker_protocol_version` role variable.
+
+**NOTE**: The upgrade process will deploy the latest version of Apache Kafka in a new folder, without any change in the previous Kafka deployment. The
+service units will be updated to use the new location of the binaries installed. This process allows a quickly rollback in case of emergency.
+
+Upgrading a Kafka cluster by this collection requires to follow this playbook playbook sequence execution (Example to upgrade from Kafka 3.5 to Kafka 3.6):
+
+1. Run the collection to set up the log message format and inter-broker protocol version if they are not already defined. Example of definition:
+
+```yaml
+  vars:
+    # Kafka version
+    amq_streams_common_scala_version: 2.13
+    amq_streams_common_product_version: 3.5.0
+    # Log message format version
+    amq_streams_broker_log_message_format_version: 3.5
+    # Inter-broker protocol version
+    amq_streams_broker_inter_broker_protocol_version: 3.5
+```
+
+2. Run the collection to deploy the latest version of Apache Kafka. Log message format and inter-broker protocol version are not changed. Example of definition:
+
+```yaml
+  vars:
+    # Kafka version
+    amq_streams_common_scala_version: 2.13
+    amq_streams_common_product_version: 3.6.0
+    # Log message format version
+    amq_streams_broker_log_message_format_version: 3.5
+    # Inter-broker protocol version
+    amq_streams_broker_inter_broker_protocol_version: 3.5
+```
+
+3. Run the collection to upgrade the log message format and inter-broker protocol version. This execution must be coordinated with the applications when they
+are ready to use the new versions.
+
+```yaml
+  vars:
+    # Kafka version
+    amq_streams_common_scala_version: 2.13
+    amq_streams_common_product_version: 3.6.0
+    # Log message format version
+    amq_streams_broker_log_message_format_version: 3.6
+    # Inter-broker protocol version
+    amq_streams_broker_inter_broker_protocol_version: 3.6
 ```
 
 ## License
