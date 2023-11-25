@@ -516,6 +516,8 @@ are ready to use the new versions.
     amq_streams_broker_inter_broker_protocol_version: 3.6
 ```
 
+[Apache Kafka upgrading reference](https://kafka.apache.org/documentation/#upgrade_3_6_0)
+
 ## License
 
 Apache License v2.0 or later
