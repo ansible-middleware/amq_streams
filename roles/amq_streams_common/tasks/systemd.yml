@@ -74,3 +74,12 @@
     enabled: yes
     state: started
   become: yes
+
+- name: "Ensure {{ server_name }} is restarted after a product upgrade."
+  ansible.builtin.set_fact:
+    amq_streams_common_product_upgrade_status: "Upgrading {{ server_name }}"
+  when:
+    - amq_streams_common_product_upgrade is defined and amq_streams_common_product_upgrade
+  notify:
+    - "Restart {{ server_name }}"
+  become: yes

@@ -6,7 +6,8 @@ Common tasks for the collection.
 
 | Variable | Description | Default |
 |:---------|:------------|:--------|
-|`amq_streams_common_product_version` | Kafka version | `3.4.0` |
+|`amq_streams_common_product_upgrade` | Enable a product upgrade | `false` |
+|`amq_streams_common_product_version` | Kafka version | `3.6.0` |
 |`amq_streams_common_scala_version` | Scala version | `2.13` |
 |`amq_streams_common_version` | Combination version | `{{ amq_streams_common_scala_version }}-{{ amq_streams_common_product_version }}` |
 |`amq_streams_common_archive_file` | Kafka binary package | `kafka_{{ amq_streams_common_version }}.tgz` |
@@ -30,7 +31,6 @@ The following are a set of required variables for the role:
 | Variable | Description | Required |
 |:---------|:------------|:---------|
 
-
 ## Offline installation
 
 Performing an offline installation is possible by:
@@ -47,4 +47,3 @@ Apache License v2.0 or later
 * [Romain Pelisse](https://github.com/rpelisse)
 * [Guido Grazioli](https://github.com/guidograzioli)
 * [Roman Martin](https://github.com/rmarting)
-
