@@ -471,14 +471,21 @@ the `amq_streams_broker_log_message_format_version` role variable.
 The inter-broker protocol version is managed by the `inter.broker.protocol.version` property of Kafka. This property is managed by the
 `amq_streams_broker_inter_broker_protocol_version` role variable.
 
+The execution of the playbook during an upgrading process must be done following a linear strategy of Ansible. The variable `serial` must be
+defined with the value `1`.
+
 **NOTE**: The upgrade process will deploy the latest version of Apache Kafka in a new folder, without any change in the previous Kafka deployment. The
 service units will be updated to use the new location of the binaries installed. This process allows a quickly rollback in case of emergency.
 
-Upgrading a Kafka cluster by this collection requires to follow this playbook playbook sequence execution (Example to upgrade from Kafka 3.5 to Kafka 3.6):
+Upgrading a Kafka cluster by this collection requires to follow this playbook sequence execution (Example to upgrade from Kafka 3.5 to Kafka 3.6):
 
-1. Run the collection to set up the log message format and inter-broker protocol version if they are not already defined. Example of definition:
+1. (Optional) Run the collection to set up the log message format and inter-broker protocol version if they are not already defined. Example of definition:
 
 ```yaml
+---
+- name: "Ansible Playbook to set up the log message format and inter-broker protocol version"
+  hosts: all
+  serial: 1
   vars:
     # Kafka version
     amq_streams_common_scala_version: 2.13
@@ -489,13 +496,19 @@ Upgrading a Kafka cluster by this collection requires to follow this playbook pl
     amq_streams_broker_inter_broker_protocol_version: 3.5
 ```
 
-2. Run the collection to deploy the latest version of Apache Kafka. Log message format and inter-broker protocol version are not changed. Example of definition:
+2. Run the collection to deploy the latest version of Apache Kafka enabling the `amq_streams_common_product_upgrade` variable. Log message format and inter-broker protocol
+version are not changed in this execution. Example of definition:
 
 ```yaml
+---
+- name: "Ansible Playbook to upgrade using the binaries from the new version"
+  hosts: all
+  serial: 1
   vars:
     # Kafka version
     amq_streams_common_scala_version: 2.13
     amq_streams_common_product_version: 3.6.0
+    amq_streams_common_product_upgrade: true
     # Log message format version
     amq_streams_broker_log_message_format_version: 3.5
     # Inter-broker protocol version
@@ -506,15 +519,22 @@ Upgrading a Kafka cluster by this collection requires to follow this playbook pl
 are ready to use the new versions.
 
 ```yaml
+---
+- name: "Ansible Playbook to upgrade the log message format and inter-broker protocol version for the new version upgraded"
+  hosts: all
+  serial: 1
   vars:
     # Kafka version
     amq_streams_common_scala_version: 2.13
     amq_streams_common_product_version: 3.6.0
+    amq_streams_common_product_upgrade: true
     # Log message format version
     amq_streams_broker_log_message_format_version: 3.6
     # Inter-broker protocol version
     amq_streams_broker_inter_broker_protocol_version: 3.6
 ```
+
+**NOTE:** Once the Kafka upgrade is finished, the variable `amq_streams_common_product_upgrade` must be removed from any playbook, or change to `false`.
 
 [Apache Kafka upgrading reference](https://kafka.apache.org/documentation/#upgrade_3_6_0)
 
