@@ -61,6 +61,8 @@ broker4
 |`amq_streams_broker_transaction_state_log_min_isr` |  | `1` |
 |`amq_streams_broker_log_retention_hours` |  | `168` |
 |`amq_streams_broker_log_retention_check_interval_ms` |  | `300000` |
+|`amq_streams_broker_log_message_format_version` | Log message format version. Required for Kafka upgrade. |  |
+|`amq_streams_broker_inter_broker_protocol_version` | Inter broker protocol version. Required for Kafka upgrade. |  |
 |`amq_streams_broker_zookeeper_connection_timeout_ms` |  | `18000` |
 |`amq_streams_broker_group_initial_rebalance_delay_ms` |  | `0` |
 |`amq_streams_broker_properties_template` |  | `templates/server.properties.j2` |
@@ -81,7 +83,7 @@ broker4
 |`amq_streams_broker_auth_listeners` | Default list of authenticated listeners | `PLAINTEXT:PLAINTEXT` |
 |`amq_streams_broker_auth_sasl_mechanisms` | Default list of authenticated SASL mechanism | `PLAIN` |
 |`amq_streams_broker_inventory_group` | Identify the group of broker nodes | `groups['brokers']` |
-|`amq_streams_broker_broker_id` | Identify the broker with specific id in the inventory
+|`amq_streams_broker_broker_id` | Identify the broker with specific id in the inventory. | |
 |`amq_streams_broker_topics` | List of topics to create. Each topics requires the `name` property, and optionally the `partitions` and `replication_factor`. | |
 
 ## Role Variables
@@ -256,7 +258,6 @@ To manage SCRAM users, the role includes the following tasks:
 * Create
 * Describe
 * Delete
-
 
 The role uses the `amq_streams_broker_topics` variable to identify the list of topics
 to be managed by the role for each stage of the life cycle.

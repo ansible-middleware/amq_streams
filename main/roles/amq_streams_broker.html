@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Broker Role &mdash; AmqStreams Ansible Collection  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/ansible-basic-sphinx-ext.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/ansible-basic-sphinx-ext.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -278,6 +280,14 @@ broker4
 <td class="text-left"><p></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">300000</span></code></p></td>
 </tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_log_message_format_version</span></code></p></td>
+<td class="text-left"><p>Log message format version. Required for Kafka upgrade.</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inter_broker_protocol_version</span></code></p></td>
+<td class="text-left"><p>Inter broker protocol version. Required for Kafka upgrade.</p></td>
+<td class="text-left"><p></p></td>
+</tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_zookeeper_connection_timeout_ms</span></code></p></td>
 <td class="text-left"><p></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">18000</span></code></p></td>
@@ -359,7 +369,7 @@ broker4
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">groups['brokers']</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_broker_id</span></code></p></td>
-<td class="text-left"><p>Identify the broker with specific id in the inventory</p></td>
+<td class="text-left"><p>Identify the broker with specific id in the inventory.</p></td>
 <td class="text-left"><p></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_broker_topics</span></code></p></td>
