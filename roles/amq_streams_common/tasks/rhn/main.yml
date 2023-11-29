@@ -14,9 +14,15 @@
     rhn_product_category: "{{ amq_streams_common_rhn_product_category }}"
     rhn_product_version: "{{ amq_streams_common_rhn_product_version }}" #"{{ amq_version.split('.')[:2] | join('.') }}"
 
+- name: "Set archive file pattern - if not defined."
+  ansible.builtin.set_fact:
+    rhn_product_archive_file_pattern: '^.*/amq-streams-[0-9.]*-bin.zip$'
+  when:
+    - not rhn_product_archive_file_pattern is defined or rhn_product_archive_file_pattern == ""
+
 - name: "Determine which archive to download"
   ansible.builtin.set_fact:
-    rhn_filtered_products: "{{ rhn_products.results | selectattr('file_path', 'match', '^.*/amq-streams-[0-9.]*-bin.zip$') }}"
+    rhn_filtered_products: "{{ rhn_products.results | selectattr('file_path', 'match', rhn_product_archive_file_pattern) }}"
 
 - name: "Download rhn_filtered_products[0]"
   ansible.builtin.include_role:

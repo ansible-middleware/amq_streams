@@ -8,11 +8,20 @@
 - name: "Ensure Cruise Control artifacts are available."
   ansible.builtin.include_role:
     name: amq_streams_common
+    tasks_from: main.yml
+
+- name: "Ensure Cruise Control artifacts are available."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: rhn/main.yml
 
 - name: "Ensure Cruise Control artifacts are available."
   ansible.builtin.include_role:
     name: amq_streams_common
     tasks_from: install.yml
+  vars:
+    amq_streams_common_archive_file: amq-streams-2.5.1-cruise-control-bin.zip
+    amq_streams_common_archive_creates_control_file: /opt/cruise-control//config
 
 - name: "Deploy custom log4j config (if provided)"
   when:
@@ -36,6 +45,11 @@
   when:
     - amq_streams_broker_inventory_group is defined and amq_streams_broker_inventory_group | length > 0
 
+- name: "Ensure JAAS config is deployed and up to date (if enabled)"
+  ansible.builtin.include_tasks: jaas_config.yml
+  when:
+    - amq_streams_broker_inter_broker_auth_sasl_protocol is defined and amq_streams_broker_inter_broker_auth_sasl_mechanisms is defined and amq_streams_cruise_control_zk_sasl_jaas_config is defined
+
 #TODO: Deal with FW if enabled
 
 - name: "Deploy Cruise Control as a systemd service."
@@ -55,7 +69,7 @@
 #    server_extra_args: "{{ amq_streams_connect_server_extra_args }}"
     server_user: "{{ amq_streams_cruise_control_user }}"
     server_group: "{{ amq_streams_cruise_control_group }}"
-#    server_java_opts: "{{ amq_streams_connect_java_opts | default('') }}"
+    server_java_opts: "{{ amq_streams_cruise_control_java_opts | default('') }}"
 #    server_log4j_opts: "{{ amq_streams_connect_java_log4j_opts | default('') }}"
 #    server_java_heap_opts: "{{ amq_streams_connect_java_heap_opts | default('') }}"
 #    server_java_performance_opts: "{{ amq_streams_connect_java_performance_opts | default('') }}"
