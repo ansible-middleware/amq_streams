@@ -8,6 +8,7 @@ amq_streams_common_rhn_product_category: 'jboss.amq.streams'
 amq_streams_common_scala_version: 2.13
 amq_streams_common_version: "{{ amq_streams_common_scala_version }}-{{ amq_streams_common_product_version }}"
 amq_streams_common_archive_file: "kafka_{{ amq_streams_common_version }}.tgz"
+amq_streams_common_rhn_product_archive_file_pattern: '^.*/amq-streams-[0-9.]*-bin.zip$'
 amq_streams_common_download_url: "https://archive.apache.org/dist/kafka/{{ amq_streams_common_product_version }}/kafka_{{ amq_streams_common_version }}.tgz"
 amq_streams_common_download_dir: /tmp
 amq_streams_common_download_user: "{{ amq_streams_common_user | default(omit) }}"

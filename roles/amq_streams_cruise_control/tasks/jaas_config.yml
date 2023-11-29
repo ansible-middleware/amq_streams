@@ -1,0 +1,17 @@
+---
+- name: "Ensure required credentials have been provided."
+  ansible.builtin.assert:
+    that:
+      - amq_streams_broker_inventory_group is defined and amq_streams_broker_inventory_group | length > 0
+      - amq_streams_broker_username is defined and amq_streams_broker_username | length > 0
+      - amq_streams_broker_password is defined and amq_streams_broker_password | length > 0
+    quiet: true
+
+- name: "Generate required JAAS config based on provided credentials."
+  ansible.builtin.set_fact:
+    amq_streams_cruise_control_zk_sasl_jaas_config: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"{{ amq_streams_broker_username }}\" password=\"{{ amq_streams_broker_password }}\";"
+
+- name: "Ensure sasl.properties is up to date on broker."
+  ansible.builtin.template:
+    src: templates/sasl.properties.j2
+    dest: "{{ amq_stream_common_home }}/config/sasl.properties"

@@ -27,6 +27,8 @@
 
 - name: "Download archive from RHN"
   ansible.builtin.include_tasks: rhn/main.yml
+  vars:
+    rhn_product_archive_file_pattern: "{{ amq_streams_common_rhn_product_archive_file_pattern }}"
   when:
     - amq_streams_common_redhat_enabled is defined and amq_streams_common_redhat_enabled
     - not amq_streams_common_offline_install is defined or not amq_streams_common_offline_install
@@ -37,12 +39,13 @@
     path: "{{ amq_streams_common_home }}/{{ amq_streams_common_subdir | default('bin') }}"
   register: download_target
 
-- name: "Extract artifact to {{ amq_streams_common_install_dir }}"
+- name: "Extract artifact {{ amq_streams_common_archive_file }} to {{ amq_streams_common_install_dir }}"
   ansible.builtin.unarchive:
     src: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
     dest: "{{ amq_streams_common_install_dir }}"
     owner: "{{ amq_streams_common_user | default(omit) }}"
     group: "{{ amq_streams_common_group | default(omit) }}"
     remote_src: "{{ amq_streams_common_download_remote_src | default('no') }}"
+    creates: "{{ amq_streams_common_archive_creates_control_file | default(omit) }}"
   when:
     - download_target is defined and download_target.stat is defined and not download_target.stat.exists

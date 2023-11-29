@@ -23,7 +23,7 @@
     quiet: True
     fail_msg: "Path for download product is not writeable on the Ansible controller: {{ rhn_product_path }}."
 
-- name: "Download Red Hat product into {{ rhn_product_path }} (rhn_download_become: {{ rhn_download_become }})"
+- name: "Download Red Hat product #{{ rhn_product_id }} into {{ rhn_product_path }}"
   middleware_automation.common.product_download:  # noqa risky-file-permissions delegated, uses controller host user
     client_id: "{{ rhn_username }}"
     client_secret: "{{ rhn_password }}"

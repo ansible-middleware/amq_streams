@@ -1,8 +1,10 @@
 ---
 amq_streams_cruise_control_home: /opt/cruise-control/
+rhn_product_archive_file_pattern: '^.*/amq-streams-[0-9.]*-cruise-control-bin.zip'
 amq_streams_cruise_control_service_name: amq_streams_cruise_control
 amq_streams_cruise_control_server_start: "{{ amq_streams_cruise_control_home }}/kafka-cruise-control-start.sh"
 amq_streams_cruise_control_server_stop: "{{ amq_streams_cruise_control_home }}/kafka-cruise-control-stop.sh"
+amq_streams_common_archive_file: amq-streams-2.5.1-cruise-control-bin.zip
 amq_streams_cruise_control_server_config: "/etc/amq_streams_cruise_control.properties"
 amq_streams_cruise_control_config_template: 'templates/service.conf.j2'
 amq_streams_cruise_control_config_properties_template: 'templates/cruisecontrol.properties.j2'
@@ -15,6 +17,7 @@ amq_streams_cruise_control_user: root
 amq_streams_cruise_control_group: root
 amq_streams_cruise_control_zk_host: "{{ groups['zookeepers'][0] }}"
 amq_streams_cruise_control_broker_host: "{{ groups['brokers'][0] }}"
+amq_streams_cruise_control_replicator_factor: 1
 # Cruise Control HTTP API
 amq_streams_cruise_control_host: 'localhost'
 amq_streams_cruise_control_port: 9090
