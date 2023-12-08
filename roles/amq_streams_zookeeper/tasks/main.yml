@@ -61,5 +61,5 @@
   when:
     - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
 
-- name: "Configure firewalld for Zookeeper (if enable)."
+- name: "Configure Zookeeper as a systemd service."
   ansible.builtin.include_tasks: service.yml
