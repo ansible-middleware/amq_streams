@@ -50,7 +50,18 @@
   when:
     - amq_streams_broker_inter_broker_auth_sasl_protocol is defined and amq_streams_broker_inter_broker_auth_sasl_mechanisms is defined and amq_streams_cruise_control_zk_sasl_jaas_config is defined
 
-#TODO: Deal with FW if enabled
+- name: "Configure firewalld for Cruise Control (if enable)."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: firewalld.yml
+  vars:
+    service_port: "{{ amq_streams_cruise_control_port }}"
+  when:
+    - amq_streams_firewalld_enabled is defined and amq_streams_firewalld_enabled
+    - amq_streams_cruise_control_port is defined
+
+
+
 
 - name: "Deploy Cruise Control as a systemd service."
   ansible.builtin.include_role:
