@@ -1,0 +1,7 @@
+---
+- name: "Validate correctness of AMQ Streams install"
+  hosts: all
+  tasks:
+    - name: "TODO Implement validation tasks"
+      ansible.builtin.debug:
+        msg: "TODO"
