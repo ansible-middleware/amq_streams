@@ -3,10 +3,10 @@ collections:
   - middleware_automation.common
 
 galaxy_info:
-  role_name: amq_streams_broker
+  role_name: amq_streams_common
   namespace: middleware_automation
   author: Romain Pelisse
-  description: Install AMQ Streams Zookeeper server
+  description: AMQ Streams common plays
   company: Red Hat, Inc.
 
   license: Apache License 2.0
@@ -24,6 +24,3 @@ galaxy_info:
     - wildfly
     - cli
     - server
-
-dependencies:
-- { role: amq_streams_common }
