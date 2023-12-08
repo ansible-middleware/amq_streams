@@ -2,6 +2,30 @@
 - name: "Validate correctness of AMQ Streams install"
   hosts: all
   tasks:
-    - name: "TODO Implement validation tasks"
-      ansible.builtin.debug:
-        msg: "TODO"
+    - name: "Validate Zookeeper installation on target"
+      ansible.builtin.include_role:
+        name: "amq_streams_zookeeper"
+        tasks_from: validate.yml
+      when:
+        - amq_streams_zookeeper_enabled is defined and amq_streams_zookeeper_enabled
+
+    - name: "Validate Broker installation on target"
+      ansible.builtin.include_role:
+        name: "amq_streams_broker"
+        tasks_from: validate.yml
+      when:
+        - amq_streams_broker_enabled
+
+    - name: "Validate Kafka Connect installation on target"
+      ansible.builtin.include_role:
+        name: "amq_streams_connect"
+        tasks_from: validate.yml
+      when:
+        - amq_streams_connect_enabled
+
+    - name: "Validate Cruise Control installation on target"
+      ansible.builtin.include_role:
+        name: "amq_streams_cruise_control"
+        tasks_from: validate.yml
+      when:
+        - amq_streams_connect_enabled
