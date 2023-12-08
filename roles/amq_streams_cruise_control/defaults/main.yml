@@ -1,4 +1,5 @@
 ---
+amq_streams_cruise_control_enabled: false
 amq_streams_cruise_control_home: /opt/cruise-control/
 rhn_product_archive_file_pattern: '^.*/amq-streams-[0-9.]*-cruise-control-bin.zip'
 amq_streams_cruise_control_service_name: amq_streams_cruise_control
