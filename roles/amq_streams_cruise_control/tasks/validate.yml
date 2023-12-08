@@ -1,0 +1,4 @@
+---
+- name: "TODO implement validation play for Cruise Control"
+  ansible.builtin.debug:
+    msg: "Need to be implemented."
