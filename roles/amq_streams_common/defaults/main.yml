@@ -14,6 +14,7 @@ amq_streams_common_download_dir: /tmp
 amq_streams_common_download_user: "{{ amq_streams_common_user | default(omit) }}"
 amq_streams_common_download_group: "{{ amq_streams_common_group | default(omit) }}"
 amq_streams_common_install_dir: /opt
+amq_streams_common_offline_install: false
 amq_streams_common_path_to_archive_file: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
 amq_streams_common_download_node: localhost
 amq_streams_common_systctl_update_enabled: false
@@ -27,8 +28,6 @@ amq_streams_common_home: "{{ amq_streams_common_install_dir }}/kafka_{{ amq_stre
 amq_streams_common_firewalld_package_name:
   - firewalld
 amq_streams_common_firewalld_enabled: false
-
-amq_streams_common_offline_install: false
 
 amq_streams_common_prometheus_install_rpm: True
 amq_streams_common_prometheus_package_name: 'prometheus-jmx-exporter'
