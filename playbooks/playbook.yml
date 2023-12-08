@@ -19,6 +19,19 @@
       vars:
         amq_streams_common_skip_download: true
 
+    - name: "Ensure Kafka Connect is running and available."
+      ansible.builtin.include_role:
+        name: amq_streams_connect
+      vars:
+        connectors:
+          - { name: "file", path: "connectors/file.yml" }
+    - name: "Give a rest to the target, sometimes broker takes a while to start"
+      ansible.builtin.wait_for:
+        timeout: 60
+
+    - name: "Flush all handlers to be sure services are ready for post_tasks."
+      ansible.builtin.meta: flush_handlers
+  post_tasks:
     - name: "Ensures topics exist."
       ansible.builtin.include_role:
         name: amq_streams_broker
@@ -57,7 +70,7 @@
       vars:
         connectors:
           - { name: "file", path: "connectors/file.yml" }
-  post_tasks:
+
     - name: "Display numbers of Zookeeper instances managed by Ansible."
       ansible.builtin.debug:
         msg: "Numbers of Zookeeper instances: {{ amq_streams_zookeeper_instance_count }}."

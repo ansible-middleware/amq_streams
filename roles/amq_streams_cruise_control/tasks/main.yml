@@ -60,9 +60,6 @@
     - amq_streams_firewalld_enabled is defined and amq_streams_firewalld_enabled
     - amq_streams_cruise_control_port is defined
 
-
-
-
 - name: "Deploy Cruise Control as a systemd service."
   ansible.builtin.include_role:
     name: amq_streams_common
