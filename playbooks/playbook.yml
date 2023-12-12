@@ -31,7 +31,7 @@
 
     - name: "Give a rest to the target, sometimes broker takes a while to start"
       ansible.builtin.wait_for:
-        timeout: 120
+        timeout: 180
 
   post_tasks:
     - name: "Ensures topics exist."
