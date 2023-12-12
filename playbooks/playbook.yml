@@ -25,12 +25,14 @@
       vars:
         connectors:
           - { name: "file", path: "connectors/file.yml" }
-    - name: "Give a rest to the target, sometimes broker takes a while to start"
-      ansible.builtin.wait_for:
-        timeout: 60
 
     - name: "Flush all handlers to be sure services are ready for post_tasks."
       ansible.builtin.meta: flush_handlers
+
+    - name: "Give a rest to the target, sometimes broker takes a while to start"
+      ansible.builtin.wait_for:
+        timeout: 120
+
   post_tasks:
     - name: "Ensures topics exist."
       ansible.builtin.include_role:
