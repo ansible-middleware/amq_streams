@@ -10,6 +10,10 @@
       - name: otherTopic
         partitions: 4
         replication_factor: 1
+    amq_streams_zookeeper_admin_server_port_delay: 0
+    amq_streams_broker_listener_port_delay: 0
+    amq_streams_connect_server_port_delay: 0
+    amq_streams_broker_bootstrap_debug: True
   roles:
     - role: amq_streams_zookeeper
   tasks:
@@ -31,14 +35,33 @@
         connectors:
           - { name: "file", path: "connectors/file.yml" }
 
-    - name: "Flush all handlers to be sure services are ready for post_tasks."
-      ansible.builtin.meta: flush_handlers
+    - ansible.builtin.meta: flush_handlers
 
     - name: "Give a rest to the target, sometimes broker takes a while to start"
       ansible.builtin.wait_for:
         timeout: 60
 
+    - name: "Validate that deployment is functional."
+      ansible.builtin.include_role:
+        name: amq_streams_zookeeper
+        tasks_from: validate.yml
+
+    - name: "Validate that Broker deployment is functional."
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: validate.yml
+
+    - name: "Validate that Connect deployment is functional."
+      ansible.builtin.include_role:
+        name: amq_streams_connect
+        tasks_from: validate.yml
+
+    - name: "Wait for DEBUG"
+      ansible.builtin.wait_for:
+        timeout: 3600
+
   post_tasks:
+
     - name: "Ensures topics exist."
       ansible.builtin.include_role:
         name: amq_streams_broker
@@ -71,13 +94,6 @@
       vars:
         topic_name: "{{ topic.name }}"
 
-    - name: "Ensure AMQ Streams Connect is running and available."
-      ansible.builtin.include_role:
-        name: amq_streams_connect
-      vars:
-        connectors:
-          - { name: "file", path: "connectors/file.yml" }
-
     - name: "Display numbers of Zookeeper instances managed by Ansible."
       ansible.builtin.debug:
         msg: "Numbers of Zookeeper instances: {{ amq_streams_zookeeper_instance_count }}."
@@ -89,18 +105,3 @@
         msg: "Numbers of broker instances: {{ amq_streams_broker_instance_count }}."
       when:
         - amq_streams_broker_instance_count_enabled is defined and amq_streams_broker_instance_count_enabled
-
-    - name: "Validate that deployment is functional."
-      ansible.builtin.include_role:
-        name: amq_streams_zookeeper
-        tasks_from: validate.yml
-
-    - name: "Validate that Broker deployment is functional."
-      ansible.builtin.include_role:
-        name: amq_streams_broker
-        tasks_from: validate.yml
-
-    - name: "Validate that Connect deployment is functional."
-      ansible.builtin.include_role:
-        name: amq_streams_connect
-        tasks_from: validate.yml

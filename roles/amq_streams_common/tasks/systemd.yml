@@ -58,6 +58,9 @@
   register: daemon_reload
   become: yes
 
+- ansible.builtin.wait_for:
+    timeout: 30
+
 - name: "Perform daemon-reload to ensure the changes are picked up"
   ansible.builtin.systemd:
     daemon_reload: yes
@@ -65,8 +68,6 @@
   when:
     - daemon_reload is defined
     - daemon_reload.changed
-  notify:
-    - "Restart {{ server_name }}"
 
 - name: "Ensure {{ server_name }} is enabled and running."
   ansible.builtin.service:

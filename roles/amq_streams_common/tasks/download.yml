@@ -26,8 +26,6 @@
 - name: "Load metadata on download folder: {{ amq_streams_common_download_dir }}."
   ansible.builtin.stat:
     path: "{{ amq_streams_common_download_dir }}"
-    owner: "{{ amq_streams_common_download_user | default(omit) }}"
-    group: "{{ amq_streams_common_download_group | default(omit) }}"
   register: download_dir
   become: "{{ amq_streams_common_download_become | default('no') }}"
   delegate_to: localhost
