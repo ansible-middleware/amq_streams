@@ -13,6 +13,11 @@
   roles:
     - role: amq_streams_zookeeper
   tasks:
+
+    - name: "Give a rest to the target, sometimes zk takes a while to start"
+      ansible.builtin.wait_for:
+        timeout: 60
+
     - name: "Ensure AMQ Streams Broker is running and available."
       ansible.builtin.include_role:
         name: amq_streams_broker
@@ -31,7 +36,7 @@
 
     - name: "Give a rest to the target, sometimes broker takes a while to start"
       ansible.builtin.wait_for:
-        timeout: 180
+        timeout: 60
 
   post_tasks:
     - name: "Ensures topics exist."
