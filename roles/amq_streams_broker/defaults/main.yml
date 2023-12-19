@@ -10,6 +10,7 @@ amq_streams_broker_user: 'amq_streams_broker'
 amq_streams_broker_listener_port: 9092
 amq_streams_broker_listener_internal_port: 9091
 amq_streams_broker_listener_tls_port: 9093
+amq_streams_broker_listener_port_delay: 0
 amq_streams_broker_group: 'amq_streams'
 amq_streams_broker_service_config_template: 'templates/service.conf.j2'
 amq_streams_broker_service_config_file: '/etc/broker.conf'
