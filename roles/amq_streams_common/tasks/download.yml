@@ -48,8 +48,6 @@
   ansible.builtin.get_url:
     url: "{{ amq_streams_common.archive.download_url }}"
     dest: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
-    owner: "{{ amq_streams_common_download_user | default(omit) }}"
-    group: "{{ amq_streams_common_download_group | default(omit) }}"
     mode: 0644
   delegate_to: localhost
   become: "{{ amq_streams_common_download_become | default('no') }}"
