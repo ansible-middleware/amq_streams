@@ -1,9 +1,4 @@
 ---
-- name: "Wait for Connect to be available."
-  ansible.builtin.wait_for:
-    timeout: 60
-    delay: 10
-
 - name: Populate service facts
   ansible.builtin.service_facts:
 
