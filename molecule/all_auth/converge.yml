@@ -1,5 +1,5 @@
 ---
-- name: "Ansible Playbook to install Zookeeper and Broker with Authentication"
+- name: "Automate AMQ Streams install"
   hosts: all
   vars:
     # Enabling Zookeeper Authentication
@@ -60,13 +60,36 @@
   roles:
     - role: amq_streams_zookeeper
   tasks:
-    - name: "Ensure Broker is running and available."
+    - name: "Ensure AMQ Streams Broker is running and available."
       ansible.builtin.include_role:
         name: amq_streams_broker
       vars:
         amq_streams_common_skip_download: true
 
-    - name: "Create topics"
+    - name: "Ensure AMQ Streams Connect is running and available."
+      ansible.builtin.include_role:
+        name: amq_streams_connect
+      vars:
+        connectors:
+          - { name: "file", path: "connectors/file.yml" }
+
+    - name: "Validate that deployment is functional."
+      ansible.builtin.include_role:
+        name: amq_streams_zookeeper
+        tasks_from: validate.yml
+
+    - name: "Validate that Broker deployment is functional."
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: validate.yml
+
+    - name: "Validate that Connect deployment is functional."
+      ansible.builtin.include_role:
+        name: amq_streams_connect
+        tasks_from: validate.yml
+
+  post_tasks:
+    - name: "Ensures topics exist."
       ansible.builtin.include_role:
         name: amq_streams_broker
         tasks_from: topic/create.yml
@@ -78,7 +101,7 @@
         topic_partitions: "{{ topic.partitions }}"
         topic_replication_factor: "{{ topic.replication_factor }}"
 
-    - name: "Describe topics"
+    - name: "Describe created topics."
       ansible.builtin.include_role:
         name: amq_streams_broker
         tasks_from: topic/describe.yml
@@ -145,26 +168,3 @@
         loop_var: user
       vars:
         user_username: "{{ user.username }}"
-
-  post_tasks:
-    - name: "Display numbers of Zookeeper instances managed by Ansible."
-      ansible.builtin.debug:
-        msg: "Numbers of Zookeeper instances: {{ amq_streams_zookeeper_instance_count }}."
-      when:
-        - amq_streams_zookeeper_instance_count_enabled is defined and amq_streams_zookeeper_instance_count_enabled
-
-    - name: "Display numbers of broker instances managed by Ansible:"
-      ansible.builtin.debug:
-        msg: "Numbers of broker instances: {{ amq_streams_broker_instance_count }}."
-      when:
-        - amq_streams_broker_instance_count_enabled is defined and amq_streams_broker_instance_count_enabled
-
-    - name: "Validate that Zookeeper deployment is functional."
-      ansible.builtin.include_role:
-        name: amq_streams_zookeeper
-        tasks_from: validate.yml
-
-    - name: "Validate that Broker deployment is functional."
-      ansible.builtin.include_role:
-        name: amq_streams_broker
-        tasks_from: validate.yml

@@ -26,10 +26,6 @@
         connectors:
           - { name: "file", path: "connectors/file.yml" }
 
-    - ansible.builtin.wait_for:
-        timeout: 300
-      delegate_to: localhost
-
     - name: "Validate that deployment is functional."
       ansible.builtin.include_role:
         name: amq_streams_zookeeper
@@ -58,7 +54,7 @@
         topic_partitions: "{{ topic.partitions }}"
         topic_replication_factor: "{{ topic.replication_factor }}"
 
-    - name: "Describe created topic."
+    - name: "Describe created topics."
       ansible.builtin.include_role:
         name: amq_streams_broker
         tasks_from: topic/describe.yml
@@ -77,10 +73,3 @@
         loop_var: topic
       vars:
         topic_name: "{{ topic.name }}"
-
-    - name: "Ensure AMQ Streams Connect is running and available."
-      ansible.builtin.include_role:
-        name: amq_streams_connect
-      vars:
-        connectors:
-          - { name: "file", path: "connectors/file.yml" }
