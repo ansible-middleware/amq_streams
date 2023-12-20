@@ -1,12 +1,18 @@
 ---
+- name: "Determine OpenJDK headless package name (if version is provided)."
+  ansible.builtin.set_fact:
+    openjdk_package_name:
+      - "java-{{ amq_streams_common_openjdk_version }}-openjdk-headless"
+  when:
+    - amq_streams_common_openjdk_version is defined
+
 - name: "Set required JDK package (if Java version is provided)."
   ansible.builtin.set_fact:
-    amq_streams_common_dependencies: "{{ [amq_streams_common.dependencies + ['java-{{ amq_streams_common.java.version }}-openjdk-headless']] | flatten }}"
+    amq_streams_common_dependencies: "{{ [amq_streams_common.dependencies + openjdk_package_name] | flatten }}"
   when:
-    - amq_streams_common.java is defined
-    - amq_streams_common.java.version is defined
+    - openjdk_package_name is defined and openjdk_package_name | length > 0
 
-- name: "Ensure all required system dependencies are present."
+- name: "Ensure all required system dependencies are present: {{ amq_streams_common_dependencies }}"
   ansible.builtin.package:
     name: "{{ amq_streams_common_dependencies }}"
     state: present
