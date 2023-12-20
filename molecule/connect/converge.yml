@@ -1,6 +1,9 @@
 ---
 - name: "Ansible playbook to install a Kafka Connect cluster"
   hosts: all
+  roles:
+    - name: amq_streams_zookeeper
+    - name: amq_streams_broker
   tasks:
     - name: "Ensure Kafka Connect is running and available."
       ansible.builtin.include_role:
