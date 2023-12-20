@@ -3,7 +3,6 @@
   hosts: all
   vars:
     amq_streams_common_download_node: ""
-    amq_streams_common_download_dir: "/tmp"
 
     # Topic Management
     amq_streams_broker_topics:
