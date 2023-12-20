@@ -108,7 +108,7 @@
         topic_partitions: "{{ topic.partitions }}"
         topic_replication_factor: "{{ topic.replication_factor }}"
 
-    - name: "Describe topics"
+    - name: "Describe created topics."
       ansible.builtin.include_role:
         name: amq_streams_broker
         tasks_from: topic/describe.yml
