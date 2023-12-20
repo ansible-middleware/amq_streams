@@ -11,8 +11,8 @@ amq_streams_common_archive_file: "kafka_{{ amq_streams_common_version }}.tgz"
 amq_streams_common_rhn_product_archive_file_pattern: '^.*/amq-streams-[0-9.]*-bin.zip$'
 amq_streams_common_download_url: "https://archive.apache.org/dist/kafka/{{ amq_streams_common_product_version }}/kafka_{{ amq_streams_common_version }}.tgz"
 amq_streams_common_download_dir: "{{ lookup('env','PWD') | default('/opt') }}"
-amq_streams_common_download_user: "{{ amq_streams_common_user | default('root') }}"
-amq_streams_common_download_group: "{{ amq_streams_common_group | default('root') }}"
+amq_streams_common_download_user: "{{ lookup('env','USER') | default('root') }}"
+amq_streams_common_download_group: "{{ lookup('env','USER') | default('root') }}"
 amq_streams_common_install_dir: /opt
 amq_streams_common_offline_install: false
 amq_streams_common_path_to_archive_file: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
