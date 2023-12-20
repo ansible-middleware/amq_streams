@@ -58,13 +58,6 @@
   register: daemon_reload
   become: yes
 
-- name: "Wait for service port {{ server_port }} to be available - (if provided)"
-  ansible.builtin.wait_for:
-    host: "{{ server_port }}"
-    delay: "{{ delay_before_server_port_check | default(omit) }}"
-  when:
-    - server_port is defined and server_port != ''
-
 - name: "Perform daemon-reload to ensure the changes are picked up"
   ansible.builtin.systemd:
     daemon_reload: yes
@@ -79,3 +72,10 @@
     enabled: yes
     state: started
   become: yes
+
+- name: "Wait for service port {{ server_port }} to be available - (if provided)"
+  ansible.builtin.wait_for:
+    host: "{{ server_port }}"
+    delay: "{{ delay_before_server_port_check | default(omit) }}"
+  when:
+    - server_port is defined and server_port != ''
