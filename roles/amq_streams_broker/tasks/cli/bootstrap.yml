@@ -73,3 +73,7 @@
       ansible.builtin.command: "{{ command_line }}" #"{{ script }} {{ bootstrap_operator }} {{ main_argument }} {{ bootstrap_command_config_operator_option | default('')}}  --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}"
       register: operation_result
       changed_when: False
+      environment:
+        KAFKA_LOG4J_OPTS: "{{ amq_streams_broker_admin_cli_log4j_opts }}"
+        LOG_DIR: "{{ amq_streams_broker_admin_cli_log_dir }}"
+        KAFKA_JMX_OPTS: "{{ amq_streams_broker_admin_cli_jmx_opts }}"
