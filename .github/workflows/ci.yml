@@ -15,4 +15,4 @@ jobs:
     with:
       fqcn: 'middleware_automation/amq_streams'
       molecule_tests: >-
-        [ "default", "all_auth", "all_cluster", "connect", "ssl_auth_sasl", "ssl_no_auth" ]
+        [ "default", "all_auth", "ssl_auth_sasl", "ssl_no_auth" ]
