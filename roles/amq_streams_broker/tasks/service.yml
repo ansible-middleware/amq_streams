@@ -43,6 +43,7 @@
     server_java_jmx_opts: "{{ amq_streams_broker_java_jmx_opts | default('') }}"
     server_start_sleep: "{{ amq_streams_broker_zookeeper_session_timeout_ms }}"
     server_port: "{{ amq_streams_broker_listener_port }}"
+    skip_wait_for_server_port: True
     delay_before_server_port_check: "{{ amq_streams_broker_listener_port_delay }}"
     server_prometheus_enabled: "{{ amq_streams_broker_prometheus_enabled }}"
     server_prometheus_config_file: "{{ amq_streams_broker_prometheus_config_file | default('') }}"
