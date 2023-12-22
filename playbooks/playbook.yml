@@ -18,10 +18,6 @@
     - role: amq_streams_zookeeper
   tasks:
 
-    - name: "Give a rest to the target, sometimes zk takes a while to start"
-      ansible.builtin.wait_for:
-        timeout: 60
-
     - name: "Ensure AMQ Streams Broker is running and available."
       ansible.builtin.include_role:
         name: amq_streams_broker
@@ -35,11 +31,7 @@
         connectors:
           - { name: "file", path: "connectors/file.yml" }
 
-    - ansible.builtin.meta: flush_handlers
-
-    - name: "Give a rest to the target, sometimes broker takes a while to start"
-      ansible.builtin.wait_for:
-        timeout: 60
+  post_tasks:
 
     - name: "Validate that deployment is functional."
       ansible.builtin.include_role:
@@ -55,12 +47,6 @@
       ansible.builtin.include_role:
         name: amq_streams_connect
         tasks_from: validate.yml
-
-    - name: "Wait for DEBUG"
-      ansible.builtin.wait_for:
-        timeout: 3600
-
-  post_tasks:
 
     - name: "Ensures topics exist."
       ansible.builtin.include_role:
@@ -93,15 +79,3 @@
         loop_var: topic
       vars:
         topic_name: "{{ topic.name }}"
-
-    - name: "Display numbers of Zookeeper instances managed by Ansible."
-      ansible.builtin.debug:
-        msg: "Numbers of Zookeeper instances: {{ amq_streams_zookeeper_instance_count }}."
-      when:
-        - amq_streams_zookeeper_instance_count_enabled is defined and amq_streams_zookeeper_instance_count_enabled
-
-    - name: "Display numbers of broker instances managed by Ansible."
-      ansible.builtin.debug:
-        msg: "Numbers of broker instances: {{ amq_streams_broker_instance_count }}."
-      when:
-        - amq_streams_broker_instance_count_enabled is defined and amq_streams_broker_instance_count_enabled
