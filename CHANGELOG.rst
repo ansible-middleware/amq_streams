@@ -6,6 +6,21 @@ middleware_automation.amq_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
+v0.0.9
+======
+
+Minor Changes
+-------------
+
+- Add custom zookeeper_id for each host based in inventory `#99 <https://github.com/ansible-middleware/amq_streams/pull/99>`_
+- Misc. enhacements `#90 <https://github.com/ansible-middleware/amq_streams/pull/90>`_
+
+Bugfixes
+--------
+
+- Bump to 3.6.0 + small fix `#102 <https://github.com/ansible-middleware/amq_streams/pull/102>`_
+- Fixup validation logic for offline install `#89 <https://github.com/ansible-middleware/amq_streams/pull/89>`_
+
 v0.0.6
 ======
 
