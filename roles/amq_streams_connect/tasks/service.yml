@@ -32,5 +32,5 @@
     server_java_gc_log_opts: "{{ amq_streams_connect_java_java_gc_log_opts | default('') }}"
     server_start_sleep: "{{ amq_streams_connect_zookeeper_session_timeout_ms }}"
     server_port: "{{ amq_streams_connect_server_port }}"
-    skip_wait_for_server_port: True
+    skip_wait_for_server_port: False
     delay_before_server_port_check: "{{ amq_streams_connect_server_port_delay }}"

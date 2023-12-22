@@ -32,7 +32,7 @@
     server_prometheus_enabled: "{{ amq_streams_zookeeper_prometheus_enabled }}"
     server_prometheus_config_file: "{{ amq_streams_zookeeper_prometheus_config_file | default('') }}"
     server_port: "{{ amq_streams_zookeeper_admin_server_port | default('') }}"
-    skip_wait_for_server_port: True
+    skip_wait_for_server_port: False
     delay_before_server_port_check: "{{ amq_streams_zookeeper_admin_server_port_delay }}"
     amq_streams_common_prometheus_port: "{{ amq_streams_zookeeper_prometheus_port }}"
     amq_streams_common_prometheus_bind_addr: "{{ amq_streams_zookeeper_prometheus_bind_addr }}"
