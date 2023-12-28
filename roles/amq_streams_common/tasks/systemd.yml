@@ -3,7 +3,6 @@
   ansible.builtin.assert:
     that:
       - server_name is defined
-      - server_config is defined
     quiet: true
 
 - name: "Ensure {{ server_name }} configuration is deployed ({{ server_config_template }} -> {{ server_config }}."
@@ -14,7 +13,7 @@
     group: root
     mode: 0644
   when:
-    - server_config_template is defined
+    - server_config_template is defined and server_config is defined
   notify:
     - "Restart {{ server_name }}"
   become: yes
