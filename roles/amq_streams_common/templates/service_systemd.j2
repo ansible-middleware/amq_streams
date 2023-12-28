@@ -15,7 +15,7 @@ After=syslog.target network.target
 {% endif %}
 #
 #
-ExecStart={{ server_start }} {{ server_config }} {% if server_extra_args is defined %}{{ server_extra_args }}{% endif %}
+ExecStart={{ server_start }} {% if server_config is defined %}{{ server_config }}{% endif %} {% if server_extra_args is defined %}{{ server_extra_args }}{% endif %}
 
 {% if service_start_sleep | int > 0 %}
 ExecStartPre=/bin/sleep {{ service_start_sleep | int / 1000 }}
