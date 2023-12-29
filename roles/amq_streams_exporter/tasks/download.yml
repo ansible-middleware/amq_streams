@@ -43,4 +43,3 @@
     dest: "{{ amq_streams_exporter_home }}"
     owner: "{{ amq_streams_exporter_user | default(omit) }}"
     group: "{{ amq_streams_exporter_group | default(omit) }}"
-
