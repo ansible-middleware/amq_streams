@@ -1,0 +1,152 @@
+argument_specs:
+    main:
+        options:
+            # line 3 of defaults/main.yml
+            amq_streams_exporter_target_arch:
+                default: "{{ ansible_architecture }}"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 4 of defaults/main.yml
+            amq_streams_exporter_version:
+                default: "1.7.0"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 5 of defaults/main.yml
+            amq_streams_exporter_download_base_url:
+                default: "https://github.com/danielqsj/kafka_exporter/releases/download/"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 6 of defaults/main.yml
+            amq_streams_exporter_download_url:
+                default: "{{ amq_streams_exporter_download_base_url }}v{{ amq_streams_exporter_version }}/kafka_exporter-{{ amq_streams_exporter_version }}.{{ amq_streams_exporter_target_system }}-{{ amq_streams_exporter_target_arch }}.tar.gz"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 7 of defaults/main.yml
+            amq_streams_exporter_archive_folder:
+                default: "kafka_exporter-{{ amq_streams_exporter_version }}.{{ amq_streams_exporter_target_system }}-{{ amq_streams_exporter_target_arch }}"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 8 of defaults/main.yml
+            amq_streams_exporter_archive_name:
+                default: "{{ amq_streams_exporter_archive_folder }}.tar.gz"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 9 of defaults/main.yml
+            amq_streams_exporter_download_dir:
+                default: "{{ lookup('env','PWD') | default('/opt') }}"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 10 of defaults/main.yml
+            amq_streams_exporter_download_path:
+                default: "{{ amq_streams_exporter_download_dir }}/{{ amq_streams_exporter_archive_name }}"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 11 of defaults/main.yml
+            amq_streams_exporter_download_host:
+                default: "localhost"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 12 of defaults/main.yml
+            amq_streams_exporter_home:
+                default: "{{ amq_streams_common_home }}"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 13 of defaults/main.yml
+            amq_streams_exporter_server_start:
+                default: "{{ amq_streams_common_home }}/{{ amq_streams_exporter_archive_folder }}/{{ amq_streams_exporter_server_start_script }}"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 14 of defaults/main.yml
+            amq_streams_exporter_dependencies:
+                default: "['tar', 'unzip']"
+                description: "TODO document argument"
+                type: "list"
+
+            # line 17 of defaults/main.yml
+            amq_streams_exporter_service_name:
+                default: "amq_streams_exporter"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 18 of defaults/main.yml
+            amq_streams_exporter_server_port:
+                default: 9308
+                description: "TODO document argument"
+                type: "int"
+
+            # line 19 of defaults/main.yml
+            amq_streams_exporter_server_start_script:
+                default: "kafka_exporter"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 23 of defaults/main.yml
+            amq_streams_exporter_systemd_env_file:
+                default: "/etc/amq_streams_exporter.conf"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 24 of defaults/main.yml
+            amq_streams_exporter_service_config_template:
+                default: "templates/service.conf.j2"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 26 of defaults/main.yml
+            amq_streams_exporter_user:
+                default: "amq_streams_exporter"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 27 of defaults/main.yml
+            amq_streams_exporter_group:
+                default: "amq_streams"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 28 of defaults/main.yml
+            amq_streams_exporter_java_opts:
+                default: ""
+                description: "TODO document argument"
+                type: "str"
+
+            # line 29 of defaults/main.yml
+            amq_streams_exporter_server_port_delay:
+                default: 0
+                description: "TODO document argument"
+                type: "int"
+
+            # line 30 of defaults/main.yml
+            amq_streams_exporter_server_port_skip_wait:
+                default: false
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 31 of defaults/main.yml
+            amq_streams_exporter_broker_server_host:
+                default: "{{ groups['brokers'][0] | default('localhost') }}"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 32 of defaults/main.yml
+            amq_streams_exporter_broker_server_port:
+                default: 9092
+                description: "TODO document argument"
+                type: "int"
+
+            # line 33 of defaults/main.yml
+            amq_streams_exporter_server_extra_args:
+                default: "--group.filter='.*' --topic.filter='.*' --offset.show-all --verbosity=0 --kafka.version='{{ amq_streams_common_product_version }}'  --kafka.server={{ amq_streams_exporter_broker_server_host }}:{{ amq_streams_exporter_broker_server_port }}"
+                description: "TODO document argument"
+                type: "str"
