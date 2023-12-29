@@ -55,6 +55,11 @@
         name: amq_streams_connect
         tasks_from: validate.yml
 
+    - name: "Validate that Exporter deployment is functional."
+      ansible.builtin.include_role:
+        name: amq_streams_exporter
+        tasks_from: validate.yml
+
     - name: "Ensures topics exist."
       ansible.builtin.include_role:
         name: amq_streams_broker
