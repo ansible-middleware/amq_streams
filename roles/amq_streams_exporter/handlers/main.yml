@@ -1,0 +1,6 @@
+---
+- name: "Restart {{ amq_streams_exporter_service_name }}"
+  ansible.builtin.service:
+    name: "{{ amq_streams_exporter_service_name }}"
+    state: restarted
+  become: yes

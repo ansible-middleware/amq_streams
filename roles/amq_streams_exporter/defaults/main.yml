@@ -1,0 +1,33 @@
+---
+amq_streams_exporter_target_system: "{{ ansible_system | lower }}"
+amq_streams_exporter_target_arch: "{{ ansible_architecture }}"
+amq_streams_exporter_version: 1.7.0
+amq_streams_exporter_download_base_url: 'https://github.com/danielqsj/kafka_exporter/releases/download/'
+amq_streams_exporter_download_url: "{{ amq_streams_exporter_download_base_url }}v{{ amq_streams_exporter_version }}/kafka_exporter-{{ amq_streams_exporter_version }}.{{ amq_streams_exporter_target_system }}-{{ amq_streams_exporter_target_arch }}.tar.gz"
+amq_streams_exporter_archive_folder: "kafka_exporter-{{ amq_streams_exporter_version }}.{{ amq_streams_exporter_target_system }}-{{ amq_streams_exporter_target_arch }}"
+amq_streams_exporter_archive_name: "{{ amq_streams_exporter_archive_folder }}.tar.gz"
+amq_streams_exporter_download_dir: "{{ lookup('env','PWD') | default('/opt') }}"
+amq_streams_exporter_download_path: "{{ amq_streams_exporter_download_dir }}/{{ amq_streams_exporter_archive_name }}"
+amq_streams_exporter_download_host: localhost
+amq_streams_exporter_home: "{{ amq_streams_common_home }}"
+amq_streams_exporter_server_start: "{{ amq_streams_common_home }}/{{ amq_streams_exporter_archive_folder }}/{{ amq_streams_exporter_server_start_script }}"
+amq_streams_exporter_dependencies:
+  - tar
+  - unzip
+amq_streams_exporter_service_name: amq_streams_exporter
+amq_streams_exporter_server_port: 9308
+amq_streams_exporter_server_start_script: kafka_exporter
+
+#amq_streams_exporter_server_config: /etc/amq_streams_exporter
+#amq_streams_exporter_config_template: templates/exporter.properties.j2
+amq_streams_exporter_systemd_env_file: /etc/amq_streams_exporter.conf
+amq_streams_exporter_service_config_template: templates/service.conf.j2
+#amq_streams_exporter_service_config_template: templates/service.conf.j2
+amq_streams_exporter_user: amq_streams_exporter
+amq_streams_exporter_group: amq_streams
+amq_streams_exporter_java_opts: ''
+amq_streams_exporter_server_port_delay: 0
+amq_streams_exporter_server_port_skip_wait: False
+amq_streams_exporter_broker_server_host: "{{ groups['brokers'][0] | default('localhost') }}"
+amq_streams_exporter_broker_server_port: 9092
+amq_streams_exporter_server_extra_args: "--group.filter='.*\' --topic.filter='.*' --offset.show-all --verbosity=0 --kafka.version='{{ amq_streams_common_product_version }}'  --kafka.server={{ amq_streams_exporter_broker_server_host }}:{{ amq_streams_exporter_broker_server_port }}"
