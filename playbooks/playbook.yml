@@ -28,6 +28,7 @@
       ansible.builtin.include_role:
         name: amq_streams_connect
       vars:
+        amq_streams_common_skip_download: true
         connectors:
           - { name: "file", path: "connectors/file.yml" }
 
