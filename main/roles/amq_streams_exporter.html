@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Role Index &mdash; AmqStreams Ansible Collection  documentation</title>
+  <title>Connect Role &mdash; AmqStreams Ansible Collection  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/ansible-basic-sphinx-ext.css" />
@@ -22,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Broker Role" href="amq_streams_broker.html" />
-    <link rel="prev" title="Usage Patterns" href="../usage.html" /> 
+    <link rel="next" title="Zookeeper Role" href="amq_streams_zookeeper.html" />
+    <link rel="prev" title="Cruise Control Role" href="amq_streams_cruise_control.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,12 +49,15 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../README.html">Ansible Collection - middleware_automation.amq_streams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage Patterns</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Role Index</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Role Index</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="amq_streams_broker.html">Broker Role</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amq_streams_common.html">Common Role</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amq_streams_connect.html">Connect Role</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amq_streams_cruise_control.html">Cruise Control Role</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_exporter.html">Connect Role</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Connect Role</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#role-defaults">Role Defaults</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="amq_streams_zookeeper.html">Zookeeper Role</a></li>
 </ul>
 </li>
@@ -96,9 +99,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Role Index</li>
+          <li class="breadcrumb-item"><a href="index.html">Role Index</a></li>
+      <li class="breadcrumb-item active">Connect Role</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/roles/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/roles/amq_streams_exporter.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -106,72 +110,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="role-index">
-<h1>Role Index<a class="headerlink" href="#role-index" title="Link to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="amq_streams_broker.html">Broker Role</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_broker.html#role-defaults">Role Defaults</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_broker.html#role-variables">Role Variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_broker.html#tls-encryption">TLS Encryption</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_broker.html#broker-authentication">Broker Authentication</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="amq_streams_broker.html#sasl-plain-authentication">SASL Plain Authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="amq_streams_broker.html#sasl-scram-authentication">SASL SCRAM Authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="amq_streams_broker.html#sasl-authentication-over-ssl-listeners">SASL Authentication over SSL listeners</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_broker.html#topic-management">Topic Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="amq_streams_broker.html#create-topics">Create Topics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="amq_streams_broker.html#describe-topics">Describe Topics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="amq_streams_broker.html#delete-topics">Delete Topics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="amq_streams_broker.html#topic-management-with-broker-authentication">Topic Management with Broker Authentication</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_broker.html#license">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_broker.html#author-information">Author Information</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="amq_streams_common.html">Common Role</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_common.html#role-defaults">Role Defaults</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_common.html#role-variables">Role Variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_common.html#offline-installation">Offline installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_common.html#license">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_common.html#author-information">Author Information</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="amq_streams_connect.html">Connect Role</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_connect.html#role-defaults">Role Defaults</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_connect.html#role-variables">Role Variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_connect.html#license">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_connect.html#author-information">Author Information</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="amq_streams_cruise_control.html">Cruise Control Role</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_cruise_control.html#license">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_cruise_control.html#author-information">Author Information</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="amq_streams_exporter.html">Connect Role</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_exporter.html#role-defaults">Role Defaults</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="amq_streams_zookeeper.html">Zookeeper Role</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_zookeeper.html#role-defaults">Role Defaults</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_zookeeper.html#role-variables">Role Variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_zookeeper.html#license">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="amq_streams_zookeeper.html#author-information">Author Information</a></li>
-</ul>
-</li>
-</ul>
-</div>
+  <section id="connect-role">
+<h1>Connect Role<a class="headerlink" href="#connect-role" title="Link to this heading"></a></h1>
+<p>Perform installation and configuration of Kafka Export.</p>
+<section id="role-defaults">
+<h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Link to this heading"></a></h2>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../usage.html" class="btn btn-neutral float-left" title="Usage Patterns" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="amq_streams_broker.html" class="btn btn-neutral float-right" title="Broker Role" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="amq_streams_cruise_control.html" class="btn btn-neutral float-left" title="Cruise Control Role" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="amq_streams_zookeeper.html" class="btn btn-neutral float-right" title="Zookeeper Role" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
