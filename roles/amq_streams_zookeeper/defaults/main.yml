@@ -14,6 +14,7 @@ amq_streams_zookeeper_max_client_cnxns: 0
 amq_streams_zookeeper_admin_enable_server: 'true'
 amq_streams_zookeeper_admin_server_port: 8080
 amq_streams_zookeeper_admin_server_port_delay: 0
+amq_streams_zookeeper_admin_server_skip_wait: False
 amq_streams_zookeeper_instance_count_enabled: true
 amq_streams_zookeeper_inventory_group_name: 'zookeepers'
 amq_streams_zookeeper_instance_count: "{{ groups[amq_streams_zookeeper_inventory_group_name] | length }}"
