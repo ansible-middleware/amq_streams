@@ -1,0 +1,23 @@
+---
+- name: "Ensure required parameter(s) are defined."
+  ansible.builtin.assert:
+    that:
+      - amq_streams_common_home is defined
+      - amq_streams_exporter_broker_server_host is defined
+      - amq_streams_exporter_broker_server_port is defined
+    quiet: true
+
+- name: "Ensure user and group exists (if provided)."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: prereqs.yml
+  vars:
+    prereqs_user: "{{ amq_streams_exporter_user }}"
+    prereqs_group: "{{ amq_streams_exporter_group }}"
+
+- name: "Ensure all required system dependencies are present: {{ amq_streams_exporter_dependencies }}"
+  ansible.builtin.package:
+    name: "{{ amq_streams_common_dependencies }}"
+    state: present
+  when:
+    - amq_streams_exporter_dependencies is defined and amq_streams_exporter_dependencies | length > 0

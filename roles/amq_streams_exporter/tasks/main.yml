@@ -1,0 +1,11 @@
+---
+- name: "Ensure prerequisite are fullfilled."
+  ansible.builtin.include_tasks: prereqs.yml
+
+- name: "Download Kafka Exporter (if defined)."
+  ansible.builtin.include_tasks: download.yml
+  when:
+    - not amq_streams_common_redhat_enable is defined or not amq_streams_common_redhat_enable
+
+- name: "Deploy Kafka Connect as a systemd service."
+  ansible.builtin.include_tasks: service.yml

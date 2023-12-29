@@ -1,0 +1,46 @@
+---
+- name: "Ensure required parameters are provided."
+  ansible.builtin.assert:
+    that:
+      - amq_streams_exporter_download_url is defined
+      - amq_streams_exporter_download_url | length > 0
+      - amq_streams_exporter_download_path is defined
+    quiet: True
+
+- name: "Switch arch to 386 if x86_64 as there is no x86_64 releases of exporter"
+  ansible.builtin.set_fact:
+    amq_streams_exporter_target_arch: 386
+  when:
+    - amq_streams_exporter_target_arch is defined and amq_streams_exporter_target_arch == 'x86_64'
+
+- name: "Ensure archive file is available on {{ amq_streams_exporter_download_host }}"
+  delegate_to: "{{ amq_streams_exporter_download_host }}"
+  block:
+    - name: "Checks if file is already downloaded on controller"
+      ansible.builtin.stat:
+        path: "{{ amq_streams_exporter_download_path }}"
+      register: exporter_download_path
+
+    - name: "Ensures metadate of {{ amq_streams_exporter_download_path }} are correct."
+      ansible.builtin.assert:
+        that:
+          - exporter_download_path is defined
+          - exporter_download_path.stat is defined
+          - exporter_download_path.stat.exists is defined
+        quiet: True
+
+    - name: "Download Kafka exporter from {{ amq_streams_exporter_download_url }}."
+      ansible.builtin.get_url:
+        url: "{{ amq_streams_exporter_download_url }}"
+        dest: "{{ amq_streams_exporter_download_path }}"
+        mode: 0644
+      when:
+        - not exporter_download_path.stat.exists
+
+- name: "Extract archive file {{ amq_streams_exporter_archive_name }} in {{ amq_streams_exporter_home }}."
+  ansible.builtin.unarchive:
+    src: "{{ amq_streams_exporter_download_path }}"
+    dest: "{{ amq_streams_exporter_home }}"
+    owner: "{{ amq_streams_exporter_user | default(omit) }}"
+    group: "{{ amq_streams_exporter_group | default(omit) }}"
+

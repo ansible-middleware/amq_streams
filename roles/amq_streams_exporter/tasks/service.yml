@@ -1,0 +1,28 @@
+---
+- name: "Configure firewalld for Kafka Connect (if enable)."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: firewalld.yml
+  vars:
+    service_port: "{{ amq_streams_exporter_server_port }}"
+  when:
+    - amq_streams_firewalld_enabled is defined and amq_streams_firewalld_enabled
+    - amq_streams_exporter_server_port is defined
+
+- name: "Deploy Kafka Connect as a systemd service."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: systemd.yml
+  vars:
+    service_systemd_workdir: "{{ amq_streams_common_home }}"
+    server_name: "{{ amq_streams_exporter_service_name }}"
+    server_start: "{{ amq_streams_exporter_server_start }}"
+    service_systemd_env_file: "{{ amq_streams_exporter_systemd_env_file }}"
+    service_systemd_env_file_template: "{{ amq_streams_exporter_service_config_template }}"
+    server_extra_args: "{{ amq_streams_exporter_server_extra_args }}"
+    server_user: "{{ amq_streams_exporter_user }}"
+    server_group: "{{ amq_streams_exporter_group }}"
+    server_java_opts: "{{ amq_streams_exporter_java_opts }}"
+    server_port: "{{ amq_streams_exporter_server_port }}"
+    skip_wait_for_server_port: "{{ amq_streams_exporter_server_port_skip_wait }}"
+    delay_before_server_port_check: "{{ amq_streams_exporter_server_port_delay }}"
