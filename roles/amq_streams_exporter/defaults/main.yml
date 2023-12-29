@@ -1,5 +1,5 @@
 ---
-amq_streams_exporter_target_system: "{{ ansible_system | lower }}"
+#amq_streams_exporter_target_system: "{{ ansible_system | lower }}"
 amq_streams_exporter_target_arch: "{{ ansible_architecture }}"
 amq_streams_exporter_version: 1.7.0
 amq_streams_exporter_download_base_url: 'https://github.com/danielqsj/kafka_exporter/releases/download/'
@@ -30,4 +30,4 @@ amq_streams_exporter_server_port_delay: 0
 amq_streams_exporter_server_port_skip_wait: False
 amq_streams_exporter_broker_server_host: "{{ groups['brokers'][0] | default('localhost') }}"
 amq_streams_exporter_broker_server_port: 9092
-amq_streams_exporter_server_extra_args: "--group.filter='.*\' --topic.filter='.*' --offset.show-all --verbosity=0 --kafka.version='{{ amq_streams_common_product_version }}'  --kafka.server={{ amq_streams_exporter_broker_server_host }}:{{ amq_streams_exporter_broker_server_port }}"
+amq_streams_exporter_server_extra_args: "--group.filter='.*' --topic.filter='.*' --offset.show-all --verbosity=0 --kafka.version='{{ amq_streams_common_product_version }}'  --kafka.server={{ amq_streams_exporter_broker_server_host }}:{{ amq_streams_exporter_broker_server_port }}"
