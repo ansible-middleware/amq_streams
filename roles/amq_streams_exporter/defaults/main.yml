@@ -1,5 +1,5 @@
 ---
-#amq_streams_exporter_target_system: "{{ ansible_system | lower }}"
+amq_streams_exporter_enabled: True
 amq_streams_exporter_target_arch: "{{ ansible_architecture }}"
 amq_streams_exporter_version: 1.7.0
 amq_streams_exporter_download_base_url: 'https://github.com/danielqsj/kafka_exporter/releases/download/'

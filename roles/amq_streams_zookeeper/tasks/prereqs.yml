@@ -1,8 +1,0 @@
----
-- name: "Ensure user for zookeeper exists (if provided)."
-  ansible.builtin.include_role:
-    name: amq_streams_common
-    tasks_from: prereqs.yml
-  vars:
-    prereqs_user: "{{ amq_streams_zookeeper_user }}"
-    prereqs_group: "{{ amq_streams_zookeeper_group }}"

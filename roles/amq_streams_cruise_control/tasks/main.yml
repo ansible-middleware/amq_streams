@@ -5,7 +5,7 @@
       - amq_stream_cruise_control_home is defined
     quiet: true
 
-- name: "Ensure Cruise Control artifacts are available."
+- name: "Ensure requirements for Cruise Control are met."
   ansible.builtin.include_role:
     name: amq_streams_common
     tasks_from: main.yml
@@ -15,13 +15,14 @@
     name: amq_streams_common
     tasks_from: rhn/main.yml
 
-- name: "Ensure Cruise Control artifacts are available."
+- name: "Ensure Cruise Control artifacts is properly installed."
   ansible.builtin.include_role:
     name: amq_streams_common
     tasks_from: install.yml
   vars:
-    amq_streams_common_archive_file: amq-streams-2.5.1-cruise-control-bin.zip
-    amq_streams_common_archive_creates_control_file: /opt/cruise-control//config
+    amq_streams_common_archive_file: "{{ amq_streams_cruise_control_archive_file }}"
+    amq_streams_common_archive_creates_control_file: "{{ amq_streams_cruise_control_home }}/config"
+    rhn_product_archive_file_pattern: "{{ amq_streams_cruise_control_rhn_product_archive_file_pattern }}"
 
 - name: "Deploy custom log4j config (if provided)"
   when:
@@ -50,36 +51,5 @@
   when:
     - amq_streams_broker_inter_broker_auth_sasl_protocol is defined and amq_streams_broker_inter_broker_auth_sasl_mechanisms is defined and amq_streams_cruise_control_zk_sasl_jaas_config is defined
 
-- name: "Configure firewalld for Cruise Control (if enable)."
-  ansible.builtin.include_role:
-    name: amq_streams_common
-    tasks_from: firewalld.yml
-  vars:
-    service_port: "{{ amq_streams_cruise_control_port }}"
-  when:
-    - amq_streams_firewalld_enabled is defined and amq_streams_firewalld_enabled
-    - amq_streams_cruise_control_port is defined
-
-- name: "Deploy Cruise Control as a systemd service."
-  ansible.builtin.include_role:
-    name: amq_streams_common
-    tasks_from: systemd.yml
-  vars:
-#    service_systemd_workdir: "{{ amq_streams_common_home }}"
-    server_name: "{{ amq_streams_cruise_control_service_name }}"
-    server_start: "{{ amq_streams_cruise_control_server_start }}"
-    server_stop: "{{ amq_streams_cruise_control_server_stop }}"
-    server_config: "{{ amq_streams_cruise_control_server_config }}"
-    server_config_template: "{{ amq_streams_cruise_control_config_properties_template }}"
-#    service_systemd_env_file: "{{ amq_streams_connect_systemd_env_file }}"
-#    service_systemd_env_file_template: "{{ amq_streams_connect_service_config_template }}"
-#    server_log_dir: "{{ amq_streams_connect_logs_dir | default(omit) }}"
-#    server_extra_args: "{{ amq_streams_connect_server_extra_args }}"
-    server_user: "{{ amq_streams_cruise_control_user }}"
-    server_group: "{{ amq_streams_cruise_control_group }}"
-    server_java_opts: "{{ amq_streams_cruise_control_java_opts | default('') }}"
-#    server_log4j_opts: "{{ amq_streams_connect_java_log4j_opts | default('') }}"
-#    server_java_heap_opts: "{{ amq_streams_connect_java_heap_opts | default('') }}"
-#    server_java_performance_opts: "{{ amq_streams_connect_java_performance_opts | default('') }}"
-#    server_java_gc_log_opts: "{{ amq_streams_connect_java_java_gc_log_opts | default('') }}"
-#    server_start_sleep: "{{ amq_streams_connect_zookeeper_session_timeout_ms }}"
+- name: "Ensure Cruise Control service is running (if enable)."
+  ansible.builtin.include_tasks: service.yml
