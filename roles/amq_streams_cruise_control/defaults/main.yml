@@ -1,11 +1,12 @@
 ---
 amq_streams_cruise_control_enabled: false
 amq_streams_cruise_control_home: /opt/cruise-control/
-rhn_product_archive_file_pattern: '^.*/amq-streams-[0-9.]*-cruise-control-bin.zip'
+amq_streams_cruise_control_rhn_product_archive_file_pattern: '^.*/amq-streams-[0-9.]*-cruise-control-bin.zip'
 amq_streams_cruise_control_service_name: amq_streams_cruise_control
 amq_streams_cruise_control_server_start: "{{ amq_streams_cruise_control_home }}/kafka-cruise-control-start.sh"
 amq_streams_cruise_control_server_stop: "{{ amq_streams_cruise_control_home }}/kafka-cruise-control-stop.sh"
-amq_streams_common_archive_file: amq-streams-2.5.1-cruise-control-bin.zip
+amq_streams_cruise_control_version: 2.5.1
+amq_streams_cruise_control_archive_file: "amq-streams-{{ amq_streams_cruise_control_version }}-cruise-control-bin.zip"
 amq_streams_cruise_control_server_config: "/etc/amq_streams_cruise_control.properties"
 amq_streams_cruise_control_config_template: 'templates/service.conf.j2'
 amq_streams_cruise_control_config_properties_template: 'templates/cruisecontrol.properties.j2'

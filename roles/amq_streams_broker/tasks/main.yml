@@ -1,6 +1,16 @@
 ---
-- name: "Ensure requirements for broker are fulfilled."
-  ansible.builtin.include_tasks: prereqs.yml
+- name: "Ensure prerequirements for collection are met."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: prereqs.yml
+  vars:
+    prereqs_user: "{{ amq_streams_broker_user }}"
+    prereqs_group: "{{ amq_streams_broker_group }}"
+
+- name: "Set Zookeeper host value"
+  ansible.builtin.set_fact:
+    amq_streams_broker_zookeeper_host: "{{ amq_streams_zookeeper_host | default(amq_streams_broker_zookeeper_host_default_value) }}"
+    amq_streams_broker_zookeeper_port: "{{ amq_streams_zookeeper_port | default(amq_streams_broker_zookeeper_port_default_value) }}"
 
 - name: "Ensure Prometheus requirements are met (if enabled: {{ amq_streams_broker_prometheus_enabled }})."
   ansible.builtin.include_role:
@@ -95,5 +105,5 @@
   when:
     - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
 
-- name: "Configure firewalld  for Broker (if enable)."
+- name: "Configure service for Broker (if enable)."
   ansible.builtin.include_tasks: service.yml
