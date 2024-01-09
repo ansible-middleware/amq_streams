@@ -124,103 +124,103 @@
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_target_arch</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Specify physical architecture of target host</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">ansible_architecture</span> <span class="pre">}}</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_version</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Exporter version to be used</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1.7.0</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_download_base_url</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Base URL for downloading Exporter archive</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://github.com/danielqsj/kafka_exporter/releases/download/</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_download_url</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Download URL for Exporter archive</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_exporter_download_base_url</span> <span class="pre">}}v{{</span> <span class="pre">amq_streams_exporter_version</span> <span class="pre">}}/kafka_exporter-{{</span> <span class="pre">amq_streams_exporter_version</span> <span class="pre">}}.{{</span> <span class="pre">amq_streams_exporter_target_system</span> <span class="pre">}}-{{</span> <span class="pre">amq_streams_exporter_target_arch</span> <span class="pre">}}.tar.gz</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_archive_folder</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Folder name for Exporter</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">kafka_exporter-{{</span> <span class="pre">amq_streams_exporter_version</span> <span class="pre">}}.{{</span> <span class="pre">amq_streams_exporter_target_system</span> <span class="pre">}}-{{</span> <span class="pre">amq_streams_exporter_target_arch</span> <span class="pre">}}</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_archive_name</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Exporter archive name</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_exporter_archive_folder</span> <span class="pre">}}.tar.gz</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_download_dir</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Download dirname</p></td>
 <td class="text-left"><p>`{{ lookup(‘env’,’PWD’)</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_download_path</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Path to download directory (on controller)</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_exporter_download_dir</span> <span class="pre">}}/{{</span> <span class="pre">amq_streams_exporter_archive_name</span> <span class="pre">}}</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_download_host</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Hostname of download host (if not controller)</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_home</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Exporter home directory</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_common_home</span> <span class="pre">}}</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_start</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Exporter start script</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_common_home</span> <span class="pre">}}/{{</span> <span class="pre">amq_streams_exporter_archive_folder</span> <span class="pre">}}/{{</span> <span class="pre">amq_streams_exporter_server_start_script</span> <span class="pre">}}</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_dependencies</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Dependencies required by Exporter (RPM packages names)</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">['tar',</span> <span class="pre">'unzip']</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_service_name</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Service name for the Exporter instance</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_port</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Exporter server port</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">9308</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_start_script</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Exporter start script name</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">kafka_exporter</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_systemd_env_file</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Exporter service config file</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/etc/amq_streams_exporter.conf</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_service_config_template</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Templates to use for the systemd service for Exporter</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/service.conf.j2</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_user</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>User account, on targets, running the Exporter</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_group</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Group account, on targets, Exporter user belongs to</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_java_opts</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Java options to pass to Exporter JVM</p></td>
 <td class="text-left"><p>``</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_port_delay</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Delay before checking Exporter server’s port availability</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_port_skip_wait</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Skip waiting for Exporter server port to be available</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_broker_server_host</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Broker’s hostname</p></td>
 <td class="text-left"><p>`{{ groups[‘brokers’][0]</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_broker_server_port</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Broker’s port</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">9092</span></code></p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_extra_args</span></code></p></td>
-<td class="text-left"><p>TODO document argument</p></td>
+<td class="text-left"><p>Extra arguments to Exporter service start command</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">--group.filter='.*'</span> <span class="pre">--topic.filter='.*'</span> <span class="pre">--offset.show-all</span> <span class="pre">--verbosity=0</span> <span class="pre">--kafka.version='{{</span> <span class="pre">amq_streams_common_product_version</span> <span class="pre">}}'</span> <span class="pre">--kafka.server={{</span> <span class="pre">amq_streams_exporter_broker_server_host</span> <span class="pre">}}:{{</span> <span class="pre">amq_streams_exporter_broker_server_port</span> <span class="pre">}}</span></code></p></td>
 </tr>
 </tbody>
@@ -239,7 +239,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Red Hat, Inc..</p>
+    <p>&#169; Copyright 2024, Red Hat, Inc..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
