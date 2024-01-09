@@ -32,12 +32,6 @@
         connectors:
           - { name: "file", path: "connectors/file.yml" }
 
-    - name: "Ensure AMQ Streams Broker is running and available."
-      ansible.builtin.include_role:
-        name: amq_streams_exporter
-      vars:
-        amq_streams_common_skip_download: true
-
   post_tasks:
 
     - name: "Validate that deployment is functional."
