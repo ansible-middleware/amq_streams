@@ -1,4 +1,7 @@
 ---
-- name: "TODO implement validation play for Cruise Control"
-  ansible.builtin.debug:
-    msg: "Need to be implemented."
+- name: "Validate that Cruise Control is running"
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: validation/service.yml
+  vars:
+    service_name: "{{ amq_streams_cruise_control_service_name }}"
