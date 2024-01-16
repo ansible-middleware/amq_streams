@@ -1,7 +1,7 @@
 ---
 amq_streams_common_product_version: 3.6.0
 amq_streams_common_rhn_product_version: 2.6.0
-amq_streams_common_rhn_home_dir: "kafka_2.13-{{ amq_streams_common_product_version }}.redhat-00014"
+amq_streams_common_rhn_home_dir: "kafka_2.13-{{ amq_streams_common_product_version }}.redhat-00005"
 amq_streams_common_rhn_product_path: /opt
 amq_streams_common_redhat_enabled: false
 amq_streams_common_rhn_product_category: 'jboss.amq.streams'
