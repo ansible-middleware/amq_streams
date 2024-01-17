@@ -14,6 +14,8 @@
   ansible.builtin.include_role:
     name: amq_streams_common
     tasks_from: rhn/main.yml
+  vars:
+    rhn_product_archive_file_pattern: "{{ amq_streams_cruise_control_rhn_product_archive_file_pattern }}"
 
 - name: "Ensure Cruise Control artifacts is properly installed."
   ansible.builtin.include_role:

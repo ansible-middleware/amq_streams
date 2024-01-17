@@ -18,7 +18,7 @@
   ansible.builtin.set_fact:
     rhn_product_archive_file_pattern: '^.*/amq-streams-[0-9.]*-bin.zip$'
   when:
-    - not rhn_product_archive_file_pattern is defined or rhn_product_archive_file_pattern == ""
+    - not rhn_product_archive_file_pattern is defined or rhn_product_archive_file_pattern | length < 1
 
 - name: "Determine which archive to download using file pattern: {{ rhn_product_archive_file_pattern }}."
   ansible.builtin.set_fact:
