@@ -20,7 +20,7 @@
   when:
     - not rhn_product_archive_file_pattern is defined or rhn_product_archive_file_pattern == ""
 
-- name: "Determine which archive to download"
+- name: "Determine which archive to download using file pattern: {{ rhn_product_archive_file_pattern }}."
   ansible.builtin.set_fact:
     rhn_filtered_products: "{{ rhn_products.results | selectattr('file_path', 'match', rhn_product_archive_file_pattern) }}"
 
