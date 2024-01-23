@@ -1,5 +1,6 @@
 ---
 - name: "Restart {{ amq_streams_zookeeper.service_name }}"
+  become: "{{ amq_streams_zookeeper_restart_requires_priv_escalation }}"
   ansible.builtin.service:
     name: "{{ amq_streams_zookeeper.service_name }}"
     state: restarted

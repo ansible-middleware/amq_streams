@@ -5,77 +5,74 @@
       - server_name is defined
     quiet: true
 
-- name: "Ensure {{ server_name }} configuration is deployed ({{ server_config_template }} -> {{ server_config }}."
-  ansible.builtin.template:
-    src: "{{ server_config_template }}"
-    dest: "{{ server_config }}"
-    owner: root
-    group: root
-    mode: 0644
-  when:
-    - server_config_template is defined and server_config is defined
-  notify:
-    - "Restart {{ server_name }}"
-  become: yes
+- name: "Switch to root"
+  become: "{{ amq_streams_common_escalade_privilege_group_create }}"
+  block:
+    - name: "Ensure {{ server_name }} configuration is deployed ({{ server_config_template }} -> {{ server_config }}."
+      ansible.builtin.template:
+        src: "{{ server_config_template }}"
+        dest: "{{ server_config }}"
+        owner: root
+        group: root
+        mode: 0644
+      when:
+        - server_config_template is defined and server_config is defined
+      notify:
+        - "Restart {{ server_name }}"
 
-- name: "Ensure log dir belongs to the appropriate user and group - if all provided"
-  ansible.builtin.file:
-    path: "{{ server_log_dir }}"
-    owner: "{{ server_user }}"
-    group: "{{ server_group }}"
-    state: directory
-  when:
-    - server_log_dir is defined
-    - server_user is defined
-    - server_group is defined
-  become: yes
+    - name: "Ensure log dir belongs to the appropriate user and group - if all provided"
+      ansible.builtin.file:
+        path: "{{ server_log_dir }}"
+        owner: "{{ server_user }}"
+        group: "{{ server_group }}"
+        state: directory
+      when:
+        - server_log_dir is defined
+        - server_user is defined
+        - server_group is defined
 
-- name: "Deploy server configuration - if provided."
-  ansible.builtin.template:
-    src: "{{ service_systemd_env_file_template | default('templates/service.conf.j2') }}"
-    dest: "{{ service_systemd_env_file }}"
-    owner: root
-    group: root
-    mode: 0644
-  when:
-    - service_systemd_env_file is defined
-  become: yes
+    - name: "Deploy server configuration - if provided."
+      ansible.builtin.template:
+        src: "{{ service_systemd_env_file_template | default('templates/service.conf.j2') }}"
+        dest: "{{ service_systemd_env_file }}"
+        owner: root
+        group: root
+        mode: 0644
+      when:
+        - service_systemd_env_file is defined
 
-- name: "Deploy Systemd descriptor for service: {{ server_name }}"
-  ansible.builtin.template:
-    src: "{{ server_service_config_file_template | default(amq_streams_common.systemd.service_config_file_template) }}"
-    dest: "{{ server_systemd_home | default(amq_streams_common.systemd.home) }}/{{ server_systemd_name | default(server_name + '.service') }}"
-    group: root
-    owner: root
-    mode: 0644
-  vars:
-    service_description: "{{ server_description | default(server_name) }}"
-    service_user: "{{ server_user | default('root') }}"
-    service_group: "{{ server_group | default('root') }}"
-    service_pidfile: "{{ server_pidfile | default(omit) }}"
-    service_start_sleep: "{{ server_start_sleep | default(0) }}"
-  register: daemon_reload
-  become: yes
+    - name: "Deploy Systemd descriptor for service: {{ server_name }}"
+      ansible.builtin.template:
+        src: "{{ server_service_config_file_template | default(amq_streams_common.systemd.service_config_file_template) }}"
+        dest: "{{ server_systemd_home | default(amq_streams_common.systemd.home) }}/{{ server_systemd_name | default(server_name + '.service') }}"
+        group: root
+        owner: root
+        mode: 0644
+      vars:
+        service_description: "{{ server_description | default(server_name) }}"
+        service_user: "{{ server_user | default('root') }}"
+        service_group: "{{ server_group | default('root') }}"
+        service_pidfile: "{{ server_pidfile | default(omit) }}"
+        service_start_sleep: "{{ server_start_sleep | default(0) }}"
+      register: daemon_reload
 
-- name: "Perform daemon-reload to ensure the changes are picked up"
-  ansible.builtin.systemd:
-    daemon_reload: yes
-  become: yes
-  when:
-    - daemon_reload is defined
-    - daemon_reload.changed
+    - name: "Perform daemon-reload to ensure the changes are picked up"
+      ansible.builtin.systemd:
+        daemon_reload: yes
+      when:
+        - daemon_reload is defined
+        - daemon_reload.changed
 
-- name: "Ensure {{ server_name }} is enabled and running."
-  ansible.builtin.service:
-    name: "{{ server_name }}"
-    enabled: yes
-    state: started
-  become: yes
+    - name: "Ensure {{ server_name }} is enabled and running."
+      ansible.builtin.service:
+        name: "{{ server_name }}"
+        enabled: yes
+        state: started
 
-- name: "Wait for service port {{ server_port }} to be available - (if provided)"
-  ansible.builtin.wait_for:
-    port: "{{ server_port }}"
-    delay: "{{ delay_before_server_port_check | default(omit) }}"
-  when:
-    - skip_wait_for_server_port is defined and not skip_wait_for_server_port
-    - server_port is defined and server_port != ''
+    - name: "Wait for service port {{ server_port }} to be available - (if provided)"
+      ansible.builtin.wait_for:
+        port: "{{ server_port }}"
+        delay: "{{ delay_before_server_port_check | default(omit) }}"
+      when:
+        - skip_wait_for_server_port is defined and not skip_wait_for_server_port
+        - server_port is defined and server_port != ''
