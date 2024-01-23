@@ -8,7 +8,7 @@ amq_streams_connect_file_connector_data:
 #
 amq_streams_connect_file_source_conf: "{{ amq_streams_common_home }}/config/connect-file-source.properties"
 amq_streams_connect_file_sink: "{{ amq_streams_common_home }}/config/connect-file-sink.properties"
-#
+amq_streams_connect_source_file_require_priv_escalation: yes
 amq_streams_connect_service_name: amq_streams_connect
 amq_streams_connect_logs_dir: "/var/log/{{ amq_streams_connect_service_name }}/"
 amq_streams_connect_server_start: "{{ amq_streams_common_home }}/bin/connect-standalone.sh"

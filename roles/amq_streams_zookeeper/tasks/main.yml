@@ -30,35 +30,38 @@
   when:
     - amq_streams_zookeeper_prometheus_enabled is defined and amq_streams_zookeeper_prometheus_enabled
 
-- name: "Ensure Zookeeper data dir exists and belongs to the appropriate user - if user is defined."
-  ansible.builtin.file:
-    path: "{{ amq_streams_zookeeper_data_dir }}"
-    state: directory
-    owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
-    group: "{{ amq_streams_zookeeper_group | default(omit) }}"
-    mode: 0755
-  when:
-    - amq_streams_zookeeper_data_dir is defined
+- name: "Ensures Zookeeper data dir, myid and auth config (if enable) are set."
+  become: "{{ amq_streams_zookeeper_data_require_priv_escalation }}"
+  block:
+    - name: "Ensure Zookeeper data dir exists and belongs to the appropriate user - if user is defined."
+      ansible.builtin.file:
+        path: "{{ amq_streams_zookeeper_data_dir }}"
+        state: directory
+        owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
+        group: "{{ amq_streams_zookeeper_group | default(omit) }}"
+        mode: 0755
+      when:
+        - amq_streams_zookeeper_data_dir is defined
 
-- name: "Configure 'myid' file based on the position in the zookeepers group or if it is defined on inventory"
-  copy:
-    content: "{{ amq_streams_zookeeper_zookeeper_id | default(amq_streams_zookeeper_inventory_group.index(inventory_hostname) + 1) }}"
-    dest: "{{ amq_streams_zookeeper_data_dir }}/myid"
-    owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
-    group: "{{ amq_streams_zookeeper_group | default(omit) }}"
-  when:
-    - amq_streams_zookeeper_inventory_group is defined
-    - amq_streams_zookeeper_inventory_group | length > 0
+    - name: "Configure 'myid' file based on the position in the zookeepers group or if it is defined on inventory"
+      ansible.builtin.copy:
+        content: "{{ amq_streams_zookeeper_zookeeper_id | default(amq_streams_zookeeper_inventory_group.index(inventory_hostname) + 1) }}"
+        dest: "{{ amq_streams_zookeeper_data_dir }}/myid"
+        owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
+        group: "{{ amq_streams_zookeeper_group | default(omit) }}"
+      when:
+        - amq_streams_zookeeper_inventory_group is defined
+        - amq_streams_zookeeper_inventory_group | length > 0
 
-- name: "Configure Zookeeper authentication (if enabled)"
-  ansible.builtin.template:
-    src: "{{ amq_streams_zookeeper_auth_config_template }}"
-    dest: "{{ amq_streams_zookeeper_auth_config }}"
-    owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
-    group: "{{ amq_streams_zookeeper_group | default(omit) }}"
-    mode: 0644
-  when:
-    - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
+    - name: "Configure Zookeeper authentication (if enabled)"
+      ansible.builtin.template:
+        src: "{{ amq_streams_zookeeper_auth_config_template }}"
+        dest: "{{ amq_streams_zookeeper_auth_config }}"
+        owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
+        group: "{{ amq_streams_zookeeper_group | default(omit) }}"
+        mode: 0644
+      when:
+        - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
 
 - name: "Enable Zookeeper authentication environment variable"
   ansible.builtin.set_fact:

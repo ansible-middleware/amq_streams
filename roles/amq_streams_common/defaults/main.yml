@@ -11,14 +11,20 @@ amq_streams_common_archive_file: "kafka_{{ amq_streams_common_version }}.tgz"
 amq_streams_common_rhn_product_archive_file_pattern: '^.*/amq-streams-[0-9.]*-bin.zip$'
 amq_streams_common_download_url: "https://archive.apache.org/dist/kafka/{{ amq_streams_common_product_version }}/kafka_{{ amq_streams_common_version }}.tgz"
 amq_streams_common_download_dir: "{{ lookup('env','PWD') | default('/opt') }}"
-#amq_streams_common_download_user: "{{ lookup('env','USER') | default('root') }}"
+amq_streams_common_archive_extraction_requires_privilege_escalation: yes
 #amq_streams_common_download_group: "{{ lookup('env','USER') | default('root') }}"
+#amq_streams_common_download_user: "{{ lookup('env','USER') | default('root') }}"
+amq_streams_common_escalade_privilege_user_create: yes
+amq_streams_common_escalade_privilege_user_group: yes
+amq_streams_common_escalade_privilege_group_create: yes
+amq_streams_common_escalade_privilege_config_file: yes
 amq_streams_common_install_dir: /opt
 amq_streams_common_offline_install: false
 amq_streams_common_path_to_archive_file: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
 amq_streams_common_download_node: localhost
 amq_streams_common_systctl_update_enabled: false
 amq_streams_common_prereqs_dependencies: ['tar']
+amq_streams_common_dependencies_require_priv: yes
 amq_streams_common_openjdk_version: 17
 
 amq_streams_common_systemd_home: '/usr/lib/systemd/system'
