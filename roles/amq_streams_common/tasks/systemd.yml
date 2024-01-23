@@ -41,9 +41,14 @@
     - service_systemd_env_file is defined
   become: yes
 
+- name: "Determine service file absolute path."
+  ansible.builtin.set_fact:
+    server_systemd_service_abs_path: "{{ server_systemd_home | default(amq_streams_common.systemd.home) }}/{{ server_systemd_name | default(server_name + '.service') }}"
+
 - name: "Deploy Systemd descriptor for service: {{ server_name }}"
   ansible.builtin.template:
     src: "{{ server_service_config_file_template | default(amq_streams_common.systemd.service_config_file_template) }}"
+    dest: "{{ server_systemd_service_abs_path }}"
     dest: "{{ server_systemd_home | default(amq_streams_common.systemd.home) }}/{{ server_systemd_name | default(server_name + '.service') }}"
     group: root
     owner: root
@@ -56,6 +61,11 @@
     service_start_sleep: "{{ server_start_sleep | default(0) }}"
   register: daemon_reload
   become: yes
+
+- name: "Wait for changes to happen on target system (if needed)."
+  ansible.builtin.wait_for:
+    path: "{{ server_systemd_service_abs_path }}"
+    state: present
 
 - name: "Perform daemon-reload to ensure the changes are picked up"
   ansible.builtin.systemd:
