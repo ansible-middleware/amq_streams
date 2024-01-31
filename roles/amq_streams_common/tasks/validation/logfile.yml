@@ -1,5 +1,8 @@
 ---
-- block:
+- name: Logfile Validation
+  when:
+    - server_log_validation is defined and server_log_validation
+  block:
     - name: "Ensure required parameter(s) are provided."
       ansible.builtin.assert:
         that:
@@ -15,7 +18,7 @@
       when:
         - not server_log_fail_if_error_is_found is defined
 
-    - name: "Read the content of {{ server_log_dir  }}."
+    - name: "Read the content of {{ server_log_dir }}."
       ansible.builtin.slurp:
         src: "{{ server_log_dir }}"
       register: server_log_slurped
@@ -39,6 +42,8 @@
         - not error_label is defined
 
     - name: "Check logfile {{ server_log_dir }} does not contains {{ error_label }}."
+      when:
+        - server_log_fail_if_error_is_found
       block:
 
         - name: "Display logfile if {{ error_label }} is found."
@@ -46,14 +51,10 @@
             msg: "{{ server_log_content }}"
           when:
               - error_label in server_log_content
-        - name:
+        - name: "Check logfile contains {{ error_label }}"
           ansible.builtin.assert:
             that:
               - not error_label in server_log_content
             quiet: true
             fail_msg: "Server logfile contains {{ error_label }} error lines."
           when:
-      when:
-        - server_log_fail_if_error_is_found
-  when:
-    - server_log_validation is defined and server_log_validation

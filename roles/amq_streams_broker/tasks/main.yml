@@ -92,6 +92,7 @@
     force: true
     owner: "{{ amq_streams_broker_user | default(omit) }}"
     group: "{{ amq_streams_broker_group | default(omit) }}"
+    mode: 0644
   when:
     - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
 
@@ -102,6 +103,7 @@
     force: true
     owner: "{{ amq_streams_broker_user | default(omit) }}"
     group: "{{ amq_streams_broker_group | default(omit) }}"
+    mode: 0644
   when:
     - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
 

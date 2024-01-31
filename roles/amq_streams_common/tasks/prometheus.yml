@@ -10,6 +10,7 @@
   ansible.builtin.file:
     path: "{{ amq_streams_common_prometheus_metrics_config_home }}"
     state: directory
+    mode: 0644
 
 - name: "Deploy Prometheus metrics file (src: {{ amq_streams_common_prometheus_config_file_template }} to dest: {{ amq_streams_common_prometheus_metrics_config_home }}{{ amq_streams_common_prometheus_config_file }}"
   ansible.builtin.template:

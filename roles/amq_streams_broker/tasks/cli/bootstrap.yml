@@ -30,6 +30,7 @@
     force: true
     owner: "{{ amq_streams_broker_user | default(omit) }}"
     group: "{{ amq_streams_broker_group | default(omit) }}"
+    mode: 0644
   when:
     - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
 
@@ -52,6 +53,7 @@
       ansible.builtin.template:
         src: "{{ amq_streams_broker_admin_cli_config_template }}"
         dest: "{{ amq_streams_broker_admin_cli_config_file }}"
+        mode: 0644
 
     - name: "Set command-config argument to run operation '{{ bootstrap_operator }}' for topic: '{{ main_argument }}'."
       ansible.builtin.set_fact:
@@ -61,8 +63,7 @@
   block:
     - name: "Build command line"
       ansible.builtin.set_fact:
-        command_line: "{{ script }} {{ bootstrap_operator }} {{ bootstrap_operator_options | default('') }} {{ main_argument }} {{ bootstrap_command_config_operator_option | default('')}}  --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}"
-
+        command_line: "{{ script }} {{ bootstrap_operator }} {{ bootstrap_operator_options | default('') }} {{ main_argument }} {{ bootstrap_command_config_operator_option | default('') }}  --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}"
     - name: "Print command line for debugging - if requested"
       ansible.builtin.debug:
         var: command_line

@@ -16,7 +16,7 @@ galaxy_info:
   platforms:
    - name: EL
      versions:
-     - 8
+     - "8"
 
   galaxy_tags:
     - java

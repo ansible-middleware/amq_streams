@@ -15,3 +15,4 @@
   ansible.builtin.template:
     src: templates/sasl.properties.j2
     dest: "{{ amq_stream_common_home }}/config/sasl.properties"
+    mode: 0644

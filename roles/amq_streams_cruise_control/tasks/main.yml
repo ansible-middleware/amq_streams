@@ -34,6 +34,7 @@
       ansible.builtin.file:
         path: "{{ amq_streams_cruise_control_logfilename | dirname }}"
         state: directory
+        mode: 0644
 
     - name: "Ensure log4j logging is properly configured"
       ansible.builtin.template:

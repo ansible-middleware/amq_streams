@@ -18,8 +18,7 @@
       vars:
         main_argument: "--topic {{ topic_name }}"
         bootstrap_operator: "--create"
-        bootstrap_operator_options: "{{ bootstrap_create_operator_partitions_option | default('') }} {{ bootstrap_create_operator_replication_factor_option  | default('') }}"
-  rescue:
+        bootstrap_operator_options: "{{ bootstrap_create_operator_partitions_option | default('') }} {{ bootstrap_create_operator_replication_factor_option | default('') }}"
     - name: "Set expected error message"
       ansible.builtin.set_fact:
         topic_already_exists_err_msg: "Topic '{{ topic_name }}' already exists"

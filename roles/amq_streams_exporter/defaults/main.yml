@@ -6,7 +6,7 @@ amq_streams_exporter_download_base_url: 'https://github.com/danielqsj/kafka_expo
 amq_streams_exporter_download_url: "{{ amq_streams_exporter_download_base_url }}v{{ amq_streams_exporter_version }}/kafka_exporter-{{ amq_streams_exporter_version }}.{{ amq_streams_exporter_target_system }}-{{ amq_streams_exporter_target_arch }}.tar.gz"
 amq_streams_exporter_archive_folder: "kafka_exporter-{{ amq_streams_exporter_version }}.{{ amq_streams_exporter_target_system }}-{{ amq_streams_exporter_target_arch }}"
 amq_streams_exporter_archive_name: "{{ amq_streams_exporter_archive_folder }}.tar.gz"
-amq_streams_exporter_download_dir: "{{ lookup('env','PWD') | default('/opt') }}"
+amq_streams_exporter_download_dir: "{{ lookup('env', 'PWD') | default('/opt') }}"
 amq_streams_exporter_download_path: "{{ amq_streams_exporter_download_dir }}/{{ amq_streams_exporter_archive_name }}"
 amq_streams_exporter_download_host: localhost
 amq_streams_exporter_home: "{{ amq_streams_common_home }}"
