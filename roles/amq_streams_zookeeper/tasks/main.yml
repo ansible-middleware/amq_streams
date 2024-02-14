@@ -70,5 +70,4 @@
     - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
 
 - name: "Configure Zookeeper as a systemd service."
-  become: yes
   ansible.builtin.include_tasks: service.yml
