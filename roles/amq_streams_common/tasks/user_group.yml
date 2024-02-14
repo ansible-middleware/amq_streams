@@ -7,10 +7,12 @@
     quiet: true
 
 - name: "Ensure required group {{ group }} exists."
+  become: yes
   ansible.builtin.group:
     name: "{{ group }}"
 
 - name: "Ensure required user {{ user }} exists."
+  become: yes
   ansible.builtin.user:
     name: "{{ user }}"
     group: "{{ group }}"
