@@ -40,6 +40,7 @@
   register: download_target
 
 - name: "Extract artifact {{ amq_streams_common_archive_file }} to {{ amq_streams_common_install_dir }}"
+  become: yes
   ansible.builtin.unarchive:
     src: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
     dest: "{{ amq_streams_common_install_dir }}"
