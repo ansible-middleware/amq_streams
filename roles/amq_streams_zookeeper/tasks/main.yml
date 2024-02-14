@@ -31,6 +31,7 @@
     - amq_streams_zookeeper_prometheus_enabled is defined and amq_streams_zookeeper_prometheus_enabled
 
 - name: "Ensure Zookeeper data dir exists and belongs to the appropriate user - if user is defined."
+  become: yes
   ansible.builtin.file:
     path: "{{ amq_streams_zookeeper_data_dir }}"
     state: directory
