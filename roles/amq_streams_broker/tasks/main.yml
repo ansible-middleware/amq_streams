@@ -35,75 +35,78 @@
   when:
     - ansible_distribution == "RedHat"
 
-- name: "Ensure broker home dir belongs to appropriate user - if user is defined."
-  ansible.builtin.file:
-    path: "{{ amq_streams_common_home }}"
-    state: directory
-    owner: "{{ amq_streams_broker_user | default(omit) }}"
-    group: "{{ amq_streams_broker_group | default(omit) }}"
-    mode: 0755
-  changed_when: false   # TODO: find a better way to deal with that
+- name: "Switch to root"
+  become: yes
+  block:
+    - name: "Ensure broker home dir belongs to appropriate user - if user is defined."
+      ansible.builtin.file:
+        path: "{{ amq_streams_common_home }}"
+        state: directory
+        owner: "{{ amq_streams_broker_user | default(omit) }}"
+        group: "{{ amq_streams_broker_group | default(omit) }}"
+        mode: 0755
+      changed_when: false   # TODO: find a better way to deal with that
 
-- name: "Ensure Broker data dir exists and belongs to the appropriate user - if user is defined."
-  ansible.builtin.file:
-    path: "{{ amq_streams_broker_data_dir }}"
-    state: directory
-    owner: "{{ amq_streams_broker_user | default(omit) }}"
-    group: "{{ amq_streams_broker_group | default(omit) }}"
-    mode: 0755
-  when:
-    - amq_streams_broker_data_dir is defined
+    - name: "Ensure Broker data dir exists and belongs to the appropriate user - if user is defined."
+      ansible.builtin.file:
+        path: "{{ amq_streams_broker_data_dir }}"
+        state: directory
+        owner: "{{ amq_streams_broker_user | default(omit) }}"
+        group: "{{ amq_streams_broker_group | default(omit) }}"
+        mode: 0755
+      when:
+        - amq_streams_broker_data_dir is defined
 
-- name: "Set server_id for {{ amq_streams_broker.service_name }} service."
-  ansible.builtin.set_fact:
-    server_id: "{{ amq_streams_broker_broker_id | default('0') }}"
-  when:
-    - not server_id is defined
+    - name: "Set server_id for {{ amq_streams_broker.service_name }} service."
+      ansible.builtin.set_fact:
+        server_id: "{{ amq_streams_broker_broker_id | default('0') }}"
+      when:
+        - not server_id is defined
 
-- name: "Configure Broker-Zookeeper authentication"
-  ansible.builtin.template:
-    src: "{{ amq_streams_broker_zookeeper_auth_config_template }}"
-    dest: "{{ amq_streams_broker_zookeeper_auth_config }}"
-    owner: "{{ amq_streams_broker_user | default(omit) }}"
-    group: "{{ amq_streams_broker_group | default(omit) }}"
-    mode: 0644
-  when:
-    - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
+    - name: "Configure Broker-Zookeeper authentication"
+      ansible.builtin.template:
+        src: "{{ amq_streams_broker_zookeeper_auth_config_template }}"
+        dest: "{{ amq_streams_broker_zookeeper_auth_config }}"
+        owner: "{{ amq_streams_broker_user | default(omit) }}"
+        group: "{{ amq_streams_broker_group | default(omit) }}"
+        mode: 0644
+      when:
+        - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
 
-- name: "Enable Broker-Zookeeper authentication environment variable"
-  ansible.builtin.set_fact:
-    amq_streams_broker_java_opts: "-Djava.security.auth.login.config={{ amq_streams_broker_zookeeper_auth_config }}"
-  when:
-    - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
+    - name: "Enable Broker-Zookeeper authentication environment variable"
+      ansible.builtin.set_fact:
+        amq_streams_broker_java_opts: "-Djava.security.auth.login.config={{ amq_streams_broker_zookeeper_auth_config }}"
+      when:
+        - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
 
-- name: "Wait for Zookeeper to be available - if enabled ({{ amq_streams_broker_zookeeper_host }}:{{ amq_streams_broker_zookeeper_port }})."
-  ansible.builtin.wait_for:
-    host: "{{ amq_streams_broker_zookeeper_host }}"
-    port: "{{ amq_streams_broker_zookeeper_port }}"
-  when:
-    - amq_streams_broker_zookeeper_wait is defined and amq_streams_broker_zookeeper_wait
-    - amq_streams_broker_zookeeper_host is defined
-    - amq_streams_broker_zookeeper_port is defined
+    - name: "Wait for Zookeeper to be available - if enabled ({{ amq_streams_broker_zookeeper_host }}:{{ amq_streams_broker_zookeeper_port }})."
+      ansible.builtin.wait_for:
+        host: "{{ amq_streams_broker_zookeeper_host }}"
+        port: "{{ amq_streams_broker_zookeeper_port }}"
+      when:
+        - amq_streams_broker_zookeeper_wait is defined and amq_streams_broker_zookeeper_wait
+        - amq_streams_broker_zookeeper_host is defined
+        - amq_streams_broker_zookeeper_port is defined
 
-- name: "Copy Server Keystore with certificates"
-  ansible.builtin.copy:
-    src: "{{ amq_streams_broker_tls_keystore_dir }}/{{ amq_streams_broker_tls_keystore }}"
-    dest: "{{ amq_streams_broker_tls_keystore_location }}/{{ amq_streams_broker_tls_keystore }}"
-    force: true
-    owner: "{{ amq_streams_broker_user | default(omit) }}"
-    group: "{{ amq_streams_broker_group | default(omit) }}"
-  when:
-    - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
+    - name: "Copy Server Keystore with certificates"
+      ansible.builtin.copy:
+        src: "{{ amq_streams_broker_tls_keystore_dir }}/{{ amq_streams_broker_tls_keystore }}"
+        dest: "{{ amq_streams_broker_tls_keystore_location }}/{{ amq_streams_broker_tls_keystore }}"
+        force: true
+        owner: "{{ amq_streams_broker_user | default(omit) }}"
+        group: "{{ amq_streams_broker_group | default(omit) }}"
+      when:
+        - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
 
-- name: "Copy Server Truststore with certificates"
-  ansible.builtin.copy:
-    src: "{{ amq_streams_broker_tls_truststore_dir }}/{{ amq_streams_broker_tls_truststore }}"
-    dest: "{{ amq_streams_broker_tls_truststore_location }}/{{ amq_streams_broker_tls_truststore }}"
-    force: true
-    owner: "{{ amq_streams_broker_user | default(omit) }}"
-    group: "{{ amq_streams_broker_group | default(omit) }}"
-  when:
-    - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
+    - name: "Copy Server Truststore with certificates"
+      ansible.builtin.copy:
+        src: "{{ amq_streams_broker_tls_truststore_dir }}/{{ amq_streams_broker_tls_truststore }}"
+        dest: "{{ amq_streams_broker_tls_truststore_location }}/{{ amq_streams_broker_tls_truststore }}"
+        force: true
+        owner: "{{ amq_streams_broker_user | default(omit) }}"
+        group: "{{ amq_streams_broker_group | default(omit) }}"
+      when:
+        - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
 
-- name: "Configure service for Broker (if enable)."
-  ansible.builtin.include_tasks: service.yml
+    - name: "Configure service for Broker (if enable)."
+      ansible.builtin.include_tasks: service.yml
