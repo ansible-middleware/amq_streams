@@ -7,6 +7,7 @@
 
 - name: "Switch to root"
   become: yes
+  block:
     - name: "Ensure {{ server_name }} configuration is deployed ({{ server_config_template }} -> {{ server_config }}."
       ansible.builtin.template:
         src: "{{ server_config_template }}"
