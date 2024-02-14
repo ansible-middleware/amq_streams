@@ -42,7 +42,8 @@
     - amq_streams_zookeeper_data_dir is defined
 
 - name: "Configure 'myid' file based on the position in the zookeepers group or if it is defined on inventory"
-  copy:
+  become: yes
+  ansible.builtin.copy:
     content: "{{ amq_streams_zookeeper_zookeeper_id | default(amq_streams_zookeeper_inventory_group.index(inventory_hostname) + 1) }}"
     dest: "{{ amq_streams_zookeeper_data_dir }}/myid"
     owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
@@ -52,6 +53,7 @@
     - amq_streams_zookeeper_inventory_group | length > 0
 
 - name: "Configure Zookeeper authentication (if enabled)"
+  become: yes
   ansible.builtin.template:
     src: "{{ amq_streams_zookeeper_auth_config_template }}"
     dest: "{{ amq_streams_zookeeper_auth_config }}"
@@ -68,4 +70,5 @@
     - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
 
 - name: "Configure Zookeeper as a systemd service."
+  become: yes
   ansible.builtin.include_tasks: service.yml
