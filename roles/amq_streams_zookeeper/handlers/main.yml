@@ -1,5 +1,6 @@
 ---
 - name: "Restart {{ amq_streams_zookeeper.service_name }}"
+  become: yes
   ansible.builtin.service:
     name: "{{ amq_streams_zookeeper.service_name }}"
     state: restarted
