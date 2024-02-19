@@ -1,6 +1,6 @@
-===============================================
-middleware_automation.amq_streams Release Notes
-===============================================
+=================================================
+middleware\_automation.amq\_streams Release Notes
+=================================================
 
 .. contents:: Topics
 
@@ -8,6 +8,11 @@ This changelog describes changes after version 0.0.0.
 
 v1.0.0-devel
 ============
+
+Major Changes
+-------------
+
+- add missing become: on task needing priv escalation to root `#121 <https://github.com/ansible-middleware/amq_streams/pull/121>`_
 
 v0.0.9
 ======
