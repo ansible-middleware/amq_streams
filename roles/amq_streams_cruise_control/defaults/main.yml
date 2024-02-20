@@ -13,6 +13,7 @@ amq_streams_cruise_control_config_properties_template: 'templates/cruisecontrol.
 amq_streams_cruise_control_path_to_log4j_properties: "{{ amq_streams_cruise_control_home }}/config/log4j.properties"
 amq_streams_cruise_control_log4j_template: 'templates/log4j.properties.j2'
 amq_streams_cruise_control_logfilename: '/var/log/cruise-control'
+amq_streams_cruise_control_logfiles_requires_priv_escalation: yes
 amq_streams_cruise_control_capacity_template: 'templates/capacity.json.j2'
 amq_streams_cruise_control_path_to_capacity_file: "{{ amq_streams_cruise_control_home }}/config/capacity.json"
 amq_streams_cruise_control_user: root
