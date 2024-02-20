@@ -27,6 +27,7 @@
     rhn_product_archive_file_pattern: "{{ amq_streams_cruise_control_rhn_product_archive_file_pattern }}"
 
 - name: "Deploy custom log4j config (if provided)"
+  become: "{{ amq_streams_cruise_control_logfiles_requires_priv_escalation }}"
   when:
     - amq_streams_cruise_control_logfilename is defined
   block:
