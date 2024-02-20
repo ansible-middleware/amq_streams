@@ -16,6 +16,7 @@ amq_streams_cruise_control_logfilename: '/var/log/cruise-control'
 amq_streams_cruise_control_logfiles_requires_priv_escalation: yes
 amq_streams_cruise_control_capacity_template: 'templates/capacity.json.j2'
 amq_streams_cruise_control_path_to_capacity_file: "{{ amq_streams_cruise_control_home }}/config/capacity.json"
+amq_streams_cruise_control_path_to_capacity_file_require_priv_escalation: yes
 amq_streams_cruise_control_user: root
 amq_streams_cruise_control_group: root
 amq_streams_cruise_control_zk_host: "{{ groups['zookeepers'][0] }}"
