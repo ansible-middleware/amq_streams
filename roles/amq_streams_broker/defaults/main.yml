@@ -100,6 +100,7 @@ amq_streams_broker_tls_truststore_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODU
 # Truststore for Clients
 amq_streams_broker_tls_truststore_client_dir: /tmp
 amq_streams_broker_tls_truststore_client: client.truststore.jks
+amq_streams_broker_tls_truststore_client_require_priv_escalation: yes
 amq_streams_broker_tls_truststore_client_location: /opt
 amq_streams_broker_tls_truststore_client_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION
 amq_streams_broker_admin_cli_log4j_opts: "  "

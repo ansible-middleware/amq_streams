@@ -24,6 +24,7 @@
     - not bootstrap_server_port is defined
 
 - name: "Copy Client Truststore with certificates"
+  become: "{{ amq_streams_broker_tls_truststore_client_require_priv_escalation }}"
   ansible.builtin.copy:
     src: "{{ amq_streams_broker_tls_truststore_client_dir }}/{{ amq_streams_broker_tls_truststore_client }}"
     dest: "{{ amq_streams_broker_tls_truststore_client_location }}/{{ amq_streams_broker_tls_truststore_client }}"
