@@ -12,6 +12,7 @@ v1.0.0-devel
 Major Changes
 -------------
 
+- Add missing become in broker and cruise_control roles `#123 <https://github.com/ansible-middleware/amq_streams/pull/123>`_
 - add missing become: on task needing priv escalation to root `#121 <https://github.com/ansible-middleware/amq_streams/pull/121>`_
 
 v0.0.9
