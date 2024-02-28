@@ -42,7 +42,10 @@ argument_specs:
                 default: "amq_streams_zookeeper"
                 description: "Name of systemd service associated to Zk"
                 type: "str"
-
+            amq_streams_zookeeper_restart_requires_priv_escalation:
+                default: "yes"
+                description: "Indicate if restarting zk requires Ansible to escalate privileges (become: yes). Value should be yes or no"
+                type: "str"
             # line 9 of defaults/main.yml
             amq_streams_zookeeper_service_config_template:
                 default: "templates/service.conf.j2"
@@ -54,13 +57,19 @@ argument_specs:
                 default: "/etc/zookeeper.conf"
                 description: "Path to the Zk systemd's configuration on the target"
                 type: "str"
-
+            amq_streams_zookeeper_sysctl_vm_max_map_count:
+                default: "65530"
+                description: "Value used to set target's kernel vm_max_map_count"
+                type: "int"
             # line 11 of defaults/main.yml
             amq_streams_zookeeper_data_dir:
                 default: "/var/lib/{{ amq_streams_zookeeper_service_name }}/"
                 description: "Path to the datadir used by Zk on the target system"
                 type: "str"
-
+            amq_streams_zookeeper_data_require_priv_escalation:
+                default: "yes"
+                description: "Indicate if zk datadir needs to be created with privileges escalation (default: yes)."
+                type: "str"
             # line 12 of defaults/main.yml
             amq_streams_zookeeper_logs_dir:
                 default: "/var/log/{{ amq_streams_zookeeper_service_name }}/"
@@ -84,7 +93,14 @@ argument_specs:
                 default: 8080
                 description: "Zk admin server port"
                 type: "int"
-
+            amq_streams_zookeeper_admin_server_port_delay:
+                default: 0
+                description: "Excepted delay for zk server to become available"
+                type: "int"
+            amq_streams_zookeeper_admin_server_skip_wait:
+                default: False
+                description: "Should Ansible skip the wait: after zk service start."
+                type: "bool"
             # line 16 of defaults/main.yml
             amq_streams_zookeeper_instance_count_enabled:
                 default: true
@@ -144,13 +160,15 @@ argument_specs:
                 default: 3888
                 description: "Zk cluster port range end"
                 type: "int"
-
             # line 28 of defaults/main.yml
             amq_streams_zookeeper_inventory_group:
-                default: "{{ groups['zookeepers'] | default('') }}"
+                default: "{{ groups[amq_streams_zookeeper_inventory_group_name] | length }}"
                 description: "Zk inventory"
                 type: "str"
-
+            amq_streams_zookeeper_inventory_group_name:
+                default: "zookeepers"
+                description: "Name used in the inventory for the group referencing all the zk instances."
+                type: "str"
             # line 30 of defaults/main.yml
             amq_streams_firewalld_package_name:
                 default: "['firewalld']"

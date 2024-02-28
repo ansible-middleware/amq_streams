@@ -1,4 +1,7 @@
 ---
+- name: "Ensure prerequistes are in place"
+  ansible.builtin.include_tasks: topic/prereqs.yml
+
 - name: "Get description of topic using the bootstrap server."
   ansible.builtin.include_tasks: cli/bootstrap.yml
   vars:

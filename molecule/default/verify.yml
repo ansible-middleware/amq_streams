@@ -6,7 +6,7 @@
       ansible.builtin.service_facts:
 
     - name: Check if amq_streams service started
-      assert:
+      ansible.builtin.assert:
         that:
           - ansible_facts.services["amq_streams_broker.service"]["state"] == "running"
           - ansible_facts.services["amq_streams_broker.service"]["status"] == "enabled"

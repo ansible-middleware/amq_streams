@@ -5,6 +5,9 @@
   vars:
     sudo_pkg_name: 'sudo'
   tasks:
+    - name: Display Ansible version
+      ansible.builtin.debug:
+        msg: "Ansible version is  {{ ansible_version.full }}"
 
     - name: "Ensure {{ sudo_pkg_name }} is installed (if user is root)."
       ansible.builtin.yum:
@@ -27,7 +30,3 @@
         name:
           - sudo
         state: present
-
-    - name: Display Ansible version
-      ansible.builtin.debug:
-        msg: "Ansible version is  {{ ansible_version.full }}"

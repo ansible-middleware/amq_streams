@@ -1,4 +1,7 @@
 ---
+- name: "Ensure prerequistes are in place"
+  ansible.builtin.include_tasks: topic/prereqs.yml
+
 - name: "Create topic using the bootstrap server."
   block:
     - name: "Set bootstrap partitions to create topic (if defined)."
