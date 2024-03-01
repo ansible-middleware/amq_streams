@@ -29,6 +29,10 @@ argument_specs:
                 default: "jboss.amq.streams"
                 description: "TODO document argument"
                 type: "str"
+            amq_streams_common_scala_version:
+                default: "2.13"
+                description: "TODO document argument"
+                type: "float"
             amq_streams_common_version:
                 default: "{{ amq_streams_common_scala_version }}-{{ amq_streams_common_product_version }}"
                 description: "Apache Kafka version to install"
@@ -114,6 +118,10 @@ argument_specs:
             amq_streams_common_systemd_service_config_file_template:
                 default: "templates/service_systemd.j2"
                 description: "Template use to create systemd service for Kafka components (Zookeeper, Broker)."
+                type: "str"
+            amq_streams_common_home:
+                default: "{{ amq_streams_common_install_dir }}/kafka_{{ amq_streams_common_version }}/"
+                description: "TODO document argument"
                 type: "str"
             amq_streams_common_firewalld_package_name:
                 default: "['firewalld']"

@@ -2,89 +2,163 @@ argument_specs:
     main:
         options:
             # line 2 of defaults/main.yml
+            amq_streams_cruise_control_enabled:
+                default: false
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 3 of defaults/main.yml
             amq_streams_cruise_control_home:
                 default: "/opt/cruise-control/"
                 description: "Path to folder where Cruise Control has been installed"
                 type: "str"
 
-            # line 3 of defaults/main.yml
+            # line 4 of defaults/main.yml
+            amq_streams_cruise_control_rhn_product_archive_file_pattern:
+                default: "^.*/amq-streams-[0-9.]*-cruise-control-bin.zip"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 5 of defaults/main.yml
             amq_streams_cruise_control_service_name:
                 default: "amq_streams_cruise_control"
                 description: "Name of the systemd service running Cruise Control"
                 type: "str"
 
-            # line 4 of defaults/main.yml
+            # line 6 of defaults/main.yml
             amq_streams_cruise_control_server_start:
                 default: "{{ amq_streams_cruise_control_home }}/kafka-cruise-control-start.sh"
                 description: "Path to start script for systemd service managing Cruise Control"
                 type: "str"
 
-            # line 5 of defaults/main.yml
+            # line 7 of defaults/main.yml
             amq_streams_cruise_control_server_stop:
                 default: "{{ amq_streams_cruise_control_home }}/kafka-cruise-control-stop.sh"
                 description: "Path to stop script for systemd service managing Cruise Control"
                 type: "str"
 
-            # line 6 of defaults/main.yml
+            # line 8 of defaults/main.yml
+            amq_streams_cruise_control_version:
+                default: "2.6.0"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 9 of defaults/main.yml
+            amq_streams_cruise_control_archive_file:
+                default: "amq-streams-{{ amq_streams_cruise_control_version }}-cruise-control-bin.zip"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 10 of defaults/main.yml
             amq_streams_cruise_control_server_config:
                 default: "/etc/amq_streams_cruise_control.properties"
                 description: "Path to config file for Cruise Control service"
                 type: "str"
 
-            # line 7 of defaults/main.yml
+            # line 11 of defaults/main.yml
             amq_streams_cruise_control_config_template:
                 default: "templates/service.conf.j2"
                 description: "Path to template defining the systemd service for Cruise Control"
                 type: "str"
 
-            # line 8 of defaults/main.yml
+            # line 12 of defaults/main.yml
             amq_streams_cruise_control_config_properties_template:
                 default: "templates/cruisecontrol.properties.j2"
                 description: "Path to template defining the config file for Cruise Control"
                 type: "str"
 
-            # line 9 of defaults/main.yml
+            # line 13 of defaults/main.yml
+            amq_streams_cruise_control_path_to_log4j_properties:
+                default: "{{ amq_streams_cruise_control_home }}/config/log4j.properties"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 14 of defaults/main.yml
+            amq_streams_cruise_control_log4j_template:
+                default: "templates/log4j.properties.j2"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 15 of defaults/main.yml
+            amq_streams_cruise_control_logfilename:
+                default: "/var/log/cruise-control"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 16 of defaults/main.yml
+            amq_streams_cruise_control_logfiles_requires_priv_escalation:
+                default: true
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 17 of defaults/main.yml
+            amq_streams_cruise_control_capacity_template:
+                default: "templates/capacity.json.j2"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 18 of defaults/main.yml
+            amq_streams_cruise_control_path_to_capacity_file:
+                default: "{{ amq_streams_cruise_control_home }}/config/capacity.json"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 19 of defaults/main.yml
+            amq_streams_cruise_control_path_to_capacity_file_require_priv_escalation:
+                default: true
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 20 of defaults/main.yml
             amq_streams_cruise_control_user:
                 default: "root"
                 description: "User account running the Cruise Control service"
                 type: "str"
 
-            # line 10 of defaults/main.yml
+            # line 21 of defaults/main.yml
             amq_streams_cruise_control_group:
                 default: "root"
                 description: "Groupname of the account running the Cruise Control service"
                 type: "str"
 
-            # line 11 of defaults/main.yml
+            # line 22 of defaults/main.yml
             amq_streams_cruise_control_zk_host:
                 default: "{{ groups['zookeepers'][0] }}"
                 description: "Hostname of the Zookeeper instance used by Cruise Control to communicate with the ensemble"
                 type: "str"
 
-            # line 12 of defaults/main.yml
+            # line 23 of defaults/main.yml
             amq_streams_cruise_control_broker_host:
                 default: "{{ groups['brokers'][0] }}"
                 description: "Hostname of the Zookeeper instance used by Cruise Control to communicate with the ensemble"
                 type: "str"
 
-            # line 14 of defaults/main.yml
+            # line 24 of defaults/main.yml
+            amq_streams_cruise_control_replicator_factor:
+                default: 1
+                description: "TODO document argument"
+                type: "int"
+
+            # line 26 of defaults/main.yml
             amq_streams_cruise_control_host:
                 default: "localhost"
                 description: "Name of the host system running Cruise Control"
                 type: "str"
 
-            # line 15 of defaults/main.yml
+            # line 27 of defaults/main.yml
             amq_streams_cruise_control_port:
                 default: 9090
                 description: "Port used communicate with Cruise Control"
                 type: "int"
 
-            # line 16 of defaults/main.yml
+            # line 28 of defaults/main.yml
             amq_streams_cruise_control_api_path:
                 default: "kafkacruisecontrol"
                 description: "Context of the HTTP API call to Cruise Control (don't modify unless you know what you are doing)"
                 type: "str"
+
+            # line 30 of defaults/main.yml
             amq_streams_cruise_control_operation_exec:
-                default: True
+                default: true
                 description: "Indicate if the request must be executed or just diplayed (for debugging purpose)"
                 type: "bool"

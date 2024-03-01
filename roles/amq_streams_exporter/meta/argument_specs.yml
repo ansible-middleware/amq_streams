@@ -1,6 +1,12 @@
 argument_specs:
     main:
         options:
+            # line 2 of defaults/main.yml
+            amq_streams_exporter_enabled:
+                default: true
+                description: "TODO document argument"
+                type: "bool"
+
             # line 3 of defaults/main.yml
             amq_streams_exporter_target_arch:
                 default: "{{ ansible_architecture }}"
