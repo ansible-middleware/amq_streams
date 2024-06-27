@@ -15,6 +15,17 @@ Major Changes
 - Add missing become in broker and cruise_control roles `#123 <https://github.com/ansible-middleware/amq_streams/pull/123>`_
 - add missing become: on task needing priv escalation to root `#121 <https://github.com/ansible-middleware/amq_streams/pull/121>`_
 
+Minor Changes
+-------------
+
+- Add a role to manage Kafka Exporter `#113 <https://github.com/ansible-middleware/amq_streams/pull/113>`_
+- Add exporter role vars documentation `#114 <https://github.com/ansible-middleware/amq_streams/pull/114>`_
+
+Bugfixes
+--------
+
+- cruise_control: fix RHN download `#118 <https://github.com/ansible-middleware/amq_streams/pull/118>`_
+
 v0.0.9
 ======
 
