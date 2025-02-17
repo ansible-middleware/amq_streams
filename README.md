@@ -1,6 +1,6 @@
 # Ansible Collection - middleware_automation.amq_streams
 
-[![Build Status](https://github.com/ansible-middleware/amq_streams/workflows/CI/badge.svg?branch=main)](https://github.com/ansible-middleware/amq_streams/actions/workflows/ci.yml)
+[![Build Status](https://github.com/ansible-middleware/amq_streams/workflows/CI/badge.svg)](https://github.com/ansible-middleware/amq_streams/actions/workflows/ci.yml)
 
 Collection to install and configure [Apache Kafka](https://kafka.apache.org/) / [Red Hat AMQ Streams](https://access.redhat.com/documentation/en-us/red_hat_amq_streams).
 

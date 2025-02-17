@@ -10,9 +10,10 @@ on:
 
 jobs:
   ci:
-    uses: ansible-middleware/github-actions/.github/workflows/ci.yml@main
+    uses: ansible-middleware/github-actions/.github/workflows/ci.yml@rootperm
     secrets: inherit
     with:
       fqcn: 'middleware_automation/amq_streams'
+      root_permission_varname: 'amq_streams_install_requires_become'
       molecule_tests: >-
         [ "default" ]
