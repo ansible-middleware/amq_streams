@@ -7,7 +7,7 @@
     quiet: true
 
 - name: "Ensure firewalld is available."
-  become: true
+  become: "{{ amq_streams_install_requires_become | default(true) }}"
   ansible.builtin.package:
     name: "{{ amq_streams_common_firewalld_package_name }}"
     state: present
@@ -15,7 +15,7 @@
     - firewalld_state_check is not defined or firewalld_state_check
 
 - name: "Ensure firewalld is running."
-  become: true
+  become: "{{ amq_streams_install_requires_become | default(true) }}"
   ansible.builtin.service:
     name: "{{ amq_streams_common_firewalld_service_name | default('firewalld') }}"
     state: started

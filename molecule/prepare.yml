@@ -22,7 +22,7 @@
           - sudo_pkg_name in ansible_facts.packages
 
     - name: "Ensure required packages are installed."
-      become: yes
+      become: "{{ amq_streams_install_requires_become | default(true) }}"
       ansible.builtin.yum:
         name:
           - sudo

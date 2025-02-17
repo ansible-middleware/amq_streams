@@ -3,4 +3,4 @@
   ansible.builtin.service:
     name: "{{ amq_streams_exporter_service_name }}"
     state: restarted
-  become: yes
+  become: "{{ amq_streams_install_requires_become | default(true) }}"

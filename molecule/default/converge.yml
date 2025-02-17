@@ -10,6 +10,8 @@
       - name: otherTopic
         partitions: 4
         replication_factor: 1
+  vars_files:
+    - vars.yml
   roles:
     - role: amq_streams_zookeeper
   tasks:

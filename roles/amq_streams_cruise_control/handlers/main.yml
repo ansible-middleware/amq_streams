@@ -3,13 +3,13 @@
   ansible.builtin.service:
     name: "{{ amq_streams_cruise_control_service_name }}"
     state: restarted
-  become: yes
+  become: "{{ amq_streams_install_requires_become | default(true) }}"
 
 - name: "Stop {{ amq_streams_cruise_control_service_name }}"
   ansible.builtin.service:
     name: "{{ amq_streams_cruise_control_service_name }}"
     state: stopped
-  become: yes
+  become: "{{ amq_streams_install_requires_become | default(true) }}"
 
 - name: "Refresh capacity.json"
   ansible.builtin.include_tasks: capacity.yml
