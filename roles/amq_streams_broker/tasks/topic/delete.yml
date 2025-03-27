@@ -1,4 +1,7 @@
 ---
+- name: "Ensure prerequistes are in place"
+  ansible.builtin.include_tasks: topic/prereqs.yml
+
 - name: "Delete topic using the bootstrap server."
   block:
     - name: "Use bootstrap server to delete topic {{ topic_name }}"

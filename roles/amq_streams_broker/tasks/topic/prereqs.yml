@@ -1,0 +1,7 @@
+---
+- name: "Ensure path to broker home dir is defined"
+  ansible.builtin.set_fact:
+    amq_streams_common_home: "{{ amq_streams_common_install_dir }}/{{ amq_streams_common_rhn_home_dir }}"
+  when:
+    - (amq_streams_common_home is defined and not amq_streams_common_home is exists) or not amq_streams_common_home is defined
+    - amq_streams_common_redhat_enabled is defined and amq_streams_common_redhat_enabled

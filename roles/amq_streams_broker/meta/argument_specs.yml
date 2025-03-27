@@ -8,180 +8,228 @@ argument_specs:
                 type: "str"
 
             # line 3 of defaults/main.yml
+            amq_streams_broker_kafka_config_script:
+                default: "{{ amq_streams_common_home }}/bin/kafka-configs.sh"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 4 of defaults/main.yml
+            amq_streams_broker_kafka_acl_script:
+                default: "{{ amq_streams_common_home }}/bin/kafka-acls.sh"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 5 of defaults/main.yml
             amq_streams_broker_enabled:
                 default: true
                 description: "Whether or not Ansible should deploy and manage broker on target"
                 type: "bool"
 
-            # line 4 of defaults/main.yml
+            # line 6 of defaults/main.yml
             amq_streams_broker_server_start:
                 default: "{{ amq_streams_common_home }}/bin/kafka-server-start.sh"
                 description: "Provides path to the script used to start the broker"
                 type: "str"
 
-            # line 5 of defaults/main.yml
+            # line 7 of defaults/main.yml
             amq_streams_broker_config:
                 default: "/etc/amq_streams_broker.properties"
                 description: "Path to the broker properties configuration file"
                 type: "str"
 
-            # line 6 of defaults/main.yml
+            # line 8 of defaults/main.yml
             amq_streams_broker_service_name:
                 default: "amq_streams_broker"
                 description: "Name of the systemd service associated to the broker"
                 type: "str"
 
-            # line 7 of defaults/main.yml
+            # line 9 of defaults/main.yml
             amq_streams_broker_user:
                 default: "amq_streams_broker"
                 description: "Name of the user account running the broker"
                 type: "str"
 
-            # line 8 of defaults/main.yml
+            # line 10 of defaults/main.yml
+            amq_streams_broker_config_files_requires_privilege_escalation:
+                default: true
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 11 of defaults/main.yml
             amq_streams_broker_listener_port:
                 default: 9092
                 description: "Port used by the broker listener"
                 type: "int"
 
-            # line 9 of defaults/main.yml
+            # line 12 of defaults/main.yml
             amq_streams_broker_listener_internal_port:
                 default: 9091
                 description: "Internal port used by the broker"
                 type: "int"
 
-            # line 10 of defaults/main.yml
+            # line 13 of defaults/main.yml
+            amq_streams_broker_listener_tls_port:
+                default: 9093
+                description: "TODO document argument"
+                type: "int"
+
+            # line 14 of defaults/main.yml
+            amq_streams_broker_listener_port_delay:
+                default: 0
+                description: "TODO document argument"
+                type: "int"
+
+            # line 15 of defaults/main.yml
+            amq_streams_broker_listener_port_skip_wait:
+                default: false
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 16 of defaults/main.yml
             amq_streams_broker_group:
                 default: "amq_streams"
                 description: "Name of the system group used to run the broker"
                 type: "str"
 
-            # line 11 of defaults/main.yml
+            # line 17 of defaults/main.yml
             amq_streams_broker_service_config_template:
                 default: "templates/service.conf.j2"
                 description: "relative path to the template used for the systemd service configuration for the broker"
                 type: "str"
 
-            # line 12 of defaults/main.yml
+            # line 18 of defaults/main.yml
             amq_streams_broker_service_config_file:
                 default: "/etc/broker.conf"
                 description: "Path to the system service config on target"
                 type: "str"
 
-            # line 13 of defaults/main.yml
+            # line 19 of defaults/main.yml
             amq_streams_broker_data_dir:
                 default: "/var/lib/{{ amq_streams_broker_service_name }}"
                 description: "Path to the broker's datadir on target"
                 type: "str"
 
-            # line 14 of defaults/main.yml
+            # line 20 of defaults/main.yml
             amq_streams_broker_logs_dir:
                 default: "/var/log/{{ amq_streams_broker_service_name }}/"
                 description: "Path to the broker's logdir on target"
                 type: "str"
 
-            # line 15 of defaults/main.yml
+            # line 21 of defaults/main.yml
             amq_streams_broker_num_network_threads:
                 default: 3
                 description: "Number of network threads for the broker"
                 type: "int"
 
-            # line 16 of defaults/main.yml
+            # line 22 of defaults/main.yml
             amq_streams_broker_num_io_threads:
                 default: 8
                 description: "Number of i/o threads for the broker"
                 type: "int"
 
-            # line 17 of defaults/main.yml
+            # line 23 of defaults/main.yml
             amq_streams_broker_buffer_send_bytes:
                 default: 102400
                 description: "Value of the buffer send bytes of the broker"
                 type: "int"
 
-            # line 18 of defaults/main.yml
+            # line 24 of defaults/main.yml
             amq_streams_broker_buffer_bytes:
                 default: 102400
                 description: "Value of the buffer bytes of the broker"
                 type: "int"
 
-            # line 19 of defaults/main.yml
+            # line 25 of defaults/main.yml
             amq_streams_broker_socket_request_max_bytes:
                 default: 104857600
                 description: "Value of the socket request max bytes"
                 type: "int"
 
-            # line 20 of defaults/main.yml
+            # line 26 of defaults/main.yml
             amq_streams_broker_num_partitions:
                 default: 1
                 description: "Number of partitions"
                 type: "int"
 
-            # line 21 of defaults/main.yml
+            # line 27 of defaults/main.yml
             amq_streams_broker_num_recovery_threads_per_data_dir:
                 default: 1
                 description: "Number of recovery threads per datadir"
                 type: "int"
 
-            # line 22 of defaults/main.yml
+            # line 28 of defaults/main.yml
+            amq_streams_broker_sysctl_vm_max_map_count:
+                default: 65530
+                description: "TODO document argument"
+                type: "int"
+
+            # line 29 of defaults/main.yml
+            amq_streams_broker_ulimit_max_value:
+                default: 1024
+                description: "TODO document argument"
+                type: "int"
+
+            # line 30 of defaults/main.yml
             amq_streams_broker_offsets_topic_replication_factor:
                 default: 1
                 description: "Broker's offeset topic replication factor"
                 type: "int"
 
-            # line 23 of defaults/main.yml
+            # line 31 of defaults/main.yml
             amq_streams_broker_transaction_state_log_replication_factor:
                 default: 1
                 description: "Transaction state log replication factor"
                 type: "int"
 
-            # line 24 of defaults/main.yml
+            # line 32 of defaults/main.yml
             amq_streams_broker_transaction_state_log_min_isr:
                 default: 1
                 description: "Transaction state log min isr"
                 type: "int"
 
-            # line 25 of defaults/main.yml
+            # line 33 of defaults/main.yml
             amq_streams_broker_log_retention_hours:
                 default: 168
                 description: "Broker's log retention (in hours)"
                 type: "int"
 
-            # line 26 of defaults/main.yml
+            # line 34 of defaults/main.yml
             amq_streams_broker_log_retention_check_interval_ms:
                 default: 300000
                 description: "Broker's log retention check interval (in milliseconds)"
                 type: "int"
 
-            # line 27 of defaults/main.yml
+            # line 35 of defaults/main.yml
             amq_streams_broker_zookeeper_connection_timeout_ms:
                 default: 30000
                 description: "Zookeeper connection timeout (in milliseconds) for the broker"
                 type: "int"
 
-            # line 28 of defaults/main.yml
+            # line 36 of defaults/main.yml
             amq_streams_broker_zookeeper_session_timeout_ms:
                 default: 18000
                 description: "Zookeeper session timeout (in milliseconds) for the broker"
                 type: "int"
 
-            # line 29 of defaults/main.yml
+            # line 37 of defaults/main.yml
             amq_streams_broker_group_initial_rebalance_delay_ms:
                 default: 0
                 description: "Broker's group initial rebalance delay (in milliseconds)"
                 type: "int"
 
-            # line 30 of defaults/main.yml
+            # line 38 of defaults/main.yml
             amq_streams_broker_properties_template:
                 default: "templates/server.properties.j2"
                 description: "Relative path to the template used for the broker's server.properties"
                 type: "str"
 
-            # line 31 of defaults/main.yml
+            # line 39 of defaults/main.yml
             amq_streams_broker_java_heap_opts:
                 default: "-Xmx1G -Xms1G"
                 description: "Broker's Java heap's options"
                 type: "str"
 
-            # line 33 of defaults/main.yml
+            # line 41 of defaults/main.yml
             amq_streams_broker_bootstrap_server_host:
                 default: "localhost"
                 description: "Broker boostrap's server host"
@@ -211,110 +259,278 @@ argument_specs:
                 description: "Whether or not Ansible should count and keep track of the number of instances of broker deployed in the cluster"
                 type: "bool"
 
-            # line 41 of defaults/main.yml
+            # line 49 of defaults/main.yml
+            amq_streams_broker_inventory_group_name:
+                default: "brokers"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 50 of defaults/main.yml
             amq_streams_broker_instance_count:
-                default: 0
+                default: "{{ groups[amq_streams_broker_inventory_group_name] | length }}"
                 description: "Number of broker instances deployed by Ansible"
                 type: "int"
 
-            # line 43 of defaults/main.yml
+            # line 52 of defaults/main.yml
             amq_streams_deployment_balance_check_enabled:
                 default: true
                 description: "Whether or not the zk/broker balance check is enabled"
                 type: "bool"
 
-            # line 45 of defaults/main.yml
+            # line 54 of defaults/main.yml
             amq_streams_broker_zookeeper_host_default_value:
-                default: "localhost"
+                default: "{{ groups['zookeepers'][0] | default('localhost') }}"
                 description: "Hostname of the Zookeeper instance to be used by the broker"
                 type: "str"
 
-            # line 46 of defaults/main.yml
+            # line 55 of defaults/main.yml
             amq_streams_broker_zookeeper_port_default_value:
                 default: 2181
                 description: "Port of the Zookeeper used by the broker"
                 type: "int"
 
-            # line 47 of defaults/main.yml
+            # line 56 of defaults/main.yml
             amq_streams_broker_zookeeper_wait:
-                default: true
+                default: false
                 description: "How long should the broker before attempting to connect to the Zk"
                 type: "bool"
 
-            # line 50 of defaults/main.yml
+            # line 59 of defaults/main.yml
             amq_streams_zookeeper_auth_enabled:
-                default: "false"
+                default: false
                 description: "Whether or not authentification with Zk is enabled or not"
-                type: "str"
+                type: "bool"
 
-            # line 51 of defaults/main.yml
+            # line 60 of defaults/main.yml
             amq_streams_broker_zookeeper_auth_config:
                 default: "/etc/broker-jaas.conf"
                 description: "Path to the broker-jass.conf file on the target system"
                 type: "str"
 
-            # line 52 of defaults/main.yml
+            # line 61 of defaults/main.yml
             amq_streams_broker_zookeeper_auth_config_template:
                 default: "templates/broker-jaas.conf.j2"
                 description: "Relative path to the templates used to generate the content of the broker-jaas.conf file"
                 type: "str"
 
-            # line 55 of defaults/main.yml
+            # line 64 of defaults/main.yml
             amq_streams_broker_listeners:
                 default: "['PLAINTEXT://:{{ amq_streams_broker_listener_port }}']"
                 description: "Broker's listeners configuration"
                 type: "list"
 
-            # line 61 of defaults/main.yml
+            # line 74 of defaults/main.yml
             amq_streams_broker_auth_enabled:
-                default: "false"
+                default: false
                 description: "Whether or not authentification between brokers"
-                type: "str"
+                type: "bool"
 
-            # line 62 of defaults/main.yml
+            # line 75 of defaults/main.yml
             amq_streams_broker_auth_scram_enabled:
-                default: "false"
+                default: false
                 description: "Whether or not scram authentification is enabled"
-                type: "str"
+                type: "bool"
 
-            # line 63 of defaults/main.yml
+            # line 76 of defaults/main.yml
             amq_streams_connect_broker_auth_username:
                 default: "broker"
                 description: "Broker's username for Connect"
                 type: "str"
 
-            # line 64 of defaults/main.yml
+            # line 77 of defaults/main.yml
             amq_streams_connect_broker_auth_password:
                 default: "PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION"
                 description: "Value of the password used for Connect"
                 type: "str"
 
-            # line 66 of defaults/main.yml
+            # line 79 of defaults/main.yml
             amq_streams_broker_auth_listeners:
                 default: "['PLAINTEXT:PLAINTEXT']"
                 description: "Broker authentification listeners configuration"
                 type: "list"
 
-            # line 71 of defaults/main.yml
+            # line 86 of defaults/main.yml
             amq_streams_broker_auth_sasl_mechanisms:
                 default: "['PLAIN']"
                 description: "Broker's authentification sasl mechnisms used"
                 type: "list"
 
-            # line 75 of defaults/main.yml
+            # line 90 of defaults/main.yml
+            amq_streams_broker_tls_enabled:
+                default: false
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 92 of defaults/main.yml
+            amq_streams_broker_tls_keystore_dir:
+                default: "/tmp"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 93 of defaults/main.yml
+            amq_streams_broker_tls_keystore:
+                default: "server.keystore.jks"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 94 of defaults/main.yml
+            amq_streams_broker_tls_keystore_location:
+                default: "/opt"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 95 of defaults/main.yml
+            amq_streams_broker_tls_keystore_password:
+                default: "PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 96 of defaults/main.yml
+            amq_streams_broker_tls_truststore_dir:
+                default: "/tmp"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 97 of defaults/main.yml
+            amq_streams_broker_tls_truststore:
+                default: "server.truststore.jks"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 98 of defaults/main.yml
+            amq_streams_broker_tls_truststore_location:
+                default: "/opt"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 99 of defaults/main.yml
+            amq_streams_broker_tls_truststore_password:
+                default: "PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 101 of defaults/main.yml
+            amq_streams_broker_tls_truststore_client_dir:
+                default: "/tmp"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 102 of defaults/main.yml
+            amq_streams_broker_tls_truststore_client:
+                default: "client.truststore.jks"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 103 of defaults/main.yml
+            amq_streams_broker_tls_truststore_client_require_priv_escalation:
+                default: true
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 104 of defaults/main.yml
+            amq_streams_broker_tls_truststore_client_location:
+                default: "/opt"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 105 of defaults/main.yml
+            amq_streams_broker_tls_truststore_client_password:
+                default: "PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 106 of defaults/main.yml
+            amq_streams_broker_admin_cli_log4j_opts:
+                default: "  "
+                description: "TODO document argument"
+                type: "str"
+
+            # line 107 of defaults/main.yml
+            amq_streams_broker_admin_cli_log_dir:
+                default: "   "
+                description: "TODO document argument"
+                type: "str"
+
+            # line 108 of defaults/main.yml
+            amq_streams_broker_admin_cli_jmx_opts:
+                default: "   "
+                description: "TODO document argument"
+                type: "str"
+
+            # line 110 of defaults/main.yml
             amq_streams_broker_server_log_validation_min_size:
                 default: 20
                 description: "Broker's serverl log validation minimal size (to consider the broker running and functionnal)"
                 type: "int"
 
-            # line 77 of defaults/main.yml
+            # line 112 of defaults/main.yml
             amq_streams_broker_inventory_group:
-                default: "{{ groups['brokers'] | default('') }}"
+                default: "{{ groups['brokers'] | default([]) }}"
                 description: "Broker inventory"
                 type: "str"
 
-            # line 78 of defaults/main.yml
+            # line 113 of defaults/main.yml
             amq_streams_zookeeper_inventory_group:
-                default: "{{ groups['zookeepers'] | default('') }}"
+                default: "{{ groups['zookeepers'] | default([]) }}"
                 description: "Zookeepers inventory"
+                type: "str"
+
+            # line 115 of defaults/main.yml
+            amq_streams_broker_admin_cli_config_template:
+                default: "templates/admin-cli.properties.j2"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 116 of defaults/main.yml
+            amq_streams_broker_admin_cli_config_file:
+                default: "/tmp/admin-cli.properties"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 117 of defaults/main.yml
+            amq_streams_broker_admin_mechanism:
+                default: "PLAIN"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 118 of defaults/main.yml
+            amq_streams_broker_admin_username:
+                default: "PLEASE_IDENTIFY_THE_ADMIN_USER"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 119 of defaults/main.yml
+            amq_streams_broker_admin_password:
+                default: "PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 121 of defaults/main.yml
+            amq_streams_broker_prometheus_enabled:
+                default: false
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 122 of defaults/main.yml
+            amq_streams_broker_prometheus_port:
+                default: 18080
+                description: "TODO document argument"
+                type: "int"
+
+            # line 123 of defaults/main.yml
+            amq_streams_broker_prometheus_bind_addr:
+                default: "0.0.0.0"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 124 of defaults/main.yml
+            amq_streams_broker_prometheus_config_file:
+                default: "broker-config.yaml"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 125 of defaults/main.yml
+            amq_streams_broker_prometheus_config_file_template:
+                default: "prometheus/broker-config.yaml.j2"
+                description: "TODO document argument"
                 type: "str"

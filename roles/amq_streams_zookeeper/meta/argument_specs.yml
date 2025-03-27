@@ -50,151 +50,223 @@ argument_specs:
                 type: "str"
 
             # line 10 of defaults/main.yml
+            amq_streams_zookeeper_restart_requires_priv_escalation:
+                default: true
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 11 of defaults/main.yml
             amq_streams_zookeeper_service_env_file:
                 default: "/etc/zookeeper.conf"
                 description: "Path to the Zk systemd's configuration on the target"
                 type: "str"
 
-            # line 11 of defaults/main.yml
+            # line 12 of defaults/main.yml
             amq_streams_zookeeper_data_dir:
                 default: "/var/lib/{{ amq_streams_zookeeper_service_name }}/"
                 description: "Path to the datadir used by Zk on the target system"
                 type: "str"
 
-            # line 12 of defaults/main.yml
+            # line 13 of defaults/main.yml
             amq_streams_zookeeper_logs_dir:
                 default: "/var/log/{{ amq_streams_zookeeper_service_name }}/"
                 description: "Path to the logdir used by Zk on the target system"
                 type: "str"
 
-            # line 13 of defaults/main.yml
+            # line 14 of defaults/main.yml
+            amq_streams_zookeeper_data_require_priv_escalation:
+                default: true
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 15 of defaults/main.yml
             amq_streams_zookeeper_max_client_cnxns:
                 default: 0
                 description: "Number of max client connections for Zk"
                 type: "int"
 
-            # line 14 of defaults/main.yml
+            # line 16 of defaults/main.yml
             amq_streams_zookeeper_admin_enable_server:
                 default: "true"
                 description: "Whether or not Zk admin server is enabled"
                 type: "str"
 
-            # line 15 of defaults/main.yml
+            # line 17 of defaults/main.yml
             amq_streams_zookeeper_admin_server_port:
                 default: 8080
                 description: "Zk admin server port"
                 type: "int"
 
-            # line 16 of defaults/main.yml
+            # line 18 of defaults/main.yml
+            amq_streams_zookeeper_admin_server_port_delay:
+                default: 0
+                description: "Excepted delay for zk server to become available"
+                type: "int"
+
+            # line 19 of defaults/main.yml
+            amq_streams_zookeeper_admin_server_skip_wait:
+                default: false
+                description: "Should Ansible skip the wait: after zk service start."
+                type: "bool"
+
+            # line 20 of defaults/main.yml
             amq_streams_zookeeper_instance_count_enabled:
                 default: true
                 description: "Whether or not Ansible should count and keep track of the number of Zk instances deployed"
                 type: "bool"
 
-            # line 17 of defaults/main.yml
+            # line 21 of defaults/main.yml
+            amq_streams_zookeeper_inventory_group_name:
+                default: "zookeepers"
+                description: "Name used in the inventory for the group referencing all the zk instances."
+                type: "str"
+
+            # line 22 of defaults/main.yml
+            amq_streams_zookeeper_instance_count:
+                default: "{{ groups[amq_streams_zookeeper_inventory_group_name] | length }}"
+                description: "Zk instance count"
+                type: "str"
+
+            # line 23 of defaults/main.yml
             amq_streams_zookeeper_4wl_commands_whitelist:
                 default: "stat,dump"
                 description: "Zk 4wl commands whitelist"
                 type: "str"
 
-            # line 18 of defaults/main.yml
-            amq_streams_zookeeper_instance_count:
-                default: 0
-                description: "Zk instance count"
-                type: "int"
-
-            # line 19 of defaults/main.yml
+            # line 24 of defaults/main.yml
             amq_streams_zookeeper_java_heap_opts:
                 default: "-Xmx512M -Xms512M"
                 description: "Zk Java heap options"
                 type: "str"
 
-            # line 21 of defaults/main.yml
+            # line 25 of defaults/main.yml
+            amq_streams_zookeeper_sysctl_vm_max_map_count:
+                default: 65530
+                description: "TODO document argument"
+                type: "int"
+
+            # line 26 of defaults/main.yml
+            amq_streams_zookeeper_ulimit_max_value:
+                default: 1024
+                description: "TODO document argument"
+                type: "int"
+
+            # line 28 of defaults/main.yml
             amq_streams_zookeeper_host:
                 default: "localhost"
                 description: "Zk hostname"
                 type: "str"
 
-            # line 22 of defaults/main.yml
+            # line 29 of defaults/main.yml
             amq_streams_zookeeper_port:
                 default: 2181
                 description: "Zk port used"
                 type: "int"
 
-            # line 23 of defaults/main.yml
+            # line 30 of defaults/main.yml
             amq_streams_zookeeper_init_limit:
                 default: 5
                 description: "Zk init limit"
                 type: "int"
 
-            # line 24 of defaults/main.yml
+            # line 31 of defaults/main.yml
             amq_streams_zookeeper_sync_limit:
                 default: 2
                 description: "Zk sync limit"
                 type: "int"
 
-            # line 25 of defaults/main.yml
+            # line 32 of defaults/main.yml
             amq_streams_zookeeper_cluster_port_start:
                 default: 2888
                 description: "Zk cluster port range start"
                 type: "int"
 
-            # line 26 of defaults/main.yml
+            # line 33 of defaults/main.yml
             amq_streams_zookeeper_cluster_port_end:
                 default: 3888
                 description: "Zk cluster port range end"
                 type: "int"
 
-            # line 28 of defaults/main.yml
+            # line 35 of defaults/main.yml
             amq_streams_zookeeper_inventory_group:
-                default: "{{ groups['zookeepers'] | default('') }}"
+                default: "{{ groups[amq_streams_zookeeper_inventory_group_name] | default([]) }}"
                 description: "Zk inventory"
                 type: "str"
 
-            # line 30 of defaults/main.yml
+            # line 37 of defaults/main.yml
             amq_streams_firewalld_package_name:
                 default: "['firewalld']"
                 description: "Packages required to install Firewalld"
                 type: "list"
 
-            # line 32 of defaults/main.yml
+            # line 39 of defaults/main.yml
             amq_streams_firewalld_enabled:
                 default: false
                 description: "Whether or not Ansible should install and managed Firewalld for Zk"
                 type: "bool"
 
-            # line 35 of defaults/main.yml
+            # line 42 of defaults/main.yml
             amq_streams_zookeeper_auth_enabled:
-                default: "false"
+                default: false
                 description: "Whether or not authenfication for Zk is enabled"
-                type: "str"
+                type: "bool"
 
-            # line 36 of defaults/main.yml
+            # line 43 of defaults/main.yml
             amq_streams_zookeeper_auth_config:
                 default: "/etc/zookeeper-jaas.conf"
                 description: "Path to the Zk JAAS conf file on the target system"
                 type: "str"
 
-            # line 37 of defaults/main.yml
+            # line 44 of defaults/main.yml
             amq_streams_zookeeper_auth_config_template:
                 default: "templates/zookeeper-jaas.conf.j2"
                 description: "Relative path to the template used to generate the JAAS config"
                 type: "str"
 
-            # line 38 of defaults/main.yml
+            # line 45 of defaults/main.yml
             amq_streams_zookeeper_auth_user:
                 default: "zookeeper"
                 description: "Zk username used for authentification"
                 type: "str"
 
-            # line 39 of defaults/main.yml
+            # line 46 of defaults/main.yml
             amq_streams_zookeeper_auth_pass:
                 default: "PLEASE_CHANGE_ME_I_AM_NO_GOOD_FOR_PRODUCTION"
                 description: "Zk password used for authentification"
                 type: "str"
 
-            # line 41 of defaults/main.yml
+            # line 48 of defaults/main.yml
             amq_streams_zookeeper_server_log_validation_min_size:
                 default: 20
                 description: "Zk server log minimal size (to be considered functional)"
                 type: "int"
+
+            # line 50 of defaults/main.yml
+            amq_streams_zookeeper_prometheus_enabled:
+                default: false
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 51 of defaults/main.yml
+            amq_streams_zookeeper_prometheus_port:
+                default: 18080
+                description: "TODO document argument"
+                type: "int"
+
+            # line 52 of defaults/main.yml
+            amq_streams_zookeeper_prometheus_bind_addr:
+                default: "0.0.0.0"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 53 of defaults/main.yml
+            amq_streams_zookeeper_prometheus_config_file:
+                default: "zk-config.yaml"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 54 of defaults/main.yml
+            amq_streams_zookeeper_prometheus_config_file_template:
+                default: "prometheus/zk-config.yaml.j2"
+                description: "TODO document argument"
+                type: "str"

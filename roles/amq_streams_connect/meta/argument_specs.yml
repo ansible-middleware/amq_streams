@@ -15,7 +15,7 @@ argument_specs:
 
             # line 4 of defaults/main.yml
             amq_streams_connect_standalone_conf:
-                default: "{{ amq_streams_common_home }}/config/connect-standalone.properties"
+                default: "/etc/amq_streams_connect-standalone.properties"
                 description: "Path to the connect-standalone.properties used by Connect"
                 type: "str"
 
@@ -36,6 +36,12 @@ argument_specs:
                 default: "{{ amq_streams_common_home }}/config/connect-file-sink.properties"
                 description: "Path to the connect-file-sink properties file"
                 type: "str"
+
+            # line 11 of defaults/main.yml
+            amq_streams_connect_source_file_require_priv_escalation:
+                default: true
+                description: "TODO document argument"
+                type: "bool"
 
             # line 12 of defaults/main.yml
             amq_streams_connect_service_name:
@@ -91,62 +97,116 @@ argument_specs:
                 description: "Connect Java heap options"
                 type: "str"
 
-            # line 22 of defaults/main.yml
+            # line 21 of defaults/main.yml
+            amq_streams_connect_sysctl_vm_max_map_count:
+                default: 65530
+                description: "TODO document argument"
+                type: "int"
+
+            # line 23 of defaults/main.yml
             amq_streams_connect_bootstrap_servers:
                 default: "localhost:9092"
                 description: "Connect's hostname and port for boostrap"
                 type: "str"
 
-            # line 25 of defaults/main.yml
+            # line 26 of defaults/main.yml
             amq_streams_connect_broker_auth_enabled:
                 default: false
                 description: "Whether or not authentification between broker and Connect is enabled"
                 type: "bool"
 
-            # line 26 of defaults/main.yml
+            # line 27 of defaults/main.yml
             amq_streams_connect_broker_auth_scram_enabled:
                 default: false
                 description: "Whether or not broker scram authentification is enabled"
                 type: "bool"
 
-            # line 27 of defaults/main.yml
+            # line 28 of defaults/main.yml
+            amq_streams_connect_broker_admin_mechanism:
+                default: "PLAIN"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 29 of defaults/main.yml
             amq_streams_connect_broker_auth_username:
                 default: "broker"
                 description: "Broker's username used for Connect's auth"
                 type: "str"
 
-            # line 28 of defaults/main.yml
+            # line 30 of defaults/main.yml
             amq_streams_connect_broker_auth_password:
                 default: "PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION"
                 description: "Broker's password used for Connect's auth"
                 type: "str"
 
-            # line 29 of defaults/main.yml
+            # line 31 of defaults/main.yml
             amq_streams_connect_zookeeper_session_timeout_ms:
                 default: 18000
                 description: "Connect's Zk session time (in milliseconds)"
                 type: "int"
 
-            # line 30 of defaults/main.yml
+            # line 32 of defaults/main.yml
             amq_streams_connect_server_log_validation_min_size:
                 default: 20
                 description: "Connect's server log minimal size (for the service to be considered functionnal)"
                 type: "int"
 
-            # line 32 of defaults/main.yml
+            # line 34 of defaults/main.yml
             amq_streams_connect_config_template:
                 default: "templates/connect-standalone.properties.j2"
                 description: "Relative path to the template used for the Connect's standalone properties file"
                 type: "str"
 
-            # line 33 of defaults/main.yml
+            # line 35 of defaults/main.yml
             amq_streams_connect_service_config_template:
                 default: "templates/service.conf.j2"
                 description: "Relative path to the template used for the systemd service associated to Connect"
                 type: "str"
 
-            # line 34 of defaults/main.yml
+            # line 36 of defaults/main.yml
             amq_streams_connect_server_port:
                 default: 8083
                 description: "Connect's server port"
                 type: "int"
+
+            # line 37 of defaults/main.yml
+            amq_streams_connect_server_port_delay:
+                default: 0
+                description: "TODO document argument"
+                type: "int"
+
+            # line 38 of defaults/main.yml
+            amq_streams_connect_server_port_skip_wait:
+                default: false
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 41 of defaults/main.yml
+            amq_streams_connect_broker_tls_enabled:
+                default: false
+                description: "TODO document argument"
+                type: "bool"
+
+            # line 42 of defaults/main.yml
+            amq_streams_connect_broker_tls_truststore_client_dir:
+                default: "/tmp"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 43 of defaults/main.yml
+            amq_streams_connect_broker_tls_truststore_client:
+                default: "client.truststore.jks"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 44 of defaults/main.yml
+            amq_streams_connect_broker_tls_truststore_client_location:
+                default: "/opt"
+                description: "TODO document argument"
+                type: "str"
+
+            # line 45 of defaults/main.yml
+            amq_streams_connect_broker_tls_truststore_client_password:
+                default: "PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION"
+                description: "TODO document argument"
+                type: "str"
