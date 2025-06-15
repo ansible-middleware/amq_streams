@@ -11,7 +11,7 @@
 
 - name: "Deploy Kafka Connect as a systemd service."
   ansible.builtin.include_role:
-    name: amq_streams_common
+    name: middleware_automation.common
     tasks_from: systemd.yml
   vars:
     service_systemd_workdir: "{{ amq_streams_common_home }}"

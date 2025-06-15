@@ -11,7 +11,7 @@
 
 - name: "Ensure Zookeeper is running as a systemd service."
   ansible.builtin.include_role:
-    name: amq_streams_common
+    name: middleware_automation.common
     tasks_from: systemd.yml
   vars:
     server_name: "{{ amq_streams_zookeeper.service_name }}"
