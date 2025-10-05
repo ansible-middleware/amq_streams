@@ -1,30 +1,30 @@
 ---
-amq_streams_cruise_control_enabled: false
-amq_streams_cruise_control_home: /opt/cruise-control/
-amq_streams_cruise_control_rhn_product_archive_file_pattern: '^.*/amq-streams-[0-9.]*-cruise-control-bin.zip'
-amq_streams_cruise_control_service_name: amq_streams_cruise_control
-amq_streams_cruise_control_server_start: "{{ amq_streams_cruise_control_home }}/kafka-cruise-control-start.sh"
-amq_streams_cruise_control_server_stop: "{{ amq_streams_cruise_control_home }}/kafka-cruise-control-stop.sh"
-amq_streams_cruise_control_version: 2.6.0
-amq_streams_cruise_control_archive_file: "amq-streams-{{ amq_streams_cruise_control_version }}-cruise-control-bin.zip"
-amq_streams_cruise_control_server_config: "/etc/amq_streams_cruise_control.properties"
-amq_streams_cruise_control_config_template: 'templates/service.conf.j2'
-amq_streams_cruise_control_config_properties_template: 'templates/cruisecontrol.properties.j2'
-amq_streams_cruise_control_path_to_log4j_properties: "{{ amq_streams_cruise_control_home }}/config/log4j.properties"
-amq_streams_cruise_control_log4j_template: 'templates/log4j.properties.j2'
-amq_streams_cruise_control_logfilename: '/var/log/cruise-control'
-amq_streams_cruise_control_logfiles_requires_priv_escalation: yes
-amq_streams_cruise_control_capacity_template: 'templates/capacity.json.j2'
-amq_streams_cruise_control_path_to_capacity_file: "{{ amq_streams_cruise_control_home }}/config/capacity.json"
-amq_streams_cruise_control_path_to_capacity_file_require_priv_escalation: yes
-amq_streams_cruise_control_user: root
-amq_streams_cruise_control_group: root
-amq_streams_cruise_control_zk_host: "{{ groups['zookeepers'][0] }}"
-amq_streams_cruise_control_broker_host: "{{ groups['brokers'][0] }}"
-amq_streams_cruise_control_replicator_factor: 1
+redhat_streams_cruise_control_enabled: false
+redhat_streams_cruise_control_home: /opt/cruise-control/
+redhat_streams_cruise_control_rhn_product_archive_file_pattern: '^.*/redhat-streams-[0-9.]*-cruise-control-bin.zip'
+redhat_streams_cruise_control_service_name: redhat_streams_cruise_control
+redhat_streams_cruise_control_server_start: "{{ redhat_streams_cruise_control_home }}/kafka-cruise-control-start.sh"
+redhat_streams_cruise_control_server_stop: "{{ redhat_streams_cruise_control_home }}/kafka-cruise-control-stop.sh"
+redhat_streams_cruise_control_version: 2.6.0
+redhat_streams_cruise_control_archive_file: "redhat-streams-{{ redhat_streams_cruise_control_version }}-cruise-control-bin.zip"
+redhat_streams_cruise_control_server_config: "/etc/redhat_streams_cruise_control.properties"
+redhat_streams_cruise_control_config_template: 'templates/service.conf.j2'
+redhat_streams_cruise_control_config_properties_template: 'templates/cruisecontrol.properties.j2'
+redhat_streams_cruise_control_path_to_log4j_properties: "{{ redhat_streams_cruise_control_home }}/config/log4j.properties"
+redhat_streams_cruise_control_log4j_template: 'templates/log4j.properties.j2'
+redhat_streams_cruise_control_logfilename: '/var/log/cruise-control'
+redhat_streams_cruise_control_logfiles_requires_priv_escalation: yes
+redhat_streams_cruise_control_capacity_template: 'templates/capacity.json.j2'
+redhat_streams_cruise_control_path_to_capacity_file: "{{ redhat_streams_cruise_control_home }}/config/capacity.json"
+redhat_streams_cruise_control_path_to_capacity_file_require_priv_escalation: yes
+redhat_streams_cruise_control_user: root
+redhat_streams_cruise_control_group: root
+redhat_streams_cruise_control_zk_host: "{{ groups['zookeepers'][0] }}"
+redhat_streams_cruise_control_broker_host: "{{ groups['brokers'][0] }}"
+redhat_streams_cruise_control_replicator_factor: 1
 # Cruise Control HTTP API
-amq_streams_cruise_control_host: 'localhost'
-amq_streams_cruise_control_port: 9090
-amq_streams_cruise_control_api_path: 'kafkacruisecontrol'
+redhat_streams_cruise_control_host: 'localhost'
+redhat_streams_cruise_control_port: 9090
+redhat_streams_cruise_control_api_path: 'kafkacruisecontrol'
 # Switch next var to False to display the HTTP request
-amq_streams_cruise_control_operation_exec: True
+redhat_streams_cruise_control_operation_exec: True

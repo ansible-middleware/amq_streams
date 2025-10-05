@@ -1,54 +1,54 @@
 ---
-amq_streams_zookeeper_enabled: true
-amq_streams_zookeeper_config: /etc/amq_streams_zookeeper.properties
-amq_streams_zookeeper_config_template: templates/zookeeper.properties.j2
-amq_streams_zookeeper_server_start: "{{ amq_streams_common_home }}/bin/zookeeper-server-start.sh"
-amq_streams_zookeeper_user: 'amq_streams_zookeeper'
-amq_streams_zookeeper_group: 'amq_streams'
-amq_streams_zookeeper_service_name: 'amq_streams_zookeeper'
-amq_streams_zookeeper_service_config_template: 'templates/service.conf.j2'
-amq_streams_zookeeper_restart_requires_priv_escalation: yes
-amq_streams_zookeeper_service_env_file: '/etc/zookeeper.conf'
-amq_streams_zookeeper_data_dir: "/var/lib/{{ amq_streams_zookeeper_service_name }}/"
-amq_streams_zookeeper_logs_dir: "/var/log/{{ amq_streams_zookeeper_service_name }}/"
-amq_streams_zookeeper_data_require_priv_escalation: yes
-amq_streams_zookeeper_max_client_cnxns: 0
-amq_streams_zookeeper_admin_enable_server: 'true'
-amq_streams_zookeeper_admin_server_port: 8080
-amq_streams_zookeeper_admin_server_port_delay: 0
-amq_streams_zookeeper_admin_server_skip_wait: False
-amq_streams_zookeeper_instance_count_enabled: true
-amq_streams_zookeeper_inventory_group_name: 'zookeepers'
-amq_streams_zookeeper_instance_count: "{{ groups[amq_streams_zookeeper_inventory_group_name] | length }}"
-amq_streams_zookeeper_4wl_commands_whitelist: stat,dump # "*"
-amq_streams_zookeeper_java_heap_opts: '-Xmx512M -Xms512M'
-amq_streams_zookeeper_sysctl_vm_max_map_count: 65530
-amq_streams_zookeeper_ulimit_max_value: 1024
+redhat_streams_zookeeper_enabled: true
+redhat_streams_zookeeper_config: /etc/redhat_streams_zookeeper.properties
+redhat_streams_zookeeper_config_template: templates/zookeeper.properties.j2
+redhat_streams_zookeeper_server_start: "{{ redhat_streams_common_home }}/bin/zookeeper-server-start.sh"
+redhat_streams_zookeeper_user: 'redhat_streams_zookeeper'
+redhat_streams_zookeeper_group: 'redhat_streams'
+redhat_streams_zookeeper_service_name: 'redhat_streams_zookeeper'
+redhat_streams_zookeeper_service_config_template: 'templates/service.conf.j2'
+redhat_streams_zookeeper_restart_requires_priv_escalation: yes
+redhat_streams_zookeeper_service_env_file: '/etc/zookeeper.conf'
+redhat_streams_zookeeper_data_dir: "/var/lib/{{ redhat_streams_zookeeper_service_name }}/"
+redhat_streams_zookeeper_logs_dir: "/var/log/{{ redhat_streams_zookeeper_service_name }}/"
+redhat_streams_zookeeper_data_require_priv_escalation: yes
+redhat_streams_zookeeper_max_client_cnxns: 0
+redhat_streams_zookeeper_admin_enable_server: 'true'
+redhat_streams_zookeeper_admin_server_port: 8080
+redhat_streams_zookeeper_admin_server_port_delay: 0
+redhat_streams_zookeeper_admin_server_skip_wait: False
+redhat_streams_zookeeper_instance_count_enabled: true
+redhat_streams_zookeeper_inventory_group_name: 'zookeepers'
+redhat_streams_zookeeper_instance_count: "{{ groups[redhat_streams_zookeeper_inventory_group_name] | length }}"
+redhat_streams_zookeeper_4wl_commands_whitelist: stat,dump # "*"
+redhat_streams_zookeeper_java_heap_opts: '-Xmx512M -Xms512M'
+redhat_streams_zookeeper_sysctl_vm_max_map_count: 65530
+redhat_streams_zookeeper_ulimit_max_value: 1024
 
-amq_streams_zookeeper_host: localhost
-amq_streams_zookeeper_port: 2181
-amq_streams_zookeeper_init_limit: 5
-amq_streams_zookeeper_sync_limit: 2
-amq_streams_zookeeper_cluster_port_start: 2888
-amq_streams_zookeeper_cluster_port_end: 3888
+redhat_streams_zookeeper_host: localhost
+redhat_streams_zookeeper_port: 2181
+redhat_streams_zookeeper_init_limit: 5
+redhat_streams_zookeeper_sync_limit: 2
+redhat_streams_zookeeper_cluster_port_start: 2888
+redhat_streams_zookeeper_cluster_port_end: 3888
 
-amq_streams_zookeeper_inventory_group: "{{ groups[amq_streams_zookeeper_inventory_group_name] | default([]) }}"
+redhat_streams_zookeeper_inventory_group: "{{ groups[redhat_streams_zookeeper_inventory_group_name] | default([]) }}"
 
-amq_streams_firewalld_package_name:
+redhat_streams_firewalld_package_name:
   - firewalld
-amq_streams_firewalld_enabled: false
+redhat_streams_firewalld_enabled: false
 
 # Zookeeper Authentication with SASL
-amq_streams_zookeeper_auth_enabled: false
-amq_streams_zookeeper_auth_config: /etc/zookeeper-jaas.conf
-amq_streams_zookeeper_auth_config_template: templates/zookeeper-jaas.conf.j2
-amq_streams_zookeeper_auth_user: zookeeper
-amq_streams_zookeeper_auth_pass: PLEASE_CHANGE_ME_I_AM_NO_GOOD_FOR_PRODUCTION
+redhat_streams_zookeeper_auth_enabled: false
+redhat_streams_zookeeper_auth_config: /etc/zookeeper-jaas.conf
+redhat_streams_zookeeper_auth_config_template: templates/zookeeper-jaas.conf.j2
+redhat_streams_zookeeper_auth_user: zookeeper
+redhat_streams_zookeeper_auth_pass: PLEASE_CHANGE_ME_I_AM_NO_GOOD_FOR_PRODUCTION
 
-amq_streams_zookeeper_server_log_validation_min_size: 20
+redhat_streams_zookeeper_server_log_validation_min_size: 20
 
-amq_streams_zookeeper_prometheus_enabled: False
-amq_streams_zookeeper_prometheus_port: 18080
-amq_streams_zookeeper_prometheus_bind_addr: '0.0.0.0'
-amq_streams_zookeeper_prometheus_config_file: zk-config.yaml
-amq_streams_zookeeper_prometheus_config_file_template: prometheus/zk-config.yaml.j2
+redhat_streams_zookeeper_prometheus_enabled: False
+redhat_streams_zookeeper_prometheus_port: 18080
+redhat_streams_zookeeper_prometheus_bind_addr: '0.0.0.0'
+redhat_streams_zookeeper_prometheus_config_file: zk-config.yaml
+redhat_streams_zookeeper_prometheus_config_file_template: prometheus/zk-config.yaml.j2

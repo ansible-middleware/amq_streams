@@ -1,73 +1,73 @@
 ---
 - name: "Ensure user for zookeeper exists (if provided)."
   ansible.builtin.include_role:
-    name: amq_streams_common
+    name: redhat_streams_common
     tasks_from: prereqs.yml
   vars:
-    prereqs_user: "{{ amq_streams_zookeeper_user }}"
-    prereqs_group: "{{ amq_streams_zookeeper_group }}"
+    prereqs_user: "{{ redhat_streams_zookeeper_user }}"
+    prereqs_group: "{{ redhat_streams_zookeeper_group }}"
 
 - name: "Ensure OS has been properly tuned (RHEL specific)."
   ansible.builtin.include_role:
-    name: amq_streams_common
+    name: redhat_streams_common
     tasks_from: os_tuning.yml
   vars:
-    sysctl_vm_max_map_count: "{{ amq_streams_zookeeper_sysctl_vm_max_map_count }}"
-    ulimit_user: "{{ amq_streams_zookeeper_user }}"
-    ulimit_limit: "{{ amq_streams_zookeeper_ulimit_max_value }}"
+    sysctl_vm_max_map_count: "{{ redhat_streams_zookeeper_sysctl_vm_max_map_count }}"
+    ulimit_user: "{{ redhat_streams_zookeeper_user }}"
+    ulimit_limit: "{{ redhat_streams_zookeeper_ulimit_max_value }}"
   when:
-    - ansible_distribution == "RedHat" and amq_streams_common_systctl_update_enable is defined and amq_streams_common_systctl_update_enable
+    - ansible_distribution == "RedHat" and redhat_streams_common_systctl_update_enable is defined and redhat_streams_common_systctl_update_enable
 
-- name: "Ensure Prometheus requirements are met (if enabled: {{ amq_streams_zookeeper_prometheus_enabled }}) - {{ amq_streams_zookeeper_prometheus_config_file_template }}."
+- name: "Ensure Prometheus requirements are met (if enabled: {{ redhat_streams_zookeeper_prometheus_enabled }}) - {{ redhat_streams_zookeeper_prometheus_config_file_template }}."
   ansible.builtin.include_role:
-    name: amq_streams_common
+    name: redhat_streams_common
     tasks_from: prometheus.yml
   vars:
-    amq_streams_common_prometheus_port: "{{ amq_streams_zookeeper_prometheus_port }}"
-    amq_streams_common_prometheus_bind_addr: "{{ amq_streams_zookeeper_prometheus_bind_addr }}"
-    amq_streams_common_prometheus_config_file: "{{ amq_streams_zookeeper_prometheus_config_file }}"
-    amq_streams_common_prometheus_config_file_template: "{{ amq_streams_zookeeper_prometheus_config_file_template }}"
+    redhat_streams_common_prometheus_port: "{{ redhat_streams_zookeeper_prometheus_port }}"
+    redhat_streams_common_prometheus_bind_addr: "{{ redhat_streams_zookeeper_prometheus_bind_addr }}"
+    redhat_streams_common_prometheus_config_file: "{{ redhat_streams_zookeeper_prometheus_config_file }}"
+    redhat_streams_common_prometheus_config_file_template: "{{ redhat_streams_zookeeper_prometheus_config_file_template }}"
   when:
-    - amq_streams_zookeeper_prometheus_enabled is defined and amq_streams_zookeeper_prometheus_enabled
+    - redhat_streams_zookeeper_prometheus_enabled is defined and redhat_streams_zookeeper_prometheus_enabled
 
 - name: "Ensures Zookeeper data dir, myid and auth config (if enable) are set."
-  become: "{{ amq_streams_zookeeper_data_require_priv_escalation }}"
+  become: "{{ redhat_streams_zookeeper_data_require_priv_escalation }}"
   block:
     - name: "Ensure Zookeeper data dir exists and belongs to the appropriate user - if user is defined."
       ansible.builtin.file:
-        path: "{{ amq_streams_zookeeper_data_dir }}"
+        path: "{{ redhat_streams_zookeeper_data_dir }}"
         state: directory
-        owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
-        group: "{{ amq_streams_zookeeper_group | default(omit) }}"
+        owner: "{{ redhat_streams_zookeeper_user | default(omit) }}"
+        group: "{{ redhat_streams_zookeeper_group | default(omit) }}"
         mode: 0755
       when:
-        - amq_streams_zookeeper_data_dir is defined
+        - redhat_streams_zookeeper_data_dir is defined
 
     - name: "Configure 'myid' file based on the position in the zookeepers group or if it is defined on inventory"
       ansible.builtin.copy:
-        content: "{{ amq_streams_zookeeper_zookeeper_id | default(amq_streams_zookeeper_inventory_group.index(inventory_hostname) + 1) }}"
-        dest: "{{ amq_streams_zookeeper_data_dir }}/myid"
-        owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
-        group: "{{ amq_streams_zookeeper_group | default(omit) }}"
+        content: "{{ redhat_streams_zookeeper_zookeeper_id | default(redhat_streams_zookeeper_inventory_group.index(inventory_hostname) + 1) }}"
+        dest: "{{ redhat_streams_zookeeper_data_dir }}/myid"
+        owner: "{{ redhat_streams_zookeeper_user | default(omit) }}"
+        group: "{{ redhat_streams_zookeeper_group | default(omit) }}"
       when:
-        - amq_streams_zookeeper_inventory_group is defined
-        - amq_streams_zookeeper_inventory_group | length > 0
+        - redhat_streams_zookeeper_inventory_group is defined
+        - redhat_streams_zookeeper_inventory_group | length > 0
 
     - name: "Configure Zookeeper authentication (if enabled)"
       ansible.builtin.template:
-        src: "{{ amq_streams_zookeeper_auth_config_template }}"
-        dest: "{{ amq_streams_zookeeper_auth_config }}"
-        owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
-        group: "{{ amq_streams_zookeeper_group | default(omit) }}"
+        src: "{{ redhat_streams_zookeeper_auth_config_template }}"
+        dest: "{{ redhat_streams_zookeeper_auth_config }}"
+        owner: "{{ redhat_streams_zookeeper_user | default(omit) }}"
+        group: "{{ redhat_streams_zookeeper_group | default(omit) }}"
         mode: 0644
       when:
-        - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
+        - redhat_streams_zookeeper_auth_enabled is defined and redhat_streams_zookeeper_auth_enabled
 
 - name: "Enable Zookeeper authentication environment variable"
   ansible.builtin.set_fact:
-    amq_streams_zookeeper_java_opts: "-Djava.security.auth.login.config={{ amq_streams_zookeeper_auth_config }}"
+    redhat_streams_zookeeper_java_opts: "-Djava.security.auth.login.config={{ redhat_streams_zookeeper_auth_config }}"
   when:
-    - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
+    - redhat_streams_zookeeper_auth_enabled is defined and redhat_streams_zookeeper_auth_enabled
 
 - name: "Configure Zookeeper as a systemd service."
   ansible.builtin.include_tasks: service.yml

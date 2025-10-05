@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/ansible-middleware/amq_streams/workflows/CI/badge.svg)](https://github.com/ansible-middleware/amq_streams/actions/workflows/ci.yml)
 
-Collection to install and configure [Apache Kafka](https://kafka.apache.org/) / [Red Hat AMQ Streams](https://access.redhat.com/documentation/en-us/red_hat_amq_streams).
+Collection to install and configure [Apache Kafka](https://kafka.apache.org/) / [Red Hat Streams for Apache Kafka](https://access.redhat.com/documentation/en-us/red_hat_amq_streams).
 
 <!--start requires_ansible-->
 ## Ansible version compatibility
@@ -88,7 +88,7 @@ It is possible to perform downloads from alternate sources (like corporate Nexus
 described by the `amq_streams_common_archive_file` variable (ie. *kafka_-a.b.c-x.y.z.tgz*).
 
 <!--start support -->
-For Red Hat customers, this collection is released as a [Technology Preview](https://access.redhat.com/support/offerings/techpreview) feature as the [Red Hat Ansible certified content collection for AMQ Streams](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/amq_streams). If you have any issues or questions related to this collection, please contact <Ansible-middleware-core@redhat.com> or open an issue at https://github.com/ansible-middleware/amq_streams/issues.
+For Red Hat customers, this collection is released as a [Technology Preview](https://access.redhat.com/support/offerings/techpreview) feature as the [Red Hat Ansible certified content collection for Red Hat Streams for Apache Kafka](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/amq_streams). If you have any issues or questions related to this collection, please contact <Ansible-middleware-core@redhat.com> or open an issue at https://github.com/ansible-middleware/amq_streams/issues.
 <!--end support -->
 
 ## License

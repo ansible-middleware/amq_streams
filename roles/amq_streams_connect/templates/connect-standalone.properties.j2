@@ -46,35 +46,35 @@ producer.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModul
 # Consumer
 consumer.sasl.mechanism=PLAIN
 consumer.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="{{ amq_streams_connect_broker_auth_username }}" password="{{ amq_streams_connect_broker_auth_password }}";
-{% elif amq_streams_connect_broker_admin_mechanism == "SCRAM-SHA-512" %}
+{% elif redhat_streams_connect_broker_admin_mechanism == "SCRAM-SHA-512" %}
 # SCRAM Login Module
 sasl.mechanism=SCRAM-SHA-512
-sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="{{ amq_streams_connect_broker_auth_username }}" password="{{ amq_streams_connect_broker_auth_password }}";
+sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="{{ redhat_streams_connect_broker_auth_username }}" password="{{ redhat_streams_connect_broker_auth_password }}";
 # Producer
 producer.sasl.mechanism=SCRAM-SHA-512
-producer.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="{{ amq_streams_connect_broker_auth_username }}" password="{{ amq_streams_connect_broker_auth_password }}";
+producer.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="{{ redhat_streams_connect_broker_auth_username }}" password="{{ redhat_streams_connect_broker_auth_password }}";
 # Consumer
 consumer.sasl.mechanism=SCRAM-SHA-512
-consumer.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="{{ amq_streams_connect_broker_auth_username }}" password="{{ amq_streams_connect_broker_auth_password }}";
+consumer.sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="{{ redhat_streams_connect_broker_auth_username }}" password="{{ redhat_streams_connect_broker_auth_password }}";
 {% endif %}
 {% endif %}
 
-{% if amq_streams_connect_broker_tls_enabled %}
-ssl.truststore.location={{ amq_streams_connect_broker_tls_truststore_client_location }}/{{ amq_streams_connect_broker_tls_truststore_client }}
-ssl.truststore.password={{ amq_streams_connect_broker_tls_truststore_client_password }}
+{% if redhat_streams_connect_broker_tls_enabled %}
+ssl.truststore.location={{ redhat_streams_connect_broker_tls_truststore_client_location }}/{{ redhat_streams_connect_broker_tls_truststore_client }}
+ssl.truststore.password={{ redhat_streams_connect_broker_tls_truststore_client_password }}
 # Disable hostname verification
 ssl.endpoint.identification.algorithm=
 # Producer
-producer.ssl.truststore.location={{ amq_streams_connect_broker_tls_truststore_client_location }}/{{ amq_streams_connect_broker_tls_truststore_client }}
-producer.ssl.truststore.password={{ amq_streams_connect_broker_tls_truststore_client_password }}
+producer.ssl.truststore.location={{ redhat_streams_connect_broker_tls_truststore_client_location }}/{{ redhat_streams_connect_broker_tls_truststore_client }}
+producer.ssl.truststore.password={{ redhat_streams_connect_broker_tls_truststore_client_password }}
 # Disable hostname verification
 producer.ssl.endpoint.identification.algorithm=
 # Consumer
-consumer.ssl.truststore.location={{ amq_streams_connect_broker_tls_truststore_client_location }}/{{ amq_streams_connect_broker_tls_truststore_client }}
-consumer.ssl.truststore.password={{ amq_streams_connect_broker_tls_truststore_client_password }}
+consumer.ssl.truststore.location={{ redhat_streams_connect_broker_tls_truststore_client_location }}/{{ redhat_streams_connect_broker_tls_truststore_client }}
+consumer.ssl.truststore.password={{ redhat_streams_connect_broker_tls_truststore_client_password }}
 # Disable hostname verification
-consumer.ssl.endpoint.identification.algorithm=
 {% endif %}
+
 
 # The converters specify the format of data in Kafka and how to translate it into Connect data. Every Connect user will
 # need to configure these based on the format they want their data in when loaded from or stored into Kafka
