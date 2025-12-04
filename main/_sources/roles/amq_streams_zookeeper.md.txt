@@ -1,5 +1,7 @@
 # Zookeeper Role
 
+> NOTE: *Starting with Kafka 4.0.0, ZooKeeper support has been removed in favor of KRaft (Kafka Raft Metadata) mode. Consequently, this role includes a version check mechanism. To use this role, ensure you are targeting a Kafka version `<= 3.9.x`. More can be found in [Apache Kafka 4.0.0 Release Announcement](https://kafka.apache.org/blog#apache_kafka_400_release_announcement)*
+
 Perform installation and configuration of Zookeeper ensemble.
 
 This role requires to have a `zookeepers` group (identified by the
@@ -72,3 +74,4 @@ Apache License v2.0 or later
 * [Romain Pelisse](https://github.com/rpelisse)
 * [Guido Grazioli](https://github.com/guidograzioli)
 * [Roman Martin](https://github.com/rmarting)
+* [Ranabir Chakraborty](https://github.com/RanabirChakraborty)

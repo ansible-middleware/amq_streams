@@ -113,6 +113,9 @@
              
   <section id="zookeeper-role">
 <h1>Zookeeper Role<a class="headerlink" href="#zookeeper-role" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>NOTE: <em>Starting with Kafka 4.0.0, ZooKeeper support has been removed in favor of KRaft (Kafka Raft Metadata) mode. Consequently, this role includes a version check mechanism. To use this role, ensure you are targeting a Kafka version <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">3.9.x</span></code>. More can be found in <a class="reference external" href="https://kafka.apache.org/blog#apache_kafka_400_release_announcement">Apache Kafka 4.0.0 Release Announcement</a></em></p>
+</div></blockquote>
 <p>Perform installation and configuration of Zookeeper ensemble.</p>
 <p>This role requires to have a <code class="docutils literal notranslate"><span class="pre">zookeepers</span></code> group (identified by the
 <code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_inventory_group</span></code> variable) in the inventory file to identify
@@ -302,6 +305,7 @@ zknode3
 <li><p><a class="reference external" href="https://github.com/rpelisse">Romain Pelisse</a></p></li>
 <li><p><a class="reference external" href="https://github.com/guidograzioli">Guido Grazioli</a></p></li>
 <li><p><a class="reference external" href="https://github.com/rmarting">Roman Martin</a></p></li>
+<li><p><a class="reference external" href="https://github.com/RanabirChakraborty">Ranabir Chakraborty</a></p></li>
 </ul>
 </section>
 </section>
