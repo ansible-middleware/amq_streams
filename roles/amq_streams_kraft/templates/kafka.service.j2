@@ -1,0 +1,15 @@
+[Unit]
+Description=Kafka KRaft Node
+After=network.target
+
+[Service]
+Type=simple
+User="{{ amq_streams_kraft_user | default('kafka') }}"
+
+ExecStart={{ amq_streams_install_dir }}/current/bin/kafka-server-start.sh \
+  {{ amq_streams_kraft_config_dir }}/server.properties
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

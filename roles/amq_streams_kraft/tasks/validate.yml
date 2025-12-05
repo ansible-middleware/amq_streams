@@ -1,0 +1,10 @@
+---
+- name: Check kafka service is running
+  ansible.builtin.systemd:
+    name: "{{ server_name | default('amq_streams_broker') }}"
+  register: kafka_service
+
+- name: Fail if Kafka is not active
+  ansible.builtin.fail:
+    msg: "Kafka KRaft service ({{ server_name | default('amq_streams_broker') }}) is not running. State: {{ kafka_service.status.ActiveState }}"
+  when: kafka_service.status.ActiveState != "active"

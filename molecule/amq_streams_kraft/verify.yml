@@ -1,0 +1,13 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Check broker service
+      assert:
+        that:
+          - ansible_facts.services["amq_streams_broker.service"]["state"] == "running"
+          - ansible_facts.services["amq_streams_broker.service"]["status"] == "enabled"
