@@ -7,4 +7,5 @@ Role Index
     amq_streams_connect
     amq_streams_cruise_control
     amq_streams_exporter
+    amq_streams_kraft
     amq_streams_zookeeper
