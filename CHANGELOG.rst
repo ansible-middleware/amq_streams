@@ -1,10 +1,33 @@
-===============================================
-middleware_automation.amq_streams Release Notes
-===============================================
+=================================================
+middleware\_automation.amq\_streams Release Notes
+=================================================
 
 .. contents:: Topics
 
 This changelog describes changes after version 0.0.0.
+
+v1.0.0
+======
+
+Major Changes
+-------------
+
+- AMW-162 Add support for KRaft `#131 <https://github.com/ansible-middleware/amq_streams/pull/131>`_
+- AMW-428 update amq_streams collection to use the latest kafka version `#129 <https://github.com/ansible-middleware/amq_streams/pull/129>`_
+- Add missing become in broker and cruise_control roles `#123 <https://github.com/ansible-middleware/amq_streams/pull/123>`_
+- add missing become: on task needing priv escalation to root `#121 <https://github.com/ansible-middleware/amq_streams/pull/121>`_
+
+Minor Changes
+-------------
+
+- AMW-457 amq_streams collection compatibility with ansible-core 2.17 & 2.19 `#130 <https://github.com/ansible-middleware/amq_streams/pull/130>`_
+- Add a role to manage Kafka Exporter `#113 <https://github.com/ansible-middleware/amq_streams/pull/113>`_
+- Add exporter role vars documentation `#114 <https://github.com/ansible-middleware/amq_streams/pull/114>`_
+
+Bugfixes
+--------
+
+- cruise_control: fix RHN download `#118 <https://github.com/ansible-middleware/amq_streams/pull/118>`_
 
 v0.0.9
 ======
