@@ -1,0 +1,29 @@
+# --- KRaft Process Roles ---
+# Defines if this node is a Broker, a Controller, or both.
+process.roles={{ amq_streams_kraft_process_roles }}
+node.id={{ amq_streams_kraft_node_id }}
+
+# --- Controller Quorum ---
+# The list of all voters (controllers) in the cluster. Format: id@host:port
+controller.quorum.voters={{ amq_streams_kraft_controller_quorum_voters }}
+
+# MUST contain BOTH Broker (PLAINTEXT) and Controller ports.
+# Example: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+listeners={{ amq_streams_kraft_listeners | join(',') }}
+
+# MUST contain ONLY the Broker port.
+# Example: PLAINTEXT://192.168.1.5:9092
+advertised.listeners={{ amq_streams_kraft_advertised_listeners | join(',') }}
+
+# Maps the listener names to security protocols.
+listener.security.protocol.map=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+
+# Tells the Controller which listener name to use for Raft communication.
+controller.listener.names={{ amq_streams_kraft_controller_listener_names }}
+
+# Tells the Broker which listener name to use for replication.
+inter.broker.listener.name={{ amq_streams_kraft_inter_broker_listener_name }}
+
+# Logs
+log.dirs={{ amq_streams_kraft_log_dirs }}
+log.retention.hours={{ amq_streams_kraft_log_retention_hours }}

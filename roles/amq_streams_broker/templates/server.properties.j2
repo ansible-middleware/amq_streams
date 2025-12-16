@@ -20,10 +20,35 @@
 # See kafka.server.KafkaConfig for additional details and defaults
 #
 
+# -----------------------------------------------------------------------------
+# MODE DETERMINATION (Added for Kafka 4.0+ KRaft Support)
+# -----------------------------------------------------------------------------
+{% set enable_kraft = amq_streams_enable_kraft | default(amq_streams_common_product_version is version('4.0.0', '>=')) | bool %}
+
 ############################# Server Basics #############################
 
 # The id of the broker. This must be set to a unique integer for each broker.
+{% if enable_kraft %}
+# KRaft uses node.id instead of broker.id
+node.id={{ amq_streams_kraft_node_id | default(1) }}
+{% else %}
 broker.id={{ amq_streams_broker_broker_id | default(amq_streams_broker_inventory_group.index(inventory_hostname)) }}
+{% endif %}
+
+############################# KRaft Settings (Kafka 4.0+) #############################
+{% if enable_kraft %}
+# The roles of this process. broker, controller, or both.
+process.roles={{ amq_streams_kraft_process_roles | default('broker,controller') }}
+
+# The connect string for the controller quorum
+controller.quorum.voters={{ amq_streams_kraft_controller_quorum_voters }}
+
+# Listener name used for the controller
+controller.listener.names={{ amq_streams_kraft_controller_listener_names | default('CONTROLLER') }}
+
+# Listener name used for inter-broker communication
+inter.broker.listener.name={{ amq_streams_kraft_inter_broker_listener_name | default('PLAINTEXT') }}
+{% endif %}
 
 ############################# Socket Server Settings #############################
 
@@ -33,6 +58,11 @@ broker.id={{ amq_streams_broker_broker_id | default(amq_streams_broker_inventory
 #     listeners = listener_name://host_name:port
 #   EXAMPLE:
 #     listeners = PLAINTEXT://your.host.name:9092
+{% if enable_kraft %}
+# KRaft Mode Listeners (Requires Broker + Controller ports)
+listeners={{ amq_streams_kraft_listeners | join(",") }}
+{% else %}
+# Legacy ZK Mode Listeners
 {% if amq_streams_broker_listeners is defined %}
 listeners={{ amq_streams_broker_listeners | join(",") }}
 {% elif amq_streams_broker_listener_port is defined %}
@@ -40,20 +70,31 @@ listeners=PLAINTEXT://:{{ amq_streams_broker_listener_port }}
 {% else %}
 #listeners=PLAINTEXT://:9092
 {% endif %}
+{% endif %}
 
-{% if amq_streams_broker_inter_broker_listener is defined %}
-# Name of listener used for communication between brokers
+{% if amq_streams_broker_inter_broker_listener is defined and not enable_kraft %}
+# Name of listener used for communication between brokers (Legacy ZK only)
 inter.broker.listener.name={{ amq_streams_broker_inter_broker_listener }}
 {% endif %}
 
 # Listener name, hostname and port the broker will advertise to clients.
 # If not set, it uses the value for "listeners".
+{% if enable_kraft %}
+# KRaft Mode Advertised Listeners (Broker port only)
+advertised.listeners={{ amq_streams_kraft_advertised_listeners | join(",") }}
+{% else %}
+# Legacy ZK Mode Advertised Listeners
 {% if amq_streams_broker_advertised_listeners is defined %}
 advertised.listeners={{ amq_streams_broker_advertised_listeners | join(",") }}
 {% else %}
 #advertised.listeners=PLAINTEXT://your.host.name:9092
 {% endif %}
+{% endif %}
 
+{% if enable_kraft %}
+# KRaft Mode Security Map (Must include Controller)
+listener.security.protocol.map=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+{% else %}
 {% if amq_streams_broker_auth_enabled and amq_streams_broker_auth_listeners is defined %}
 # Maps listener names to security protocols, the default is for them to be the same. See the config documentation for more details
 listener.security.protocol.map={{ amq_streams_broker_auth_listeners | join(",") }}
@@ -67,6 +108,7 @@ sasl.mechanism.inter.broker.protocol={{ amq_streams_broker_inter_broker_auth_sas
 {% else %}
 # Maps listener names to security protocols, the default is for them to be the same. See the config documentation for more details
 #listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+{% endif %}
 {% endif %}
 
 {% if amq_streams_broker_inter_broker_listener_auth is defined %}
@@ -105,7 +147,11 @@ socket.request.max.bytes={{ amq_streams_broker_socket_request_max_bytes }}
 ############################# Log Basics #############################
 
 # A comma separated list of directories under which to store log files
+{% if enable_kraft %}
+log.dirs={{ amq_streams_kraft_log_dirs }}
+{% else %}
 log.dirs={{ amq_streams_broker_data_dir }}
+{% endif %}
 
 # The default number of log partitions per topic. More partitions allow greater
 # parallelism for consumption, but this will also result in more files across
@@ -162,7 +208,7 @@ log.retention.hours={{ amq_streams_broker_log_retention_hours }}
 log.retention.check.interval.ms={{ amq_streams_broker_log_retention_check_interval_ms }}
 
 ############################# Zookeeper #############################
-
+{% if not enable_kraft %}
 # Zookeeper connection string (see zookeeper docs for details).
 # This is a comma separated host:port pairs, each corresponding to a zk
 # server. e.g. "127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002".
@@ -173,6 +219,7 @@ zookeeper.connect={{ amq_streams_broker_zookeeper_host }}:{{ amq_streams_broker_
 # Timeout in ms for connecting to zookeeper
 zookeeper.connection.timeout.ms={{ amq_streams_broker_zookeeper_connection_timeout_ms }}
 zookeeper.session.timeout.ms={{ amq_streams_broker_zookeeper_session_timeout_ms }}
+{% endif %}
 
 ############################# Group Coordinator Settings #############################
 

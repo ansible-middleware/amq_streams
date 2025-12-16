@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - AMW-162
   pull_request:
   schedule:
     - cron: '0 6 * * *'
@@ -16,4 +16,4 @@ jobs:
       fqcn: 'middleware_automation/amq_streams'
       root_permission_varname: 'amq_streams_install_requires_become'
       molecule_tests: >-
-        [ "default" ]
+        [ "default", "amq_streams_kraft" ]

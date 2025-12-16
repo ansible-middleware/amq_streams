@@ -1,0 +1,9 @@
+---
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Restart Kafka
+  ansible.builtin.systemd:
+    name: "{{ server_name | default('amq_streams_broker') }}"
+    state: restarted

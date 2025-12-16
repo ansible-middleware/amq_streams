@@ -1,0 +1,40 @@
+---
+- name: Check if KRaft metadata log already formatted
+  ansible.builtin.stat:
+    path: "{{ amq_streams_kraft_data_dir }}/meta.properties"
+  register: meta_file
+
+- name: Generate cluster ID if not provided and not already formatted
+  ansible.builtin.command: "{{ amq_streams_kafka_home }}/bin/kafka-storage.sh random-uuid"
+  register: generated_cluster_id
+  when:
+    - amq_streams_cluster_id | length == 0
+    - not meta_file.stat.exists
+  changed_when: false
+
+- name: Set cluster ID fact
+  ansible.builtin.set_fact:
+    amq_streams_cluster_id: "{{ generated_cluster_id.stdout }}"
+  when:
+    - amq_streams_cluster_id | length == 0
+    - generated_cluster_id.skipped is not defined
+    - generated_cluster_id.stdout is defined
+
+- name: Format storage directory if not formatted
+  ansible.builtin.command: >
+    {{ amq_streams_kafka_home }}/bin/kafka-storage.sh format
+    --config {{ amq_streams_kraft_config_dir }}/server.properties
+    --cluster-id {{ amq_streams_cluster_id }}
+  become: "{{ amq_streams_kraft_priv_escalation }}"
+  when: not meta_file.stat.exists
+
+- name: Enforce ownership on Kafka data directory
+  ansible.builtin.file:
+    path: "{{ amq_streams_kraft_data_dir }}"
+    state: directory
+    owner: "{{ amq_streams_kraft_user | default('kafka') }}"
+    group: "{{ amq_streams_kraft_group | default('kafka') }}"
+    mode: '0750'
+    recurse: yes
+  become: "{{ amq_streams_kraft_priv_escalation }}"
+  when: not meta_file.stat.exists
