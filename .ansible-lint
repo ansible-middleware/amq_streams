@@ -49,4 +49,3 @@ skip_list:
   - task_has_valid_name
 
 use_default_rules: true
-parseable: true
