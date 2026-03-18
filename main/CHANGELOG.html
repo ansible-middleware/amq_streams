@@ -8,15 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>middleware_automation.amq_streams Release Notes &mdash; AmqStreams Ansible Collection  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/ansible-basic-sphinx-ext.css" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -58,7 +58,8 @@
 <p class="caption" role="heading"><span class="caption-text">General</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#v1-0-0-devel">v1.0.0-devel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-1-devel">v1.0.1-devel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v1-0-0">v1.0.0</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#major-changes">Major Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#minor-changes">Minor Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bugfixes">Bugfixes</a></li>
@@ -138,45 +139,46 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#middleware-automation-amq-streams-release-notes" id="id47">middleware_automation.amq_streams Release Notes</a></p>
 <ul>
-<li><p><a class="reference internal" href="#v1-0-0-devel" id="id48">v1.0.0-devel</a></p>
+<li><p><a class="reference internal" href="#v1-0-1-devel" id="id48">v1.0.1-devel</a></p></li>
+<li><p><a class="reference internal" href="#v1-0-0" id="id49">v1.0.0</a></p>
 <ul>
-<li><p><a class="reference internal" href="#major-changes" id="id49">Major Changes</a></p></li>
-<li><p><a class="reference internal" href="#minor-changes" id="id50">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#bugfixes" id="id51">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#major-changes" id="id50">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#minor-changes" id="id51">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#bugfixes" id="id52">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-9" id="id52">v0.0.9</a></p>
+<li><p><a class="reference internal" href="#v0-0-9" id="id53">v0.0.9</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id9" id="id53">Minor Changes</a></p></li>
-<li><p><a class="reference internal" href="#id12" id="id54">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id9" id="id54">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id12" id="id55">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-6" id="id55">v0.0.6</a></p></li>
-<li><p><a class="reference internal" href="#v0-0-5" id="id56">v0.0.5</a></p>
+<li><p><a class="reference internal" href="#v0-0-6" id="id56">v0.0.6</a></p></li>
+<li><p><a class="reference internal" href="#v0-0-5" id="id57">v0.0.5</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id15" id="id57">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id15" id="id58">Minor Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-4" id="id58">v0.0.4</a></p>
+<li><p><a class="reference internal" href="#v0-0-4" id="id59">v0.0.4</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id17" id="id59">Major Changes</a></p></li>
-<li><p><a class="reference internal" href="#id22" id="id60">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id17" id="id60">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#id22" id="id61">Minor Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-3" id="id61">v0.0.3</a></p>
+<li><p><a class="reference internal" href="#v0-0-3" id="id62">v0.0.3</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id25" id="id62">Major Changes</a></p></li>
-<li><p><a class="reference internal" href="#id29" id="id63">Minor Changes</a></p></li>
+<li><p><a class="reference internal" href="#id25" id="id63">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#id29" id="id64">Minor Changes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-2" id="id64">v0.0.2</a></p>
+<li><p><a class="reference internal" href="#v0-0-2" id="id65">v0.0.2</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id39" id="id65">Bugfixes</a></p></li>
+<li><p><a class="reference internal" href="#id39" id="id66">Bugfixes</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#v0-0-1" id="id66">v0.0.1</a></p>
+<li><p><a class="reference internal" href="#v0-0-1" id="id67">v0.0.1</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id41" id="id67">Major Changes</a></p></li>
+<li><p><a class="reference internal" href="#id41" id="id68">Major Changes</a></p></li>
 </ul>
 </li>
 </ul>
@@ -184,10 +186,13 @@
 </ul>
 </nav>
 <p>This changelog describes changes after version 0.0.0.</p>
-<section id="v1-0-0-devel">
-<h2><a class="toc-backref" href="#id48" role="doc-backlink">v1.0.0-devel</a><a class="headerlink" href="#v1-0-0-devel" title="Link to this heading"></a></h2>
+<section id="v1-0-1-devel">
+<h2><a class="toc-backref" href="#id48" role="doc-backlink">v1.0.1-devel</a><a class="headerlink" href="#v1-0-1-devel" title="Link to this heading"></a></h2>
+</section>
+<section id="v1-0-0">
+<h2><a class="toc-backref" href="#id49" role="doc-backlink">v1.0.0</a><a class="headerlink" href="#v1-0-0" title="Link to this heading"></a></h2>
 <section id="major-changes">
-<h3><a class="toc-backref" href="#id49" role="doc-backlink">Major Changes</a><a class="headerlink" href="#major-changes" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id50" role="doc-backlink">Major Changes</a><a class="headerlink" href="#major-changes" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>AMW-162 Add support for KRaft <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/131">#131</a></p></li>
 <li><p>AMW-428 update amq_streams collection to use the latest kafka version <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/129">#129</a></p></li>
@@ -196,7 +201,7 @@
 </ul>
 </section>
 <section id="minor-changes">
-<h3><a class="toc-backref" href="#id50" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#minor-changes" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id51" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#minor-changes" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>AMW-457 amq_streams collection compatibility with ansible-core 2.17 &amp; 2.19 <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/130">#130</a></p></li>
 <li><p>Add a role to manage Kafka Exporter <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/113">#113</a></p></li>
@@ -204,23 +209,23 @@
 </ul>
 </section>
 <section id="bugfixes">
-<h3><a class="toc-backref" href="#id51" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#bugfixes" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id52" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#bugfixes" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>cruise_control: fix RHN download <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/118">#118</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v0-0-9">
-<h2><a class="toc-backref" href="#id52" role="doc-backlink">v0.0.9</a><a class="headerlink" href="#v0-0-9" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id53" role="doc-backlink">v0.0.9</a><a class="headerlink" href="#v0-0-9" title="Link to this heading"></a></h2>
 <section id="id9">
-<h3><a class="toc-backref" href="#id53" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id54" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add custom zookeeper_id for each host based in inventory <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/99">#99</a></p></li>
 <li><p>Misc. enhacements <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/90">#90</a></p></li>
 </ul>
 </section>
 <section id="id12">
-<h3><a class="toc-backref" href="#id54" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id55" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Bump to 3.6.0 + small fix <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/102">#102</a></p></li>
 <li><p>Fixup validation logic for offline install <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/89">#89</a></p></li>
@@ -228,21 +233,21 @@
 </section>
 </section>
 <section id="v0-0-6">
-<h2><a class="toc-backref" href="#id55" role="doc-backlink">v0.0.6</a><a class="headerlink" href="#v0-0-6" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id56" role="doc-backlink">v0.0.6</a><a class="headerlink" href="#v0-0-6" title="Link to this heading"></a></h2>
 </section>
 <section id="v0-0-5">
-<h2><a class="toc-backref" href="#id56" role="doc-backlink">v0.0.5</a><a class="headerlink" href="#v0-0-5" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id57" role="doc-backlink">v0.0.5</a><a class="headerlink" href="#v0-0-5" title="Link to this heading"></a></h2>
 <section id="id15">
-<h3><a class="toc-backref" href="#id57" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id58" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>add remote_src attribute to unarchive: to allow deployment using archive on target <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/80">#80</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v0-0-4">
-<h2><a class="toc-backref" href="#id58" role="doc-backlink">v0.0.4</a><a class="headerlink" href="#v0-0-4" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id59" role="doc-backlink">v0.0.4</a><a class="headerlink" href="#v0-0-4" title="Link to this heading"></a></h2>
 <section id="id17">
-<h3><a class="toc-backref" href="#id59" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id60" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><dl class="field-list simple">
 <dt class="field-odd">closed_lock_with_key<span class="colon">:</span></dt>
@@ -266,7 +271,7 @@
 </ul>
 </section>
 <section id="id22">
-<h3><a class="toc-backref" href="#id60" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id61" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Mol all cluster <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/78">#78</a></p></li>
 <li><p>ensure required information for auth are passed <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/79">#79</a></p></li>
@@ -274,9 +279,9 @@
 </section>
 </section>
 <section id="v0-0-3">
-<h2><a class="toc-backref" href="#id61" role="doc-backlink">v0.0.3</a><a class="headerlink" href="#v0-0-3" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id62" role="doc-backlink">v0.0.3</a><a class="headerlink" href="#v0-0-3" title="Link to this heading"></a></h2>
 <section id="id25">
-<h3><a class="toc-backref" href="#id62" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id63" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Enable Broker Authentication usign SASL mechanism <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/43">#43</a></p></li>
 <li><p>Enable Zookeeper authentication <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/42">#42</a></p></li>
@@ -284,7 +289,7 @@
 </ul>
 </section>
 <section id="id29">
-<h3><a class="toc-backref" href="#id63" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id64" role="doc-backlink">Minor Changes</a><a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add a molecule scenario for all_auth <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/61">#61</a></p></li>
 <li><p>Declare Java Heap options as variables <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/48">#48</a></p></li>
@@ -299,18 +304,18 @@
 </section>
 </section>
 <section id="v0-0-2">
-<h2><a class="toc-backref" href="#id64" role="doc-backlink">v0.0.2</a><a class="headerlink" href="#v0-0-2" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id65" role="doc-backlink">v0.0.2</a><a class="headerlink" href="#v0-0-2" title="Link to this heading"></a></h2>
 <section id="id39">
-<h3><a class="toc-backref" href="#id65" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id66" role="doc-backlink">Bugfixes</a><a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Fixup invalid varnames <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/4">#4</a></p></li>
 </ul>
 </section>
 </section>
 <section id="v0-0-1">
-<h2><a class="toc-backref" href="#id66" role="doc-backlink">v0.0.1</a><a class="headerlink" href="#v0-0-1" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id67" role="doc-backlink">v0.0.1</a><a class="headerlink" href="#v0-0-1" title="Link to this heading"></a></h2>
 <section id="id41">
-<h3><a class="toc-backref" href="#id67" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
+<h3><a class="toc-backref" href="#id68" role="doc-backlink">Major Changes</a><a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Basic deployment of both Zookeeper and Brokers as systemd service on target <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/2">#2</a></p></li>
 <li><p>Basic deployment of both Zookeeper and Brokers as systemd service on target <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/pull/2">#2</a></p></li>
@@ -332,7 +337,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, Red Hat, Inc..</p>
+    <p>&#169; Copyright 2026, Red Hat, Inc..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
