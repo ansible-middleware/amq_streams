@@ -2,7 +2,7 @@
 - name: "Ensure required parameter(s) are defined."
   ansible.builtin.assert:
     that:
-      - amq_stream_cruise_control_home is defined
+      - amq_streams_cruise_control_home is defined
     quiet: true
 
 - name: "Ensure requirements for Cruise Control are met."
@@ -31,10 +31,11 @@
   when:
     - amq_streams_cruise_control_logfilename is defined
   block:
-    - name: "Ensure dirname for logfile exits {{ amq_streams_cruise_control_logfilename | dirname }}"
+    - name: "Ensure logfile parent directory exists {{ amq_streams_cruise_control_logfilename | dirname }}"
       ansible.builtin.file:
         path: "{{ amq_streams_cruise_control_logfilename | dirname }}"
         state: directory
+        mode: '0755'
 
     - name: "Ensure log4j logging is properly configured"
       ansible.builtin.template:
@@ -42,7 +43,7 @@
         dest: "{{ amq_streams_cruise_control_path_to_log4j_properties }}"
         owner: "{{ amq_streams_cruise_control_user | default(omit) }}"
         group: "{{ amq_streams_cruise_control_group | default(omit) }}"
-        mode: 0644
+        mode: '0644'
 
 - name: "Ensure capacity.json is properly configured"
   ansible.builtin.include_tasks: capacity.yml
@@ -52,7 +53,9 @@
 - name: "Ensure JAAS config is deployed and up to date (if enabled)"
   ansible.builtin.include_tasks: jaas_config.yml
   when:
-    - amq_streams_broker_inter_broker_auth_sasl_protocol is defined and amq_streams_broker_inter_broker_auth_sasl_mechanisms is defined and amq_streams_cruise_control_zk_sasl_jaas_config is defined
+    - amq_streams_broker_inter_broker_auth_sasl_protocol is defined
+    - amq_streams_broker_inter_broker_auth_sasl_mechanisms is defined
+    - amq_streams_cruise_control_zk_sasl_jaas_config is defined
 
 - name: "Ensure Cruise Control service is running (if enable)."
   ansible.builtin.include_tasks: service.yml

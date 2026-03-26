@@ -12,7 +12,7 @@
       - operation_result is defined
       - operation_result.rc is defined and operation_result.rc == 0
       - operation_result.stdout is defined
-    quiet: True
+    quiet: true
 
 - name: "Display information on user: {{ user_username }}."
   ansible.builtin.debug:

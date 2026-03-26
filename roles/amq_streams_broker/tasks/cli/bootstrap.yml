@@ -3,9 +3,9 @@
   ansible.builtin.assert:
     that:
       - main_argument is defined
-    quiet: True
+    quiet: true
 
-- name: "Set script to {{ amq_streams_broker_create_topic_script }} - if not defined."
+- name: "Set script to kafka-topics path - if not defined."
   ansible.builtin.set_fact:
     script: "{{ amq_streams_broker_create_topic_script }}"
   when:
@@ -31,6 +31,7 @@
     force: true
     owner: "{{ amq_streams_broker_user | default(omit) }}"
     group: "{{ amq_streams_broker_group | default(omit) }}"
+    mode: '0644'
   when:
     - amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled
 
@@ -45,7 +46,9 @@
           - amq_streams_broker_admin_username is defined and amq_streams_broker_admin_username | length > 0
           - amq_streams_broker_admin_password is defined and amq_streams_broker_admin_password | length > 0
         quiet: true
-        fail_msg: "For authentification to work properly, the admin username and password needs to be provided (or set amq_streams_broker_allow_auth_without_password to True to bypass this check)."
+        fail_msg: >-
+          For authentification to work properly, the admin username and password needs to be provided
+          (or set amq_streams_broker_allow_auth_without_password to true to bypass this check).
       when:
         - not amq_streams_broker_allow_auth_without_password is defined
 
@@ -53,16 +56,22 @@
       ansible.builtin.template:
         src: "{{ amq_streams_broker_admin_cli_config_template }}"
         dest: "{{ amq_streams_broker_admin_cli_config_file }}"
+        owner: "{{ amq_streams_broker_user | default(omit) }}"
+        group: "{{ amq_streams_broker_group | default(omit) }}"
+        mode: '0600'
 
-    - name: "Set command-config argument to run operation '{{ bootstrap_operator }}' for topic: '{{ main_argument }}'."
+    - name: "Set command-config argument for bootstrap operation"
       ansible.builtin.set_fact:
         bootstrap_command_config_operator_option: "--command-config {{ amq_streams_broker_admin_cli_config_file }}"
 
-- name: "Run operation '{{ bootstrap_operator }}' for with: '{{ main_argument }}'."
+- name: "Run bootstrap operation for main argument"
   block:
     - name: "Build command line"
       ansible.builtin.set_fact:
-        command_line: "{{ script }} {{ bootstrap_operator }} {{ bootstrap_operator_options | default('') }} {{ main_argument }} {{ bootstrap_command_config_operator_option | default('')}}  --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}"
+        command_line: >-
+          {{ script }} {{ bootstrap_operator }} {{ bootstrap_operator_options | default('') }}
+          {{ main_argument }} {{ bootstrap_command_config_operator_option | default('') }}
+          --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}
 
     - name: "Print command line for debugging - if requested"
       ansible.builtin.debug:
@@ -70,10 +79,10 @@
       when:
         - amq_streams_broker_bootstrap_debug is defined and amq_streams_broker_bootstrap_debug
 
-    - name: "Execute {{ script }} request for operation {{ bootstrap_operator }}."
-      ansible.builtin.command: "{{ command_line }}" #"{{ script }} {{ bootstrap_operator }} {{ main_argument }} {{ bootstrap_command_config_operator_option | default('')}}  --bootstrap-server {{ bootstrap_server_host }}:{{ bootstrap_server_port }}"
+    - name: "Execute kafka script for bootstrap operation"
+      ansible.builtin.command: "{{ command_line }}"
       register: operation_result
-      changed_when: False
+      changed_when: false
       environment:
         KAFKA_LOG4J_OPTS: "{{ amq_streams_broker_admin_cli_log4j_opts }}"
         LOG_DIR: "{{ amq_streams_broker_admin_cli_log_dir }}"

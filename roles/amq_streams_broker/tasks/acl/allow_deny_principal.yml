@@ -6,7 +6,7 @@
       - topic_name is defined
     quiet: true
 
-- name: "Change ACL on {{ user }} for {{ topic_name }}."
+- name: "Change ACL for topic and principal {{ topic_name }} / {{ user }}"
   block:
     - name: "Use bootstrap server to create topic {{ topic_name }}"
       ansible.builtin.include_tasks: cli/bootstrap.yml

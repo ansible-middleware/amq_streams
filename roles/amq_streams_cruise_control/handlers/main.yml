@@ -12,4 +12,5 @@
   become: "{{ amq_streams_install_requires_become | default(true) }}"
 
 - name: "Refresh capacity.json"
-  ansible.builtin.include_tasks: capacity.yml
+  ansible.builtin.include_tasks:
+    file: capacity.yml

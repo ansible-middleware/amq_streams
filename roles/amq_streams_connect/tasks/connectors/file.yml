@@ -25,7 +25,7 @@
         dest: "{{ amq_streams_common_home }}/test.txt"
         owner: "{{ amq_streams_connect_user | default(omit) }}"
         group: "{{ amq_streams_connect_group | default(omit) }}"
-        mode: 0644
+        mode: '0644'
 
     - name: "Ensure Sink file belongs to the appropriate user."
       ansible.builtin.copy:
@@ -34,4 +34,4 @@
         force: false
         owner: "{{ amq_streams_connect_user | default(omit) }}"
         group: "{{ amq_streams_connect_group | default(omit) }}"
-        mode: 0644
+        mode: '0644'

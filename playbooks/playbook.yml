@@ -13,7 +13,7 @@
     amq_streams_zookeeper_admin_server_port_delay: 0
     amq_streams_broker_listener_port_delay: 0
     amq_streams_connect_server_port_delay: 0
-    amq_streams_broker_bootstrap_debug: True
+    amq_streams_broker_bootstrap_debug: true
   roles:
     - role: amq_streams_zookeeper
   tasks:

@@ -85,6 +85,6 @@ argument_specs:
                 description: "Context of the HTTP API call to Cruise Control (don't modify unless you know what you are doing)"
                 type: "str"
             amq_streams_cruise_control_operation_exec:
-                default: True
+                default: true
                 description: "Indicate if the request must be executed or just diplayed (for debugging purpose)"
                 type: "bool"

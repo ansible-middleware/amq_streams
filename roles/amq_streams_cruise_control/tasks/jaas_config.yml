@@ -9,9 +9,13 @@
 
 - name: "Generate required JAAS config based on provided credentials."
   ansible.builtin.set_fact:
-    amq_streams_cruise_control_zk_sasl_jaas_config: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"{{ amq_streams_broker_username }}\" password=\"{{ amq_streams_broker_password }}\";"
+    amq_streams_cruise_control_zk_sasl_jaas_config: >-
+      org.apache.kafka.common.security.plain.PlainLoginModule required
+      username="{{ amq_streams_broker_username }}"
+      password="{{ amq_streams_broker_password }}";
 
 - name: "Ensure sasl.properties is up to date on broker."
   ansible.builtin.template:
     src: templates/sasl.properties.j2
-    dest: "{{ amq_stream_common_home }}/config/sasl.properties"
+    dest: "{{ amq_streams_common_home }}/config/sasl.properties"
+    mode: '0644'

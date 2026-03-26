@@ -27,6 +27,7 @@
     --cluster-id {{ amq_streams_cluster_id }}
   become: "{{ amq_streams_kraft_priv_escalation }}"
   when: not meta_file.stat.exists
+  changed_when: true
 
 - name: Enforce ownership on Kafka data directory
   ansible.builtin.file:
@@ -35,6 +36,6 @@
     owner: "{{ amq_streams_kraft_user | default('kafka') }}"
     group: "{{ amq_streams_kraft_group | default('kafka') }}"
     mode: '0750'
-    recurse: yes
+    recurse: true
   become: "{{ amq_streams_kraft_priv_escalation }}"
   when: not meta_file.stat.exists

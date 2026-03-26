@@ -13,7 +13,7 @@
   ansible.builtin.assert:
     that:
       - amq_streams_common_path_to_archive_file is exists
-    quiet: True
+    quiet: true
     fail_msg: "An offline install was requested, but files are not present on the controller: {{ amq_streams_common_path_to_archive_file }}"
   when:
     - amq_streams_common_offline_install
@@ -39,14 +39,14 @@
     path: "{{ amq_streams_common_home }}/{{ amq_streams_common_subdir | default('bin') }}"
   register: download_target
 
-- name: "Extract artifact {{ amq_streams_common_archive_file }} to {{ amq_streams_common_install_dir }}"
+- name: "Extract artifact to install directory {{ amq_streams_common_archive_file }} {{ amq_streams_common_install_dir }}"
   become: "{{ amq_streams_common_archive_extraction_requires_privilege_escalation }}"
   ansible.builtin.unarchive:
     src: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
     dest: "{{ amq_streams_common_install_dir }}"
     owner: "{{ amq_streams_common_user | default(omit) }}"
     group: "{{ amq_streams_common_group | default(omit) }}"
-    remote_src: "{{ amq_streams_common_download_remote_src | default('no') }}"
+    remote_src: "{{ amq_streams_common_download_remote_src | default(false) }}"
     creates: "{{ amq_streams_common_archive_creates_control_file | default(omit) }}"
   when:
     - download_target is defined and download_target.stat is defined and not download_target.stat.exists

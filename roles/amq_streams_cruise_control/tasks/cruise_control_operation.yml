@@ -7,11 +7,15 @@
       - operation_name is defined and operation_name | length > 0
     quiet: true
 
+- name: "Build Cruise Control API base URL"
+  ansible.builtin.set_fact:
+    cruise_control_api_base_url: "http://{{ amq_streams_cruise_control_host }}:{{ amq_streams_cruise_control_port }}"
+
 - name: "Build request"
   ansible.builtin.set_fact:
-    cruise_control_url_request: "http://{{ amq_streams_cruise_control_host }}:{{ amq_streams_cruise_control_port }}/{{ amq_streams_cruise_control_api_path }}/{{ operation_name }}"
+    cruise_control_url_request: "{{ cruise_control_api_base_url }}/{{ amq_streams_cruise_control_api_path }}/{{ operation_name }}"
 
-- name: "Use Cruise Control to perform {{ operation_name }} on the cluster"
+- name: "Use Cruise Control to perform cluster operation {{ operation_name }}"
   when:
     - amq_streams_cruise_control_operation_exec is defined and amq_streams_cruise_control_operation_exec
   block:
@@ -19,7 +23,7 @@
       ansible.builtin.uri:
         url: "{{ cruise_control_url_request }}"
         method: POST
-        return_content: True
+        return_content: true
       register: operation_result
 
   rescue:

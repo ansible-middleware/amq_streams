@@ -5,7 +5,7 @@
       - amq_streams_exporter_download_url is defined
       - amq_streams_exporter_download_url | length > 0
       - amq_streams_exporter_download_path is defined
-    quiet: True
+    quiet: true
 
 - name: "Switch arch to 386 if x86_64 as there is no x86_64 releases of exporter"
   ansible.builtin.set_fact:
@@ -27,13 +27,13 @@
           - exporter_download_path is defined
           - exporter_download_path.stat is defined
           - exporter_download_path.stat.exists is defined
-        quiet: True
+        quiet: true
 
     - name: "Download Kafka exporter from {{ amq_streams_exporter_download_url }}."
       ansible.builtin.get_url:
         url: "{{ amq_streams_exporter_download_url }}"
         dest: "{{ amq_streams_exporter_download_path }}"
-        mode: 0644
+        mode: '0644'
       when:
         - not exporter_download_path.stat.exists
 

@@ -17,12 +17,12 @@
       when:
         - amq_streams_common_systctl_update_enable is defined and amq_streams_common_systctl_update_enable
 
-    - name: "Ensure that {{ ulimit_user }} ulimit is set to {{ ulimit_limit }}."
+    - name: "Ensure ulimit is set for user and limit value {{ ulimit_user }} {{ ulimit_limit }}"
       ansible.builtin.template:
         src: templates/ulimit.j2
         dest: /etc/security/limits.d/{{ ulimit_user }}
         owner: root
         group: root
-        mode: 0755
+        mode: '0755'
       when:
         - ulimit_limit is defined and ulimit_user is defined
