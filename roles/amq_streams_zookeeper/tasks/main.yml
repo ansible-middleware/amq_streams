@@ -23,9 +23,11 @@
     ulimit_user: "{{ amq_streams_zookeeper_user }}"
     ulimit_limit: "{{ amq_streams_zookeeper_ulimit_max_value }}"
   when:
-    - ansible_distribution == "RedHat" and amq_streams_common_systctl_update_enable is defined and amq_streams_common_systctl_update_enable
+    - ansible_distribution == "RedHat"
+    - amq_streams_common_systctl_update_enable is defined
+    - amq_streams_common_systctl_update_enable | bool
 
-- name: "Ensure Prometheus requirements are met (if enabled: {{ amq_streams_zookeeper_prometheus_enabled }}) - {{ amq_streams_zookeeper_prometheus_config_file_template }}."
+- name: "Ensure Prometheus requirements are met for Zookeeper {{ amq_streams_zookeeper_prometheus_config_file_template }}"
   ansible.builtin.include_role:
     name: amq_streams_common
     tasks_from: prometheus.yml
@@ -46,7 +48,7 @@
         state: directory
         owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
         group: "{{ amq_streams_zookeeper_group | default(omit) }}"
-        mode: 0755
+        mode: '0755'
       when:
         - amq_streams_zookeeper_data_dir is defined
 
@@ -56,6 +58,7 @@
         dest: "{{ amq_streams_zookeeper_data_dir }}/myid"
         owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
         group: "{{ amq_streams_zookeeper_group | default(omit) }}"
+        mode: '0644'
       when:
         - amq_streams_zookeeper_inventory_group is defined
         - amq_streams_zookeeper_inventory_group | length > 0
@@ -66,7 +69,7 @@
         dest: "{{ amq_streams_zookeeper_auth_config }}"
         owner: "{{ amq_streams_zookeeper_user | default(omit) }}"
         group: "{{ amq_streams_zookeeper_group | default(omit) }}"
-        mode: 0644
+        mode: '0644'
       when:
         - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
 

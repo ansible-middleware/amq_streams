@@ -18,4 +18,4 @@ amq_streams_kraft_inter_broker_listener_name: "PLAINTEXT"
 amq_streams_kraft_process_roles: "broker,controller"
 amq_streams_kraft_log_dirs: "{{ amq_streams_kraft_data_dir }}"
 amq_streams_kraft_log_retention_hours: 168
-amq_streams_kraft_priv_escalation: yes
+amq_streams_kraft_priv_escalation: true

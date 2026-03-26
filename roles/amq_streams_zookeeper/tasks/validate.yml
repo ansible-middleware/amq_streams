@@ -29,7 +29,7 @@
     name: amq_streams_common
     tasks_from: validation/prometheus.yml
   vars:
-    amq_streams_zookeeper_prometheus_bind_addr: "{{ amq_streams_broker_prometheus_bind_addr }}"
-    amq_streams_zookeeper_prometheus_port: "{{ amq_streams_broker_prometheus_port  }}"
+    amq_streams_common_prometheus_bind_addr: "{{ amq_streams_zookeeper_prometheus_bind_addr }}"
+    amq_streams_common_prometheus_port: "{{ amq_streams_zookeeper_prometheus_port }}"
   when:
     - amq_streams_zookeeper_prometheus_enabled is defined and amq_streams_zookeeper_prometheus_enabled

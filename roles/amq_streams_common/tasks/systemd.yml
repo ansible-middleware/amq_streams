@@ -14,7 +14,7 @@
         dest: "{{ server_config }}"
         owner: root
         group: root
-        mode: 0644
+        mode: '0644'
       when:
         - server_config_template is defined and server_config is defined
       notify:
@@ -26,6 +26,7 @@
         owner: "{{ server_user }}"
         group: "{{ server_group }}"
         state: directory
+        mode: '0755'
       when:
         - server_log_dir is defined
         - server_user is defined
@@ -37,7 +38,7 @@
         dest: "{{ service_systemd_env_file }}"
         owner: root
         group: root
-        mode: 0644
+        mode: '0644'
       when:
         - service_systemd_env_file is defined
 
@@ -47,7 +48,7 @@
         dest: "{{ server_systemd_home | default(amq_streams_common.systemd.home) }}/{{ server_systemd_name | default(server_name + '.service') }}"
         group: root
         owner: root
-        mode: 0644
+        mode: '0644'
       vars:
         service_description: "{{ server_description | default(server_name) }}"
         service_user: "{{ server_user | default('root') }}"
@@ -58,7 +59,7 @@
 
     - name: "Perform daemon-reload to ensure the changes are picked up"
       ansible.builtin.systemd:
-        daemon_reload: yes
+        daemon_reload: true
       when:
         - daemon_reload is defined
         - daemon_reload.changed
@@ -66,7 +67,7 @@
     - name: "Ensure {{ server_name }} is enabled and running."
       ansible.builtin.service:
         name: "{{ server_name }}"
-        enabled: yes
+        enabled: true
         state: started
 
     - name: "Wait for service port {{ server_port }} to be available - (if provided)"

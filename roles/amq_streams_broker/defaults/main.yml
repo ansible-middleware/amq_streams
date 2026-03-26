@@ -7,12 +7,12 @@ amq_streams_broker_server_start: "{{ amq_streams_common_home }}/bin/kafka-server
 amq_streams_broker_config: "/etc/amq_streams_broker.properties"
 amq_streams_broker_service_name: 'amq_streams_broker'
 amq_streams_broker_user: 'amq_streams_broker'
-amq_streams_broker_config_files_requires_privilege_escalation: yes
+amq_streams_broker_config_files_requires_privilege_escalation: true
 amq_streams_broker_listener_port: 9092
 amq_streams_broker_listener_internal_port: 9091
 amq_streams_broker_listener_tls_port: 9093
 amq_streams_broker_listener_port_delay: 0
-amq_streams_broker_listener_port_skip_wait: False
+amq_streams_broker_listener_port_skip_wait: false
 amq_streams_broker_group: 'amq_streams'
 amq_streams_broker_service_config_template: 'templates/service.conf.j2'
 amq_streams_broker_service_config_file: '/etc/broker.conf'
@@ -53,7 +53,7 @@ amq_streams_deployment_balance_check_enabled: true
 
 amq_streams_broker_zookeeper_host_default_value: "{{ groups['zookeepers'][0] | default('localhost') }}"
 amq_streams_broker_zookeeper_port_default_value: 2181
-amq_streams_broker_zookeeper_wait: False
+amq_streams_broker_zookeeper_wait: false
 
 # Broker-Zookeeper Authentication with SASL
 amq_streams_zookeeper_auth_enabled: false
@@ -62,13 +62,13 @@ amq_streams_broker_zookeeper_auth_config_template: templates/broker-jaas.conf.j2
 
 # Broker Listeners
 amq_streams_broker_listeners:
-  - PLAINTEXT://:{{ amq_streams_broker_listener_port }} # Insecure
-  #- REPLICATION://:{{ amq_streams_broker_listener_internal_port }} # Inter-broker communication
-  #- AUTHENTICATED://:{{ amq_streams_broker_listener_port }} # Authenticated
-  #- SSL://:{{ amq_streams_broker_listener_tls_port }} # TLS enabled
+  - PLAINTEXT://:{{ amq_streams_broker_listener_port }}  # Insecure
+  # - REPLICATION://:{{ amq_streams_broker_listener_internal_port }}  # Inter-broker communication
+  # - AUTHENTICATED://:{{ amq_streams_broker_listener_port }}  # Authenticated
+  # - SSL://:{{ amq_streams_broker_listener_tls_port }}  # TLS enabled
 
-#amq_streams_broker_advertised_listeners
-#  - PLAINTEXT://:{{ amq_streams_broker_listener_port }} # Insecure
+# amq_streams_broker_advertised_listeners
+#   - PLAINTEXT://:{{ amq_streams_broker_listener_port }}  # Insecure
 
 # Broker Authentication
 amq_streams_broker_auth_enabled: false
@@ -78,14 +78,14 @@ amq_streams_connect_broker_auth_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCT
 
 amq_streams_broker_auth_listeners:
   - PLAINTEXT:PLAINTEXT
-  #- REPLICATION:PLAINTEXT
-  #- AUTHENTICATED:SASL_PLAINTEXT
-  #- SSL:SSL
-  #- SSL:SASL_SSL
+  # - REPLICATION:PLAINTEXT
+  # - AUTHENTICATED:SASL_PLAINTEXT
+  # - SSL:SSL
+  # - SSL:SASL_SSL
 
 amq_streams_broker_auth_sasl_mechanisms:
   - PLAIN
-  #- SCRAM-SHA-512
+  # - SCRAM-SHA-512
 
 amq_streams_broker_tls_enabled: false
 # Keystore and truststore for Brokers
@@ -100,7 +100,7 @@ amq_streams_broker_tls_truststore_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODU
 # Truststore for Clients
 amq_streams_broker_tls_truststore_client_dir: /tmp
 amq_streams_broker_tls_truststore_client: client.truststore.jks
-amq_streams_broker_tls_truststore_client_require_priv_escalation: yes
+amq_streams_broker_tls_truststore_client_require_priv_escalation: true
 amq_streams_broker_tls_truststore_client_location: /opt
 amq_streams_broker_tls_truststore_client_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION
 amq_streams_broker_admin_cli_log4j_opts: "  "
@@ -118,7 +118,7 @@ amq_streams_broker_admin_mechanism: PLAIN
 amq_streams_broker_admin_username: PLEASE_IDENTIFY_THE_ADMIN_USER
 amq_streams_broker_admin_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION
 
-amq_streams_broker_prometheus_enabled: False
+amq_streams_broker_prometheus_enabled: false
 amq_streams_broker_prometheus_port: 18080
 amq_streams_broker_prometheus_bind_addr: '0.0.0.0'
 amq_streams_broker_prometheus_config_file: broker-config.yaml

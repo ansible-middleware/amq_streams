@@ -1,5 +1,6 @@
 *.tar.gz
 *.zip
+*.tgz
 .tmp
 .cache
 docs/plugins/

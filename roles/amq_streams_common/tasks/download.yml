@@ -12,14 +12,26 @@
 - name: "Validate credentials (if required)"
   ansible.builtin.assert:
     that:
-      - (rhn_username is defined and amq_streams_common_redhat_enable is defined and amq_streams_common_redhat_enable) or not amq_streams_common_redhat_enable is defined or not amq_streams_common_redhat_enable or amq_streams_common_offline_install
-      - (rhn_password is defined and amq_streams_common_redhat_enable is defined and amq_streams_common_redhat_enable) or not amq_streams_common_redhat_enable is defined or not amq_streams_common_redhat_enable or amq_streams_common_offline_install
-    quiet: True
-    fail_msg: "Cannot install Red Hat Enterprise Application AMQ Streams without RHN service accounts credentials. Verify rhn_username and rhn_password are defined or set amq_streams_offline_install"
+      - >-
+        (rhn_username is defined and amq_streams_common_redhat_enable is defined
+        and amq_streams_common_redhat_enable)
+        or not amq_streams_common_redhat_enable is defined
+        or not amq_streams_common_redhat_enable
+        or amq_streams_common_offline_install
+      - >-
+        (rhn_password is defined and amq_streams_common_redhat_enable is defined
+        and amq_streams_common_redhat_enable)
+        or not amq_streams_common_redhat_enable is defined
+        or not amq_streams_common_redhat_enable
+        or amq_streams_common_offline_install
+    quiet: true
+    fail_msg: >-
+      Cannot install Red Hat Enterprise Application AMQ Streams without RHN service accounts credentials.
+      Verify rhn_username and rhn_password are defined or set amq_streams_offline_install
 
 - name: "Determine current working directory to set as download target - if not specified."
   ansible.builtin.set_fact:
-    amq_streams_common_download_dir: "{{ lookup('env', 'pwd') | default('.') }}"
+    amq_streams_common_download_dir: "{{ lookup('env', 'PWD') | default('.') }}"
   when:
     - not amq_streams_common.archive.download_dir is defined
 
@@ -27,7 +39,7 @@
   ansible.builtin.stat:
     path: "{{ amq_streams_common_download_dir }}"
   register: download_dir
-  become: "{{ amq_streams_common_download_become | default('no') }}"
+  become: "{{ amq_streams_common_download_become | default(false) }}"
   delegate_to: localhost
 
 - name: "Verify that download directory exist."
@@ -50,8 +62,8 @@
     dest: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"
     owner: "{{ amq_streams_common_download_user | default(omit) }}"
     group: "{{ amq_streams_common_download_group | default(omit) }}"
-    mode: 0644
+    mode: '0644'
   delegate_to: localhost
-  become: "{{ amq_streams_common_download_become | default('no') }}"
+  become: "{{ amq_streams_common_download_become | default(false) }}"
   when:
     - not download_target_file.stat.exists

@@ -86,8 +86,8 @@ num.broker.metrics.windows=20
 min.samples.per.broker.metrics.window=1
 
 # The configuration for the BrokerCapacityConfigFileResolver (supports JBOD, non-JBOD, and heterogeneous CPU core capacities)
-#capacity.config.file={{ amq_stream_cruise_control_home }}/config/capacity.json
-capacity.config.file={{ amq_stream_cruise_control_home }}/config/capacity.json
+#capacity.config.file={{ amq_streams_cruise_control_home }}/config/capacity.json
+capacity.config.file={{ amq_streams_cruise_control_home }}/config/capacity.json
 
 # Configurations for the analyzer
 # =======================================
@@ -229,7 +229,7 @@ failed.brokers.zk.path=/CruiseControlBrokerList
 topic.config.provider.class=com.linkedin.kafka.cruisecontrol.config.KafkaAdminTopicConfigProvider
 
 # The cluster configurations for the TopicConfigProvider
-cluster.configs.file={{ amq_stream_cruise_control_home }}/config/clusterConfigs.json
+cluster.configs.file={{ amq_streams_cruise_control_home }}/config/clusterConfigs.json
 
 # The maximum time in milliseconds to store the response and access details of a completed kafka monitoring user task.
 completed.kafka.monitor.user.task.retention.time.ms=86400000

@@ -14,9 +14,9 @@ galaxy_info:
   min_ansible_version: "2.14"
 
   platforms:
-   - name: EL
-     versions:
-     - 8
+    - name: EL
+      versions:
+        - all
 
   galaxy_tags:
     - java
@@ -26,4 +26,4 @@ galaxy_info:
     - server
 
 dependencies:
-- { role: amq_streams_common }
+  - role: amq_streams_common

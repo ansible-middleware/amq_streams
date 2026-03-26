@@ -1,11 +1,26 @@
 ---
-- block:
+- name: "Validate server log file (when enabled)"
+  when:
+    - server_log_validation is defined
+    - server_log_validation | bool
+  block:
     - name: "Ensure required parameter(s) are provided."
       ansible.builtin.assert:
         that:
           - server_log_dir is defined
-          - server_log_dir is exists
           - server_log_validation_min_size is defined
+        quiet: true
+        fail_msg: "{{ server_log_dir | default('server_log_dir') }} is invalid"
+
+    - name: "Stat server log file"
+      ansible.builtin.stat:
+        path: "{{ server_log_dir }}"
+      register: server_log_stat
+
+    - name: "Assert server log file exists"
+      ansible.builtin.assert:
+        that:
+          - server_log_stat.stat.exists
         quiet: true
         fail_msg: "{{ server_log_dir }} is invalid"
 
@@ -13,47 +28,44 @@
       ansible.builtin.set_fact:
         server_log_fail_if_error_is_found: true
       when:
-        - not server_log_fail_if_error_is_found is defined
+        - server_log_fail_if_error_is_found is not defined
 
-    - name: "Read the content of {{ server_log_dir  }}."
+    - name: "Read the content of server log"
       ansible.builtin.slurp:
         src: "{{ server_log_dir }}"
       register: server_log_slurped
 
-    - name: "Set number of characters in {{ server_log_dir }}"
+    - name: "Set number of characters in log"
       ansible.builtin.set_fact:
         server_log_content: "{{ server_log_slurped['content'] | b64decode }}"
         nb_chars_in_server_log: "{{ server_log_slurped['content'] | b64decode | length }}"
 
-    - name: "Check that {{ server_log_dir }} is not empty."
+    - name: "Check that log is not empty"
       ansible.builtin.assert:
         that:
           - nb_chars_in_server_log is defined
           - nb_chars_in_server_log | int > server_log_validation_min_size
-        quiet: True
+        quiet: true
 
-    - name: "Set expected string for fail error message."
+    - name: "Set expected string for fail error message"
       ansible.builtin.set_fact:
         error_label: 'ERROR'
       when:
-        - not error_label is defined
+        - error_label is not defined
 
-    - name: "Check logfile {{ server_log_dir }} does not contains {{ error_label }}."
+    - name: "Check logfile does not contain error lines"
+      when:
+        - server_log_fail_if_error_is_found | bool
       block:
-
-        - name: "Display logfile if {{ error_label }} is found."
+        - name: "Display logfile if error label is found"
           ansible.builtin.debug:
             msg: "{{ server_log_content }}"
           when:
-              - error_label in server_log_content
-        - name:
+            - error_label in server_log_content
+
+        - name: "Assert logfile does not contain error label"
           ansible.builtin.assert:
             that:
-              - not error_label in server_log_content
+              - error_label not in server_log_content
             quiet: true
             fail_msg: "Server logfile contains {{ error_label }} error lines."
-          when:
-      when:
-        - server_log_fail_if_error_is_found
-  when:
-    - server_log_validation is defined and server_log_validation
