@@ -7,7 +7,7 @@ Collection to install and configure [Apache Kafka](https://kafka.apache.org/) / 
 <!--start requires_ansible-->
 ## Ansible version compatibility
 
-This collection has been tested against following Ansible versions: **>=2.9.10**.
+This collection has been tested against following Ansible versions: **>=2.16.0**.
 
 Plugins and modules within a collection may be tested with only specific Ansible versions. A collection may contain metadata that identifies these versions.
 <!--end requires_ansible-->
@@ -87,13 +87,21 @@ It is possible to perform downloads from alternate sources (like corporate Nexus
 `amq_streams_common_download_url` variable; make sure the final downloaded filename matches with the source filename
 described by the `amq_streams_common_archive_file` variable (ie. *kafka_-a.b.c-x.y.z.tgz*).
 
+
+## Support
+
 <!--start support -->
-For Red Hat customers, this collection is released as a [Technology Preview](https://access.redhat.com/support/offerings/techpreview) feature as the [Red Hat Ansible certified content collection for AMQ Streams](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/amq_streams). If you have any issues or questions related to this collection, please contact <Ansible-middleware-core@redhat.com> or open an issue at https://github.com/ansible-middleware/amq_streams/issues.
+
+For Red Hat customers, this collection is released as a [Technology Preview](https://access.redhat.com/support/offerings/techpreview) feature as the [Red Hat Ansible certified content collection for AMQ Streams](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/amq_streams). If you have any issues or questions related to this collection, please contact <Ansible-middleware-core@redhat.com> or open an [issue](https://github.com/ansible-middleware/amq_streams/issues).
+
 <!--end support -->
+
+## Release and Upgrade Notes
+
+For details on changes between versions, please see the [CHANGELOG](https://github.com/ansible-middleware/amq_streams/blob/main/CHANGELOG.rst) for this collection.
 
 ## License
 
 Apache License v2.0 or later
 
 See [LICENSE](LICENSE) to view the full text.
-

@@ -6,8 +6,19 @@ middleware\_automation.amq\_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
-v1.0.1-devel
-============
+v1.0.1
+======
+
+Major Changes
+-------------
+
+- AMW-540 Fix the upstream collection requirements with common v1.2.4 `#138 <https://github.com/ansible-middleware/amq_streams/pull/138>`_
+
+Minor Changes
+-------------
+
+- Add missing variables documentation, plus a few minors tweaks, mostly focused on CI issues `#126 <https://github.com/ansible-middleware/amq_streams/pull/126>`_
+- Fix certification requirements for AMQ Streams `#137 <https://github.com/ansible-middleware/amq_streams/pull/137>`_
 
 v1.0.0
 ======
