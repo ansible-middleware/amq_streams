@@ -12,6 +12,7 @@ v1.0.3-devel
 Minor Changes
 -------------
 
+- Fix AMQ Streams downstream compatibility issues `#141 <https://github.com/ansible-middleware/amq_streams/pull/141>`_
 - Fixing common module usage `#139 <https://github.com/ansible-middleware/amq_streams/pull/139>`_
 
 v1.0.2
