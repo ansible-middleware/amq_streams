@@ -41,9 +41,6 @@ The amq_streams collection also depends on the following python packages to be p
 
 * _none at the moment_
 
-A requirement file is provided to install:
-
-    pip install -r requirements.txt
 <!--end galaxy_download -->
 ### Build and install locally
 
