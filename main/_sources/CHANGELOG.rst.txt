@@ -15,6 +15,11 @@ Minor Changes
 - Fix AMQ Streams downstream compatibility issues `#141 <https://github.com/ansible-middleware/amq_streams/pull/141>`_
 - Fixing common module usage `#139 <https://github.com/ansible-middleware/amq_streams/pull/139>`_
 
+Bugfixes
+--------
+
+- AMW-594 Upstream release is failing due to recent rules change `#143 <https://github.com/ansible-middleware/amq_streams/pull/143>`_
+
 v1.0.2
 ======
 
