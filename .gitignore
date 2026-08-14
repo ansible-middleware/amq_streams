@@ -11,4 +11,6 @@ docs/_build/
 *.retry
 inventory
 changelogs/.plugin-cache.yaml
+changelogs/fragments/*.yml
+changelogs/fragments/*.yaml
 .ansible
