@@ -106,19 +106,19 @@ argument_specs:
             # line 23 of defaults/main.yml
             amq_streams_connect_bootstrap_servers:
                 default: "localhost:9092"
-                description: "Connect's hostname and port for boostrap"
+                description: "Connect's hostname and port for bootstrap"
                 type: "str"
 
             # line 26 of defaults/main.yml
             amq_streams_connect_broker_auth_enabled:
                 default: false
-                description: "Whether or not authentification between broker and Connect is enabled"
+                description: "Whether or not authentication between broker and Connect is enabled"
                 type: "bool"
 
             # line 27 of defaults/main.yml
             amq_streams_connect_broker_auth_scram_enabled:
                 default: false
-                description: "Whether or not broker scram authentification is enabled"
+                description: "Whether or not broker scram authentication is enabled"
                 type: "bool"
 
             # line 28 of defaults/main.yml
@@ -148,7 +148,7 @@ argument_specs:
             # line 32 of defaults/main.yml
             amq_streams_connect_server_log_validation_min_size:
                 default: 20
-                description: "Connect's server log minimal size (for the service to be considered functionnal)"
+                description: "Connect's server log minimal size (for the service to be considered functional)"
                 type: "int"
 
             # line 34 of defaults/main.yml

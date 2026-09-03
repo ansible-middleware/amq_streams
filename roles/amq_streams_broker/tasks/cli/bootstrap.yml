@@ -47,7 +47,7 @@
           - amq_streams_broker_admin_password is defined and amq_streams_broker_admin_password | length > 0
         quiet: true
         fail_msg: >-
-          For authentification to work properly, the admin username and password needs to be provided
+          For authentication to work properly, the admin username and password needs to be provided
           (or set amq_streams_broker_allow_auth_without_password to true to bypass this check).
       when:
         - not amq_streams_broker_allow_auth_without_password is defined
