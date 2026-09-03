@@ -1,0 +1,50 @@
+# AMQ Streams / Kafka / Ansible domain-specific words
+# Only terms NOT covered by built-in dictionaries
+
+# Product names and projects
+Infinispan
+wildfly
+Wildfly
+cruisecontrol
+kafkacruisecontrol
+
+# Kafka / Zookeeper terms
+cnxn
+cnxns
+Cnxns
+Interbroker
+Intercluster
+JBOD
+kafkaassigner
+Unflushed
+zknode
+znodes
+balancedness
+vertx
+exposeheaders
+
+# Java / Security terms
+jaas
+JAAS
+jarname
+
+# Ansible terms
+fqcn
+FQCN
+divisibleby
+
+# Linux / System terms
+firewalld
+Firewalld
+systctl
+
+# Placeholder passwords
+CHANGEME
+IAMNOTGOOD
+
+# CI / DevOps
+sangonzal
+rootperm
+
+# RST / Sphinx directives
+toctree

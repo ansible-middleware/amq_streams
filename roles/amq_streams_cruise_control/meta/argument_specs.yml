@@ -160,5 +160,5 @@ argument_specs:
             # line 30 of defaults/main.yml
             amq_streams_cruise_control_operation_exec:
                 default: true
-                description: "Indicate if the request must be executed or just diplayed (for debugging purpose)"
+                description: "Indicate if the request must be executed or just displayed (for debugging purpose)"
                 type: "bool"

@@ -43,7 +43,7 @@ the role successfully:
 `localhost:9092` |
 |`amq_streams_connect_broker_admin_mechanism` | Authentication mechanism to connect to the Kafka brokers | `true` | `PLAIN` |
 |`amq_streams_connect_broker_auth_username` | Default user to connect to the Kafka brokers | `true` | `broker` |
-|`amq_streams_connect_broker_auth_password` | Default password to connecto to the Kafka brokers | `true` | `PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION` |
+|`amq_streams_connect_broker_auth_password` | Default password to connect to the Kafka brokers | `true` | `PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION` |
 |`amq_streams_broker_admin_password` | Default password of the admin user to manage topics | `false` |  |
 |`amq_streams_connect_broker_tls_enabled` | Enable SSL connections to the Kafka brokers | `false` | `false` |
 |`amq_streams_connect_broker_tls_truststore_client_dir` | Local folder of the client truststore to use | `true` | `/tmp` |

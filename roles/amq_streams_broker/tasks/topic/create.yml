@@ -1,5 +1,5 @@
 ---
-- name: "Ensure prerequistes are in place"
+- name: "Ensure prerequisites are in place"
   ansible.builtin.include_tasks: topic/prereqs.yml
 
 - name: "Create topic using the bootstrap server."

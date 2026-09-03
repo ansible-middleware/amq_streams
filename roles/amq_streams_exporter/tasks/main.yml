@@ -1,5 +1,5 @@
 ---
-- name: "Ensure prerequisite are fullfilled."
+- name: "Ensure prerequisites are fulfilled."
   ansible.builtin.include_tasks: prereqs.yml
 
 - name: "Download Kafka Exporter (if defined)."

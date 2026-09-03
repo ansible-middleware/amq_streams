@@ -1,5 +1,5 @@
 ---
-- name: "Ensure prerequirements for collection are met."
+- name: "Ensure prerequisites for collection are met."
   ansible.builtin.include_role:
     name: amq_streams_common
     tasks_from: prereqs.yml
@@ -35,7 +35,7 @@
   when:
     - ansible_distribution == "RedHat"
 
-- name: "Escalade privilge to root"
+- name: "Escalate privilege to root"
   become: "{{ amq_streams_broker_config_files_requires_privilege_escalation }}"
   block:
     - name: "Ensure broker home dir belongs to appropriate user - if user is defined."

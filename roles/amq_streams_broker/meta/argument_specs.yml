@@ -172,7 +172,7 @@ argument_specs:
             # line 30 of defaults/main.yml
             amq_streams_broker_offsets_topic_replication_factor:
                 default: 1
-                description: "Broker's offeset topic replication factor"
+                description: "Broker's offset topic replication factor"
                 type: "int"
 
             # line 31 of defaults/main.yml
@@ -232,13 +232,13 @@ argument_specs:
             # line 41 of defaults/main.yml
             amq_streams_broker_bootstrap_server_host:
                 default: "localhost"
-                description: "Broker boostrap's server host"
+                description: "Broker bootstrap's server host"
                 type: "str"
 
             # line 34 of defaults/main.yml
             amq_streams_broker_bootstrap_server_port:
                 default: 9092
-                description: "Broker's boostrap server port"
+                description: "Broker's bootstrap server port"
                 type: "int"
 
             # line 36 of defaults/main.yml
@@ -298,13 +298,13 @@ argument_specs:
             # line 59 of defaults/main.yml
             amq_streams_zookeeper_auth_enabled:
                 default: false
-                description: "Whether or not authentification with Zk is enabled or not"
+                description: "Whether or not authentication with Zk is enabled or not"
                 type: "bool"
 
             # line 60 of defaults/main.yml
             amq_streams_broker_zookeeper_auth_config:
                 default: "/etc/broker-jaas.conf"
-                description: "Path to the broker-jass.conf file on the target system"
+                description: "Path to the broker-jaas.conf file on the target system"
                 type: "str"
 
             # line 61 of defaults/main.yml
@@ -322,13 +322,13 @@ argument_specs:
             # line 74 of defaults/main.yml
             amq_streams_broker_auth_enabled:
                 default: false
-                description: "Whether or not authentification between brokers"
+                description: "Whether or not authentication between brokers"
                 type: "bool"
 
             # line 75 of defaults/main.yml
             amq_streams_broker_auth_scram_enabled:
                 default: false
-                description: "Whether or not scram authentification is enabled"
+                description: "Whether or not scram authentication is enabled"
                 type: "bool"
 
             # line 76 of defaults/main.yml
@@ -346,13 +346,13 @@ argument_specs:
             # line 79 of defaults/main.yml
             amq_streams_broker_auth_listeners:
                 default: "['PLAINTEXT:PLAINTEXT']"
-                description: "Broker authentification listeners configuration"
+                description: "Broker authentication listeners configuration"
                 type: "list"
 
             # line 86 of defaults/main.yml
             amq_streams_broker_auth_sasl_mechanisms:
                 default: "['PLAIN']"
-                description: "Broker's authentification sasl mechnisms used"
+                description: "Broker's authentication SASL mechanisms used"
                 type: "list"
 
             # line 90 of defaults/main.yml
@@ -460,7 +460,7 @@ argument_specs:
             # line 110 of defaults/main.yml
             amq_streams_broker_server_log_validation_min_size:
                 default: 20
-                description: "Broker's serverl log validation minimal size (to consider the broker running and functionnal)"
+                description: "Broker's server log validation minimal size (to consider the broker running and functional)"
                 type: "int"
 
             # line 112 of defaults/main.yml
