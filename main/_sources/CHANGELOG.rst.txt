@@ -15,6 +15,7 @@ Minor Changes
 - AMW-623 amq_streams collection spelling and grammar checking for PRs `#145 <https://github.com/ansible-middleware/amq_streams/pull/145>`_
 - Fix AMQ Streams downstream compatibility issues `#141 <https://github.com/ansible-middleware/amq_streams/pull/141>`_
 - Fixing common module usage `#139 <https://github.com/ansible-middleware/amq_streams/pull/139>`_
+- Remove requirements.txt and related documentation `#142 <https://github.com/ansible-middleware/amq_streams/pull/142>`_
 - Replace deprecated top-level fact variables with ansible_fact `#146 <https://github.com/ansible-middleware/amq_streams/pull/146>`_
 
 Bugfixes
