@@ -33,7 +33,7 @@
     ulimit_user: "{{ amq_streams_broker_user }}"
     ulimit_limit: "{{ amq_streams_broker_ulimit_max_value }}"
   when:
-    - ansible_distribution == "RedHat"
+    - ansible_facts['distribution'] == "RedHat"
 
 - name: "Escalate privilege to root"
   become: "{{ amq_streams_broker_config_files_requires_privilege_escalation }}"

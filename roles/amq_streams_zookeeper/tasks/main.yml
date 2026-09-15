@@ -23,7 +23,7 @@
     ulimit_user: "{{ amq_streams_zookeeper_user }}"
     ulimit_limit: "{{ amq_streams_zookeeper_ulimit_max_value }}"
   when:
-    - ansible_distribution == "RedHat"
+    - ansible_facts['distribution'] == "RedHat"
     - amq_streams_common_systctl_update_enable is defined
     - amq_streams_common_systctl_update_enable | bool
 

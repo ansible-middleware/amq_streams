@@ -22,7 +22,7 @@
     ulimit_user: "{{ amq_streams_connect_user }}"
     ulimit_limit: "{{ amq_streams_connect_ulimit_max_value }}"
   when:
-    - ansible_distribution == "RedHat"
+    - ansible_facts['distribution'] == "RedHat"
 
 - name: "Ensure connectors for AMQ Connect are deployed."
   ansible.builtin.include_tasks: "{{ connector.path }}"
