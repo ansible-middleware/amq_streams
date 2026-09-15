@@ -9,6 +9,7 @@ authors:
   - Roman Martin <rmarting@redhat.com>
   - Guilherme Baufaker Rêgo <baufaker@redhat.com>
 description: Install and configure Red Hat AMQ Streams (kafka) deployments
+license: ["Apache-2.0"]
 license_file: "LICENSE"
 tags:
   - java

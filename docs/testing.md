@@ -42,13 +42,7 @@ cd amq_streams
 ansible-galaxy collection install -r requirements.yml
 ```
 
-4. Install collection python deps
-
-```shell
-pip install -r requirements.txt
-```
-
-5. Create inventory for localhost
+4. Create inventory for localhost
 
 ```shell
 cat << EOF > inventory2
