@@ -15,6 +15,16 @@ amq_streams_kraft_advertised_listeners:
   - "PLAINTEXT://{{ ansible_host }}:{{ amq_streams_kraft_listener_port }}"
 amq_streams_kraft_controller_listener_names: "CONTROLLER"
 amq_streams_kraft_inter_broker_listener_name: "PLAINTEXT"
+# Maps every listener name used in amq_streams_kraft_listeners (and the
+# controller listener) to a Kafka security protocol. Extend or override this
+# list if amq_streams_kraft_listeners / amq_streams_kraft_inter_broker_listener_name
+# reference a listener name not covered here (e.g. a custom CONTROLLER mapping).
+amq_streams_kraft_security_protocol_map:
+  - "PLAINTEXT:PLAINTEXT"
+  - "CONTROLLER:PLAINTEXT"
+  - "SSL:SSL"
+  - "SASL_PLAINTEXT:SASL_PLAINTEXT"
+  - "SASL_SSL:SASL_SSL"
 amq_streams_kraft_process_roles: "broker,controller"
 amq_streams_kraft_log_dirs: "{{ amq_streams_kraft_data_dir }}"
 amq_streams_kraft_log_retention_hours: 168

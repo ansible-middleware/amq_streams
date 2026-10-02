@@ -25,6 +25,7 @@ This role orchestrates the initialization and configuration of Apache Kafka in K
 | `amq_streams_kraft_advertised_listeners` | *(See defaults)* | A list of listeners advertised to clients. Must **ONLY** include Broker listeners (e.g., `PLAINTEXT://...`). |
 | `amq_streams_kraft_controller_listener_names` | `"CONTROLLER"` | The listener name used by the controller quorum (must match an entry in `listeners`). |
 | `amq_streams_kraft_inter_broker_listener_name` | `"PLAINTEXT"` | The listener name used for replication between brokers. |
+| `amq_streams_kraft_security_protocol_map` | *(See defaults)* | A list of `NAME:PROTOCOL` entries used to build `listener.security.protocol.map`. Every listener name referenced in `amq_streams_kraft_listeners` / `amq_streams_kraft_inter_broker_listener_name` (e.g. `SASL_SSL`, `SSL`, `SASL_PLAINTEXT`) must have a matching entry here, otherwise `kafka-storage.sh format` fails with `No security protocol defined for listener <NAME>`. |
 | `amq_streams_kraft_log_dirs` | `{{ amq_streams_kraft_data_dir }}` | The comma-separated list of directories for log data. Usually matches the data dir. |
 | `amq_streams_kraft_log_retention_hours` | `168` | The number of hours to keep log segments before deletion (Default: 7 days). |
 | `amq_streams_kraft_priv_escalation` | `yes` | Controls whether tasks (like creating directories and formatting storage) run with elevated privileges (`become: true`). |
