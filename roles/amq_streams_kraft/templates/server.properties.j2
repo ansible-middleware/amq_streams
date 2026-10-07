@@ -16,7 +16,7 @@ listeners={{ amq_streams_kraft_listeners | join(',') }}
 advertised.listeners={{ amq_streams_kraft_advertised_listeners | join(',') }}
 
 # Maps the listener names to security protocols.
-listener.security.protocol.map=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+listener.security.protocol.map={{ amq_streams_kraft_security_protocol_map | join(',') }}
 
 # Tells the Controller which listener name to use for Raft communication.
 controller.listener.names={{ amq_streams_kraft_controller_listener_names }}
