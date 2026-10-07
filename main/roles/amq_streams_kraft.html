@@ -189,15 +189,19 @@
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">&quot;PLAINTEXT&quot;</span></code></p></td>
 <td class="text-left"><p>The listener name used for replication between brokers.</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_log_dirs</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_security_protocol_map</span></code></p></td>
+<td class="text-left"><p><em>(See defaults)</em></p></td>
+<td class="text-left"><p>A list of <code class="docutils literal notranslate"><span class="pre">NAME:PROTOCOL</span></code> entries used to build <code class="docutils literal notranslate"><span class="pre">listener.security.protocol.map</span></code>. Every listener name referenced in <code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_listeners</span></code> / <code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_inter_broker_listener_name</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">SASL_SSL</span></code>, <code class="docutils literal notranslate"><span class="pre">SSL</span></code>, <code class="docutils literal notranslate"><span class="pre">SASL_PLAINTEXT</span></code>) must have a matching entry here, otherwise <code class="docutils literal notranslate"><span class="pre">kafka-storage.sh</span> <span class="pre">format</span></code> fails with <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">security</span> <span class="pre">protocol</span> <span class="pre">defined</span> <span class="pre">for</span> <span class="pre">listener</span> <span class="pre">&lt;NAME&gt;</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_log_dirs</span></code></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_kraft_data_dir</span> <span class="pre">}}</span></code></p></td>
 <td class="text-left"><p>The comma-separated list of directories for log data. Usually matches the data dir.</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_log_retention_hours</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_log_retention_hours</span></code></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">168</span></code></p></td>
 <td class="text-left"><p>The number of hours to keep log segments before deletion (Default: 7 days).</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_priv_escalation</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_priv_escalation</span></code></p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">yes</span></code></p></td>
 <td class="text-left"><p>Controls whether tasks (like creating directories and formatting storage) run with elevated privileges (<code class="docutils literal notranslate"><span class="pre">become:</span> <span class="pre">true</span></code>).</p></td>
 </tr>
