@@ -1,0 +1,87 @@
+argument_specs:
+    main:
+        options:
+            amq_streams_install_dir:
+                default: "/opt"
+                description: "Root installation directory for AMQ Streams"
+                type: "str"
+
+            amq_streams_kraft_config_dir:
+                default: "{{ amq_streams_kafka_home }}/config"
+                description: "Path to the KRaft configuration directory"
+                type: "str"
+
+            amq_streams_kraft_data_dir:
+                default: "{{ amq_streams_kafka_home }}/data/kraft"
+                description: "Path to the KRaft data directory"
+                type: "str"
+
+            amq_streams_cluster_id:
+                default: ""
+                description: "Kafka cluster ID for KRaft mode"
+                type: "str"
+
+            amq_streams_kraft_node_id:
+                default: 1
+                description: "Node ID for the KRaft broker/controller"
+                type: "int"
+
+            amq_streams_kraft_listener_port:
+                default: 9092
+                description: "KRaft broker listener port"
+                type: "int"
+
+            amq_streams_kraft_controller_port:
+                default: 9093
+                description: "KRaft controller port"
+                type: "int"
+
+            amq_streams_kraft_controller_quorum_voters:
+                default: "1@{{ ansible_host }}:{{ amq_streams_kraft_controller_port }}"
+                description: "Comma-separated list of controller quorum voters"
+                type: "str"
+
+            amq_streams_kraft_listeners:
+                default: "['PLAINTEXT://0.0.0.0:{{ amq_streams_kraft_listener_port }}', 'CONTROLLER://0.0.0.0:{{ amq_streams_kraft_controller_port }}']"
+                description: "List of KRaft listeners"
+                type: "list"
+
+            amq_streams_kraft_advertised_listeners:
+                default: "['PLAINTEXT://{{ ansible_host }}:{{ amq_streams_kraft_listener_port }}']"
+                description: "List of KRaft advertised listeners"
+                type: "list"
+
+            amq_streams_kraft_controller_listener_names:
+                default: "CONTROLLER"
+                description: "Comma-separated list of controller listener names"
+                type: "str"
+
+            amq_streams_kraft_inter_broker_listener_name:
+                default: "PLAINTEXT"
+                description: "Name of the inter-broker listener"
+                type: "str"
+
+            amq_streams_kraft_security_protocol_map:
+                default: "['PLAINTEXT:PLAINTEXT', 'CONTROLLER:PLAINTEXT', 'SSL:SSL', 'SASL_PLAINTEXT:SASL_PLAINTEXT', 'SASL_SSL:SASL_SSL']"
+                description: "Mapping of listener names to security protocols"
+                type: "list"
+
+            amq_streams_kraft_process_roles:
+                default: "broker,controller"
+                description: "KRaft process roles (broker, controller, or both)"
+                type: "str"
+
+            amq_streams_kraft_log_dirs:
+                default: "{{ amq_streams_kraft_data_dir }}"
+                description: "Comma-separated list of log directories"
+                type: "str"
+
+            amq_streams_kraft_log_retention_hours:
+                default: 168
+                description: "Number of hours to retain log segments"
+                type: "int"
+
+            amq_streams_kraft_priv_escalation:
+                default: true
+                description: "Whether KRaft operations require privilege escalation"
+                type: "bool"

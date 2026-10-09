@@ -3,7 +3,9 @@
   ansible.builtin.assert:
     that:
       - amq_streams_common_product_version is version('4.0.0', '<')
-    fail_msg: "ERROR: You are trying to run Zookeeper with Kafka {{ amq_streams_common_product_version }}. Zookeeper is removed from Kafka 4.0.0 (KRaft mode is required)."
+    fail_msg: >-
+      ERROR: You are trying to run Zookeeper with Kafka {{ amq_streams_common_product_version }}.
+      Zookeeper is removed from Kafka 4.0.0 (KRaft mode is required).
     success_msg: "Kafka version {{ amq_streams_common_product_version }} is compatible with Zookeeper."
 
 - name: "Ensure user for zookeeper exists (if provided)."
