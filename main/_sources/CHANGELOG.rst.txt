@@ -24,6 +24,7 @@ Bugfixes
 
 - AMW-594 Upstream release is failing due to recent rules change `#143 <https://github.com/ansible-middleware/amq_streams/pull/143>`_
 - Fix amq_streams_kraft hardcoded listener.security.protocol.map (AAP-95525) `#152 <https://github.com/ansible-middleware/amq_streams/pull/152>`_
+- Fix galaxy-importer CI failure and stale push branch trigger `#155 <https://github.com/ansible-middleware/amq_streams/pull/155>`_
 
 v1.0.2
 ======
