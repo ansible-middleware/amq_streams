@@ -37,7 +37,8 @@
 
 - name: "Generate Admin CLI properties file"
   when:
-    - (amq_streams_broker_auth_enabled is defined and amq_streams_broker_auth_enabled) or (amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled)
+    - (amq_streams_broker_auth_enabled is defined and amq_streams_broker_auth_enabled) or
+      (amq_streams_broker_tls_enabled is defined and amq_streams_broker_tls_enabled)
   block:
 
     - name: "Ensure required parameters for broker auth has been provided."
