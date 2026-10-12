@@ -9,7 +9,7 @@
           - sysctl_vm_max_map_count is defined
         quiet: true
 
-    - name: "Update vm.max_map_count to {{ sysctl_vm_max_map_count }}."
+    - name: "Update vm.max_map_count to: {{ sysctl_vm_max_map_count }}"
       ansible.posix.sysctl:
         name: vm.max_map_count
         value: "{{ sysctl_vm_max_map_count }}"
@@ -17,7 +17,7 @@
       when:
         - amq_streams_common_systctl_update_enable is defined and amq_streams_common_systctl_update_enable
 
-    - name: "Ensure ulimit is set for user and limit value {{ ulimit_user }} {{ ulimit_limit }}"
+    - name: "Ensure ulimit is set for user: {{ ulimit_user }}"
       ansible.builtin.template:
         src: templates/ulimit.j2
         dest: /etc/security/limits.d/{{ ulimit_user }}

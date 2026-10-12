@@ -12,7 +12,7 @@
     amq_streams_broker_zookeeper_host: "{{ amq_streams_zookeeper_host | default(amq_streams_broker_zookeeper_host_default_value) }}"
     amq_streams_broker_zookeeper_port: "{{ amq_streams_zookeeper_port | default(amq_streams_broker_zookeeper_port_default_value) }}"
 
-- name: "Ensure Prometheus requirements are met (if enabled: {{ amq_streams_broker_prometheus_enabled }})."
+- name: "Ensure Prometheus requirements are met if enabled: {{ amq_streams_broker_prometheus_enabled }}"
   ansible.builtin.include_role:
     name: amq_streams_common
     tasks_from: prometheus.yml
@@ -57,7 +57,7 @@
       when:
         - amq_streams_broker_data_dir is defined
 
-    - name: "Set server_id for {{ amq_streams_broker.service_name }} service."
+    - name: "Set server_id for service: {{ amq_streams_broker.service_name }}"
       ansible.builtin.set_fact:
         server_id: "{{ amq_streams_broker_broker_id | default('0') }}"
       when:
@@ -79,7 +79,7 @@
       when:
         - amq_streams_zookeeper_auth_enabled is defined and amq_streams_zookeeper_auth_enabled
 
-    - name: "Wait for Zookeeper to be available - if enabled ({{ amq_streams_broker_zookeeper_host }}:{{ amq_streams_broker_zookeeper_port }})."
+    - name: "Wait for Zookeeper to be available: {{ amq_streams_broker_zookeeper_host ~ ':' ~ amq_streams_broker_zookeeper_port }}"
       ansible.builtin.wait_for:
         host: "{{ amq_streams_broker_zookeeper_host }}"
         port: "{{ amq_streams_broker_zookeeper_port }}"

@@ -27,6 +27,6 @@
       register: operation_result
 
   rescue:
-    - name: "Display Cruise Control response to operation request ({{ operation_name }})"
+    - name: "Display Cruise Control response to operation request: {{ operation_name }}"
       ansible.builtin.debug:
         var: operation_result

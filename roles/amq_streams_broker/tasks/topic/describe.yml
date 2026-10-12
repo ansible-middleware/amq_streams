@@ -8,7 +8,7 @@
     main_argument: "--topic {{ topic_name }}"
     bootstrap_operator: "--describe"
 
-- name: "Verify that information on {{ topic_name }} could be retrieved without any errors."
+- name: "Verify that topic information could be retrieved without any errors: {{ topic_name }}"
   ansible.builtin.assert:
     that:
       - operation_result is defined
@@ -16,6 +16,6 @@
       - operation_result.stdout is defined
     quiet: true
 
-- name: "Display information on topic: {{ topic_name }}."
+- name: "Display information on topic: {{ topic_name }}"
   ansible.builtin.debug:
     var: operation_result.stdout

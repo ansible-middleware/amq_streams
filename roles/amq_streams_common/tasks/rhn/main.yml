@@ -6,7 +6,7 @@
     quiet: true
 
 # rhn_product_version override example: "{{ amq_version.split('.')[:2] | join('.') }}"
-- name: "Search RHN artefact for {{ amq_streams_common_rhn_product_version }}."
+- name: "Search RHN artefact for: {{ amq_streams_common_rhn_product_version }}"
   ansible.builtin.include_role:
     name: amq_streams_common
     tasks_from: rhn/search.yml
@@ -21,7 +21,7 @@
   when:
     - not rhn_product_archive_file_pattern is defined or rhn_product_archive_file_pattern | length < 1
 
-- name: "Determine which archive to download using file pattern: {{ rhn_product_archive_file_pattern }}."
+- name: "Determine which archive to download using file pattern: {{ rhn_product_archive_file_pattern }}"
   ansible.builtin.set_fact:
     rhn_filtered_products: "{{ rhn_products.results | selectattr('file_name', 'match', rhn_product_archive_file_pattern) }}"
 
