@@ -6,24 +6,33 @@ middleware\_automation.amq\_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
-v1.0.3-devel
-============
+v1.0.3
+======
 
 Minor Changes
 -------------
 
 - AMW-614 Add galaxy-importer job in CI to reproduce sab Hub linting issue `#154 <https://github.com/ansible-middleware/amq_streams/pull/154>`_
+- AMW-614 Add galaxy-importer job in CI to reproduce sab Hub linting issue `#154 <https://github.com/ansible-middleware/amq_streams/pull/154>`_
+- AMW-623 amq_streams collection spelling and grammar checking for PRs `#145 <https://github.com/ansible-middleware/amq_streams/pull/145>`_
 - AMW-623 amq_streams collection spelling and grammar checking for PRs `#145 <https://github.com/ansible-middleware/amq_streams/pull/145>`_
 - Fix AMQ Streams downstream compatibility issues `#141 <https://github.com/ansible-middleware/amq_streams/pull/141>`_
+- Fix AMQ Streams downstream compatibility issues `#141 <https://github.com/ansible-middleware/amq_streams/pull/141>`_
+- Fixing common module usage `#139 <https://github.com/ansible-middleware/amq_streams/pull/139>`_
 - Fixing common module usage `#139 <https://github.com/ansible-middleware/amq_streams/pull/139>`_
 - Remove requirements.txt and related documentation `#142 <https://github.com/ansible-middleware/amq_streams/pull/142>`_
+- Remove requirements.txt and related documentation `#142 <https://github.com/ansible-middleware/amq_streams/pull/142>`_
+- Replace deprecated top-level fact variables with ansible_fact `#146 <https://github.com/ansible-middleware/amq_streams/pull/146>`_
 - Replace deprecated top-level fact variables with ansible_fact `#146 <https://github.com/ansible-middleware/amq_streams/pull/146>`_
 
 Bugfixes
 --------
 
 - AMW-594 Upstream release is failing due to recent rules change `#143 <https://github.com/ansible-middleware/amq_streams/pull/143>`_
+- AMW-594 Upstream release is failing due to recent rules change `#143 <https://github.com/ansible-middleware/amq_streams/pull/143>`_
 - Fix amq_streams_kraft hardcoded listener.security.protocol.map (AAP-95525) `#152 <https://github.com/ansible-middleware/amq_streams/pull/152>`_
+- Fix amq_streams_kraft hardcoded listener.security.protocol.map (AAP-95525) `#152 <https://github.com/ansible-middleware/amq_streams/pull/152>`_
+- Fix galaxy-importer CI failure and stale push branch trigger `#155 <https://github.com/ansible-middleware/amq_streams/pull/155>`_
 - Fix galaxy-importer CI failure and stale push branch trigger `#155 <https://github.com/ansible-middleware/amq_streams/pull/155>`_
 
 v1.0.2
