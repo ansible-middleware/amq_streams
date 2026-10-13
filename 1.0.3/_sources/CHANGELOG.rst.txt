@@ -1,0 +1,153 @@
+=================================================
+middleware\_automation.amq\_streams Release Notes
+=================================================
+
+.. contents:: Topics
+
+This changelog describes changes after version 0.0.0.
+
+v1.0.3
+======
+
+Minor Changes
+-------------
+
+- AMW-614 Add galaxy-importer job in CI to reproduce sab Hub linting issue `#154 <https://github.com/ansible-middleware/amq_streams/pull/154>`_
+- AMW-623 amq_streams collection spelling and grammar checking for PRs `#145 <https://github.com/ansible-middleware/amq_streams/pull/145>`_
+- Fix AMQ Streams downstream compatibility issues `#141 <https://github.com/ansible-middleware/amq_streams/pull/141>`_
+- Fixing common module usage `#139 <https://github.com/ansible-middleware/amq_streams/pull/139>`_
+- Remove requirements.txt and related documentation `#142 <https://github.com/ansible-middleware/amq_streams/pull/142>`_
+- Replace deprecated top-level fact variables with ansible_fact `#146 <https://github.com/ansible-middleware/amq_streams/pull/146>`_
+
+Bugfixes
+--------
+
+- AMW-594 Upstream release is failing due to recent rules change `#143 <https://github.com/ansible-middleware/amq_streams/pull/143>`_
+- Fix amq_streams_kraft hardcoded listener.security.protocol.map (AAP-95525) `#152 <https://github.com/ansible-middleware/amq_streams/pull/152>`_
+- Fix galaxy-importer CI failure and stale push branch trigger `#155 <https://github.com/ansible-middleware/amq_streams/pull/155>`_
+
+v1.0.2
+======
+
+Major Changes
+-------------
+
+- AMW-540 Fix the upstream collection requirements with common v1.2.4 `#138 <https://github.com/ansible-middleware/amq_streams/pull/138>`_
+
+Minor Changes
+-------------
+
+- Add missing variables documentation, plus a few minors tweaks, mostly focused on CI issues `#126 <https://github.com/ansible-middleware/amq_streams/pull/126>`_
+- Fix certification requirements for AMQ Streams `#137 <https://github.com/ansible-middleware/amq_streams/pull/137>`_
+
+v1.0.1
+======
+
+v1.0.0
+======
+
+Major Changes
+-------------
+
+- AMW-162 Add support for KRaft `#131 <https://github.com/ansible-middleware/amq_streams/pull/131>`_
+- AMW-428 update amq_streams collection to use the latest kafka version `#129 <https://github.com/ansible-middleware/amq_streams/pull/129>`_
+- Add missing become in broker and cruise_control roles `#123 <https://github.com/ansible-middleware/amq_streams/pull/123>`_
+- add missing become: on task needing priv escalation to root `#121 <https://github.com/ansible-middleware/amq_streams/pull/121>`_
+
+Minor Changes
+-------------
+
+- AMW-457 amq_streams collection compatibility with ansible-core 2.17 & 2.19 `#130 <https://github.com/ansible-middleware/amq_streams/pull/130>`_
+- Add a role to manage Kafka Exporter `#113 <https://github.com/ansible-middleware/amq_streams/pull/113>`_
+- Add exporter role vars documentation `#114 <https://github.com/ansible-middleware/amq_streams/pull/114>`_
+
+Bugfixes
+--------
+
+- cruise_control: fix RHN download `#118 <https://github.com/ansible-middleware/amq_streams/pull/118>`_
+
+v0.0.9
+======
+
+Minor Changes
+-------------
+
+- Add custom zookeeper_id for each host based in inventory `#99 <https://github.com/ansible-middleware/amq_streams/pull/99>`_
+- Misc. enhacements `#90 <https://github.com/ansible-middleware/amq_streams/pull/90>`_
+
+Bugfixes
+--------
+
+- Bump to 3.6.0 + small fix `#102 <https://github.com/ansible-middleware/amq_streams/pull/102>`_
+- Fixup validation logic for offline install `#89 <https://github.com/ansible-middleware/amq_streams/pull/89>`_
+
+v0.0.6
+======
+
+v0.0.5
+======
+
+Minor Changes
+-------------
+
+- add remote_src attribute to unarchive: to allow deployment using archive on target `#80 <https://github.com/ansible-middleware/amq_streams/pull/80>`_
+
+v0.0.4
+======
+
+Major Changes
+-------------
+
+- :closed_lock_with_key: Enable secured connection from Kafka Connect `#76 <https://github.com/ansible-middleware/amq_streams/pull/76>`_
+- :lock: Enable SSL listeners for Kafka Brokers `#70 <https://github.com/ansible-middleware/amq_streams/pull/70>`_
+- :memo: How to enable TLS encryption `#74 <https://github.com/ansible-middleware/amq_streams/pull/74>`_
+- ✅ Add test for SSL listeners with SASL authentication `#73 <https://github.com/ansible-middleware/amq_streams/pull/73>`_
+
+Minor Changes
+-------------
+
+- Mol all cluster `#78 <https://github.com/ansible-middleware/amq_streams/pull/78>`_
+- ensure required information for auth are passed `#79 <https://github.com/ansible-middleware/amq_streams/pull/79>`_
+
+v0.0.3
+======
+
+Major Changes
+-------------
+
+- Enable Broker Authentication usign SASL mechanism `#43 <https://github.com/ansible-middleware/amq_streams/pull/43>`_
+- Enable Zookeeper authentication `#42 <https://github.com/ansible-middleware/amq_streams/pull/42>`_
+- Manage topics in a Kafka authenticated broker `#60 <https://github.com/ansible-middleware/amq_streams/pull/60>`_
+
+Minor Changes
+-------------
+
+- Add a molecule scenario for all_auth `#61 <https://github.com/ansible-middleware/amq_streams/pull/61>`_
+- Declare Java Heap options as variables `#48 <https://github.com/ansible-middleware/amq_streams/pull/48>`_
+- Set up KAFKA environment variables for the service execution `#54 <https://github.com/ansible-middleware/amq_streams/pull/54>`_
+- Validate the odd number of Zookeeper instances of the cluster `#12 <https://github.com/ansible-middleware/amq_streams/pull/12>`_
+- all jvm and servers args for zookeeper and broker can be overriden thru Ansible `#13 <https://github.com/ansible-middleware/amq_streams/pull/13>`_
+- ⬆️ Upgrade to Kafka 3.4.0 `#59 <https://github.com/ansible-middleware/amq_streams/pull/59>`_
+- 🐛 Add zk inventory group var into broker role `#46 <https://github.com/ansible-middleware/amq_streams/pull/46>`_
+- 💚 Update topic management in test playbooks `#67 <https://github.com/ansible-middleware/amq_streams/pull/67>`_
+- 📦 Use archive site to download any version `#41 <https://github.com/ansible-middleware/amq_streams/pull/41>`_
+
+v0.0.2
+======
+
+Bugfixes
+--------
+
+- Fixup invalid varnames `#4 <https://github.com/ansible-middleware/amq_streams/pull/4>`_
+
+v0.0.1
+======
+
+Major Changes
+-------------
+
+- Basic deployment of both Zookeeper and Brokers as systemd service on target `#2 <https://github.com/ansible-middleware/amq_streams/pull/2>`_
+- Basic deployment of both Zookeeper and Brokers as systemd service on target `#2 <https://github.com/ansible-middleware/amq_streams/pull/2>`_
+- Basic deployment of both Zookeeper and Brokers as systemd service on target `#2 <https://github.com/ansible-middleware/amq_streams/pull/2>`_
+- Basic deployment of both Zookeeper and Brokers as systemd service on target `#2 <https://github.com/ansible-middleware/amq_streams/pull/2>`_
+- Basic deployment of both Zookeeper and Brokers as systemd service on target `#2 <https://github.com/ansible-middleware/amq_streams/pull/2>`_

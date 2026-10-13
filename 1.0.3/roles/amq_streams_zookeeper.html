@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zookeeper Role &mdash; AmqStreams Ansible Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/ansible-basic-sphinx-ext.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Testing" href="../testing.html" />
+    <link rel="prev" title="AMQ Streams KRaft Role" href="amq_streams_kraft.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AmqStreams Ansible Collection
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Ansible Collection - middleware_automation.amq_streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage Patterns</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Role Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_broker.html">Broker Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_common.html">Common Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_connect.html">Connect Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_cruise_control.html">Cruise Control Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_exporter.html">Connect Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_kraft.html">AMQ Streams KRaft Role</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Zookeeper Role</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#role-defaults">Role Defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#role-variables">Role Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#license">License</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#author-information">Author Information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing.html">Contributor’s Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html">Collection Versioning Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html#release-automation">Release automation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ Broker</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AmqStreams Ansible Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Role Index</a></li>
+      <li class="breadcrumb-item active">Zookeeper Role</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/roles/amq_streams_zookeeper.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zookeeper-role">
+<h1>Zookeeper Role<a class="headerlink" href="#zookeeper-role" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>NOTE: <em>Starting with Kafka 4.0.0, ZooKeeper support has been removed in favor of KRaft (Kafka Raft Metadata) mode. Consequently, this role includes a version check mechanism. To use this role, ensure you are targeting a Kafka version <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">3.9.x</span></code>. More can be found in <a class="reference external" href="https://kafka.apache.org/blog#apache_kafka_400_release_announcement">Apache Kafka 4.0.0 Release Announcement</a></em></p>
+</div></blockquote>
+<p>Perform installation and configuration of Zookeeper ensemble.</p>
+<p>This role requires to have a <code class="docutils literal notranslate"><span class="pre">zookeepers</span></code> group (identified by the
+<code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_inventory_group</span></code> variable) in the inventory file to identify
+each node of he Zookeeper cluster. This group is used to set up the right
+configuration files in order to establish the communication between Zookeeper cluster members.</p>
+<p>Example of inventory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[zookeepers]
+zknode1
+zknode2
+zknode3
+</pre></div>
+</div>
+<section id="role-defaults">
+<h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_enabled</span></code></p></td>
+<td class="text-left"><p>Enable zookeeper ensemble</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_config</span></code></p></td>
+<td class="text-left"><p>Zookeeper configuration file</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/etc/amq_streams_zookeeper.properties</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_config_template</span></code></p></td>
+<td class="text-left"><p>Zookeeper template configuration file</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/zookeeper.properties.j2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_server_start</span></code></p></td>
+<td class="text-left"><p>Zookeeper server start file</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_common_home</span> <span class="pre">}}/bin/zookeeper-server-start.sh</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_user</span></code></p></td>
+<td class="text-left"><p>Zookeeper user</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_group</span></code></p></td>
+<td class="text-left"><p>User group</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_service_name</span></code></p></td>
+<td class="text-left"><p>Zookeeper service name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_service_config_template</span></code></p></td>
+<td class="text-left"><p>Zookeeper template service file</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/service.conf.j2</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_service_env_file</span></code></p></td>
+<td class="text-left"><p>Zookeeper service environment configuration file</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/etc/zookeeper.conf</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_data_dir</span></code></p></td>
+<td class="text-left"><p>Zookeeper data folder</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/var/lib/{{</span> <span class="pre">amq_streams_zookeeper_service_name</span> <span class="pre">}}/</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_logs_dir</span></code></p></td>
+<td class="text-left"><p>Zookeeper logs folder</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/var/log/{{</span> <span class="pre">amq_streams_zookeeper_service_name</span> <span class="pre">}}/</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_max_client_cnxns</span></code></p></td>
+<td class="text-left"><p>Max client connections</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_admin_enable_server</span></code></p></td>
+<td class="text-left"><p>Enable zookeeper administration server</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_instance_count_enabled</span></code></p></td>
+<td class="text-left"><p>Count zookeeper instances</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_instance_count</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_zookeeper_id</span></code></p></td>
+<td class="text-left"><p>Zookeeper variable to identify the zookeeper in a cluster</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_java_opts</span></code></p></td>
+<td class="text-left"><p>Default values to apply to <code class="docutils literal notranslate"><span class="pre">KAFKA_OPTS</span></code> env variable</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_java_heap_opts</span></code></p></td>
+<td class="text-left"><p>Default values to apply to <code class="docutils literal notranslate"><span class="pre">KAFKA_HEAP_OPTS</span></code> env variable</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-Xmx512M</span> <span class="pre">-Xms512M</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_java_performance_opts</span></code></p></td>
+<td class="text-left"><p>Default values to apply to <code class="docutils literal notranslate"><span class="pre">KAFKA_JVM_PERFORMANCE_OPTS</span></code> env variable</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_java_java_gc_log_opts</span></code></p></td>
+<td class="text-left"><p>Default values to apply to <code class="docutils literal notranslate"><span class="pre">KAFKA_GC_LOG_OPTS</span></code> env variable</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_java_jmx_opts</span></code></p></td>
+<td class="text-left"><p>Default values to apply to <code class="docutils literal notranslate"><span class="pre">KAFKA_JMX_OPTS</span></code> env variable</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_host</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_port</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2181</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_firewalld_package_name</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">firewalld</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_firewalld_enabled</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_init_limit</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_sync_limit</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_cluster_port_start</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2888</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_cluster_port_end</span></code></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3888</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_enabled</span></code></p></td>
+<td class="text-left"><p>Enable Zookeeper authentication</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_config</span></code></p></td>
+<td class="text-left"><p>JAAS file to set up Zookeeper authentication</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/etc/zookeeper-jaas.conf</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_config_template</span></code></p></td>
+<td class="text-left"><p>JAAS template for Zookeeper authentication</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/zookeeper-jaas.conf.j2</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_inventory_group</span></code></p></td>
+<td class="text-left"><p>Identify the group of zookeeper nodes</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">groups['zookeepers']</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role-variables">
+<h2>Role Variables<a class="headerlink" href="#role-variables" title="Link to this heading"></a></h2>
+<p>The following are a set of required variables for the role:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Required</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_user</span></code></p></td>
+<td class="text-left"><p>Zookeeper user to authenticate. Mandatory if <code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_enabled:</span> <span class="pre">true</span></code></p></td>
+<td class="text-left"><p>‘’</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_pass</span></code></p></td>
+<td class="text-left"><p>Zookeeper user password to authenticate. Mandatory if <code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_auth_enabled:</span> <span class="pre">true</span></code></p></td>
+<td class="text-left"><p>‘’</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
+<p>Apache License v2.0 or later</p>
+</section>
+<section id="author-information">
+<h2>Author Information<a class="headerlink" href="#author-information" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/rpelisse">Romain Pelisse</a></p></li>
+<li><p><a class="reference external" href="https://github.com/guidograzioli">Guido Grazioli</a></p></li>
+<li><p><a class="reference external" href="https://github.com/rmarting">Roman Martin</a></p></li>
+<li><p><a class="reference external" href="https://github.com/RanabirChakraborty">Ranabir Chakraborty</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="amq_streams_kraft.html" class="btn btn-neutral float-left" title="AMQ Streams KRaft Role" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../testing.html" class="btn btn-neutral float-right" title="Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Red Hat, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
