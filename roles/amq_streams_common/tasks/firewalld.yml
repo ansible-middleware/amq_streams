@@ -21,7 +21,7 @@
     state: started
     enabled: true
 
-- name: "Ensure firewalld allows communication over {{ service_port }}."
+- name: "Ensure firewalld allows communication over port: {{ service_port }}"
   ansible.posix.firewalld:
     port: "{{ service_port }}/tcp"
     permanent: true

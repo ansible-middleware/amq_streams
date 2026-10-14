@@ -6,7 +6,7 @@
     script: "{{ amq_streams_broker_kafka_config_script }}"
     bootstrap_operator: "--describe"
 
-- name: "Verify that information on {{ user_username }} could be retrieved without any errors."
+- name: "Verify that user information could be retrieved without any errors: {{ user_username }}"
   ansible.builtin.assert:
     that:
       - operation_result is defined
@@ -14,6 +14,6 @@
       - operation_result.stdout is defined
     quiet: true
 
-- name: "Display information on user: {{ user_username }}."
+- name: "Display information on user: {{ user_username }}"
   ansible.builtin.debug:
     var: operation_result.stdout

@@ -8,14 +8,14 @@
       - rhn_product_path is defined and rhn_product_path | length > 0
     quiet: true
 
-- name: "Load metadata on target location for download ({{ rhn_product_path }})"
+- name: "Load metadata on target location for download: {{ rhn_product_path }}"
   ansible.builtin.stat:
     path: "{{ rhn_product_path | dirname }}"
   register: rhn_product_path_metadata
   delegate_to: localhost
   become: "{{ rhn_download_become | default(false) }}"
 
-- name: "Ensure {{ rhn_product_path }} is accessible"
+- name: "Ensure download path is accessible: {{ rhn_product_path }}"
   ansible.builtin.assert:
     that:
       - rhn_product_path_metadata is defined and rhn_product_path_metadata.stat is defined
@@ -23,7 +23,7 @@
     quiet: true
     fail_msg: "Path for download product is not writeable on the Ansible controller: {{ rhn_product_path }}."
 
-- name: "Download Red Hat product #{{ rhn_product_id }} into {{ rhn_product_path }}"
+- name: "Download Red Hat product: {{ rhn_product_id ~ ' -> ' ~ rhn_product_path }}"
   middleware_automation.common.product_download:  # noqa risky-file-permissions delegated, uses controller host user
     client_id: "{{ rhn_username }}"
     client_secret: "{{ rhn_password }}"

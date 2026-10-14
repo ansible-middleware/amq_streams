@@ -12,7 +12,7 @@
       - list.files[0] is defined and list.files[0].path is defined
     quiet: true
 
-- name: "Set path to file_connect jar to: {{ list.files[0].path }}."
+- name: "Set path to file_connect jar to: {{ list.files[0].path }}"
   ansible.builtin.set_fact:
     path_to_file_connect_lib: "{{ list.files[0].path }}"
 

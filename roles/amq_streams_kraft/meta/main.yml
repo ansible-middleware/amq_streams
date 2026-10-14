@@ -1,0 +1,29 @@
+---
+collections:
+  - middleware_automation.common
+
+galaxy_info:
+  role_name: amq_streams_kraft
+  namespace: middleware_automation
+  author: Ranabir Chakraborty
+  description: Install AMQ Streams Kafka server in KRaft mode
+  company: Red Hat, Inc.
+
+  license: Apache License 2.0
+
+  min_ansible_version: "2.16"
+
+  platforms:
+    - name: EL
+      versions:
+        - all
+
+  galaxy_tags:
+    - java
+    - kafka
+    - messaging
+    - kraft
+    - server
+
+dependencies:
+  - role: amq_streams_common

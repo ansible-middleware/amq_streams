@@ -34,12 +34,12 @@
     - not amq_streams_common_offline_install is defined or not amq_streams_common_offline_install
     - rhn_username is defined and rhn_password is defined
 
-- name: "Load metadata on {{ amq_streams_common_home }}."
+- name: "Load metadata on install target: {{ amq_streams_common_home }}"
   ansible.builtin.stat:
     path: "{{ amq_streams_common_home }}/{{ amq_streams_common_subdir | default('bin') }}"
   register: download_target
 
-- name: "Extract artifact to install directory {{ amq_streams_common_archive_file }} {{ amq_streams_common_install_dir }}"
+- name: "Extract artifact to install directory: {{ amq_streams_common_archive_file ~ ' -> ' ~ amq_streams_common_install_dir }}"
   become: "{{ amq_streams_common_archive_extraction_requires_privilege_escalation }}"
   ansible.builtin.unarchive:
     src: "{{ amq_streams_common_download_dir }}/{{ amq_streams_common_archive_file }}"

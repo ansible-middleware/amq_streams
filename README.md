@@ -12,6 +12,11 @@ This collection has been tested against following Ansible versions: **>=2.16.0**
 Plugins and modules within a collection may be tested with only specific Ansible versions. A collection may contain metadata that identifies these versions.
 <!--end requires_ansible-->
 
+## Requirements
+
+* Python 3.12 or later
+* ansible-core 2.16 or later
+
 ## Included content
 
 ### Roles
@@ -20,6 +25,14 @@ Plugins and modules within a collection may be tested with only specific Ansible
 * [`amq_streams_zookeeper`](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_zookeeper/): Perform installation and configuration of Zookeeper ensemble.
 * [`amq_streams_broker`](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_broker/): Perform installation and configuration of Kafka brokers cluster.
 * [`amq_streams_connect`](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_connect/): Perform installation and configuration of Kafka Connect cluster.
+* [`amq_streams_kraft`](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_kraft/): Perform installation and configuration of Kafka server in KRaft mode.
+* [`amq_streams_exporter`](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_exporter/): Perform installation and configuration of Kafka Exporter.
+* [`amq_streams_cruise_control`](https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_cruise_control/): Perform installation and configuration of Cruise Control.
+
+### Dependencies
+
+* [middleware_automation.common](https://github.com/ansible-middleware/common) >= 1.0.0
+* [ansible.posix](https://docs.ansible.com/ansible/latest/collections/ansible/posix/index.html) >= 1.4.0
 
 ## Installation
 
@@ -89,7 +102,7 @@ described by the `amq_streams_common_archive_file` variable (ie. *kafka_-a.b.c-x
 
 <!--start support -->
 
-For Red Hat customers, this collection is released as a [Technology Preview](https://access.redhat.com/support/offerings/techpreview) feature as the [Red Hat Ansible certified content collection for AMQ Streams](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/amq_streams). If you have any issues or questions related to this collection, please contact <Ansible-middleware-core@redhat.com> or open an [issue](https://github.com/ansible-middleware/amq_streams/issues).
+For bug reports and feature requests, use [GitHub Issues](https://github.com/ansible-middleware/amq_streams/issues).
 
 <!--end support -->
 

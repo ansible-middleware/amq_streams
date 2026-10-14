@@ -8,7 +8,7 @@
 - name: "Switch to root"
   become: "{{ amq_streams_common_escalade_privilege_group_create }}"
   block:
-    - name: "Ensure {{ server_name }} configuration is deployed ({{ server_config_template }} -> {{ server_config }}."
+    - name: "Ensure server configuration is deployed: {{ server_name }}"
       ansible.builtin.template:
         src: "{{ server_config_template }}"
         dest: "{{ server_config }}"
@@ -64,13 +64,13 @@
         - daemon_reload is defined
         - daemon_reload.changed
 
-    - name: "Ensure {{ server_name }} is enabled and running."
+    - name: "Ensure server is enabled and running: {{ server_name }}"
       ansible.builtin.service:
         name: "{{ server_name }}"
         enabled: true
         state: started
 
-    - name: "Wait for service port {{ server_port }} to be available - (if provided)"
+    - name: "Wait for service port to be available if provided: {{ server_port }}"
       ansible.builtin.wait_for:
         port: "{{ server_port }}"
         delay: "{{ delay_before_server_port_check | default(omit) }}"

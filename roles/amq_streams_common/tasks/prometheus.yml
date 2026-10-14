@@ -6,7 +6,7 @@
       - amq_streams_common_prometheus_config_file_template is defined and amq_streams_common_prometheus_config_file_template | length > 0
     quiet: true
 
-- name: "Ensure directory {{ amq_streams_common_prometheus_metrics_config_home }} exits."
+- name: "Ensure Prometheus metrics directory exists: {{ amq_streams_common_prometheus_metrics_config_home }}"
   ansible.builtin.file:
     path: "{{ amq_streams_common_prometheus_metrics_config_home }}"
     state: directory
@@ -20,7 +20,7 @@
     group: "{{ amq_streams_common_prometheus_group | default(omit) }}"
     mode: '0644'
 
-- name: "Ensure Prometheus jar exporter is installed ({{ amq_streams_common_prometheus_package_name }})."
+- name: "Ensure Prometheus jar exporter is installed: {{ amq_streams_common_prometheus_package_name }}"
   ansible.builtin.package:
     name: "{{ amq_streams_common_prometheus_package_name }}"
     state: present

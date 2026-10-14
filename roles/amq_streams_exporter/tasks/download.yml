@@ -21,7 +21,7 @@
         path: "{{ amq_streams_exporter_download_path }}"
       register: exporter_download_path
 
-    - name: "Ensures metadate of {{ amq_streams_exporter_download_path }} are correct."
+    - name: "Ensure metadata of download path is correct: {{ amq_streams_exporter_download_path }}"
       ansible.builtin.assert:
         that:
           - exporter_download_path is defined
@@ -29,7 +29,7 @@
           - exporter_download_path.stat.exists is defined
         quiet: true
 
-    - name: "Download Kafka exporter from {{ amq_streams_exporter_download_url }}."
+    - name: "Download Kafka exporter from: {{ amq_streams_exporter_download_url }}"
       ansible.builtin.get_url:
         url: "{{ amq_streams_exporter_download_url }}"
         dest: "{{ amq_streams_exporter_download_path }}"
@@ -37,7 +37,7 @@
       when:
         - not exporter_download_path.stat.exists
 
-- name: "Extract archive file {{ amq_streams_exporter_archive_name }} in {{ amq_streams_exporter_home }}."
+- name: "Extract archive file: {{ amq_streams_exporter_archive_name ~ ' -> ' ~ amq_streams_exporter_home }}"
   ansible.builtin.unarchive:
     src: "{{ amq_streams_exporter_download_path }}"
     dest: "{{ amq_streams_exporter_home }}"
