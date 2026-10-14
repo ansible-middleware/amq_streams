@@ -47,8 +47,10 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Ansible Collection - middleware_automation.amq_streams</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#ansible-version-compatibility">Ansible version compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#included-content">Included content</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#roles">Roles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
@@ -130,6 +132,13 @@
 <p>Plugins and modules within a collection may be tested with only specific Ansible versions. A collection may contain metadata that identifies these versions.</p>
 <!--end requires_ansible-->
 </section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Python 3.12 or later</p></li>
+<li><p>ansible-core 2.16 or later</p></li>
+</ul>
+</section>
 <section id="included-content">
 <h2>Included content<a class="headerlink" href="#included-content" title="Link to this heading"></a></h2>
 <section id="roles">
@@ -139,6 +148,16 @@
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_zookeeper/"><code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper</span></code></a>: Perform installation and configuration of Zookeeper ensemble.</p></li>
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_broker/"><code class="docutils literal notranslate"><span class="pre">amq_streams_broker</span></code></a>: Perform installation and configuration of Kafka brokers cluster.</p></li>
 <li><p><a class="reference external" href="https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_connect/"><code class="docutils literal notranslate"><span class="pre">amq_streams_connect</span></code></a>: Perform installation and configuration of Kafka Connect cluster.</p></li>
+<li><p><a class="reference external" href="https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_kraft/"><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft</span></code></a>: Perform installation and configuration of Kafka server in KRaft mode.</p></li>
+<li><p><a class="reference external" href="https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_exporter/"><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter</span></code></a>: Perform installation and configuration of Kafka Exporter.</p></li>
+<li><p><a class="reference external" href="https://github.com/ansible-middleware/amq_streams/blob/main/roles/amq_streams_cruise_control/"><code class="docutils literal notranslate"><span class="pre">amq_streams_cruise_control</span></code></a>: Perform installation and configuration of Cruise Control.</p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ansible-middleware/common">middleware_automation.common</a> &gt;= 1.0.0</p></li>
+<li><p><a class="reference external" href="https://docs.ansible.com/ansible/latest/collections/ansible/posix/index.html">ansible.posix</a> &gt;= 1.4.0</p></li>
 </ul>
 </section>
 </section>
@@ -211,7 +230,7 @@ described by the <code class="docutils literal notranslate"><span class="pre">am
 <section id="support">
 <h2>Support<a class="headerlink" href="#support" title="Link to this heading"></a></h2>
 <!--start support -->
-<p>For Red Hat customers, this collection is released as a <a class="reference external" href="https://access.redhat.com/support/offerings/techpreview">Technology Preview</a> feature as the <a class="reference external" href="https://console.redhat.com/ansible/automation-hub/repo/published/redhat/amq_streams">Red Hat Ansible certified content collection for AMQ Streams</a>. If you have any issues or questions related to this collection, please contact <a class="reference external" href="mailto:Ansible-middleware-core&#37;&#52;&#48;redhat&#46;com">Ansible-middleware-core<span>&#64;</span>redhat<span>&#46;</span>com</a> or open an <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/issues">issue</a>.</p>
+<p>For bug reports and feature requests, use <a class="reference external" href="https://github.com/ansible-middleware/amq_streams/issues">GitHub Issues</a>.</p>
 <!--end support -->
 </section>
 <section id="release-and-upgrade-notes">
