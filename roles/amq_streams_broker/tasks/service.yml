@@ -27,9 +27,9 @@
   vars:
     server_name: "{{ amq_streams_broker.service_name }}"
     server_start: "{{ amq_streams_broker.server_start }}"
-    # After amq_streams_kraft runs, start from the properties file that
-    # kafka-storage.sh formatted. Otherwise keep the broker role path.
-    server_config: "{{ amq_streams_kraft_server_config if (amq_streams_kraft_settings_published | default(false) | bool) else amq_streams_broker_config }}"
+    # Separate from the KRaft role's server.properties. Published KRaft
+    # facts make quorum, listeners, and log.dirs match the formatted file.
+    server_config: "{{ amq_streams_broker_config }}"
     server_config_template: "{{ amq_streams_broker.config.template }}"
     server_id: "{{ amq_streams_broker_broker_id | default('0') }}"
     server_user: "{{ amq_streams_broker_user | default(omit) }}"
