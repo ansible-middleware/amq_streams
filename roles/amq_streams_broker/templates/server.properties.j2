@@ -93,7 +93,7 @@ advertised.listeners={{ amq_streams_broker_advertised_listeners | join(",") }}
 
 {% if enable_kraft %}
 # KRaft Mode Security Map (Must include Controller)
-listener.security.protocol.map=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+listener.security.protocol.map={{ amq_streams_kraft_security_protocol_map | join(',') }}
 {% else %}
 {% if amq_streams_broker_auth_enabled and amq_streams_broker_auth_listeners is defined %}
 # Maps listener names to security protocols, the default is for them to be the same. See the config documentation for more details

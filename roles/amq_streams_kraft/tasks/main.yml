@@ -1,4 +1,7 @@
 ---
+- name: Publish resolved KRaft settings
+  ansible.builtin.include_tasks: publish.yml
+
 - name: Configure KRaft node
   ansible.builtin.include_tasks: configure.yml
 

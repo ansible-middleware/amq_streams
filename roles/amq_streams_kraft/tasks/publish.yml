@@ -1,0 +1,18 @@
+---
+# include_role keeps role defaults private. Publish the values actually used
+# to render server.properties so amq_streams_broker can see them later.
+- name: Publish resolved KRaft settings for later roles
+  ansible.builtin.set_fact:
+    amq_streams_kraft_settings_published: true
+    amq_streams_kraft_server_config: "{{ amq_streams_kraft_config_dir }}/server.properties"
+    amq_streams_kraft_config_dir: "{{ amq_streams_kraft_config_dir }}"
+    amq_streams_kraft_data_dir: "{{ amq_streams_kraft_data_dir }}"
+    amq_streams_kraft_node_id: "{{ amq_streams_kraft_node_id }}"
+    amq_streams_kraft_controller_quorum_voters: "{{ amq_streams_kraft_controller_quorum_voters }}"
+    amq_streams_kraft_listeners: "{{ amq_streams_kraft_listeners }}"
+    amq_streams_kraft_advertised_listeners: "{{ amq_streams_kraft_advertised_listeners }}"
+    amq_streams_kraft_controller_listener_names: "{{ amq_streams_kraft_controller_listener_names }}"
+    amq_streams_kraft_inter_broker_listener_name: "{{ amq_streams_kraft_inter_broker_listener_name }}"
+    amq_streams_kraft_security_protocol_map: "{{ amq_streams_kraft_security_protocol_map }}"
+    amq_streams_kraft_process_roles: "{{ amq_streams_kraft_process_roles }}"
+    amq_streams_kraft_log_dirs: "{{ amq_streams_kraft_log_dirs }}"

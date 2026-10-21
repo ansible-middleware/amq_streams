@@ -51,6 +51,8 @@ This role orchestrates the initialization and configuration of Apache Kafka in K
     - role: amq_streams_broker
 ```
 
+`include_role` does not share role defaults with later roles. This role publishes the resolved KRaft settings as facts so `amq_streams_broker` can render its configuration afterwards. The broker service then uses `{{ amq_streams_kraft_config_dir }}/server.properties`, the file `kafka-storage.sh format` used.
+
 ## License
 
 Apache License v2.0 or later

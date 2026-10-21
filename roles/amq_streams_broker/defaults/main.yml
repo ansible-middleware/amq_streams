@@ -123,3 +123,29 @@ amq_streams_broker_prometheus_port: 18080
 amq_streams_broker_prometheus_bind_addr: '0.0.0.0'
 amq_streams_broker_prometheus_config_file: broker-config.yaml
 amq_streams_broker_prometheus_config_file_template: prometheus/broker-config.yaml.j2
+
+# KRaft values read by templates/server.properties.j2 on Kafka >= 4.
+# Keep in sync with roles/amq_streams_kraft/defaults/main.yml.
+# include_role does not export that role's defaults, so the broker role
+# must define them itself. amq_streams_kraft publishes the resolved values
+# with set_fact, and those facts override the defaults below.
+amq_streams_kraft_node_id: 1
+amq_streams_kraft_listener_port: 9092
+amq_streams_kraft_controller_port: 9093
+amq_streams_kraft_controller_quorum_voters: "1@{{ ansible_host }}:{{ amq_streams_kraft_controller_port }}"
+amq_streams_kraft_listeners:
+  - "PLAINTEXT://0.0.0.0:{{ amq_streams_kraft_listener_port }}"
+  - "CONTROLLER://0.0.0.0:{{ amq_streams_kraft_controller_port }}"
+amq_streams_kraft_advertised_listeners:
+  - "PLAINTEXT://{{ ansible_host }}:{{ amq_streams_kraft_listener_port }}"
+amq_streams_kraft_controller_listener_names: "CONTROLLER"
+amq_streams_kraft_inter_broker_listener_name: "PLAINTEXT"
+amq_streams_kraft_security_protocol_map:
+  - "PLAINTEXT:PLAINTEXT"
+  - "CONTROLLER:PLAINTEXT"
+  - "SSL:SSL"
+  - "SASL_PLAINTEXT:SASL_PLAINTEXT"
+  - "SASL_SSL:SASL_SSL"
+amq_streams_kraft_process_roles: "broker,controller"
+amq_streams_kraft_data_dir: "{{ amq_streams_kafka_home | default(amq_streams_common_home) }}/data/kraft"
+amq_streams_kraft_log_dirs: "{{ amq_streams_kraft_data_dir }}"
