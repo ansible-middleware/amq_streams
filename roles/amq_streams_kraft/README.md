@@ -51,6 +51,8 @@ This role orchestrates the initialization and configuration of Apache Kafka in K
     - role: amq_streams_broker
 ```
 
+`include_role` does not share role defaults with later roles. This role publishes the resolved KRaft settings as facts so `amq_streams_broker` can render the same quorum, listeners, and `log.dirs`. The broker service keeps its own properties file, so the two templates do not overwrite each other.
+
 ## License
 
 Apache License v2.0 or later

@@ -27,6 +27,8 @@
   vars:
     server_name: "{{ amq_streams_broker.service_name }}"
     server_start: "{{ amq_streams_broker.server_start }}"
+    # Separate from the KRaft role's server.properties. Published KRaft
+    # facts make quorum, listeners, and log.dirs match the formatted file.
     server_config: "{{ amq_streams_broker_config }}"
     server_config_template: "{{ amq_streams_broker.config.template }}"
     server_id: "{{ amq_streams_broker_broker_id | default('0') }}"
