@@ -123,3 +123,11 @@ amq_streams_broker_prometheus_port: 18080
 amq_streams_broker_prometheus_bind_addr: '0.0.0.0'
 amq_streams_broker_prometheus_config_file: broker-config.yaml
 amq_streams_broker_prometheus_config_file_template: prometheus/broker-config.yaml.j2
+
+# KRaft listener.security.protocol.map read by templates/server.properties.j2
+amq_streams_broker_security_protocol_map:
+  - "PLAINTEXT:PLAINTEXT"
+  - "CONTROLLER:PLAINTEXT"
+  - "SSL:SSL"
+  - "SASL_PLAINTEXT:SASL_PLAINTEXT"
+  - "SASL_SSL:SASL_SSL"
