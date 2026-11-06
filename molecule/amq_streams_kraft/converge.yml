@@ -16,11 +16,10 @@
     - role: amq_streams_common
     - role: amq_streams_kraft
   tasks:
-    - name: "Ensure AMQ Streams Broker is running and available."
+    - name: "Validate that KRaft deployment is functional."
       ansible.builtin.include_role:
-        name: amq_streams_broker
-      vars:
-        amq_streams_common_skip_download: true
+        name: amq_streams_kraft
+        tasks_from: validate.yml
 
     - name: "Ensure AMQ Streams Connect is running and available."
       ansible.builtin.include_role:
@@ -29,16 +28,6 @@
         amq_streams_common_skip_download: true
         connectors:
           - { name: "file", path: "connectors/file.yml" }
-
-    - name: "Validate that KRaft deployment is functional."
-      ansible.builtin.include_role:
-        name: amq_streams_kraft
-        tasks_from: validate.yml
-
-    - name: "Validate that Broker deployment is functional."
-      ansible.builtin.include_role:
-        name: amq_streams_broker
-        tasks_from: validate.yml
 
     - name: "Validate that Connect deployment is functional."
       ansible.builtin.include_role:

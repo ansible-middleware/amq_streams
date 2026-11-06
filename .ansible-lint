@@ -42,13 +42,12 @@ warn_list:
   - name[missing]
   - meta-runtime[unsupported-version]
   - fqcn[keyword]
+  - var-naming[no-role-prefix]
 
 skip_list:
   - vars_should_not_be_used
   - file_is_small_enough
   - name[template]
   - task_has_valid_name
-  # Shared vars (amq_streams_common_*, topic_*, connectors, etc.) are passed between roles on purpose; renaming would break consumers.
-  - var-naming  # includes no-role-prefix and related sub-rules
 
 use_default_rules: true

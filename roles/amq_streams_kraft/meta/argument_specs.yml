@@ -85,3 +85,43 @@ argument_specs:
                 default: true
                 description: "Whether KRaft operations require privilege escalation"
                 type: "bool"
+
+            amq_streams_kraft_service_name:
+                default: "amq_streams_kraft"
+                description: "Name of the systemd service for the KRaft node"
+                type: "str"
+
+            amq_streams_kraft_properties_template:
+                default: "templates/server.properties.j2"
+                description: "Relative path to the template used for KRaft server.properties"
+                type: "str"
+
+            amq_streams_kraft_service_config_template:
+                default: "templates/service.conf.j2"
+                description: "Relative path to the template used for the systemd environment file"
+                type: "str"
+
+            amq_streams_kraft_service_config_file:
+                default: "/etc/kraft.conf"
+                description: "Path to the systemd environment file on disk"
+                type: "str"
+
+            amq_streams_kraft_logs_dir:
+                default: "/var/log/amq_streams_kraft/"
+                description: "Directory for KRaft service log output"
+                type: "str"
+
+            amq_streams_kraft_java_heap_opts:
+                default: "-Xmx1G -Xms1G"
+                description: "Default values to apply to KAFKA_HEAP_OPTS env variable"
+                type: "str"
+
+            amq_streams_kraft_listener_port_skip_wait:
+                default: false
+                description: "Whether to skip waiting for the listener port to become available"
+                type: "bool"
+
+            amq_streams_kraft_server_log_validation_min_size:
+                default: 20
+                description: "Minimum size of the server log to consider the node running and functional"
+                type: "int"

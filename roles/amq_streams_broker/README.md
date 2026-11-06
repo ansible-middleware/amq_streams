@@ -1,10 +1,10 @@
 # Broker Role
 
-Perform installation and configuration of Kafka brokers cluster.
+Perform installation and configuration of Kafka brokers cluster in ZooKeeper mode. For KRaft-based deployments (Kafka 3.x with KRaft enabled or Kafka 4.0+), use the `amq_streams_kraft` role instead.
 
 This role requires to have a `zookeepers` group (identified by the
 `amq_streams_zookeeper_inventory_group` variable) in the inventory file to identify
-each node of he Zookeeper cluster. This group is used to set up the right
+each node of the Zookeeper cluster. This group is used to set up the right
 configuration files in order to establish the communication between Zookeeper cluster members.
 
 The `brokers` group (identified by the `amq_streams_broker_inventory_group` variable)
@@ -463,6 +463,7 @@ Apache License v2.0 or later
 
 ## Author Information
 
+* [Ranabir Chakraborty](https://github.com/RanabirChakraborty)
 * [Romain Pelisse](https://github.com/rpelisse)
 * [Guido Grazioli](https://github.com/guidograzioli)
 * [Roman Martin](https://github.com/rmarting)

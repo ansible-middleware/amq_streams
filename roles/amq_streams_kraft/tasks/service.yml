@@ -1,0 +1,45 @@
+---
+- name: "Configure firewalld for KRaft (if enabled)."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: firewalld.yml
+  vars:
+    service_port: "{{ amq_streams_kraft_listener_port }}"
+  when:
+    - amq_streams_firewalld_enabled is defined and amq_streams_firewalld_enabled
+
+- name: "Configure firewalld for KRaft controller (if enabled)."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: firewalld.yml
+  vars:
+    service_port: "{{ amq_streams_kraft_controller_port }}"
+  when:
+    - amq_streams_firewalld_enabled is defined and amq_streams_firewalld_enabled
+
+- name: "Start KRaft as a systemd service."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: systemd.yml
+  vars:
+    server_name: "{{ amq_streams_kraft_service_name }}"
+    server_start: "{{ amq_streams_kafka_home }}/bin/kafka-server-start.sh"
+    server_config: "{{ amq_streams_kraft_config_dir }}/server.properties"
+    server_config_template: "{{ amq_streams_kraft_properties_template }}"
+    server_user: "{{ amq_streams_kraft_user | default('kafka') }}"
+    server_group: "{{ amq_streams_kraft_group | default('kafka') }}"
+    server_log_dir: "{{ amq_streams_kraft_logs_dir | default(omit) }}"
+    service_systemd_env_file_template: "{{ amq_streams_kraft_service_config_template }}"
+    service_systemd_env_file: "{{ amq_streams_kraft_service_config_file }}"
+    server_java_opts: "{{ amq_streams_kraft_java_opts | default('') }}"
+    server_log4j_opts: "{{ amq_streams_kraft_java_log4j_opts | default('') }}"
+    server_java_heap_opts: "{{ amq_streams_kraft_java_heap_opts | default('') }}"
+    server_java_performance_opts: "{{ amq_streams_kraft_java_performance_opts | default('') }}"
+    server_java_gc_log_opts: "{{ amq_streams_kraft_java_gc_log_opts | default('') }}"
+    server_java_jmx_opts: "{{ amq_streams_kraft_java_jmx_opts | default('') }}"
+    server_port: "{{ amq_streams_kraft_listener_port }}"
+    skip_wait_for_server_port: "{{ amq_streams_kraft_listener_port_skip_wait | default(false) }}"
+    server_prometheus_enabled: "{{ amq_streams_kraft_prometheus_enabled | default(false) }}"
+    server_prometheus_config_file: "{{ amq_streams_kraft_prometheus_config_file | default('') }}"
+    amq_streams_common_prometheus_port: "{{ amq_streams_kraft_prometheus_port | default(18080) }}"
+    amq_streams_common_prometheus_bind_addr: "{{ amq_streams_kraft_prometheus_bind_addr | default('0.0.0.0') }}"

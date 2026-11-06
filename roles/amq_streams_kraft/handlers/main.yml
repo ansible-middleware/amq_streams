@@ -5,5 +5,5 @@
 
 - name: Restart Kafka
   ansible.builtin.systemd:
-    name: "{{ server_name | default('amq_streams_broker') }}"
+    name: "{{ amq_streams_kraft_service_name }}"
     state: restarted

@@ -4,6 +4,7 @@ name: amq_streams
 version: "1.0.4"
 readme: README.md
 authors:
+  - Ranabir Chakraborty <ranabir@ibm.com>
   - Romain Pelisse <belaran@redhat.com>
   - Guido Grazioli <ggraziol@redhat.com>
   - Roman Martin <rmarting@redhat.com>
