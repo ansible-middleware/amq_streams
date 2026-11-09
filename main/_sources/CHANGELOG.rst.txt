@@ -6,17 +6,19 @@ middleware\_automation.amq\_streams Release Notes
 
 This changelog describes changes after version 0.0.0.
 
-v1.0.4-devel
-============
+v1.0.4
+======
 
 Major Changes
 -------------
 
 - AMW-674 Separate broker and kraft roles into independent, self-contained roles `#160 <https://github.com/ansible-middleware/amq_streams/pull/160>`_
+- AMW-674 Separate broker and kraft roles into independent, self-contained roles `#160 <https://github.com/ansible-middleware/amq_streams/pull/160>`_
 
 Bugfixes
 --------
 
+- Fix Automation Hub certification feedback for amq_streams `#156 <https://github.com/ansible-middleware/amq_streams/pull/156>`_
 - Fix Automation Hub certification feedback for amq_streams `#156 <https://github.com/ansible-middleware/amq_streams/pull/156>`_
 
 v1.0.3
