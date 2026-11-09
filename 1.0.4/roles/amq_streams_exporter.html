@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connect Role &mdash; AmqStreams Ansible Collection  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/ansible-basic-sphinx-ext.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="AMQ Streams KRaft Role" href="amq_streams_kraft.html" />
+    <link rel="prev" title="Cruise Control Role" href="amq_streams_cruise_control.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AmqStreams Ansible Collection
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Ansible Collection - middleware_automation.amq_streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage Patterns</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Role Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_broker.html">Broker Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_common.html">Common Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_connect.html">Connect Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_cruise_control.html">Cruise Control Role</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Connect Role</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#role-defaults">Role Defaults</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_kraft.html">AMQ Streams KRaft Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="amq_streams_zookeeper.html">Zookeeper Role</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing.html">Contributor’s Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html">Collection Versioning Strategy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releasing.html#release-automation">Release automation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Middleware collections</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/infinispan/">Infinispan / Red Hat Data Grid</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/keycloak/">Keycloak / Red Hat Single Sign-On</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/wildfly/">Wildfly / Red Hat JBoss EAP</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/jws/">Tomcat / Red Hat JWS</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq/">ActiveMQ / Red Hat AMQ Broker</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/amq_streams/">Kafka / Red Hat AMQ Streams</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/redhat-csp-download/">Red Hat CSP Download</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://ansible-middleware.github.io/ansible_collections_jcliff/">JCliff</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AmqStreams Ansible Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Role Index</a></li>
+      <li class="breadcrumb-item active">Connect Role</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/roles/amq_streams_exporter.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="connect-role">
+<h1>Connect Role<a class="headerlink" href="#connect-role" title="Link to this heading"></a></h1>
+<p>Perform installation and configuration of Kafka Export.</p>
+<section id="role-defaults">
+<h2>Role Defaults<a class="headerlink" href="#role-defaults" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Variable</p></th>
+<th class="head text-left"><p>Description</p></th>
+<th class="head text-left"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_target_arch</span></code></p></td>
+<td class="text-left"><p>Specify physical architecture of target host</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">ansible_architecture</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_version</span></code></p></td>
+<td class="text-left"><p>Exporter version to be used</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1.7.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_download_base_url</span></code></p></td>
+<td class="text-left"><p>Base URL for downloading Exporter archive</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://github.com/danielqsj/kafka_exporter/releases/download/</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_download_url</span></code></p></td>
+<td class="text-left"><p>Download URL for Exporter archive</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_exporter_download_base_url</span> <span class="pre">}}v{{</span> <span class="pre">amq_streams_exporter_version</span> <span class="pre">}}/kafka_exporter-{{</span> <span class="pre">amq_streams_exporter_version</span> <span class="pre">}}.{{</span> <span class="pre">amq_streams_exporter_target_system</span> <span class="pre">}}-{{</span> <span class="pre">amq_streams_exporter_target_arch</span> <span class="pre">}}.tar.gz</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_archive_folder</span></code></p></td>
+<td class="text-left"><p>Folder name for Exporter</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">kafka_exporter-{{</span> <span class="pre">amq_streams_exporter_version</span> <span class="pre">}}.{{</span> <span class="pre">amq_streams_exporter_target_system</span> <span class="pre">}}-{{</span> <span class="pre">amq_streams_exporter_target_arch</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_archive_name</span></code></p></td>
+<td class="text-left"><p>Exporter archive name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_exporter_archive_folder</span> <span class="pre">}}.tar.gz</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_download_dir</span></code></p></td>
+<td class="text-left"><p>Download dirname</p></td>
+<td class="text-left"><p>`{{ lookup(‘env’,’PWD’)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_download_path</span></code></p></td>
+<td class="text-left"><p>Path to download directory (on controller)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_exporter_download_dir</span> <span class="pre">}}/{{</span> <span class="pre">amq_streams_exporter_archive_name</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_download_host</span></code></p></td>
+<td class="text-left"><p>Hostname of download host (if not controller)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">localhost</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_home</span></code></p></td>
+<td class="text-left"><p>Exporter home directory</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_common_home</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_start</span></code></p></td>
+<td class="text-left"><p>Exporter start script</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">amq_streams_common_home</span> <span class="pre">}}/{{</span> <span class="pre">amq_streams_exporter_archive_folder</span> <span class="pre">}}/{{</span> <span class="pre">amq_streams_exporter_server_start_script</span> <span class="pre">}}</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_dependencies</span></code></p></td>
+<td class="text-left"><p>Dependencies required by Exporter (RPM packages names)</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">['tar',</span> <span class="pre">'unzip']</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_service_name</span></code></p></td>
+<td class="text-left"><p>Service name for the Exporter instance</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_port</span></code></p></td>
+<td class="text-left"><p>Exporter server port</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">9308</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_start_script</span></code></p></td>
+<td class="text-left"><p>Exporter start script name</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">kafka_exporter</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_systemd_env_file</span></code></p></td>
+<td class="text-left"><p>Exporter service config file</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/etc/amq_streams_exporter.conf</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_service_config_template</span></code></p></td>
+<td class="text-left"><p>Templates to use for the systemd service for Exporter</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/service.conf.j2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_user</span></code></p></td>
+<td class="text-left"><p>User account, on targets, running the Exporter</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_group</span></code></p></td>
+<td class="text-left"><p>Group account, on targets, Exporter user belongs to</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_java_opts</span></code></p></td>
+<td class="text-left"><p>Java options to pass to Exporter JVM</p></td>
+<td class="text-left"><p>``</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_port_delay</span></code></p></td>
+<td class="text-left"><p>Delay before checking Exporter server’s port availability</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_port_skip_wait</span></code></p></td>
+<td class="text-left"><p>Skip waiting for Exporter server port to be available</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_broker_server_host</span></code></p></td>
+<td class="text-left"><p>Broker’s hostname</p></td>
+<td class="text-left"><p>`{{ groups[‘brokers’][0]</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_broker_server_port</span></code></p></td>
+<td class="text-left"><p>Broker’s port</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">9092</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_exporter_server_extra_args</span></code></p></td>
+<td class="text-left"><p>Extra arguments to Exporter service start command</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">--group.filter='.*'</span> <span class="pre">--topic.filter='.*'</span> <span class="pre">--offset.show-all</span> <span class="pre">--verbosity=0</span> <span class="pre">--kafka.version='{{</span> <span class="pre">amq_streams_common_product_version</span> <span class="pre">}}'</span> <span class="pre">--kafka.server={{</span> <span class="pre">amq_streams_exporter_broker_server_host</span> <span class="pre">}}:{{</span> <span class="pre">amq_streams_exporter_broker_server_port</span> <span class="pre">}}</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="amq_streams_cruise_control.html" class="btn btn-neutral float-left" title="Cruise Control Role" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="amq_streams_kraft.html" class="btn btn-neutral float-right" title="AMQ Streams KRaft Role" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Red Hat, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
