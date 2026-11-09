@@ -9,6 +9,11 @@ This changelog describes changes after version 0.0.0.
 v1.0.4-devel
 ============
 
+Major Changes
+-------------
+
+- AMW-674 Separate broker and kraft roles into independent, self-contained roles `#160 <https://github.com/ansible-middleware/amq_streams/pull/160>`_
+
 Bugfixes
 --------
 

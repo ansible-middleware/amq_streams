@@ -205,27 +205,52 @@
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">yes</span></code></p></td>
 <td class="text-left"><p>Controls whether tasks (like creating directories and formatting storage) run with elevated privileges (<code class="docutils literal notranslate"><span class="pre">become:</span> <span class="pre">true</span></code>).</p></td>
 </tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_service_name</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft</span></code></p></td>
+<td class="text-left"><p>The systemd service name for the KRaft node.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_properties_template</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/server.properties.j2</span></code></p></td>
+<td class="text-left"><p>The Jinja2 template used to render the server configuration.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_service_config_template</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">templates/service.conf.j2</span></code></p></td>
+<td class="text-left"><p>The Jinja2 template used for the systemd environment file.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_service_config_file</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/etc/kraft.conf</span></code></p></td>
+<td class="text-left"><p>The path to the systemd environment file on disk.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_logs_dir</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">/var/log/amq_streams_kraft/</span></code></p></td>
+<td class="text-left"><p>The directory for service log output.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_java_heap_opts</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-Xmx1G</span> <span class="pre">-Xms1G</span></code></p></td>
+<td class="text-left"><p>Default values to apply to <code class="docutils literal notranslate"><span class="pre">KAFKA_HEAP_OPTS</span></code> env variable.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_listener_port_skip_wait</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td class="text-left"><p>Whether to skip waiting for the listener port to become available.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">amq_streams_kraft_server_log_validation_min_size</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">20</span></code></p></td>
+<td class="text-left"><p>Minimum size of the server log to consider the node running and functional.</p></td>
+</tr>
 </tbody>
 </table>
 </section>
 <section id="example-playbook">
 <h2>Example Playbook<a class="headerlink" href="#example-playbook" title="Link to this heading"></a></h2>
+<p>This role is self-contained and does <strong>not</strong> require <code class="docutils literal notranslate"><span class="pre">amq_streams_broker</span></code>. It configures KRaft, formats storage, and starts the Kafka service. For ZooKeeper-based deployments, use <code class="docutils literal notranslate"><span class="pre">amq_streams_broker</span></code> instead.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka_brokers</span>
-<span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">amq_streams_common_version</span><span class="p">:</span><span class="w"> </span><span class="s">"3.7.0"</span>
-<span class="w">    </span><span class="nt">amq_streams_enable_kraft</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kafka_nodes</span>
 <span class="w">  </span><span class="nt">roles</span><span class="p">:</span>
 <span class="w">    </span><span class="c1"># Install Java and Kafka Binaries</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_common</span>
 
-<span class="w">    </span><span class="c1"># Configure and Format Storage for KRaft</span>
+<span class="w">    </span><span class="c1"># Configure, format storage, and start Kafka</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_kraft</span>
-<span class="w">      </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_enable_kraft | bool</span>
-
-<span class="w">    </span><span class="c1"># Start the Kafka Service</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">amq_streams_broker</span>
 </pre></div>
 </div>
 </section>

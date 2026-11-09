@@ -128,10 +128,10 @@
              
   <section id="broker-role">
 <h1>Broker Role<a class="headerlink" href="#broker-role" title="Link to this heading"></a></h1>
-<p>Perform installation and configuration of Kafka brokers cluster.</p>
+<p>Perform installation and configuration of Kafka brokers cluster in ZooKeeper mode. For KRaft-based deployments (Kafka 3.x with KRaft enabled or Kafka 4.0+), use the <code class="docutils literal notranslate"><span class="pre">amq_streams_kraft</span></code> role instead.</p>
 <p>This role requires to have a <code class="docutils literal notranslate"><span class="pre">zookeepers</span></code> group (identified by the
 <code class="docutils literal notranslate"><span class="pre">amq_streams_zookeeper_inventory_group</span></code> variable) in the inventory file to identify
-each node of he Zookeeper cluster. This group is used to set up the right
+each node of the Zookeeper cluster. This group is used to set up the right
 configuration files in order to establish the communication between Zookeeper cluster members.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">brokers</span></code> group (identified by the <code class="docutils literal notranslate"><span class="pre">amq_streams_broker_inventory_group</span></code> variable)
 is used in the same way identifying the members of the Kafka cluster.
@@ -811,6 +811,7 @@ admin user.</p>
 <section id="author-information">
 <h2>Author Information<a class="headerlink" href="#author-information" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p><a class="reference external" href="https://github.com/RanabirChakraborty">Ranabir Chakraborty</a></p></li>
 <li><p><a class="reference external" href="https://github.com/rpelisse">Romain Pelisse</a></p></li>
 <li><p><a class="reference external" href="https://github.com/guidograzioli">Guido Grazioli</a></p></li>
 <li><p><a class="reference external" href="https://github.com/rmarting">Roman Martin</a></p></li>
