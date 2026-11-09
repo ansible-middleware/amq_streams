@@ -4,3 +4,6 @@
 
 - name: Format storage if needed
   ansible.builtin.include_tasks: storage.yml
+
+- name: Start KRaft service
+  ansible.builtin.include_tasks: service.yml

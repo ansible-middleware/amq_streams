@@ -1,10 +1,25 @@
 ---
-- name: Check kafka service is running
-  ansible.builtin.systemd:
-    name: "{{ server_name | default('amq_streams_broker') }}"
-  register: kafka_service
+- name: "Verify that service is functional: {{ amq_streams_kraft_service_name }}"
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: validation/service.yml
+  vars:
+    service_name: "{{ amq_streams_kraft_service_name }}"
 
-- name: Fail if Kafka is not active
-  ansible.builtin.fail:
-    msg: "Kafka KRaft service ({{ server_name | default('amq_streams_broker') }}) is not running. State: {{ kafka_service.status.ActiveState }}"
-  when: kafka_service.status.ActiveState != "active"
+- name: "Verify that logfile contains no errors: {{ amq_streams_kraft_logs_dir ~ 'server.log' }}"
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: validation/logfile.yml
+  vars:
+    server_log_validation_min_size: "{{ amq_streams_kraft_server_log_validation_min_size }}"
+    server_log_dir: "{{ amq_streams_kraft_logs_dir }}server.log"
+
+- name: "Check that Prometheus port is accessible if enabled: {{ amq_streams_kraft_prometheus_enabled | default(false) }}"
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: validation/prometheus.yml
+  vars:
+    amq_streams_common_prometheus_bind_addr: "{{ amq_streams_kraft_prometheus_bind_addr | default('0.0.0.0') }}"
+    amq_streams_common_prometheus_port: "{{ amq_streams_kraft_prometheus_port | default(18080) }}"
+  when:
+    - amq_streams_kraft_prometheus_enabled is defined and amq_streams_kraft_prometheus_enabled

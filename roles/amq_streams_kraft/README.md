@@ -29,26 +29,28 @@ This role orchestrates the initialization and configuration of Apache Kafka in K
 | `amq_streams_kraft_log_dirs` | `{{ amq_streams_kraft_data_dir }}` | The comma-separated list of directories for log data. Usually matches the data dir. |
 | `amq_streams_kraft_log_retention_hours` | `168` | The number of hours to keep log segments before deletion (Default: 7 days). |
 | `amq_streams_kraft_priv_escalation` | `yes` | Controls whether tasks (like creating directories and formatting storage) run with elevated privileges (`become: true`). |
+| `amq_streams_kraft_service_name` | `amq_streams_kraft` | The systemd service name for the KRaft node. |
+| `amq_streams_kraft_properties_template` | `templates/server.properties.j2` | The Jinja2 template used to render the server configuration. |
+| `amq_streams_kraft_service_config_template` | `templates/service.conf.j2` | The Jinja2 template used for the systemd environment file. |
+| `amq_streams_kraft_service_config_file` | `/etc/kraft.conf` | The path to the systemd environment file on disk. |
+| `amq_streams_kraft_logs_dir` | `/var/log/amq_streams_kraft/` | The directory for service log output. |
+| `amq_streams_kraft_java_heap_opts` | `-Xmx1G -Xms1G` | Default values to apply to `KAFKA_HEAP_OPTS` env variable. |
+| `amq_streams_kraft_listener_port_skip_wait` | `false` | Whether to skip waiting for the listener port to become available. |
+| `amq_streams_kraft_server_log_validation_min_size` | `20` | Minimum size of the server log to consider the node running and functional. |
 
 ## Example Playbook
 
+This role is self-contained and does **not** require `amq_streams_broker`. It configures KRaft, formats storage, and starts the Kafka service. For ZooKeeper-based deployments, use `amq_streams_broker` instead.
+
 ```yaml
 ---
-- hosts: kafka_brokers
-  vars:
-    amq_streams_common_version: "3.7.0"
-    amq_streams_enable_kraft: true
-
+- hosts: kafka_nodes
   roles:
     # Install Java and Kafka Binaries
     - role: amq_streams_common
 
-    # Configure and Format Storage for KRaft
+    # Configure, format storage, and start Kafka
     - role: amq_streams_kraft
-      when: amq_streams_enable_kraft | bool
-
-    # Start the Kafka Service
-    - role: amq_streams_broker
 ```
 
 ## License

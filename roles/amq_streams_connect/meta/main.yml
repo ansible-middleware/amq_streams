@@ -6,7 +6,7 @@ galaxy_info:
   role_name: amq_streams_connect
   namespace: middleware_automation
   author: Romain Pelisse
-  description: Install AMQ Streams Zookeeper server
+  description: Install AMQ Streams Kafka Connect
   company: Red Hat, Inc.
 
   license: Apache License 2.0
@@ -21,8 +21,11 @@ galaxy_info:
   galaxy_tags:
     - java
     - jboss
-    - wildfly
+    - kafka
     - cli
+    - messaging
+    - middleware
+    - streaming
     - server
 
 dependencies:

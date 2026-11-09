@@ -5,8 +5,8 @@ collections:
 galaxy_info:
   role_name: amq_streams_broker
   namespace: middleware_automation
-  author: Romain Pelisse
-  description: Install AMQ Streams Zookeeper server
+  author: Romain Pelisse, Ranabir Chakraborty
+  description: Install AMQ Streams Kafka broker in ZooKeeper mode
   company: Red Hat, Inc.
 
   license: Apache License 2.0
@@ -21,8 +21,12 @@ galaxy_info:
   galaxy_tags:
     - java
     - jboss
-    - wildfly
+    - kafka
     - cli
+    - messaging
+    - middleware
+    - streaming
+    - zookeeper
     - server
 
 dependencies:

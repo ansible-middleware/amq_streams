@@ -20,8 +20,12 @@ galaxy_info:
 
   galaxy_tags:
     - java
+    - jboss
     - kafka
+    - cli
     - messaging
+    - middleware
+    - streaming
     - kraft
     - server
 

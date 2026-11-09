@@ -21,8 +21,12 @@ galaxy_info:
   galaxy_tags:
     - java
     - jboss
-    - wildfly
+    - kafka
     - cli
+    - messaging
+    - middleware
+    - streaming
+    - zookeeper
     - server
 
 dependencies:

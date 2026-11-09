@@ -29,3 +29,12 @@ amq_streams_kraft_process_roles: "broker,controller"
 amq_streams_kraft_log_dirs: "{{ amq_streams_kraft_data_dir }}"
 amq_streams_kraft_log_retention_hours: 168
 amq_streams_kraft_priv_escalation: true
+
+amq_streams_kraft_service_name: 'amq_streams_kraft'
+amq_streams_kraft_properties_template: templates/server.properties.j2
+amq_streams_kraft_service_config_template: templates/service.conf.j2
+amq_streams_kraft_service_config_file: '/etc/kraft.conf'
+amq_streams_kraft_logs_dir: "/var/log/{{ amq_streams_kraft_service_name }}/"
+amq_streams_kraft_java_heap_opts: '-Xmx1G -Xms1G'
+amq_streams_kraft_listener_port_skip_wait: false
+amq_streams_kraft_server_log_validation_min_size: 20
