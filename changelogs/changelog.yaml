@@ -257,3 +257,18 @@ releases:
     - 154.yaml
     - 155.yaml
     release_date: '2026-10-13'
+  1.0.4:
+    changes:
+      bugfixes:
+      - 'Fix Automation Hub certification feedback for amq_streams `#156 <https://github.com/ansible-middleware/amq_streams/pull/156>`_
+
+        '
+      major_changes:
+      - 'AMW-674 Separate broker and kraft roles into independent, self-contained
+        roles `#160 <https://github.com/ansible-middleware/amq_streams/pull/160>`_
+
+        '
+    fragments:
+    - 156.yaml
+    - 160.yaml
+    release_date: '2026-11-09'
