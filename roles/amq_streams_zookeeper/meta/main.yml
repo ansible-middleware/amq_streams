@@ -5,7 +5,7 @@ collections:
 galaxy_info:
   role_name: amq_streams_zookeeper
   namespace: middleware_automation
-  author: Romain Pelisse
+  author: Ranabir Chakraborty, Romain Pelisse
   description: Install AMQ Streams Zookeeper server
   company: Red Hat, Inc.
 

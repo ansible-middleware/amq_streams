@@ -2,7 +2,7 @@
 amq_streams_install_dir: "/opt"
 amq_streams_kafka_home: "{{ amq_streams_common_home }}"
 amq_streams_kraft_config_dir: "{{ amq_streams_kafka_home }}/config"
-amq_streams_kraft_data_dir: "{{ amq_streams_kafka_home }}/data/kraft"
+amq_streams_kraft_data_dir: "/var/lib/{{ amq_streams_kraft_service_name }}"
 amq_streams_cluster_id: ""
 amq_streams_kraft_node_id: 1
 amq_streams_kraft_listener_port: 9092
@@ -10,7 +10,7 @@ amq_streams_kraft_controller_port: 9093
 amq_streams_kraft_controller_quorum_voters: "1@{{ ansible_host }}:{{ amq_streams_kraft_controller_port }}"
 amq_streams_kraft_listeners:
   - "PLAINTEXT://0.0.0.0:{{ amq_streams_kraft_listener_port }}"
-  - "CONTROLLER://0.0.0.0:{{ amq_streams_kraft_controller_port }}"
+  - "CONTROLLER://{{ ansible_host }}:{{ amq_streams_kraft_controller_port }}"
 amq_streams_kraft_advertised_listeners:
   - "PLAINTEXT://{{ ansible_host }}:{{ amq_streams_kraft_listener_port }}"
 amq_streams_kraft_controller_listener_names: "CONTROLLER"

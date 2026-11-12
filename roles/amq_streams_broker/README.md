@@ -457,6 +457,53 @@ Example of definition:
     amq_streams_broker_admin_password: password
 ```
 
+## Rolling Upgrade
+
+The role supports rolling upgrades of Kafka broker clusters with no downtime. The upgrade
+task stops the broker, installs the new version, redeploys the configuration, restarts
+the service, and validates it is healthy before moving to the next node.
+
+The playbook **must** use `serial: 1` to upgrade one broker at a time. The upgrade
+requires two separate passes because Kafka mandates that **all** brokers must be
+running the new binary before any broker can switch to the new inter-broker protocol.
+A single pass cannot satisfy this — with `serial: 1`, earlier brokers would adopt the
+new protocol while later brokers are still on the old version and unable to understand it.
+
+**Phase 1** — Upgrade all brokers with protocol versions pinned to the **old** version.
+This ensures compatibility while nodes are running mixed versions.
+
+**Phase 2** — After all brokers are on the new version, remove the protocol version
+pins and re-deploy the configuration so brokers start using the new protocol.
+
+Both phases can be combined in a single playbook:
+
+```yaml
+---
+# Phase 1: Upgrade binaries with old protocol pinned
+- hosts: brokers
+  serial: 1
+  vars:
+    amq_streams_common_product_version: "3.9.0"
+    amq_streams_broker_inter_broker_protocol_version: "3.8"
+    amq_streams_broker_log_message_format_version: "3.8"
+  tasks:
+    - name: "Rolling upgrade of Kafka broker"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: upgrade.yml
+
+# Phase 2: Update protocol versions (all brokers are now on 3.9.0)
+- hosts: brokers
+  serial: 1
+  tasks:
+    - name: "Update broker configuration to new protocol version"
+      ansible.builtin.include_role:
+        name: amq_streams_broker
+        tasks_from: upgrade.yml
+      vars:
+        amq_streams_common_product_version: "3.9.0"
+```
+
 ## License
 
 Apache License v2.0 or later
