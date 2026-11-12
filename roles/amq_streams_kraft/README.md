@@ -14,7 +14,7 @@ This role orchestrates the initialization and configuration of Apache Kafka in K
 | `amq_streams_install_dir` | `/opt` | The base directory where AMQ Streams/Kafka is installed. |
 | `amq_streams_kafka_home` | `{{ amq_streams_install_dir }}/kafka_{{ amq_streams_common_version }}/` | The absolute path to the Kafka installation home directory. |
 | `amq_streams_kraft_config_dir` | `{{ amq_streams_kafka_home }}/config` | The directory containing `server.properties` and other config files. |
-| `amq_streams_kraft_data_dir` | `{{ amq_streams_kafka_home }}/data/kraft` | The directory where Kafka stores its KRaft metadata and log data. |
+| `amq_streams_kraft_data_dir` | `/var/lib/{{ amq_streams_kraft_service_name }}` | The directory where Kafka stores its KRaft metadata and log data. |
 | `amq_streams_cluster_id` | `""` | The UUID of the Kafka cluster. If left empty, the role will auto-generate a random UUID during the first run. |
 | `amq_streams_kraft_node_id` | `1` | The unique integer ID for this specific broker/controller node. **Must be unique per host.** |
 | `amq_streams_kraft_process_roles` | `"broker,controller"` | Defines the role of this node. Options: `broker`, `controller`, or `broker,controller` (combined). |
@@ -51,6 +51,27 @@ This role is self-contained and does **not** require `amq_streams_broker`. It co
 
     # Configure, format storage, and start Kafka
     - role: amq_streams_kraft
+```
+
+## Rolling Upgrade
+
+The role supports rolling upgrades of KRaft clusters with no downtime. The upgrade
+task stops the node, installs the new version, redeploys the configuration, restarts
+the service, and validates it is healthy before moving to the next node.
+
+The playbook **must** use `serial: 1` to upgrade one node at a time.
+
+```yaml
+---
+- hosts: kafka_nodes
+  serial: 1
+  vars:
+    amq_streams_common_product_version: "4.1.0"
+  tasks:
+    - name: "Rolling upgrade of KRaft node"
+      ansible.builtin.include_role:
+        name: amq_streams_kraft
+        tasks_from: upgrade.yml
 ```
 
 ## License

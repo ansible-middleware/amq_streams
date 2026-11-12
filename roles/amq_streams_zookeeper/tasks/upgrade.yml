@@ -1,0 +1,66 @@
+---
+- name: "Validate upgrade parameters are provided."
+  ansible.builtin.assert:
+    that:
+      - amq_streams_common_product_version is defined
+      - amq_streams_common_product_version is version('4.0.0', '<')
+    fail_msg: >-
+      Upgrade target version must be defined and below 4.0.0 for ZooKeeper mode.
+      For Kafka 4.0+ or Kafka 3.x with KRaft enabled, use the amq_streams_kraft role instead.
+    quiet: true
+
+- name: "Find existing Kafka installation."
+  ansible.builtin.find:
+    paths: "{{ amq_streams_common_install_dir | default('/opt') }}"
+    patterns: "kafka_*"
+    file_type: directory
+  register: __kafka_install_dirs
+
+- name: "Determine currently installed Kafka version."
+  ansible.builtin.command:
+    cmd: "{{ __kafka_install_dirs.files[0].path }}/bin/kafka-topics.sh --version"
+  register: __current_kafka_version
+  changed_when: false
+  failed_when: false
+  when: __kafka_install_dirs.files | length > 0
+
+- name: "Display upgrade versions."
+  ansible.builtin.debug:
+    msg: "Upgrading ZooKeeper from Kafka {{ __current_kafka_version.stdout | default('unknown') }} to {{ amq_streams_common_product_version }}"
+
+- name: "Stop ZooKeeper service: {{ amq_streams_zookeeper.service_name }}"
+  become: "{{ amq_streams_zookeeper_restart_requires_priv_escalation }}"
+  ansible.builtin.service:
+    name: "{{ amq_streams_zookeeper.service_name }}"
+    state: stopped
+
+- name: "Install new Kafka version."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: install.yml
+
+- name: "Redeploy ZooKeeper configuration and systemd service."
+  ansible.builtin.include_tasks: service.yml
+
+- name: "Wait for ZooKeeper client port to be available: {{ amq_streams_zookeeper.config.port }}"
+  ansible.builtin.wait_for:
+    host: "{{ inventory_hostname }}"
+    port: "{{ amq_streams_zookeeper.config.port }}"
+    timeout: 120
+
+- name: "Verify installed Kafka version after upgrade."
+  ansible.builtin.command:
+    cmd: "{{ amq_streams_common_home }}/bin/kafka-topics.sh --version"
+  register: __upgraded_kafka_version
+  changed_when: false
+
+- name: "Display upgraded Kafka version."
+  ansible.builtin.debug:
+    msg: "ZooKeeper upgraded successfully to Kafka {{ __upgraded_kafka_version.stdout }}"
+
+- name: "Validate ZooKeeper is functional after upgrade."
+  ansible.builtin.include_role:
+    name: amq_streams_common
+    tasks_from: validation/service.yml
+  vars:
+    service_name: "{{ amq_streams_zookeeper.service_name }}"

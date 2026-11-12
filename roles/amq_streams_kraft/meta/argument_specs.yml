@@ -6,13 +6,18 @@ argument_specs:
                 description: "Root installation directory for AMQ Streams"
                 type: "str"
 
+            amq_streams_kafka_home:
+                default: "{{ amq_streams_common_home }}"
+                description: "Absolute path to the Kafka installation home directory"
+                type: "str"
+
             amq_streams_kraft_config_dir:
                 default: "{{ amq_streams_kafka_home }}/config"
                 description: "Path to the KRaft configuration directory"
                 type: "str"
 
             amq_streams_kraft_data_dir:
-                default: "{{ amq_streams_kafka_home }}/data/kraft"
+                default: "/var/lib/{{ amq_streams_kraft_service_name }}"
                 description: "Path to the KRaft data directory"
                 type: "str"
 

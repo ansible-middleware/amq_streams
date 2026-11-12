@@ -11,7 +11,7 @@ amq_streams_cruise_control_path_to_capacity_file_require_priv_escalation: "{{ am
 amq_streams_cruise_control_logfiles_requires_priv_escalation: "{{ amq_streams_install_requires_become | default(true) }}"
 amq_streams_connect_source_file_require_priv_escalation: "{{ amq_streams_install_requires_become | default(true) }}"
 amq_streams_kraft_priv_escalation: "{{ amq_streams_install_requires_become | default(true) }}"
-amq_streams_common_product_version: 4.1.1
+amq_streams_common_product_version: 4.0.0
 # Run the Systemd Service as root
 amq_streams_broker_user: root
 amq_streams_broker_group: root

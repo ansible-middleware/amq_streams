@@ -65,6 +65,30 @@ The following are a set of required variables for the role:
 |`amq_streams_zookeeper_auth_user` | Zookeeper user to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true` | '' |
 |`amq_streams_zookeeper_auth_pass` | Zookeeper user password to authenticate. Mandatory if `amq_streams_zookeeper_auth_enabled: true`| '' |
 
+## Rolling Upgrade
+
+The role supports rolling upgrades of ZooKeeper clusters with no downtime. The upgrade
+task stops the node, installs the new version, redeploys the configuration, restarts
+the service, and validates it is healthy before moving to the next node.
+
+ZooKeeper upgrades must be performed **before** upgrading Kafka brokers. The playbook
+**must** use `serial: 1` to upgrade one ZooKeeper node at a time.
+
+```yaml
+---
+- hosts: zookeepers
+  serial: 1
+  vars:
+    amq_streams_common_product_version: "3.9.0"
+  tasks:
+    - name: "Rolling upgrade of ZooKeeper"
+      ansible.builtin.include_role:
+        name: amq_streams_zookeeper
+        tasks_from: upgrade.yml
+```
+
+After all ZooKeeper nodes are upgraded, proceed to upgrade the Kafka brokers.
+
 ## License
 
 Apache License v2.0 or later
