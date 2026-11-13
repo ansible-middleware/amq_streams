@@ -125,3 +125,79 @@ argument_specs:
                 default: 20
                 description: "Minimum size of the server log to consider the node running and functional"
                 type: "int"
+
+            amq_streams_kraft_auth_enabled:
+                default: false
+                description: "Whether or not SASL authentication is enabled for KRaft"
+                type: "bool"
+
+            amq_streams_kraft_auth_scram_enabled:
+                default: false
+                description: "Whether or not the SASL SCRAM login module is enabled"
+                type: "bool"
+
+            amq_streams_kraft_auth_config:
+                default: "/etc/kraft-jaas.conf"
+                description: "Path to the kraft-jaas.conf file on the target system"
+                type: "str"
+
+            amq_streams_kraft_auth_config_template:
+                default: "templates/kraft-jaas.conf.j2"
+                description: "Relative path to the template used to generate kraft-jaas.conf"
+                type: "str"
+
+            amq_streams_kraft_auth_sasl_mechanisms:
+                default: "['PLAIN']"
+                description: "List of SASL mechanisms written to sasl.enabled.mechanisms"
+                type: "list"
+                elements: "str"
+
+            amq_streams_kraft_tls_enabled:
+                default: false
+                description: "Whether or not TLS encryption is enabled for KRaft"
+                type: "bool"
+
+            amq_streams_kraft_listener_tls_port:
+                default: 9094
+                description: "Port used when opening firewalld for a TLS listener"
+                type: "int"
+
+            amq_streams_kraft_tls_keystore_dir:
+                default: "/tmp"
+                description: "Local folder that contains the server keystore"
+                type: "str"
+
+            amq_streams_kraft_tls_keystore:
+                default: "server.keystore.jks"
+                description: "Filename of the server keystore"
+                type: "str"
+
+            amq_streams_kraft_tls_keystore_location:
+                default: "/opt"
+                description: "Location on the Kafka server for the keystore"
+                type: "str"
+
+            amq_streams_kraft_tls_keystore_password:
+                default: "PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION"
+                description: "Password of the server keystore"
+                type: "str"
+
+            amq_streams_kraft_tls_truststore_dir:
+                default: "/tmp"
+                description: "Local folder that contains the server truststore"
+                type: "str"
+
+            amq_streams_kraft_tls_truststore:
+                default: "server.truststore.jks"
+                description: "Filename of the server truststore"
+                type: "str"
+
+            amq_streams_kraft_tls_truststore_location:
+                default: "/opt"
+                description: "Location on the Kafka server for the truststore"
+                type: "str"
+
+            amq_streams_kraft_tls_truststore_password:
+                default: "PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION"
+                description: "Password of the server truststore"
+                type: "str"

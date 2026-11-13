@@ -37,6 +37,64 @@ This role orchestrates the initialization and configuration of Apache Kafka in K
 | `amq_streams_kraft_java_heap_opts` | `-Xmx1G -Xms1G` | Default values to apply to `KAFKA_HEAP_OPTS` env variable. |
 | `amq_streams_kraft_listener_port_skip_wait` | `false` | Whether to skip waiting for the listener port to become available. |
 | `amq_streams_kraft_server_log_validation_min_size` | `20` | Minimum size of the server log to consider the node running and functional. |
+| `amq_streams_kraft_auth_enabled` | `false` | Enable SASL authentication for KRaft listeners. |
+| `amq_streams_kraft_auth_scram_enabled` | `false` | Enable the SASL SCRAM login module in the JAAS config. |
+| `amq_streams_kraft_auth_config` | `/etc/kraft-jaas.conf` | Path to the JAAS config file on the target host. |
+| `amq_streams_kraft_auth_config_template` | `templates/kraft-jaas.conf.j2` | Template used to render the JAAS config. |
+| `amq_streams_kraft_auth_sasl_mechanisms` | `PLAIN` | List of SASL mechanisms written to `sasl.enabled.mechanisms`. |
+| `amq_streams_kraft_tls_enabled` | `false` | Enable TLS keystore/truststore settings in `server.properties`. |
+| `amq_streams_kraft_listener_tls_port` | `9094` | Port opened in firewalld when TLS is enabled (listener list is still set via `amq_streams_kraft_listeners`). |
+| `amq_streams_kraft_tls_keystore_dir` | `/tmp` | Local directory that contains the server keystore to copy. |
+| `amq_streams_kraft_tls_keystore` | `server.keystore.jks` | Keystore filename. |
+| `amq_streams_kraft_tls_keystore_location` | `/opt` | Destination directory for the server keystore. |
+| `amq_streams_kraft_tls_keystore_password` | *(placeholder)* | Keystore password. |
+| `amq_streams_kraft_tls_truststore_dir` | `/tmp` | Local directory that contains the server truststore to copy. |
+| `amq_streams_kraft_tls_truststore` | `server.truststore.jks` | Truststore filename. |
+| `amq_streams_kraft_tls_truststore_location` | `/opt` | Destination directory for the server truststore. |
+| `amq_streams_kraft_tls_truststore_password` | *(placeholder)* | Truststore password. |
+
+## TLS Encryption
+
+Set `amq_streams_kraft_tls_enabled: true` and provide a keystore/truststore. Update `amq_streams_kraft_listeners`, `amq_streams_kraft_advertised_listeners`, `amq_streams_kraft_inter_broker_listener_name`, and `amq_streams_kraft_security_protocol_map` so every listener name maps to `SSL` or `SASL_SSL` as required.
+
+```yaml
+  vars:
+    amq_streams_kraft_tls_enabled: true
+    amq_streams_kraft_tls_keystore_dir: ./certs
+    amq_streams_kraft_tls_truststore_dir: ./certs
+    amq_streams_kraft_tls_keystore_password: password
+    amq_streams_kraft_tls_truststore_password: password
+    amq_streams_kraft_listeners:
+      - "SSL://0.0.0.0:{{ amq_streams_kraft_listener_tls_port }}"
+      - "CONTROLLER://0.0.0.0:{{ amq_streams_kraft_controller_port }}"
+    amq_streams_kraft_advertised_listeners:
+      - "SSL://{{ ansible_host }}:{{ amq_streams_kraft_listener_tls_port }}"
+    amq_streams_kraft_inter_broker_listener_name: "SSL"
+```
+
+## SASL SCRAM Authentication
+
+Set `amq_streams_kraft_auth_enabled: true` and, for SCRAM, `amq_streams_kraft_auth_scram_enabled: true`. Include `SCRAM-SHA-512` (or another SCRAM mechanism) in `amq_streams_kraft_auth_sasl_mechanisms`. Provide `amq_streams_kraft_auth_plain_users` and/or inter-broker credentials the same way as on `amq_streams_broker`. Listener names must use `SASL_PLAINTEXT` or `SASL_SSL` in `amq_streams_kraft_listeners` / `amq_streams_kraft_security_protocol_map`.
+
+```yaml
+  vars:
+    amq_streams_kraft_auth_enabled: true
+    amq_streams_kraft_auth_scram_enabled: true
+    amq_streams_kraft_auth_sasl_mechanisms:
+      - SCRAM-SHA-512
+    amq_streams_kraft_auth_plain_users:
+      - username: admin
+        password: secret
+    amq_streams_kraft_listeners:
+      - "SASL_SSL://0.0.0.0:{{ amq_streams_kraft_listener_tls_port }}"
+      - "CONTROLLER://0.0.0.0:{{ amq_streams_kraft_controller_port }}"
+    amq_streams_kraft_advertised_listeners:
+      - "SASL_SSL://{{ ansible_host }}:{{ amq_streams_kraft_listener_tls_port }}"
+    amq_streams_kraft_inter_broker_listener_name: "SASL_SSL"
+    amq_streams_kraft_tls_enabled: true
+```
+
+Creating SCRAM users in the cluster after startup is still done with the Kafka admin tooling (same operational step as with `amq_streams_broker` `user-scram` tasks).
 
 ## Example Playbook
 

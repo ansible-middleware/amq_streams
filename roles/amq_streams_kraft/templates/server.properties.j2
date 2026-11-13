@@ -24,6 +24,28 @@ controller.listener.names={{ amq_streams_kraft_controller_listener_names }}
 # Tells the Broker which listener name to use for replication.
 inter.broker.listener.name={{ amq_streams_kraft_inter_broker_listener_name }}
 
+{% if amq_streams_kraft_auth_enabled %}
+# The list of SASL mechanisms enabled in the Kafka server
+sasl.enabled.mechanisms={{ amq_streams_kraft_auth_sasl_mechanisms | join(",") }}
+{% if amq_streams_kraft_inter_broker_auth_sasl_mechanisms is defined %}
+# SASL mechanism used for inter-broker communication
+sasl.mechanism.inter.broker.protocol={{ amq_streams_kraft_inter_broker_auth_sasl_mechanisms }}
+{% endif %}
+{% endif %}
+
+{% if amq_streams_kraft_tls_enabled %}
+# Broker Keystore and Truststore files
+ssl.keystore.location={{ amq_streams_kraft_tls_keystore_location }}/{{ amq_streams_kraft_tls_keystore }}
+ssl.keystore.password={{ amq_streams_kraft_tls_keystore_password }}
+ssl.truststore.location={{ amq_streams_kraft_tls_truststore_location }}/{{ amq_streams_kraft_tls_truststore }}
+ssl.truststore.password={{ amq_streams_kraft_tls_truststore_password }}
+{% if amq_streams_kraft_auth_enabled %}
+ssl.client.auth=required
+{% else %}
+ssl.client.auth=none
+{% endif %}
+{% endif %}
+
 # Logs
 log.dirs={{ amq_streams_kraft_log_dirs }}
 log.retention.hours={{ amq_streams_kraft_log_retention_hours }}

@@ -15,6 +15,47 @@
     group: "{{ amq_streams_kraft_group | default('kafka') }}"
     mode: '0755'
 
+- name: "Copy Server Keystore with certificates"
+  ansible.builtin.copy:
+    src: "{{ amq_streams_kraft_tls_keystore_dir }}/{{ amq_streams_kraft_tls_keystore }}"
+    dest: "{{ amq_streams_kraft_tls_keystore_location }}/{{ amq_streams_kraft_tls_keystore }}"
+    force: true
+    owner: "{{ amq_streams_kraft_user | default('kafka') }}"
+    group: "{{ amq_streams_kraft_group | default('kafka') }}"
+    mode: '0640'
+  become: "{{ amq_streams_kraft_priv_escalation }}"
+  when:
+    - amq_streams_kraft_tls_enabled is defined and amq_streams_kraft_tls_enabled
+
+- name: "Copy Server Truststore with certificates"
+  ansible.builtin.copy:
+    src: "{{ amq_streams_kraft_tls_truststore_dir }}/{{ amq_streams_kraft_tls_truststore }}"
+    dest: "{{ amq_streams_kraft_tls_truststore_location }}/{{ amq_streams_kraft_tls_truststore }}"
+    force: true
+    owner: "{{ amq_streams_kraft_user | default('kafka') }}"
+    group: "{{ amq_streams_kraft_group | default('kafka') }}"
+    mode: '0640'
+  become: "{{ amq_streams_kraft_priv_escalation }}"
+  when:
+    - amq_streams_kraft_tls_enabled is defined and amq_streams_kraft_tls_enabled
+
+- name: "Configure KRaft authentication"
+  ansible.builtin.template:
+    src: "{{ amq_streams_kraft_auth_config_template }}"
+    dest: "{{ amq_streams_kraft_auth_config }}"
+    owner: "{{ amq_streams_kraft_user | default('kafka') }}"
+    group: "{{ amq_streams_kraft_group | default('kafka') }}"
+    mode: '0640'
+  become: "{{ amq_streams_kraft_priv_escalation }}"
+  when:
+    - amq_streams_kraft_auth_enabled is defined and amq_streams_kraft_auth_enabled
+
+- name: "Enable KRaft authentication environment variable"
+  ansible.builtin.set_fact:
+    amq_streams_kraft_java_opts: "{{ (amq_streams_kraft_java_opts | default('')) ~ ' -Djava.security.auth.login.config=' ~ amq_streams_kraft_auth_config }}"
+  when:
+    - amq_streams_kraft_auth_enabled is defined and amq_streams_kraft_auth_enabled
+
 - name: Deploy server.properties
   ansible.builtin.template:
     src: server.properties.j2
