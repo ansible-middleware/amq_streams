@@ -3,7 +3,7 @@
   ansible.builtin.systemd:
     daemon_reload: true
 
-- name: Restart Kafka
+- name: "Restart {{ amq_streams_kraft_service_name }}"
   ansible.builtin.systemd:
     name: "{{ amq_streams_kraft_service_name }}"
     state: restarted

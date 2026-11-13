@@ -505,6 +505,16 @@ argument_specs:
                 description: "TODO document argument"
                 type: "str"
 
+            amq_streams_broker_inter_broker_protocol_version:
+                description: "Pin inter.broker.protocol.version during rolling upgrades to the old version for compatibility"
+                type: "str"
+                required: false
+
+            amq_streams_broker_log_message_format_version:
+                description: "Pin log.message.format.version during rolling upgrades to the old version for compatibility"
+                type: "str"
+                required: false
+
             # line 121 of defaults/main.yml
             amq_streams_broker_prometheus_enabled:
                 default: false
