@@ -38,3 +38,24 @@ amq_streams_kraft_logs_dir: "/var/log/{{ amq_streams_kraft_service_name }}/"
 amq_streams_kraft_java_heap_opts: '-Xmx1G -Xms1G'
 amq_streams_kraft_listener_port_skip_wait: false
 amq_streams_kraft_server_log_validation_min_size: 20
+
+# KRaft Authentication
+amq_streams_kraft_auth_enabled: false
+amq_streams_kraft_auth_scram_enabled: false
+amq_streams_kraft_auth_config: /etc/kraft-jaas.conf
+amq_streams_kraft_auth_config_template: templates/kraft-jaas.conf.j2
+amq_streams_kraft_auth_sasl_mechanisms:
+  - PLAIN
+  # - SCRAM-SHA-512
+
+# KRaft TLS Encryption
+amq_streams_kraft_tls_enabled: false
+amq_streams_kraft_listener_tls_port: 9094
+amq_streams_kraft_tls_keystore_dir: /tmp
+amq_streams_kraft_tls_keystore: server.keystore.jks
+amq_streams_kraft_tls_keystore_location: /opt
+amq_streams_kraft_tls_keystore_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION
+amq_streams_kraft_tls_truststore_dir: /tmp
+amq_streams_kraft_tls_truststore: server.truststore.jks
+amq_streams_kraft_tls_truststore_location: /opt
+amq_streams_kraft_tls_truststore_password: PLEASE_CHANGEME_IAMNOTGOOD_FOR_PRODUCTION

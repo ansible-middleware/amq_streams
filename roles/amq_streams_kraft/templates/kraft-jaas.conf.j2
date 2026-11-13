@@ -1,0 +1,27 @@
+// {{ ansible_managed }}
+
+{% if amq_streams_kraft_auth_enabled %}
+// KRaft Broker Authentication
+KafkaServer {
+
+    // Plain Login Module
+    org.apache.kafka.common.security.plain.PlainLoginModule required
+{% if amq_streams_kraft_inter_broker_auth_broker_username is defined and amq_streams_kraft_inter_broker_auth_broker_password is defined %}
+    username="{{ amq_streams_kraft_inter_broker_auth_broker_username }}"
+    password="{{ amq_streams_kraft_inter_broker_auth_broker_password }}"
+    user_{{ amq_streams_kraft_inter_broker_auth_broker_username }}="{{ amq_streams_kraft_inter_broker_auth_broker_password }}"
+{% endif %}
+{% if amq_streams_kraft_auth_plain_users is defined %}
+{% for user in amq_streams_kraft_auth_plain_users %}
+    user_{{ user.username }}="{{ user.password }}"
+{% endfor %}
+{% endif %}
+    ;
+
+{% if amq_streams_kraft_auth_scram_enabled %}
+    // SCRAM Login Module
+    org.apache.kafka.common.security.scram.ScramLoginModule required;
+{% endif %}
+
+};
+{% endif %}
