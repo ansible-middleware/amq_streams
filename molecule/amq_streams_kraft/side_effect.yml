@@ -1,0 +1,19 @@
+---
+- name: "Rolling upgrade of AMQ Streams KRaft"
+  hosts: all
+  vars_files:
+    - vars.yml
+  vars:
+    amq_streams_upgrade_version: "4.1.1"
+  tasks:
+    - name: "Rolling upgrade of KRaft to {{ amq_streams_upgrade_version }}."
+      ansible.builtin.include_role:
+        name: amq_streams_kraft
+        tasks_from: upgrade.yml
+      vars:
+        amq_streams_common_product_version: "{{ amq_streams_upgrade_version }}"
+
+    - name: "Validate KRaft is functional after upgrade."
+      ansible.builtin.include_role:
+        name: amq_streams_kraft
+        tasks_from: validate.yml

@@ -1,4 +1,59 @@
 ---
+- name: Check for existing data at previous version-specific path
+  ansible.builtin.stat:
+    path: "{{ amq_streams_kafka_home }}/data/kraft/meta.properties"
+  register: __old_data_dir
+
+- name: Check if new data directory already has data
+  ansible.builtin.stat:
+    path: "{{ amq_streams_kraft_data_dir }}/meta.properties"
+  register: __new_data_dir
+
+- name: Migrate KRaft data from previous version-specific path
+  when:
+    - __old_data_dir.stat.exists
+    - not __new_data_dir.stat.exists
+    - amq_streams_kraft_data_dir != amq_streams_kafka_home ~ '/data/kraft'
+  become: "{{ amq_streams_kraft_priv_escalation }}"
+  block:
+    - name: Stop KRaft service before moving data
+      ansible.builtin.service:
+        name: "{{ amq_streams_kraft_service_name }}"
+        state: stopped
+      failed_when: false
+
+    - name: Ensure new data directory exists
+      ansible.builtin.file:
+        path: "{{ amq_streams_kraft_data_dir }}"
+        state: directory
+        owner: "{{ amq_streams_kraft_user | default('kafka') }}"
+        group: "{{ amq_streams_kraft_group | default('kafka') }}"
+        mode: '0750'
+
+    - name: Move data from previous path to new path
+      ansible.builtin.shell:
+        cmd: mv {{ amq_streams_kafka_home }}/data/kraft/* {{ amq_streams_kraft_data_dir }}/
+      register: __migrate_result
+      changed_when: __migrate_result.rc == 0
+
+    - name: Set ownership on migrated data directory
+      ansible.builtin.file:
+        path: "{{ amq_streams_kraft_data_dir }}"
+        state: directory
+        owner: "{{ amq_streams_kraft_user | default('kafka') }}"
+        group: "{{ amq_streams_kraft_group | default('kafka') }}"
+        mode: '0750'
+        recurse: true
+
+    - name: Remove old data directory after migration
+      ansible.builtin.file:
+        path: "{{ amq_streams_kafka_home }}/data/kraft"
+        state: absent
+
+    - name: Display data migration result
+      ansible.builtin.debug:
+        msg: "Migrated KRaft data from {{ amq_streams_kafka_home }}/data/kraft to {{ amq_streams_kraft_data_dir }}"
+
 - name: Check if KRaft metadata log already formatted
   ansible.builtin.stat:
     path: "{{ amq_streams_kraft_data_dir }}/meta.properties"

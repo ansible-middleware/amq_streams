@@ -1,0 +1,13 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Check KRaft service
+      assert:
+        that:
+          - ansible_facts.services["amq_streams_kraft.service"]["state"] == "running"
+          - ansible_facts.services["amq_streams_kraft.service"]["status"] == "enabled"

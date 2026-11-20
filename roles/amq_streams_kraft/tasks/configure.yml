@@ -22,4 +22,4 @@
     owner: "{{ amq_streams_kraft_user | default('kafka') }}"
     group: "{{ amq_streams_kraft_group | default('kafka') }}"
     mode: '0644'
-  notify: Restart Kafka
+  notify: "Restart {{ amq_streams_kraft_service_name }}"
